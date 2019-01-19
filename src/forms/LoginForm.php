@@ -2,6 +2,7 @@
 
 namespace app\user\forms;
 
+use app\user\Module;
 use app\user\finder\Finder;
 use app\user\helpers\Password;
 use app\user\traits\ModuleTrait;
@@ -15,7 +16,7 @@ use yii\helpers\Yii;
  * an error to login form
  *
  * @property self $app
- * @property string $module
+ * @property Module $module
  **/
 class LoginForm extends Model
 {
