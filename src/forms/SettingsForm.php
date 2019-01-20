@@ -39,8 +39,8 @@ class SettingsForm extends Model
 		$this->_mailer = new Mailer();
 		$this->_passwordhelper = new PasswordHelper();
         $this->setAttributes([
-            'username' => $this->_user->username,
-            'email'    => $this->_user->unconfirmed_email ?: $this->user->email,
+            'username' => $this->user->username,
+            'email'    => $this->user->unconfirmed_email ?: $this->user->email,
 		], false);
     }
 
@@ -75,14 +75,14 @@ class SettingsForm extends Model
     /**
 	 * defaultEmailChange
 	 *
-     * Sends a confirmation message to user's email address with link to confirm changing of email
+     * sends a confirmation message to user's email address with link to confirm changing of email
      *
      * @return void
      **/
     protected function defaultEmailChange(): void
     {
         $this->user->unconfirmed_email = $this->email;
-		$token = new Token();
+		$token = new TokenModel();
 		$token->user_id = $this->user->id;
 		$token->type = $token::TYPE_CONFIRM_NEW_EMAIL;
         $token->save(false);

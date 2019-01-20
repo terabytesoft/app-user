@@ -140,7 +140,7 @@ class Mailer extends Component
 	 *
 	 * @param string $reconfirmationSubject
 	 *
-     * @return null|string
+     * @return string
      */
     public function setReconfirmationSubject($reconfirmationSubject)
     {
@@ -152,7 +152,7 @@ class Mailer extends Component
 	 *
      * @return string
      */
-    public function getRecoverySubject(): string
+    public function getRecoverySubject()
     {
         if ($this->recoverySubject == null) {
             $this->setRecoverySubject($this->module->getApp()->t(
@@ -250,7 +250,7 @@ class Mailer extends Component
      */
     public function sendReconfirmationMessage(UserModel $user, TokenModel $token): bool
     {
-        if ($token->type == Token::TYPE_CONFIRM_NEW_EMAIL) {
+        if ($token->type == TokenModel::TYPE_CONFIRM_NEW_EMAIL) {
             $email = $user->unconfirmed_email;
         } else {
             $email = $user->email;
@@ -276,6 +276,7 @@ class Mailer extends Component
      */
     public function sendRecoveryMessage(UserModel $user, TokenModel $token)
     {
+		$this->app->session->set('sendRecoveryMessage', true);
         return $this->sendMessage(
             $user->email,
             $this->getRecoverySubject(),
