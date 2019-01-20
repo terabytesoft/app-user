@@ -63,7 +63,7 @@ class ProfileModel extends ActiveRecord
     /**
      * getUser
      *
-     * @return \yii\db\ActiveQueryInterface
+     * @return \yii\activerecord\ActiveQueryInterface
      **/
     public function getUser()
     {

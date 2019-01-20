@@ -50,7 +50,7 @@ class AccountModel extends ActiveRecord
     /**
      * getUser
      *
-     * @return UserModel
+     * @return \yii\activerecord\ActiveQuer
      **/
     public function getUser()
     {

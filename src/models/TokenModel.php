@@ -10,11 +10,12 @@ use yii\helpers\Url;
  * Token Active Record model.
  *
  * @property integer $user_id
- * @property string  $code
+ * @property string $code
  * @property integer $created_at
  * @property integer $type
- * @property string  $url
- * @property bool    $isExpired
+ * @property string $url
+ * @property bool $isExpired
+ * @property \yii\web\Application app
  */
 class TokenModel extends ActiveRecord
 {
@@ -28,7 +29,7 @@ class TokenModel extends ActiveRecord
     /**
 	 * getUser
 	 *
-     * @return yii\activerecord\ActiveQuery
+     * @return \yii\activerecord\ActiveQuery
      */
     public function getUser()
     {

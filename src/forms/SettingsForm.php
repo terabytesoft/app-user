@@ -16,6 +16,7 @@ use yii\base\Model;
  * SettingsForm gets user's username, email and password and changes them
  *
  * @property \yii\web\Application app
+ * @property UserModel user
  **/
 class SettingsForm extends Model
 {
