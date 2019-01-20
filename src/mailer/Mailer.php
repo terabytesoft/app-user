@@ -276,7 +276,6 @@ class Mailer extends Component
      */
     public function sendRecoveryMessage(UserModel $user, TokenModel $token)
     {
-		$this->app->session->set('sendRecoveryMessage', true);
         return $this->sendMessage(
             $user->email,
             $this->getRecoverySubject(),

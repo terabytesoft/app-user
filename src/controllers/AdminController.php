@@ -264,7 +264,7 @@ class AdminController extends Controller
             );
         }
 
-        if (!$id && $this->app->session->has(self::ORIGINAL_USER_SESSION_KEY)) {
+        if ($id === null && $this->app->session->has(self::ORIGINAL_USER_SESSION_KEY)) {
             $user = $this->findModel($this->app->session->get(self::ORIGINAL_USER_SESSION_KEY));
             $this->app->session->remove(self::ORIGINAL_USER_SESSION_KEY);
         } else {
@@ -457,7 +457,7 @@ class AdminController extends Controller
      *
      * @param int $id
      *
-     * @return User the loaded model
+     * @return UserModel the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      **/
     protected function findModel(int $id)

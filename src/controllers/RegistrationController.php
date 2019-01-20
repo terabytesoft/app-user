@@ -123,7 +123,7 @@ class RegistrationController extends Controller
      *
      * @param string|yii\web\Response
      *
-     * @return string
+     * @return string|yii\web\Response
      * @throws NotFoundHttpException
      */
     public function actionConnect(string $code)

@@ -103,7 +103,7 @@ class Finder extends BaseObject
      *
      * @param int $id User id to be used on search.
      *
-     * @return UserModel
+     * @return array|UserModel
      */
     public function findUserById($id)
     {
@@ -115,7 +115,7 @@ class Finder extends BaseObject
      *
      * @param string $username Username to be used on search.
      *
-     * @return UserModel
+     * @return array|UserModel
      */
     public function findUserByUsername($username)
     {
@@ -127,7 +127,7 @@ class Finder extends BaseObject
      *
      * @param string $email Email to be used on search.
      *
-     * @return UserModel
+     * @return array|UserModel
      */
     public function findUserByEmail($email)
     {
@@ -175,7 +175,7 @@ class Finder extends BaseObject
      *
      * @param int $id
      *
-     * @return Account|null
+     * @return null|AccountModel
      */
     public function findAccountById($id)
     {
@@ -201,7 +201,7 @@ class Finder extends BaseObject
      * @param string  $code
      * @param integer $type
      *
-     * @return TokenModel
+     * @return array|TokenModel
      */
     public function findTokenByParams($userId, $code, $type)
     {
@@ -217,7 +217,7 @@ class Finder extends BaseObject
      *
      * @param int $id
      *
-     * @return null|Profile
+     * @return null|array|ProfileModel
      */
     public function findProfileById($id)
     {

@@ -29,7 +29,7 @@ trait ModuleTrait
     }
 
     /**
-     * @return app
+     * @return yii\web\Application App
      */
     public function getApp()
     {

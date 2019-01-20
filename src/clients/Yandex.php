@@ -14,29 +14,29 @@ class Yandex extends BaseYandex implements ClientInterface
 {
 	use ModuleTrait;
 
-	protected $result;
-
 	/**
- 	 * getEmail
+     * getEmail
+     *
+     * @return
  	 **/
-    public function getEmail()
+    public function getEmail(bool $result = null)
     {
-		$this->result = null;
-
         $emails = isset($this->getUserAttributes()['emails'])
             ? $this->getUserAttributes()['emails']
             : null;
 
         if ($emails !== null && isset($emails[0])) {
-			$this->resullt = $emails[0];
+			$result = $emails[0];
 		}
 
-		return $this->result;
+		return $result;
     }
 
 	/**
  	 * getUsername
- 	 **/
+     *
+     * @return string|null
+     **/
     public function getUsername()
     {
         return isset($this->getUserAttributes()['login'])
@@ -45,9 +45,11 @@ class Yandex extends BaseYandex implements ClientInterface
     }
 
 	/**
- 	 * defaultTitle
+     * defaultTitle
+     *
+     * @return string
  	 **/
-    protected function defaultTitle()
+    protected function defaultTitle(): string
     {
         return $this->app->t('user', 'Yandex');
     }

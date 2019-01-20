@@ -49,7 +49,7 @@ class DeleteController extends Controller
             if ($user === null) {
                 $this->stdout($this->app->t('user', 'User is not found') . "\n", Console::FG_RED);
             } else {
-                if ($user->delete()) {
+                if ($user->delete() !== false) {
                     $this->stdout($this->app->t('user', 'User has been deleted') . "\n", Console::FG_GREEN);
                 } else {
                     $this->stdout($this->app->t('user', 'Error occurred while deleting user') . "\n", Console::FG_RED);

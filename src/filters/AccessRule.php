@@ -6,6 +6,8 @@ use app\user\traits\ModuleTrait;
 
 /**
  * Access rule class for simpler RBAC.
+ *
+ * @property yii\web\Application App
  */
 class AccessRule extends \yii\web\filters\AccessRule
 {
@@ -13,7 +15,7 @@ class AccessRule extends \yii\web\filters\AccessRule
 
     /**
      * @inheritdoc
-     * */
+     **/
     protected function matchRole($user)
     {
         if (empty($this->roles)) {
