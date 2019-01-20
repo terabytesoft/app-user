@@ -13,6 +13,8 @@ use yii\helpers\Yii;
 trait ModuleTrait
 {
     /**
+     * getModule
+     *
      * @return object Module
      */
     public function getModule()
@@ -21,6 +23,8 @@ trait ModuleTrait
     }
 
     /**
+     * getDb
+     *
      * @return string
      */
     public static function getDb()
@@ -29,7 +33,9 @@ trait ModuleTrait
     }
 
     /**
-     * @return yii\web\Application App
+     * getApp
+     *
+     * @return \yii\web\Application App
      */
     public function getApp()
     {

@@ -121,9 +121,9 @@ class RegistrationController extends Controller
 	 *
      * displays page where user can create new account that will be connected to social account
      *
-     * @param string|yii\web\Response
+     * @param string|\yii\web\Response
      *
-     * @return string|yii\web\Response
+     * @return string|\yii\web\Response
      * @throws NotFoundHttpException
      */
     public function actionConnect(string $code)

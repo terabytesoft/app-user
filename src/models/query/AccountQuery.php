@@ -2,15 +2,13 @@
 
 namespace app\user\models\query;
 
-use app\user\models\Account;
+use app\user\models\AccountModel;
 use yii\authclient\ClientInterface;
 use yii\activerecord\ActiveQuery;
 
 /**
  * @method Account|null one($db = null)
  * @method Account[]    all($db = null)
- *
- * @author Dmitry Erofeev <dmeroff@gmail.com>
  */
 class AccountQuery extends ActiveQuery
 {

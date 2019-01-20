@@ -15,21 +15,22 @@ use yii\helpers\Yii;
 
 class Finder extends BaseObject
 {
-    /** @var ActiveQuery */
+    /** @var ActiveQuery **/
     protected $userQuery;
 
-    /** @var ActiveQuery */
+    /** @var ActiveQuery **/
     protected $tokenQuery;
 
-    /** @var AccountQuery */
+    /** @var AccountQuery **/
     protected $accountQuery;
 
-    /** @var ActiveQuery */
+    /** @var ActiveQuery **/
     protected $profileQuery;
 
     /**
+     * __construct
      *
-     */
+     **/
     public function __construct()
     {
         $this->setAccountQuery();
@@ -39,22 +40,28 @@ class Finder extends BaseObject
     }
 
     /**
+     * getUserQuery
+     *
      * @return ActiveQuery
-     */
+     **/
     public function getUserQuery()
     {
         return $this->userQuery;
     }
 
     /**
+     * getTokenQuery
+     *
      * @return ActiveQuery
-     */
+     **/
     public function getTokenQuery()
     {
         return $this->tokenQuery;
     }
 
     /**
+     * getAccountQuery
+     *
      * @return ActiveQuery
      */
     public function getAccountQuery()
@@ -63,6 +70,8 @@ class Finder extends BaseObject
     }
 
     /**
+     * getProfileQuery
+     *
      * @return ActiveQuery
      */
     public function getProfileQuery()
@@ -70,28 +79,44 @@ class Finder extends BaseObject
         return $this->profileQuery;
     }
 
-    /** @param ActiveQuery $accountQuery */
+    /**
+     * setAccountQuery
+     *
+     * @param ActiveQuery $accountQuery
+     **/
     public function setAccountQuery()
     {
         $model = new AccountModel();
         $this->accountQuery = new AccountQuery($model);
     }
 
-    /** @param ActiveQuery $userQuery */
+    /**
+     * setUserQuery
+     *
+     * @param ActiveQuery $userQuery
+     **/
     public function setUserQuery()
     {
         $this->userQuery = new UserModel();
         $this->userQuery = $this->userQuery->find();
     }
 
-    /** @param ActiveQuery $tokenQuery */
+    /**
+     * setTokenQuery
+     *
+     *  @param ActiveQuery $tokenQuery
+     **/
     public function setTokenQuery()
     {
         $this->tokenQuery = new TokenModel();
         $this->tokenQuery = $this->tokenQuery->find();
     }
 
-    /** @param ActiveQuery $profileQuery */
+    /**
+     * setProfileQuery
+     *
+     * @param ActiveQuery $profileQuery
+     **/
     public function setProfileQuery()
     {
         $this->profileQuery = new ProfileModel();
@@ -99,9 +124,11 @@ class Finder extends BaseObject
     }
 
     /**
-     * Finds a user by the given id.
+     * findUserById
      *
-     * @param int $id User id to be used on search.
+     * finds a user by the given id
+     *
+     * @param int $id User id to be used on search
      *
      * @return array|UserModel
      */
@@ -111,9 +138,11 @@ class Finder extends BaseObject
     }
 
     /**
-     * Finds a user by the given username.
+     * findUserByUsername
      *
-     * @param string $username Username to be used on search.
+     * finds a user by the given username
+     *
+     * @param string $username Username to be used on search
      *
      * @return array|UserModel
      */
@@ -123,9 +152,11 @@ class Finder extends BaseObject
     }
 
     /**
-     * Finds a user by the given email.
+     * findUserByEmail
      *
-     * @param string $email Email to be used on search.
+     * finds a user by the given email
+     *
+     * @param string $email Email to be used on search
      *
      * @return array|UserModel
      */
@@ -135,9 +166,11 @@ class Finder extends BaseObject
     }
 
     /**
-     * Finds a user by the given username or email.
+     * findUserByUsernameOrEmail
      *
-     * @param string $usernameOrEmail Username or email to be used on search.
+     * finds a user by the given username or email
+     *
+     * @param string $usernameOrEmail Username or email to be used on search
      *
      * @return UserModel
      */
@@ -151,9 +184,11 @@ class Finder extends BaseObject
     }
 
     /**
-     * Finds a user by the given condition.
+     * findUser
      *
-     * @param mixed $condition Condition to be used on search.
+     * finds a user by the given condition
+     *
+     * @param mixed $condition Condition to be used on search
      *
      * @return ActiveQuery
      */
@@ -163,6 +198,8 @@ class Finder extends BaseObject
     }
 
     /**
+     * findAccount
+     *
      * @return AccountQuery
      */
     public function findAccount()
@@ -171,7 +208,9 @@ class Finder extends BaseObject
     }
 
     /**
-     * Finds an account by id.
+     * findAccountById
+     *
+     * finds an account by id
      *
      * @param int $id
      *
@@ -183,7 +222,9 @@ class Finder extends BaseObject
     }
 
     /**
-     * Finds a token by user id and code.
+     * findToken
+     *
+     * finds a token by user id and code
      *
      * @param mixed $condition
      *
@@ -195,7 +236,9 @@ class Finder extends BaseObject
     }
 
     /**
-     * Finds a token by params.
+     * findTokenByParams
+     *
+     * finds a token by params
      *
      * @param integer $userId
      * @param string  $code
@@ -213,7 +256,9 @@ class Finder extends BaseObject
     }
 
     /**
-     * Finds a profile by user id.
+     * findProfileById
+     *
+     * finds a profile by user id
      *
      * @param int $id
      *
@@ -225,7 +270,9 @@ class Finder extends BaseObject
     }
 
     /**
-     * Finds a profile.
+     * findProfile
+     *
+     * finds a profile
      *
      * @param mixed $condition
      *
