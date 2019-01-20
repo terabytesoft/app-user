@@ -15,7 +15,7 @@ trait ModuleTrait
     /**
      * getModule
      *
-     * @return object Module
+     * @return object module
      */
     public function getModule()
     {
@@ -35,7 +35,7 @@ trait ModuleTrait
     /**
      * getApp
      *
-     * @return \yii\web\Application App
+     * @return \yii\web\Application app
      */
     public function getApp()
     {

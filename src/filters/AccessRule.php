@@ -6,7 +6,7 @@ use app\user\traits\ModuleTrait;
 
 /**
  * Access rule class for simpler RBAC
- *
+ * @property object module
  * @property \yii\web\Application app
  **/
 class AccessRule extends \yii\web\filters\AccessRule

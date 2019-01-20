@@ -100,7 +100,7 @@ class SecurityController extends Controller
             $this->goHome();
         }
 
-        $model = new LoginForm($this->finder);
+        $model = new LoginForm();
 
         $this->trigger(FormEvent::init());
         $this->performAjaxValidation($model);

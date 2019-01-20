@@ -11,6 +11,7 @@ use yii\helpers\Yii;
 /**
  * Mailer
  *
+ * @property \yii\web\Application app
  */
 class Mailer extends Component
 {
