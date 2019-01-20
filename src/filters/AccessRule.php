@@ -5,15 +5,17 @@ namespace app\user\filters;
 use app\user\traits\ModuleTrait;
 
 /**
- * Access rule class for simpler RBAC.
+ * Access rule class for simpler RBAC
  *
- * @property yii\web\Application app
- */
+ * @property \yii\web\Application app
+ **/
 class AccessRule extends \yii\web\filters\AccessRule
 {
     use ModuleTrait;
 
     /**
+     * matchRole
+     *
      * @inheritdoc
      **/
     protected function matchRole($user)

@@ -9,8 +9,9 @@ use yii\base\Model;
 /**
  * RegistrationForm
  *
- * Registration form collects user input on registration process, validates it and creates new User model.
+ * Registration form collects user input on registration process, validates it and creates new User model
  *
+ * @property \yii\web\Application app
  **/
 class RegistrationForm extends Model
 {
@@ -34,7 +35,7 @@ class RegistrationForm extends Model
     /**
 	 * rules
 	 *
-     * @return array the validation rules.
+     * @return array the validation rules
      **/
     public function rules(): array
     {
@@ -79,10 +80,10 @@ class RegistrationForm extends Model
     /**
 	 * register
 	 *
-     * registers a new user account. If registration was successful it will set flash message.
+     * registers a new user account. If registration was successful it will set flash message
      * @params Model $model
      *
-     * @return bool.
+     * @return bool
      **/
     public function register(bool $result = true): bool
     {
@@ -101,10 +102,10 @@ class RegistrationForm extends Model
 	 * loadAttributes
 	 *
      * loads attributes to the user model. You should override this method if you are going to add new fields to the
-     * registration form. You can read more in special guide.
+     * registration form. You can read more in special guide
      *
      * by default this method set all attributes of this model to the attributes of User model, so you should properly
-     * configure safe attributes of your User model.
+     * configure safe attributes of your User model
      *
      * @param UserModel $user
      **/

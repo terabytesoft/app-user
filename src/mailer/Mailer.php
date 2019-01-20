@@ -140,9 +140,9 @@ class Mailer extends Component
 	 *
 	 * @param string $reconfirmationSubject
 	 *
-     * @return string
+     * @return null|string
      */
-    public function setReconfirmationSubject($reconfirmationSubject): string
+    public function setReconfirmationSubject($reconfirmationSubject)
     {
         $this->reconfirmationSubject = $reconfirmationSubject;
     }

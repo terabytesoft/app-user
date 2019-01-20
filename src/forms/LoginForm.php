@@ -16,6 +16,7 @@ use yii\helpers\Yii;
  * LoginForm get user's login and password, validates them and logs the user in. If user has been blocked, it adds
  * an error to login form
  *
+ * @property \yii\web\Application app
  **/
 class LoginForm extends Model
 {

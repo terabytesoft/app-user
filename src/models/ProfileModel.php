@@ -2,58 +2,80 @@
 
 namespace app\user\models;
 
+use app\models\UserModel;
 use app\user\traits\ModuleTrait;
 use yii\activerecord\ActiveRecord;
-use yii\helpers\Yii;
 
 /**
- * This is the model class for table "profile".
+ * ProfileModel
+ *
+ * This is the model class for table "profile"
  *
  * @property integer $user_id
- * @property string  $name
- * @property string  $public_email
- * @property string  $gravatar_email
- * @property string  $gravatar_id
- * @property string  $location
- * @property string  $website
- * @property string  $bio
- * @property string  $timezone
- * @property User    $user
- */
+ * @property string $name
+ * @property string $public_email
+ * @property string $gravatar_email
+ * @property string $gravatar_id
+ * @property string $location
+ * @property string $website
+ * @property string $bio
+ * @property string $timezone
+ * @property UserModel $user
+ * @property \yii\web\Application app
+ **/
 class ProfileModel extends ActiveRecord
 {
     use ModuleTrait;
-    /** @var \dektrium\user\Module */
+    /** @var \app\user\Module **/
     protected $module;
 
-    /** @inheritdoc */
+    /**
+     * init
+     *
+     **/
     public function init()
     {
-        $this->module = Yii::getApp()->getModule('user');
+        $this->module = $this->module->modelMap['user'];
     }
 
     /**
-     * Returns avatar url or null if avatar is not set.
-     * @param  int $size
-     * @return string|null
-     */
+     * tableName
+     *
+     **/
+    public static function tableName()
+    {
+        return '{{%profile}}';
+    }
+
+    /**
+     * getAvatarUrl
+     *
+     * returns avatar url or null if avatar is not set
+     *
+     * @param int $size
+     * @return null|string
+     **/
     public function getAvatarUrl($size = 200)
     {
         return '//gravatar.com/avatar/' . $this->gravatar_id . '?s=' . $size;
     }
 
     /**
+     * getUser
+     *
      * @return \yii\db\ActiveQueryInterface
-     */
+     **/
     public function getUser()
     {
-        return $this->hasOne(Yii::getApp()->modules['user']->modelMap['User'], ['id' => 'user_id']);
+        return $this->hasOne($this->module->modelMap['user'], ['id' => 'user_id']);
     }
 
     /**
-     * @inheritdoc
-     */
-    public function rules()
+	 * rules
+	 *
+     * @return array the validation rules
+     **/
+    public function rules(): array
     {
         return [
             'bioString'            => ['bio', 'string'],
@@ -70,75 +92,73 @@ class ProfileModel extends ActiveRecord
     }
 
     /**
-     * @inheritdoc
-     */
-    public function attributeLabels()
-    {
-        return [
-            'name'           => Yii::t('user', 'Name'),
-            'public_email'   => Yii::t('user', 'Email (public)'),
-            'gravatar_email' => Yii::t('user', 'Gravatar email'),
-            'location'       => Yii::t('user', 'Location'),
-            'website'        => Yii::t('user', 'Website'),
-            'bio'            => Yii::t('user', 'Bio'),
-            'timezone'       => Yii::t('user', 'Time zone'),
-        ];
-    }
-
-    /**
-     * Validates the timezone attribute.
-     * Adds an error when the specified time zone doesn't exist.
+     * validateTimeZone
+     *
+     * validates the timezone attribute
+     * Adds an error when the specified time zone doesn't exist
+     *
      * @param string $attribute the attribute being validated
      * @param array $params values for the placeholders in the error message
-     */
+     **/
     public function validateTimeZone($attribute, $params)
     {
         if (!in_array($this->$attribute, timezone_identifiers_list())) {
-            $this->addError($attribute, Yii::t('user', 'Time zone is not valid'));
+            $this->addError($attribute, $this->app->t('user', 'Time zone is not valid'));
         }
     }
 
     /**
-     * Get the user's time zone.
-     * Defaults to the application timezone if not specified by the user.
-     * @return DateTimeZone
-     */
+     * getTimeZone
+     *
+     * get the user's time zone
+     * defaults to the application timezone if not specified by the user
+     *
+     * @return \DateTimeZone
+     **/
     public function getTimeZone()
     {
         try {
-            return new DateTimeZone($this->timezone);
+            return new \DateTimeZone($this->timezone);
         } catch (Exception $e) {
             // Default to application time zone if the user hasn't set their time zone
-            return new DateTimeZone(Yii::getApp()->timeZone);
+            return new \DateTimeZone(Yii::getApp()->timeZone);
         }
     }
 
     /**
-     * Set the user's time zone.
-     * @param DateTimeZone $timezone the timezone to save to the user's profile
-     */
-    public function setTimeZone(DateTimeZone $timeZone)
+     * setTimeZone
+     *
+     * set the user's time zone
+     *
+     * @param \DateTimeZone $timezone the timezone to save to the user's profile
+     **/
+    public function setTimeZone(\DateTimeZone $timeZone)
     {
         $this->setAttribute('timezone', $timeZone->getName());
     }
 
     /**
-     * Converts DateTime to user's local time
-     * @param DateTime the datetime to convert
-     * @return DateTime
-     */
+     * toLocalTime
+     *
+     * converts DateTime to user's local time
+     *
+     * @param \DateTime the datetime to convert
+     * @return \DateTime
+     **/
     public function toLocalTime(\DateTime $dateTime = null)
     {
         if ($dateTime === null) {
-            $dateTime = new DateTime();
+            $dateTime = new \DateTime();
         }
 
         return $dateTime->setTimezone($this->getTimeZone());
     }
 
     /**
+     * beforeSave
+     *
      * @inheritdoc
-     */
+     **/
     public function beforeSave($insert)
     {
         if ($this->isAttributeChanged('gravatar_email')) {
@@ -146,13 +166,5 @@ class ProfileModel extends ActiveRecord
         }
 
         return parent::beforeSave($insert);
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public static function tableName()
-    {
-        return '{{%profile}}';
     }
 }

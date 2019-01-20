@@ -14,6 +14,7 @@ use yii\base\Model;
  *
  * Model for collecting data on password recovery
  *
+ * @property \yii\web\Application app
  **/
 class RecoveryForm extends Model
 {

@@ -13,8 +13,9 @@ use yii\base\Model;
  * ResendForm
  *
  * ResendForm gets user email address and if user with given email is registered it sends new confirmation message
- * to him in case he did not validate his email.
+ * to him in case he did not validate his email
  *
+ * @property \yii\web\Application app
  **/
 class ResendForm extends Model
 {
@@ -39,7 +40,7 @@ class ResendForm extends Model
 	/**
 	 * rules
 	 *
-     * @return array the validation rules.
+     * @return array the validation rules
      **/
     public function rules(): array
     {
@@ -57,7 +58,7 @@ class ResendForm extends Model
 	/**
 	 * formName
 	 *
-     * @return string.
+     * @return string
      **/
     public function formName(): string
     {
