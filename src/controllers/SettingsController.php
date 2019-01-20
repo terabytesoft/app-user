@@ -88,21 +88,21 @@ class SettingsController extends Controller
      */
     public function actionProfile()
     {
-        $model = $this->finder->findProfileById($this->getApp()->user->identity->getId());
+        $model = $this->finder->findProfileById($this->app->user->identity->getId());
 
         if ($model == null) {
             $model = new Profile();
-            $model->link('user', $this->getApp()->user->identity);
+            $model->link('user', $this->app->user->identity);
         }
 
         $this->trigger(ProfileEvent::init());
         $this->performAjaxValidation($model);
         $this->trigger(ProfileEvent::beforeProfileUpdate());
 
-        if ($model->load($this->getApp()->request->post()) && $model->save()) {
-            $this->getApp()->getSession()->setFlash(
+        if ($model->load($this->app->request->post()) && $model->save()) {
+            $this->app->getSession()->setFlash(
                 'success',
-                $this->getApp()->t(
+                $this->app->t(
                     'user',
                     'Your profile has been updated'
                 )
@@ -132,10 +132,10 @@ class SettingsController extends Controller
         $this->performAjaxValidation($model);
         $this->trigger(FormEvent::beforeAccountUpdate());
 
-        if ($model->load($this->getApp()->request->post()) && $model->save()) {
-            $this->getApp()->session->setFlash(
+        if ($model->load($this->app->request->post()) && $model->save()) {
+            $this->app->session->setFlash(
                 'success',
-                $this->getApp()->t(
+                $this->app->t(
                     'user',
                     'Your account details have been updated'
                 )
@@ -189,7 +189,7 @@ class SettingsController extends Controller
     public function actionNetworks(): string
     {
         return $this->render('networks', [
-            'user' => $this->getApp()->user->identity,
+            'user' => $this->app->user->identity,
         ]);
     }
 
@@ -211,7 +211,7 @@ class SettingsController extends Controller
         if ($account === null) {
             throw new NotFoundHttpException();
         }
-        if ($account->user_id != $this->getApp()->user->id) {
+        if ($account->user_id != $this->app->user->id) {
             throw new ForbiddenHttpException();
         }
 
@@ -236,21 +236,21 @@ class SettingsController extends Controller
     public function actionDelete()
     {
         if (!$this->module->enableAccountDelete) {
-            throw new NotFoundHttpException($this->getApp()->t('user', 'Not found'));
+            throw new NotFoundHttpException($this->app->t('user', 'Not found'));
         }
 
-        $user  = $this->getApp()->user->identity;
+        $user  = $this->app->user->identity;
 
         $this->trigger(UserEvent::init());
-        $this->getApp()->user->logout();
+        $this->app->user->logout();
         $this->trigger(UserEvent::beforeDelete());
 
         $user->delete();
 
         $this->trigger(UserEvent::afterDelete());
-        $this->getApp()->session->setFlash(
+        $this->app->session->setFlash(
             'info',
-            $this->getApp()->t(
+            $this->app->t(
                 'user',
                 'Your account has been completely deleted'
             )

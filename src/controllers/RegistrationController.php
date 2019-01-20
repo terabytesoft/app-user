@@ -10,7 +10,8 @@ use app\user\events\ResetPasswordEvent;
 use app\user\events\UserEvent;
 use app\user\forms\RegistrationForm;
 use app\user\forms\ResendForm;
-use app\user\models\User;
+use app\user\models\TokenModel;
+use app\user\models\UserModel;
 use app\user\traits\AjaxValidationTrait;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -85,21 +86,21 @@ class RegistrationController extends Controller
         $this->trigger(FormEvent::beforeRegister());
         $this->performAjaxValidation($model);
 
-        if ($model->load($this->getApp()->request->post()) && $model->validate()) {
+        if ($model->load($this->app->request->post()) && $model->validate()) {
             if ($model->register()) {
                 $this->trigger(FormEvent::afterRegister());
 
-                $this->getApp()->session->setFlash(
+                $this->app->session->setFlash(
                     'info',
-                    $this->getApp()->t(
+                    $this->app->t(
                         'user',
                         'Your account has been created and a message with further instructions has been sent to your email'
                     )
                 );
             } else {
-				$this->getApp()->session->setFlash(
+				$this->app->session->setFlash(
 					'warning',
-					$this->getApp()->t(
+					$this->app->t(
 						'user',
 						'The account could not be created. Contact the administrator.'
                     )
@@ -135,17 +136,17 @@ class RegistrationController extends Controller
 
         $this->trigger(ConnectEvent::init());
 
-		$user = new User();
+		$user = new UserModel();
 		$user->scenario = 'connect';
 		$user->username = $account->username;
 		$user->email = $account->email;
 
         $this->trigger(ConnectEvent::beforeConnect());
 
-        if ($user->load($this->getApp()->request->post()) && $user->create()) {
+        if ($user->load($this->app->request->post()) && $user->create()) {
             $account->connect($user);
             $this->trigger(ConnectEvent::afterConnect());
-            $this->getApp()->user->login($user, $this->module->rememberFor);
+            $this->app->user->login($user, $this->module->rememberFor);
             return $this->goBack();
         }
 
@@ -178,7 +179,24 @@ class RegistrationController extends Controller
         $this->trigger(UserEvent::init());
         $this->trigger(UserEvent::beforeConfirm());
 
-        $user->attemptConfirmation($code);
+        $token = $this->finder->findTokenByParams($user->id, $code, TokenModel::TYPE_CONFIRMATION);
+
+		$this->app->session->set('token', $token);
+		$result = false;
+
+        if ($token instanceof TokenModel && !$token->isExpired) {
+			$token->delete();
+            if ($result = $user->confirm()) {
+				$this->app->user->login($user, $this->module->rememberFor);
+                $message = $this->app->t('user', 'Thank you, registration is now complete.');
+            } else {
+                $message = $this->app->t('user', 'Something went wrong and your account has not been confirmed.');
+			}
+        } else {
+            $message = $this->app->t('user', 'The confirmation link is invalid or expired. Please try requesting a new one.');
+        }
+
+        $this->app->session->setFlash($result ? 'success' : 'danger', $message);
 
         $this->trigger(UserEvent::afterConfirm());
 
@@ -206,21 +224,21 @@ class RegistrationController extends Controller
         $this->trigger(FormEvent::beforeResend());
         $this->performAjaxValidation($model);
 
-		if ($model->load($this->getApp()->request->post()) && $model->validate()) {
+		if ($model->load($this->app->request->post()) && $model->validate()) {
 			if ($model->resend()) {
 				$this->trigger(FormEvent::afterResend());
 
-				$this->getApp()->session->setFlash(
+				$this->app->session->setFlash(
 					'info',
-					$this->getApp()->t(
+					$this->app->t(
 						'user',
 						'A message has been sent to your email address. It contains a confirmation link that you must click to complete registration.'
 					)
 				);
             } else {
-				$this->getApp()->session->setFlash(
+				$this->app->session->setFlash(
 					'warning',
-					$this->getApp()->t(
+					$this->app->t(
 						'user',
 						'A message has not been sent to your email address. The user has already been confirmed.'
                     )

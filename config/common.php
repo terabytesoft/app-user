@@ -8,18 +8,21 @@ return [
                 'basePath' => dirname(__DIR__) . '/src',
                 'controllerNamespace' => 'app\user\controllers',
                 'modelMap' => [
-                    'Account'          => app\user\models\Account::class,
-                    'Profile'          => app\user\models\Profile::class,
-                    'Token'            => app\user\models\Token::class,
-                    'User'             => app\user\models\User::class,
+                    'Account'          => app\user\models\AccountModel::class,
+                    'Profile'          => app\user\models\ProfileModel::class,
+                    'Token'            => app\user\models\TokenModel::class,
+                    'User'             => app\user\models\UserModel::class,
                     'UserSearch'       => app\user\models\UserSearch::class,
                     'LoginForm'        => app\user\forms\LoginForm::class,
                     'RecoveryForm'     => app\user\forms\RecoveryForm::class,
                     'RegistrationForm' => app\user\forms\RegistrationForm::class,
                     'ResendForm'       => app\user\forms\ResendForm::class,
                     'SettingsForm'     => app\user\forms\SettingsForm::class,
-                ],
-                'enableFlashMessages' => true,
+				],
+				'enableAccountDelete' => true,
+				'enableConfirmation' => true,
+				'enableFlashMessages' => true,
+				'enableRegistration' => true,
                 'enableUnconfirmedLogin' => true,
                 'confirmWithin' => 21600,
                 'cost' => 12,
@@ -47,9 +50,6 @@ return [
     'mailer' => [
         '__class' => yii\swiftmailer\Mailer::class,
         'useFileTransport' => $params['mailer.useFileTransport'],
-	],
-    'user' => [
-        'identityClass' => app\user\models\User::class,
 	],
     'translator' => [
         'translations' => [

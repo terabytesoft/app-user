@@ -2,24 +2,23 @@
 
 namespace app\user\forms;
 
-use app\user\Mailer;
 use app\user\Module;
-use app\user\helpers\Password;
+use app\user\mailer\Mailer;
+use app\user\helpers\PasswordHelper;
 use app\user\traits\ModuleTrait;
 use yii\base\Model;
 
 /**
  * SettingsForm gets user's username, email and password and changes them.
  *
- * @property self $app
  **/
 class SettingsForm extends Model
 {
     use ModuleTrait;
 
+	private $_mailer;
+	private $_passwordhelper;
 	private $_user;
-
-	protected $mailer;
 
     public $email;
     public $username;
@@ -32,11 +31,12 @@ class SettingsForm extends Model
 	 **/
     public function __construct()
     {
-        $this->mailer = new Mailer();
+		$this->_mailer = new Mailer();
+		$this->_passwordhelper = new PasswordHelper();
         $this->setAttributes([
             'username' => $this->user->username,
             'email'    => $this->user->unconfirmed_email ?: $this->user->email,
-        ], false);
+		], false);
     }
 
     /**
@@ -55,12 +55,12 @@ class SettingsForm extends Model
             'emailRequired' => ['email', 'required'],
             'emailPattern' => ['email', 'email'],
             'emailUsernameUnique' => [['email', 'username'], 'unique', 'when' => function ($model, $attribute) {
-                return $this->user->$attribute != $model->$attribute;
+                return $this->_user->$attribute != $model->$attribute;
             }, 'targetClass' => $this->module->modelMap['User']],
             'newPasswordLength' => ['new_password', 'string', 'max' => 72, 'min' => 6],
             'currentPasswordRequired' => ['current_password', 'required'],
             'currentPasswordValidate' => ['current_password', function ($attr) {
-                if (!Password::validate($this->$attr, $this->user->password_hash)) {
+                if (!$this->_passwordhelper->validate($this->$attr, $this->_user->password_hash)) {
                     $this->addError($attr, $this->app->t('user', 'Current password is not valid'));
                 }
             }],
@@ -74,7 +74,7 @@ class SettingsForm extends Model
      **/
     protected function defaultEmailChange(): void
     {
-        $this->user->unconfirmed_email = $this->email;
+        $this->_user->unconfirmed_email = $this->email;
 		$token = new Token();
 		$token->user_id = $this->user->id;
 		$token->type = $token::TYPE_CONFIRM_NEW_EMAIL;

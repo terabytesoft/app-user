@@ -59,7 +59,7 @@ class ProfileController extends Controller
      **/
     public function actionIndex()
     {
-        return $this->redirect(['show', 'id' => $this->getApp()->user->getId()]);
+        return $this->redirect(['show', 'id' => $this->app->user->getId()]);
     }
 
     /**

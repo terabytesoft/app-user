@@ -8,12 +8,10 @@ use yii\bootstrap4\Nav;
  * @var string $content
  */
 
-$this->title = $this-getApp()->t('user', 'Update user account');
-$this->params['breadcrumbs'][] = ['label' => $this-getApp()->t('user', 'Users'), 'url' => ['index']];
+$this->title = $this->app->t('user', 'Update user account');
+$this->params['breadcrumbs'][] = ['label' => $this->app->t('user', 'Users'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-
-<?= $this->render('/_alert', ['module' => $this-getApp()->getModule('user')]) ?>
 
 <?= $this->render('_menu') ?>
 
@@ -27,57 +25,57 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                     'items' => [
                         [
-                            'label' => $this-getApp()->t('user', 'Account details'),
+                            'label' => $this->app->t('user', 'Account details'),
                             'url' => ['/user/admin/update', 'id' => $user->id]
                         ],
                         [
-                            'label' => $this-getApp()->t('user', 'Profile details'),
+                            'label' => $this->app->t('user', 'Profile details'),
                             'url' => ['/user/admin/update-profile', 'id' => $user->id]
                         ],
-                        ['label' => $this-getApp()->t('user', 'Information'), 'url' => ['/user/admin/info', 'id' => $user->id]],
+                        ['label' => $this->app->t('user', 'Information'), 'url' => ['/user/admin/info', 'id' => $user->id]],
                         [
-                            'label' => $this-getApp()->t('user', 'Assignments'),
+                            'label' => $this->app->t('user', 'Assignments'),
                             'url' => ['/user/admin/assignments', 'id' => $user->id],
-                            'visible' => isset($this-getApp()->extensions['app/yii2-rbac']),
+                            'visible' => false,
                         ],
                         '<hr>',
                         [
-                            'label' => $this-getApp()->t('user', 'Confirm'),
+                            'label' => $this->app->t('user', 'Confirm'),
                             'url' => ['/user/admin/confirm', 'id' => $user->id],
                             'visible' => !$user->isConfirmed,
                             'linkOptions' => [
                                 'class' => 'text-success',
                                 'data-method' => 'post',
-                                'data-confirm' => $this-getApp()->t('user', 'Are you sure you want to confirm this user?'),
+                                'data-confirm' => $this->app->t('user', 'Are you sure you want to confirm this user?'),
                             ],
                         ],
                         [
-                            'label' => $this-getApp()->t('user', 'Block'),
+                            'label' => $this->app->t('user', 'Block'),
                             'url' => ['/user/admin/block', 'id' => $user->id],
                             'visible' => !$user->isBlocked,
                             'linkOptions' => [
                                 'class' => 'text-danger',
                                 'data-method' => 'post',
-                                'data-confirm' => $this-getApp()->t('user', 'Are you sure you want to block this user?'),
+                                'data-confirm' => $this->app->t('user', 'Are you sure you want to block this user?'),
                             ],
                         ],
                         [
-                            'label' => $this-getApp()->t('user', 'Unblock'),
+                            'label' => $this->app->t('user', 'Unblock'),
                             'url' => ['/user/admin/block', 'id' => $user->id],
                             'visible' => $user->isBlocked,
                             'linkOptions' => [
                                 'class' => 'text-success',
                                 'data-method' => 'post',
-                                'data-confirm' => $this-getApp()->t('user', 'Are you sure you want to unblock this user?'),
+                                'data-confirm' => $this->app->t('user', 'Are you sure you want to unblock this user?'),
                             ],
                         ],
                         [
-                            'label' => $this-getApp()->t('user', 'Delete'),
+                            'label' => $this->app->t('user', 'Delete'),
                             'url' => ['/user/admin/delete', 'id' => $user->id],
                             'linkOptions' => [
                                 'class' => 'text-danger',
                                 'data-method' => 'post',
-                                'data-confirm' => $this-getApp()->t('user', 'Are you sure you want to delete this user?'),
+                                'data-confirm' => $this->app->t('user', 'Are you sure you want to delete this user?'),
                             ],
                         ],
                     ],

@@ -4,28 +4,39 @@ namespace app\user\forms;
 
 use app\user\finder\Finder;
 use app\user\mailer\Mailer;
-use app\user\models\Token;
-use app\user\models\User;
+use app\user\models\TokenModel;
+use app\user\models\UserModel;
 use app\user\traits\ModuleTrait;
 use yii\base\Model;
 
 /**
+ * ResendForm
+ *
  * ResendForm gets user email address and if user with given email is registered it sends new confirmation message
  * to him in case he did not validate his email.
  *
- * @property self $app
  **/
 class ResendForm extends Model
 {
 	use ModuleTrait;
 
+	private $_finder;
+	private $_mailer;
+	private $_user;
+
     public $email;
 
-    protected $finder;
-    protected $mailer;
-    protected $result;
+	/**
+     * __construct
+	 *
+     */
+    public function __construct()
+    {
+		$this->_finder = new Finder();
+		$this->_mailer = new Mailer();
+    }
 
-    /**
+	/**
 	 * rules
 	 *
      * @return array the validation rules.
@@ -37,7 +48,7 @@ class ResendForm extends Model
             'emailPattern' => ['email', 'email'],
             'emailPattern'  => ['email', 'email'],
 			['email', 'exist',
-				'targetClass' => User::class,
+				'targetClass' => UserModel::class,
 				'message' => $this->app->t('user', 'There is no user with this email address.'),
             ],
         ];
@@ -56,29 +67,23 @@ class ResendForm extends Model
     /**
 	 * resend
 	 *
-     * creates new confirmation token and sends it to the user.
+     * creates new confirmation token and sends it to the user
      *
      * @return bool
      **/
-    public function resend(): bool
+    public function resend(bool $result = false): bool
     {
-		$this->finder = new Finder();
-		$this->mailer = new Mailer();
-		$this->result = false;
+        $this->_user = $this->_finder->findUserByEmail($this->email);
 
-        $user = $this->finder->findUserByEmail($this->email);
-
-        if ($user instanceof User && !$user->isConfirmed) {
-            $token = new Token();
-            $token->user_id = $user->id;
-            $token->type = Token::TYPE_CONFIRMATION;
+        if ($this->_user instanceof UserModel && !$this->_user->isConfirmed) {
+            $token = new TokenModel();
+            $token->user_id = $this->_user->id;
+            $token->type = TokenModel::TYPE_CONFIRMATION;
             $token->save(false);
-
-            $this->mailer->sendConfirmationMessage($user, $token);
-
-            $this->result = true;
+            $this->_mailer->sendConfirmationMessage($this->_user, $token);
+            $result = true;
         }
 
-        return $this->result;
+        return $result;
     }
 }

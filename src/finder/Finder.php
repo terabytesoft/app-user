@@ -2,10 +2,10 @@
 
 namespace app\user\finder;
 
-use app\user\models\Account;
-use app\user\models\Profile;
-use app\user\models\User;
-use app\user\models\Token;
+use app\user\models\AccountModel;
+use app\user\models\ProfileModel;
+use app\user\models\UserModel;
+use app\user\models\TokenModel;
 use app\user\models\query\AccountQuery;
 use yii\activerecord\ActiveQuery;
 use yii\authclient\ClientInterface;
@@ -73,28 +73,28 @@ class Finder extends BaseObject
     /** @param ActiveQuery $accountQuery */
     public function setAccountQuery()
     {
-        $model = new Account();
+        $model = new AccountModel();
         $this->accountQuery = new AccountQuery($model);
     }
 
     /** @param ActiveQuery $userQuery */
     public function setUserQuery()
     {
-        $this->userQuery = new User();
+        $this->userQuery = new UserModel();
         $this->userQuery = $this->userQuery->find();
     }
 
     /** @param ActiveQuery $tokenQuery */
     public function setTokenQuery()
     {
-        $this->tokenQuery = new Token();
+        $this->tokenQuery = new TokenModel();
         $this->tokenQuery = $this->tokenQuery->find();
     }
 
     /** @param ActiveQuery $profileQuery */
     public function setProfileQuery()
     {
-        $this->profileQuery = new Profile();
+        $this->profileQuery = new ProfileModel();
         $this->profileQuery = $this->profileQuery->find();
     }
 
@@ -103,7 +103,7 @@ class Finder extends BaseObject
      *
      * @param int $id User id to be used on search.
      *
-     * @return User
+     * @return UserModel
      */
     public function findUserById($id)
     {
@@ -115,7 +115,7 @@ class Finder extends BaseObject
      *
      * @param string $username Username to be used on search.
      *
-     * @return User
+     * @return UserModel
      */
     public function findUserByUsername($username)
     {
@@ -127,7 +127,7 @@ class Finder extends BaseObject
      *
      * @param string $email Email to be used on search.
      *
-     * @return User
+     * @return UserModel
      */
     public function findUserByEmail($email)
     {
@@ -139,7 +139,7 @@ class Finder extends BaseObject
      *
      * @param string $usernameOrEmail Username or email to be used on search.
      *
-     * @return User
+     * @return UserModel
      */
     public function findUserByUsernameOrEmail($usernameOrEmail)
     {
@@ -201,7 +201,7 @@ class Finder extends BaseObject
      * @param string  $code
      * @param integer $type
      *
-     * @return Token
+     * @return TokenModel
      */
     public function findTokenByParams($userId, $code, $type)
     {

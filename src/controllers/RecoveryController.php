@@ -7,7 +7,7 @@ use app\user\events\FormEvent;
 use app\user\events\ResetPasswordEvent;
 use app\user\finder\Finder;
 use app\user\forms\RecoveryForm;
-use app\user\models\Token;
+use app\user\models\TokenModel;
 use app\user\traits\AjaxValidationTrait;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -77,21 +77,21 @@ class RecoveryController extends Controller
         $this->performAjaxValidation($model);
         $this->trigger(FormEvent::beforeRequest());
 
-        if ($model->load($this->getApp()->request->post()) && $model->validate()) {
+        if ($model->load($this->app->request->post()) && $model->validate()) {
 			if ($model->sendRecoveryMessage()) {
 				$this->trigger(FormEvent::afterRequest());
 
-				$this->getApp()->session->setFlash(
+				$this->app->session->setFlash(
 					'info',
-					$this->getApp()->t(
+					$this->app->t(
 						'user',
 						'An email has been sent with instructions for resetting your password'
 					)
 				);
 			} else {
-				$this->getApp()->session->setFlash(
+				$this->app->session->setFlash(
 					'warning',
-					$this->getApp()->t(
+					$this->app->t(
 						'user',
 						'A message has not been sent to your email address. Contact the administrator.'
                     )
@@ -126,10 +126,10 @@ class RecoveryController extends Controller
         $token = $this->finder->findToken([
             'user_id' => $id,
             'code' => $code,
-            'type' => Token::TYPE_RECOVERY
+            'type' => TokenModel::TYPE_RECOVERY
         ])->one();
 
-        if (empty($token) || ! $token instanceof Token) {
+        if (empty($token) || ! $token instanceof TokenModel) {
             throw new NotFoundHttpException();
         }
 
@@ -139,9 +139,9 @@ class RecoveryController extends Controller
         if ($token === null || $token->isExpired || $token->user === null) {
             $this->trigger(ResetPasswordEvent::afterTokenValidate());
 
-            $this->getApp()->session->setFlash(
+            $this->app->session->setFlash(
                 'danger',
-                $this->getApp()->t(
+                $this->app->t(
                     'user',
                     'Recovery link is invalid or expired. Please try requesting a new one.'
                 )
@@ -154,21 +154,21 @@ class RecoveryController extends Controller
         $this->performAjaxValidation($model);
         $this->trigger(ResetPasswordEvent::beforeReset());
 
-        if ($model->load($this->getApp()->getRequest()->post()) && $model->validate()) {
+        if ($model->load($this->app->getRequest()->post()) && $model->validate()) {
 			if ($token->user->resetPassword($model->password)) {
 				$this->trigger(ResetPasswordEvent::afterReset());
-				$this->getApp()->session->setFlash(
+				$this->app->session->setFlash(
 					'success',
-					$this->getApp()->t(
+					$this->app->t(
 						'user',
 						'Your password has been changed successfully.'
 					)
 				);
 				$token->delete();
 			} else {
-				$this->getApp()->session->setFlash(
+				$this->app->session->setFlash(
 					'danger',
-					$this->getApp()->t(
+					$this->app->t(
 						'user',
 						'An error occurred and your password has not been changed. Please try again later.'
 					)

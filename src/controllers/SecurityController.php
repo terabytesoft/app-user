@@ -80,7 +80,7 @@ class SecurityController extends Controller
                 '__class' => AuthAction::class,
                 // if user is not logged in, will try to log him in, otherwise
                 // will try to connect social account to user.
-                'successCallback' => $this->getApp()->user->isGuest
+                'successCallback' => $this->app->user->isGuest
                     ? [$this, 'authenticate']
                     : [$this, 'connect'],
             ],
@@ -96,7 +96,7 @@ class SecurityController extends Controller
      **/
     public function actionLogin()
     {
-        if (!$this->getApp()->user->isGuest) {
+        if (!$this->app->user->isGuest) {
             $this->goHome();
         }
 
@@ -106,7 +106,7 @@ class SecurityController extends Controller
         $this->performAjaxValidation($model);
         $this->trigger(FormEvent::beforeLogin());
 
-        if ($model->load($this->getApp()->getRequest()->post()) && $model->login()) {
+        if ($model->load($this->app->getRequest()->post()) && $model->login()) {
             $this->trigger(FormEvent::afterLogin());
 
             return $this->goBack();
@@ -129,7 +129,7 @@ class SecurityController extends Controller
     {
         $this->trigger(FormEvent::init());
         $this->trigger(FormEvent::beforeLogout());
-        $this->getApp()->getUser()->logout();
+        $this->app->getUser()->logout();
         $this->trigger(FormEvent::afterLogout());
 
         return $this->goHome();
@@ -149,9 +149,9 @@ class SecurityController extends Controller
         $account = $this->finder->findAccount()->byClient($client)->one();
 
         if (!$this->module->enableRegistration && ($account === null || $account->user === null)) {
-            $this->getApp()->session->setFlash(
+            $this->app->session->setFlash(
                 'danger',
-                $this->getApp()->t(
+                $this->app->t(
                     'user',
                     'Registration on this website is disabled'
                 )
@@ -171,9 +171,9 @@ class SecurityController extends Controller
 
         if ($account->user instanceof User) {
             if ($account->user->isBlocked) {
-                $this->getApp()->session->setFlash(
+                $this->app->session->setFlash(
                     'danger',
-                    $this->getApp()->t(
+                    $this->app->t(
                         'user',
                         'Your account has been blocked.'
                     )
@@ -181,8 +181,8 @@ class SecurityController extends Controller
                 $this->action->successUrl = Url::to(['/user/security/login']);
             } else {
                 $account->user->updateAttributes(['last_login_at' => time()]);
-                $this->getApp()->user->login($account->user, $this->module->rememberFor);
-                $this->action->successUrl = $this->getApp()->getUser()->getReturnUrl();
+                $this->app->user->login($account->user, $this->module->rememberFor);
+                $this->action->successUrl = $this->app->getUser()->getReturnUrl();
             }
         } else {
             $this->action->successUrl = $account->getConnectUrl();
@@ -199,14 +199,14 @@ class SecurityController extends Controller
      **/
     public function connect(ClientInterface $client)
     {
-        $account = new Account();
+		$account = new Account();
 
-        $this->trigger(AuthEvent::init());
-        $this->trigger(AuthEvent::beforeConnect());
+		$this->trigger(AuthEvent::init());
+		$this->trigger(AuthEvent::beforeConnect());
 
-        $account->connectWithUser($client);
+		$account->connectWithUser($client);
 
-        $this->trigger(AuthEvent::afterConnect());
-        $this->action->successUrl = Url::to(['/user/settings/networks']);
-    }
+		$this->trigger(AuthEvent::afterConnect());
+		$this->action->successUrl = Url::to(['/user/settings/networks']);
+	}
 }

@@ -4,7 +4,7 @@ namespace app\user\models;
 
 use app\user\Module;
 use app\user\finder\Finder;
-use app\user\helpers\Password;
+use app\user\helpers\PasswordHelper;
 use app\user\mailer\Mailer;
 use app\user\traits\ModuleTrait;
 use yii\activerecord\ActiveRecord;
@@ -46,7 +46,7 @@ use yii\helpers\ArrayHelper;
  * @property-read Module $module
  * @property-read Mailer $mailer
  */
-class User extends ActiveRecord implements IdentityInterface
+class UserModel extends ActiveRecord implements IdentityInterface
 {
     use ModuleTrait;
 
@@ -59,16 +59,27 @@ class User extends ActiveRecord implements IdentityInterface
 
     // following constants are used on secured email changing process
     const OLD_EMAIL_CONFIRMED = 0b1;
-    const NEW_EMAIL_CONFIRMED = 0b10;
+	const NEW_EMAIL_CONFIRMED = 0b10;
+
+	private $_passwordhelper;
+
+	/** @var Profile|null */
+	private $_profile;
 
     /** @var string Plain password. Used for model validation. */
     public $password;
 
-    /** @var Profile|null */
-    private $_profile;
-
     /** @var string Default username regexp */
     public static $usernameRegexp = '/^[-a-zA-Z0-9_\.@]+$/';
+
+    /**
+     * __construct
+	 *
+     */
+    public function __construct()
+    {
+		$this->_passwordhelper = new PasswordHelper();
+    }
 
     /**
      * @return Finder
@@ -261,7 +272,7 @@ class User extends ActiveRecord implements IdentityInterface
         $transaction = $this->getDb()->beginTransaction();
 
         try {
-            $this->password = ($this->password == null && $this->module->enableGeneratingPassword) ? Password::generate(8) : $this->password;
+            $this->password = ($this->password == null && $this->module->enableGeneratingPassword) ? $this->_passwordhelper->generate(8) : $this->password;
 
             $this->trigger(self::BEFORE_CREATE);
 
@@ -301,7 +312,7 @@ class User extends ActiveRecord implements IdentityInterface
 
         try {
             $this->confirmed_at = $this->module->enableConfirmation ? null : time();
-            $this->password     = $this->module->enableGeneratingPassword ? Password::generate(8) : $this->password;
+            $this->password     = $this->module->enableGeneratingPassword ? $this->_passwordhelper->generate(8) : $this->password;
 
             $this->trigger(self::BEFORE_REGISTER);
 
@@ -313,8 +324,8 @@ class User extends ActiveRecord implements IdentityInterface
             if ($this->module->enableConfirmation) {
                 /** @var Token $token */
                 $token = Yii::createObject([
-                    '__class' => Token::class,
-                    'type' => Token::TYPE_CONFIRMATION
+                    '__class' => TokenModel::class,
+                    'type' => TokenModel::TYPE_CONFIRMATION
                 ]);
                 $token->link('user', $this);
             }
@@ -333,35 +344,6 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * Attempts user confirmation.
-     *
-     * @param string $code Confirmation code.
-     *
-     * @return boolean
-     */
-    public function attemptConfirmation($code)
-    {
-        $token = $this->finder->findTokenByParams($this->id, $code, Token::TYPE_CONFIRMATION);
-
-        if ($token instanceof Token && !$token->isExpired) {
-            $token->delete();
-            if (($success = $this->confirm())) {
-                Yii::getApp()->user->login($this, $this->module->rememberFor);
-                $message = Yii::t('user', 'Thank you, registration is now complete.');
-            } else {
-                $message = Yii::t('user', 'Something went wrong and your account has not been confirmed.');
-            }
-        } else {
-            $success = false;
-            $message = Yii::t('user', 'The confirmation link is invalid or expired. Please try requesting a new one.');
-        }
-
-        Yii::getApp()->session->setFlash($success ? 'success' : 'danger', $message);
-
-        return $success;
-    }
-
-    /**
      * Generates a new password and sends it to the user.
      *
      * @param string $code Confirmation code.
@@ -370,7 +352,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function resendPassword()
     {
-        $this->password = Password::generate(8);
+        $this->password = $this->_passwordhelper->generate(8);
         $this->save(false, ['password_hash']);
 
         return $this->mailer->sendGeneratedPassword($this, $this->password);
@@ -394,7 +376,7 @@ class User extends ActiveRecord implements IdentityInterface
         $token = $this->finder->findToken([
             'user_id' => $this->id,
             'code'    => $code,
-        ])->andWhere(['in', 'type', [Token::TYPE_CONFIRM_NEW_EMAIL, Token::TYPE_CONFIRM_OLD_EMAIL]])->one();
+        ])->andWhere(['in', 'type', [TokenModel::TYPE_CONFIRM_NEW_EMAIL, TokenModel::TYPE_CONFIRM_OLD_EMAIL]])->one();
 
         if (empty($this->unconfirmed_email) || $token === null || $token->isExpired) {
             Yii::getApp()->session->setFlash('danger', Yii::t('user', 'Your confirmation token is invalid or expired'));
@@ -406,7 +388,7 @@ class User extends ActiveRecord implements IdentityInterface
             } elseif ($this->finder->findUser(['email' => $this->unconfirmed_email])->exists() == false) {
                 if ($this->module->emailChangeStrategy == Module::STRATEGY_SECURE) {
                     switch ($token->type) {
-                        case Token::TYPE_CONFIRM_NEW_EMAIL:
+                        case TokenModel::TYPE_CONFIRM_NEW_EMAIL:
                             $this->flags |= self::NEW_EMAIL_CONFIRMED;
                             Yii::getApp()->session->setFlash(
                                 'success',
@@ -416,7 +398,7 @@ class User extends ActiveRecord implements IdentityInterface
                                 )
                             );
                             break;
-                        case Token::TYPE_CONFIRM_OLD_EMAIL:
+                        case TokenModel::TYPE_CONFIRM_OLD_EMAIL:
                             $this->flags |= self::OLD_EMAIL_CONFIRMED;
                             Yii::getApp()->session->setFlash(
                                 'success',
@@ -445,7 +427,7 @@ class User extends ActiveRecord implements IdentityInterface
     public function confirm()
     {
         $this->trigger(self::BEFORE_CONFIRM);
-        $result = (bool) $this->updateAttributes(['confirmed_at' => time()]);
+		$result = (bool) $this->updateAttributes(['confirmed_at' => time()]);
         $this->trigger(self::AFTER_CONFIRM);
         return $result;
     }
@@ -459,7 +441,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function resetPassword($password)
     {
-        return (bool)$this->updateAttributes(['password_hash' => Password::hash($password)]);
+        return (bool)$this->updateAttributes(['password_hash' => $this->_passwordhelper->hash($password)]);
     }
 
     /**
@@ -522,7 +504,7 @@ class User extends ActiveRecord implements IdentityInterface
         }
 
         if (!empty($this->password)) {
-            $this->setAttribute('password_hash', Password::hash($this->password));
+            $this->setAttribute('password_hash', $this->_passwordhelper->hash($this->password));
         }
 
         return parent::beforeSave($insert);

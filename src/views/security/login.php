@@ -30,30 +30,32 @@ LoginAsset::register($this);
 		) ?>
     <?= Html::endTag('p') ?>
 
-    <?php $form = ActiveForm::begin([
-        'id' => 'form-login',
-		'layout' => 'default',
-		'fieldConfig' => [
-			'template' => '{input}{label}{hint}{error}',
-			'horizontalCssClasses' => [
-				'label' => '',
-				'offset' => '',
-				'wrapper' => '',
-				'error' => 'text-center',
-                'hint' => '',
-                'field' => 'form-label-group',
-			],
-			'options' => ['class' => 'form-label-group'],
-		],
-        'enableAjaxValidation' => true,
-        'enableClientValidation' => false,
-		'options' => ['class' => 'form-login'],
-		'validateOnType' => false,
-        'validateOnChange' => false,
-    ]); ?>
+	<?php if (!$module->debug) : ?>
 
-        <?php if ($module->debug) : ?>
-            <?= $form->field($model, 'login')->textInput([
+    	<?php $form = ActiveForm::begin([
+        	'id' => 'form-login',
+			'layout' => 'default',
+			'fieldConfig' => [
+				'template' => '{input}{label}{hint}{error}',
+				'horizontalCssClasses' => [
+					'label' => '',
+					'offset' => '',
+					'wrapper' => '',
+					'error' => 'text-center',
+                	'hint' => '',
+                	'field' => 'form-label-group',
+				],
+				'options' => ['class' => 'form-label-group'],
+			] ,
+        	'enableAjaxValidation' => true,
+        	'enableClientValidation' => false,
+			'options' => ['class' => 'form-login'],
+			'validateOnBlur' => false,
+			'validateOnType' => false,
+        	'validateOnChange' => false,
+    	]); ?>
+
+			<?= $form->field($model, 'login')->textInput([
 			    'autofocus' => true,
 			    'oninput' => 'this.setCustomValidity("")',
 			    'oninvalid' => 'this.setCustomValidity("' . $this->app->t('user', 'Enter Login Here') . '")',
@@ -62,26 +64,7 @@ LoginAsset::register($this);
 			    'tabindex' => '1',
 		    ])->label($this->app->t('user', 'Login')) ?>
 
-        <?php else : ?>
-
-            <?= $form->field($model, 'login')->textInput([
-			    'autofocus' => true,
-			    'oninput' => 'this.setCustomValidity("")',
-			    'oninvalid' => 'this.setCustomValidity("' . $this->app->t('user', 'Enter Login Here') . '")',
-			    'placeholder' => $this->app->t('user', 'Login'),
-			    'required' => (YII_ENV === 'test') ? false : true,
-			    'tabindex' => '1',
-		    ])->label($this->app->t('user', 'Login')) ?>
-
-        <?php endif ?>
-
-        <?php if ($module->debug) : ?>
-            <?= Html::beginTag('div', ['class' => 'alert alert-warning']) ?>
-                <?= $this->getApp()->t('user', 'Password is not necessary because the module is in DEBUG mode.'); ?>
-            <?= Html::endTag('div'); ?>
-
-        <?php else : ?>
-            <?= $form->field($model, 'password')->passwordInput([
+			<?= $form->field($model, 'password')->passwordInput([
 				'oninput' => 'this.setCustomValidity("")',
 				'oninvalid' => 'this.setCustomValidity("' . $this->app->t('user', 'Enter Password Here') . '")',
 				'placeholder' => $this->app->t('user', 'Password'),
@@ -89,7 +72,33 @@ LoginAsset::register($this);
 				'tabindex' => '3',
 			])->label($this->app->t('user', 'Password')) ?>
 
-        <?php endif ?>
+    <?php else : ?>
+
+		<?php $form = ActiveForm::begin([
+        	'id' => 'form-login',
+        	'enableAjaxValidation' => true,
+        	'enableClientValidation' => false,
+			'options' => ['class' => 'form-login'],
+			'validateOnBlur' => false,
+			'validateOnType' => false,
+        	'validateOnChange' => false,
+    	]); ?>
+
+			<?= $form->field($model, 'login')->dropDownList(
+				$model->loginList(),
+				[
+					'autofocus' => 'autofocus',
+					'class' => 'form-control',
+					'placeholder' => '',
+					'tabindex' => '1',
+				]
+			)->label('') ?>
+
+			<?= Html::beginTag('div', ['class' => 'alert alert-warning']) ?>
+                <?= $this->getApp()->t('user', 'Password is not necessary because the module is in DEBUG mode.'); ?>
+            <?= Html::endTag('div'); ?>
+
+	<?php endif ?>
 
         <?= $form->field($model, 'rememberMe', [
 				'options' => ['tabindex' => '3'],

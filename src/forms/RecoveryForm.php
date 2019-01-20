@@ -4,15 +4,16 @@ namespace app\user\forms;
 
 use app\user\finder\Finder;
 use app\user\mailer\Mailer;
-use app\user\models\Token;
-use app\user\models\User;
+use app\user\models\TokenModel;
+use app\user\models\UserModel;
 use app\user\traits\ModuleTrait;
 use yii\base\Model;
 
 /**
- * Model for collecting data on password recovery.
+ * RecoveryForm
  *
- * @property self $app
+ * Model for collecting data on password recovery
+ *
  **/
 class RecoveryForm extends Model
 {
@@ -21,17 +22,27 @@ class RecoveryForm extends Model
     const SCENARIO_REQUEST = self::SCENARIO_DEFAULT;
     const SCENARIO_RESET = 'reset';
 
-	protected $finder;
-    protected $mailer;
-    protected $result;
+	private $_finder;
+	private $_mailer;
+	private $_user;
 
     public $email;
     public $password;
 
+	/**
+     * __construct
+	 *
+     */
+    public function __construct()
+    {
+		$this->_finder = new Finder();
+		$this->_mailer = new Mailer();
+    }
+
     /**
 	 * scenarios
 	 *
-     * @return array scenarios validation.
+     * @return array scenarios validation
      **/
     public function scenarios(): array
     {
@@ -44,7 +55,7 @@ class RecoveryForm extends Model
     /**
 	 * rules
 	 *
-     * @return array the validation rules.
+     * @return array the validation rules
      **/
     public function rules(): array
     {
@@ -53,7 +64,7 @@ class RecoveryForm extends Model
             'emailRequired' => ['email', 'required'],
             'emailPattern' => ['email', 'email'],
 			['email', 'exist',
-				'targetClass' => User::class,
+				'targetClass' => UserModel::class,
 				'message' => $this->app->t('user', 'There is no user with this email address.'),
             ],
             'passwordRequired' => ['password', 'required'],
@@ -64,7 +75,7 @@ class RecoveryForm extends Model
 	/**
 	 * formName
 	 *
-     * @return string.
+     * @return string
      **/
     public function formName(): string
     {
@@ -74,30 +85,28 @@ class RecoveryForm extends Model
     /**
      * sendRecoveryMessage
      *
-     * @return bool sends recovery message.
+     * @return bool sends recovery message
      **/
-    public function sendRecoveryMessage()
+    public function sendRecoveryMessage(bool $result = false): bool
     {
-		$this->finder = new Finder();
-		$this->mailer = new Mailer();
-        $this->result = true;
+        $this->_user = $this->_finder->findUserByEmail($this->email);
 
-        $user = $this->finder->findUserByEmail($this->email);
-
-        if ($user instanceof User) {
-            $token = new Token();
-            $token->user_id = $user->id;
-            $token->type = Token::TYPE_RECOVERY;
+        if ($this->_user instanceof UserModel) {
+            $token = new TokenModel();
+            $token->user_id = $this->_user->id;
+            $token->type = TokenModel::TYPE_RECOVERY;
 
             if (!$token->save(false)) {
-                $this->result = false;
+                $result = false;
             }
 
-            if (!$this->mailer->sendRecoveryMessage($user, $token)) {
-                $this->result = false;
-            }
+            if (!$this->_mailer->sendRecoveryMessage($this->_user, $token)) {
+                $result = false;
+			}
+
+			$result = true;
         }
 
-        return $this->result;
+        return $result;
     }
 }

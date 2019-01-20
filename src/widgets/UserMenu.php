@@ -3,7 +3,7 @@
 namespace app\user\widgets;
 
 use app\user\traits\ModuleTrait;
-use yii\widgets\Menu;
+use yii\bootstrap4\nav;
 use yii\widgets\Widget;
 
 /**
@@ -20,11 +20,11 @@ class UserMenu extends Widget
     /** @array \app\user\forms\RegistrationForm */
     public $items;
 
-    public function init()
+    public function init(): void
     {
         parent::init();
 
-        $networksVisible = count($this->app->authClientCollection->clients) > 0;
+        //$networksVisible = count($this->app->authClientCollection->clients) > 0;
 
         $this->items = [
                 ['label' => $this->app->t('user', 'Profile'), 'url' => ['/user/settings/profile']],
@@ -32,7 +32,7 @@ class UserMenu extends Widget
                 [
                     'label' => $this->app->t('user', 'Networks'),
                     'url' => ['/user/settings/networks'],
-                    'visible' => $networksVisible
+                    //'visible' => $networksVisible
                 ],
             ];
     }

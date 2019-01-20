@@ -1,77 +1,103 @@
 <?php
 
-use yii\helpers\Html;
-use app\user\helpers\Timezone;
-use yii\widgets\ActiveForm;
+use app\user\helpers\TimeZoneHelper;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
+use yii\bootstrap4\ActiveForm;
 
 /**
+ * @var TimeZoneHelper $timezoneHelper
+ * @var app\user\models\Profile $model
  * @var yii\web\View $this
  * @var yii\widgets\ActiveForm $form
- * @var app\user\models\Profile $model
  */
 
-$this->title = $this->getApp()->t('user', 'Profile settings');
+$timezoneHelper = new TimeZoneHelper();
+
+$this->title = $this->app->t('user', 'Profile Form');
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
 
-<?= $this->render('/_alert', ['module' => $this->getApp()->getModule('user')]) ?>
-
-<div class="row">
-    <div class="col-md-3">
+<?= Html::beginTag('div', ['class' => 'row']) ?>
+	<?= Html::beginTag('div', ['class' => 'col-md-3']) ?>
         <?= $this->render('_menu') ?>
-    </div>
-    <div class="col-md-9">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <?= Html::encode($this->title) ?>
-            </div>
-            <div class="panel-body">
-                <?php $form = ActiveForm::begin([
-                    'id' => 'profile-form',
-                    'options' => ['class' => 'form-horizontal'],
-                    'fieldConfig' => [
-                        'template' => "{label}\n<div class=\"col-lg-9\">{input}</div>\n<div class=\"col-sm-offset-3 col-lg-9\">{error}\n{hint}</div>",
-                        'labelOptions' => ['class' => 'col-lg-3 control-label'],
-                    ],
-                    'enableAjaxValidation' => true,
-                    'enableClientValidation' => false,
-                    'validateOnBlur' => false,
-                ]); ?>
+	<?= Html::endTag('div') ?>
+	<?= Html::beginTag('div', ['class' => 'col-md-9']) ?>
+		<?= Html::tag('h2', '<b>' . Html::encode($this->title) . '</b>', ['class' => 'text-center']) ?>
 
-                <?= $form->field($model, 'name') ?>
+        <?php $form = ActiveForm::begin([
+            'id' => 'profile-form',
+			'layout' => 'default',
+        	'enableAjaxValidation' => true,
+        	'enableClientValidation' => false,
+			'options' => ['class' => 'form-profile'],
+			'validateOnBlur' => false,
+			'validateOnType' => false,
+        	'validateOnChange' => false,
+        ]); ?>
 
-                <?= $form->field($model, 'public_email') ?>
+			<?= $form->field($model, 'name')
+				->textInput([
+			    	'tabindex' => '1',
+				])
+				->label($this->app->t('user', 'Name'))
+			?>
 
-                <?= $form->field($model, 'website') ?>
+			<?= $form->field($model, 'public_email')
+				->textInput([
+			    	'tabindex' => '2',
+				])
+				->label($this->app->t('user', 'Email - (Public)'))
+			?>
 
-                <?= $form->field($model, 'location') ?>
+			<?= $form->field($model, 'website')
+				->textInput([
+			    	'tabindex' => '3',
+				])
+				->label($this->app->t('user', 'Website'))
+			?>
 
-                <?= $form
-                    ->field($model, 'timezone')
-                    ->dropDownList(
-                        ArrayHelper::map(
-                            Timezone::getAll(),
-                            'timezone',
-                            'name'
-                        )
-                    ); ?>
+			<?= $form->field($model, 'location')
+				->textInput([
+			    	'tabindex' => '4',
+				])
+				->label($this->app->t('user', 'Location'))
+			?>
 
-                <?= $form
-                    ->field($model, 'gravatar_email')
-                    ->hint(Html::a($this->getApp()->t('user', 'Change your avatar at Gravatar.com'), 'http://gravatar.com')) ?>
+			<?= $form->field($model, 'timezone')
+				->dropDownList(
+                	ArrayHelper::map(
+                    	$timezoneHelper->getAll(),
+                    	'timezone',
+                    	'name'
+					),
+					[
+						'tabindex' => '5',
+					]
+				)
+				->label($this->app->t('user', 'Time Zone'))
+			?>
 
-                <?= $form->field($model, 'bio')->textarea() ?>
+			<?= $form->field($model, 'gravatar_email')
+				->textInput([
+			    	'tabindex' => '6',
+				])
+				->label($this->app->t('user', 'Gravatar Email'))
+				->hint(Html::a($this->app->t('user', 'Change your avatar at Gravatar.com'), 'http://gravatar.com'))
+			?>
 
-                <div class="form-group">
-                    <div class="col-lg-offset-3 col-lg-9">
-                        <?= Html::submitButton($this->getApp()->t('user', 'Save'), ['class' => 'btn btn-block btn-success']) ?>
-                        <br>
-                    </div>
-                </div>
+            <?= $form->field($model, 'bio')->textarea([
+			    	'tabindex' => '7',
+				])
+				->label($this->app->t('user', 'Bio'))
+			?>
 
-                <?php ActiveForm::end(); ?>
-            </div>
-        </div>
-    </div>
-</div>
+			<?= Html::submitButton($this->app->t('user', 'Save'), [
+				'class' => 'btn btn-lg btn-primary btn-block', 'name' => 'profile-save-button', 'tabindex' => '8',
+	        ]); ?>
+
+        <?php ActiveForm::end(); ?>
+
+	<?= Html::endTag('div') ?>
+<?php echo Html::endTag('div');

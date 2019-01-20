@@ -2,9 +2,8 @@
 
 namespace app\user\forms;
 
-use app\user\Module;
 use app\user\finder\Finder;
-use app\user\helpers\Password;
+use app\user\helpers\PasswordHelper;
 use app\user\traits\ModuleTrait;
 use yii\base\Model;
 use yii\helpers\ArrayHelper;
@@ -12,23 +11,33 @@ use yii\helpers\Html;
 use yii\helpers\Yii;
 
 /**
+ * LoginForm
+ *
  * LoginForm get user's login and password, validates them and logs the user in. If user has been blocked, it adds
  * an error to login form
  *
- * @property self $app
- * @property Module $module
  **/
 class LoginForm extends Model
 {
 	use ModuleTrait;
 
-    protected $user;
-	protected $finder;
-	protected $result;
+	private $_finder;
+	private $_passwordhelper;
+	private $_user;
 
     public $login;
     public $password;
     public $rememberMe = false;
+
+    /**
+     * __construct
+	 *
+     */
+    public function __construct()
+    {
+		$this->_finder = new Finder();
+		$this->_passwordhelper = new PasswordHelper();
+    }
 
     /**
 	 * rules
@@ -43,13 +52,15 @@ class LoginForm extends Model
             'confirmationValidate' => [
             	'login',
                 function ($attribute) {
-                    if ($this->user !== null) {
+                    if ($this->_user !== null) {
                         $confirmationRequired = $this->module->enableConfirmation
 							&& !$this->module->enableUnconfirmedLogin;
-                        if ($confirmationRequired && !$this->user->getIsConfirmed()) {
+
+                        if ($confirmationRequired && !$this->_user->getIsConfirmed()) {
                             $this->addError($attribute, $this->app->t('user', 'You need to confirm your email address'));
 						}
-                        if ($this->user->getIsBlocked()) {
+
+                        if ($this->_user->getIsBlocked()) {
                             $this->addError($attribute, $this->app->t('user', 'Your account has been blocked'));
                         }
                     }
@@ -61,14 +72,7 @@ class LoginForm extends Model
         if (!$this->module->debug) {
             $rules = array_merge($rules, [
                 'requiredFields' => [['login', 'password'], 'required'],
-                'passwordValidate' => [
-                    'password',
-                    function ($attribute) {
-                        if ($this->user === null || !Password::validate($this->password, $this->user->password_hash)) {
-                            $this->addError($attribute, $this->app->t('user', 'Invalid login or password'));
-                        }
-                    }
-                ]
+				['password', 'validatePassword'],
             ]);
         }
 
@@ -80,17 +84,14 @@ class LoginForm extends Model
 	 *
      * @return bool
      **/
-    public function beforeValidate(): bool
+    public function beforeValidate(bool $result = false): bool
     {
-		$this->result = false;
-
         if (parent::beforeValidate()) {
-            $this->finder = new Finder();
-            $this->user = $this->finder->findUserByUsernameOrEmail(trim($this->login));
-            $this->result = true;
+            $this->_user = $this->_finder->findUserByUsernameOrEmail(trim($this->login));
+            $result = true;
 		}
 
-		return $this->result;
+		return $result;
 	}
 
 	/**
@@ -108,20 +109,19 @@ class LoginForm extends Model
      *
      * @return bool whether the user is logged in successfully
      **/
-    public function login(): bool
+    public function login(bool $result = false): bool
     {
-		$this->result = false;
-
-        if ($this->validate() && $this->user) {
-            $isLogged = $this->app->user->login($this->user, $this->rememberMe ? $this->module->rememberFor : 0);
+        if ($this->validate() && $this->_user) {
+            $isLogged = $this->app->user->login($this->_user, $this->rememberMe ? $this->module->rememberFor : 0);
 
             if ($isLogged) {
-                $this->user->updateAttributes(['last_login_at' => time()]);
-            }
-            $this->result = $isLogged;
+                $this->_user->updateAttributes(['last_login_at' => time()]);
+			}
+
+            $result = $isLogged;
         }
 
-        return $this->result;
+        return $result;
     }
 
     /**
@@ -129,12 +129,12 @@ class LoginForm extends Model
      *
      * @return array gets all users to generate the dropdown list when in debug mode
      **/
-    public static function loginList(): array
+    public function loginList(): array
     {
         $userModel = $this->module->modelMap['User'];
 
-        return ArrayHelper::map($userModel::find()->where(['blocked_at' => null])->all(), 'username', function ($user) {
-            return sprintf('%s (%s)', Html::encode($user->username), Html::encode($user->email));
+        return ArrayHelper::map($userModel::find()->where(['blocked_at' => null])->all(), 'username', function ($userModel) {
+            return sprintf('%s (%s)', Html::encode($userModel->username), Html::encode($userModel->email));
         });
     }
 
@@ -148,7 +148,7 @@ class LoginForm extends Model
      **/
     public function validatePassword($attribute, $params): void
     {
-        if ($this->user === null || !Password::validate($this->password, $this->user->password_hash)) {
+        if ($this->_user === null || !$this->_passwordhelper->validate($this->password, $this->_user->password_hash)) {
             $this->addError($attribute, $this->app->t('user', 'Invalid login or password'));
         }
     }

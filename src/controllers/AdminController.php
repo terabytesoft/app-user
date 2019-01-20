@@ -9,7 +9,7 @@ use app\user\events\UserEvent;
 use app\user\finder\Finder;
 use app\user\filters\AccessRule;
 use app\user\models\Profile;
-use app\user\models\User;
+use app\user\models\UserModel;
 use app\user\models\UserSearch;
 use app\user\helpers\Password;
 use yii\helpers\Yii;
@@ -107,7 +107,7 @@ class AdminController extends Controller
 
         $searchModel = new UserSearch();
 
-        $dataProvider = $searchModel->search($this->getApp()->request->get());
+        $dataProvider = $searchModel->search($this->app->request->get());
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
@@ -125,17 +125,17 @@ class AdminController extends Controller
      **/
     public function actionCreate()
     {
-		$user = new User();
+		$user = new UserModel();
 		$user->scenario = 'create';
 
         $this->trigger(UserEvent::init());
         $this->performAjaxValidation($user);
 		$this->trigger(UserEvent::beforeCreate());
 
-        if ($user->load($this->getApp()->request->post()) && $user->create()) {
-            $this->getApp()->getSession()->setFlash(
+        if ($user->load($this->app->request->post()) && $user->create()) {
+            $this->app->session->setFlash(
 				'success',
-				$this->getApp()->t('user', 'User has been created')
+				$this->app->t('user', 'User has been created')
 			);
             $this->trigger(UserEvent::afterCreate());
             return $this->redirect(['update', 'id' => $user->id]);
@@ -166,10 +166,10 @@ class AdminController extends Controller
         $this->performAjaxValidation($user);
 		$this->trigger(UserEvent::beforeUpdate());
 
-        if ($user->load($this->getApp()->request->post()) && $user->save()) {
-            $this->getApp()->getSession()->setFlash(
+        if ($user->load($this->app->request->post()) && $user->save()) {
+            $this->app->session->setFlash(
 				'success',
-				$this->getApp()->t('user', 'Account details have been updated')
+				$this->app->t('user', 'Account details have been updated')
 			);
 			$this->trigger(UserEvent::afterUpdate());
 
@@ -194,7 +194,7 @@ class AdminController extends Controller
     {
         Url::remember('', 'actions-redirect');
 
-        $user    = $this->findModel($id);
+        $user = $this->findModel($id);
         $profile = $user->profile;
 
         if ($profile == null) {
@@ -206,10 +206,10 @@ class AdminController extends Controller
         $this->performAjaxValidation($profile);
         $this->trigger(ProfileEvent::beforeProfileUpdate());
 
-        if ($profile->load($this->getApp()->request->post()) && $profile->save()) {
-            $this->getApp()->getSession()->setFlash(
+        if ($profile->load($this->app->request->post()) && $profile->save()) {
+            $this->app->session->setFlash(
                 'success',
-                $this->getApp()->t('user', 'Profile details have been updated')
+                $this->app->t('user', 'Profile details have been updated')
             );
 			$this->trigger(ProfileEvent::afterProfileUpdate());
 
@@ -257,27 +257,27 @@ class AdminController extends Controller
     {
         if (!$this->module->enableImpersonateUser) {
             throw new ForbiddenHttpException(
-                $this->getApp()->t(
+                $this->app->t(
 					'user',
 					'Impersonate user is disabled in the application configuration'
 				)
             );
         }
 
-        if (!$id && $this->getApp()->session->has(self::ORIGINAL_USER_SESSION_KEY)) {
-            $user = $this->findModel($this->getApp()->session->get(self::ORIGINAL_USER_SESSION_KEY));
-            $this->getApp()->session->remove(self::ORIGINAL_USER_SESSION_KEY);
+        if (!$id && $this->app->session->has(self::ORIGINAL_USER_SESSION_KEY)) {
+            $user = $this->findModel($this->app->session->get(self::ORIGINAL_USER_SESSION_KEY));
+            $this->app->session->remove(self::ORIGINAL_USER_SESSION_KEY);
         } else {
-            if (!$this->getApp()->user->identity->isAdmin) {
+            if (!$this->app->user->identity->isAdmin) {
                 throw new ForbiddenHttpException;
             }
             $user = $this->findModel($id);
-            $this->getApp()->session->set(self::ORIGINAL_USER_SESSION_KEY, $this->getApp()->user->id);
+            $this->app->session->set(self::ORIGINAL_USER_SESSION_KEY, $this->app->user->id);
         }
 
         $this->trigger(UserEvent::init());
         $this->trigger(UserEvent::beforeImpersonate());
-        $this->getApp()->user->switchIdentity($user, 3600);
+        $this->app->user->switchIdentity($user, 3600);
         $this->trigger(UserEvent::afterImpersonate());
 
         return $this->goHome();
@@ -296,7 +296,7 @@ class AdminController extends Controller
      **/
     public function actionAssignments(int $id): string
     {
-        if (!isset($this->getApp()->extensions['app/yii2-rbac'])) {
+        if (!isset($this->app->extensions['app/yii2-rbac'])) {
             throw new NotFoundHttpException();
         }
 
@@ -328,9 +328,9 @@ class AdminController extends Controller
         $model->confirm();
 
         $this->trigger(UserEvent::afterConfirm());
-        $this->getApp()->getSession()->setFlash(
+        $this->app->session->setFlash(
 			'success',
-			$this->getApp()->t('user', 'User has been confirmed')
+			$this->app->t('user', 'User has been confirmed')
 		);
 
         return $this->redirect(Url::previous('actions-redirect'));
@@ -348,10 +348,10 @@ class AdminController extends Controller
      **/
     public function actionDelete(int $id)
     {
-        if ($id == $this->getApp()->user->getId()) {
-            $this->getApp()->getSession()->setFlash(
+        if ($id == $this->app->user->getId()) {
+            $this->app->session->setFlash(
                 'danger',
-                $this->getApp()->t('user', 'You can not remove your own account')
+                $this->app->t('user', 'You can not remove your own account')
             );
         } else {
             $model = $this->findModel($id);
@@ -362,9 +362,9 @@ class AdminController extends Controller
             $model->delete();
 
             $this->trigger(UserEvent::afterDelete());
-            $this->getApp()->getSession()->setFlash(
+            $this->app->session->setFlash(
                 'success',
-                $this->getApp()->t('user', 'User has been deleted')
+                $this->app->t('user', 'User has been deleted')
             );
         }
 
@@ -382,10 +382,10 @@ class AdminController extends Controller
      **/
     public function actionBlock(int $id)
     {
-        if ($id == $this->getApp()->user->getId()) {
-            $this->getApp()->getSession()->setFlash(
+        if ($id == $this->app->user->getId()) {
+            $this->app->session->setFlash(
                 'danger',
-                $this->getApp()->t('user', 'You can not block your own account')
+                $this->app->t('user', 'You can not block your own account')
             );
         } else {
             $user  = $this->findModel($id);
@@ -397,9 +397,9 @@ class AdminController extends Controller
                 $user->unblock();
 
                 $this->trigger(UserEvent::afterUnblock());
-                $this->getApp()->getSession()->setFlash(
+                $this->app->session->setFlash(
                     'success',
-                    $this->getApp()->t('user', 'User has been unblocked')
+                    $this->app->t('user', 'User has been unblocked')
                 );
             } else {
                 $this->trigger(UserEvent::beforeBlock());
@@ -407,9 +407,9 @@ class AdminController extends Controller
                 $user->block();
 
                 $this->trigger(UserEvent::afterBlock());
-                $this->getApp()->getSession()->setFlash(
+                $this->app->session->setFlash(
                     'success',
-                    $this->getApp()->t('user', 'User has been blocked')
+                    $this->app->t('user', 'User has been blocked')
                 );
             }
         }
@@ -430,19 +430,19 @@ class AdminController extends Controller
         $user = $this->findModel($id);
         if ($user->isAdmin) {
             throw new ForbiddenHttpException(
-                $this->getApp()->t('user', 'Password generation is not possible for admin users')
+                $this->app->t('user', 'Password generation is not possible for admin users')
             );
         }
 
         if ($user->resendPassword()) {
-            $this->getApp()->session->setFlash(
+            $this->app->session->setFlash(
                 'success',
-                $this->getApp()->t('user', 'New Password has been generated and sent to user')
+                $this->app->t('user', 'New Password has been generated and sent to user')
             );
         } else {
-            $this->getApp()->session->setFlash(
+            $this->app->session->setFlash(
                 'danger',
-                $this->getApp()->t('user', 'Error while trying to generate new password')
+                $this->app->t('user', 'Error while trying to generate new password')
             );
         }
 
@@ -481,11 +481,11 @@ class AdminController extends Controller
      **/
     protected function performAjaxValidation(Model $model)
     {
-        if ($this->getApp()->request->isAjax && !$this->getApp()->request->isPjax) {
-            if ($model->load($this->getApp()->request->post())) {
-                $this->getApp()->response->format = Response::FORMAT_JSON;
-                $this->getApp()->response->data = json_encode(ActiveForm::validate($model));
-                $this->getApp()->end();
+        if ($this->app->request->isAjax && !$this->app->request->isPjax) {
+            if ($model->load($this->app->request->post())) {
+                $this->app->response->format = Response::FORMAT_JSON;
+                $this->app->response->data = json_encode(ActiveForm::validate($model));
+                $this->app->end();
             }
         }
     }

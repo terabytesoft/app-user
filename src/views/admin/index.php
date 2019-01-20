@@ -100,6 +100,26 @@ $this->params['breadcrumbs'][] = $this->title;
 			],
 			[
 				'__class' => ActionColumn::class,
+				'template' => '{switch} {resend_password} {update} {delete}',
+				'buttons' => [
+					'resend_password' => function ($url, $model, $key) {
+						if ($model->isAdmin) {
+							return '
+						<a data-method="POST" data-confirm="' . $this->getApp()->t('user', 'Are you sure?') . '" href="' . Url::to(['resend-password', 'id' => $model->id]) . '">
+						<span title="' . $this->getApp()->t('user', 'Generate and send new password to user') . '" class= "&#x2709">
+						</span> </a>';
+						}
+					},
+					'switch' => function ($url, $model) {
+						if ($model->id != $this->getApp()->user->id && $this->getApp()->getModule('user')->enableImpersonateUser) {
+							return Html::a('<span class="glyphicon glyphicon-user"></span>', ['/user/admin/switch', 'id' => $model->id], [
+								'title' => $this->getApp()->t('user', 'Become this user'),
+								'data-confirm' => $this->getApp()->t('user', 'Are you sure you want to switch to this user for the rest of this Session?'),
+								'data-method' => 'POST',
+							]);
+						}
+					}
+				]
 			],
 		],
 ]);

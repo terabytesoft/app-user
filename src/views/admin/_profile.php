@@ -32,7 +32,7 @@ use yii\bootstrap4\Html;
 
 <div class="form-group">
     <div class="col-lg-offset-3 col-lg-9">
-        <?= Html::submitButton($this-getApp()->t('user', 'Update'), ['class' => 'btn btn-block btn-success']) ?>
+        <?= Html::submitButton($this->app->t('user', 'Update'), ['class' => 'btn btn-block btn-success']) ?>
     </div>
 </div>
 

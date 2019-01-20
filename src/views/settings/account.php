@@ -1,7 +1,7 @@
 <?php
 
+use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
 
 /**
  * @var yii\web\View $this
@@ -11,69 +11,61 @@ use yii\widgets\ActiveForm;
 
 $this->title = $this->getApp()->t('user', 'Account settings');
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
 
-<?= $this->render('/_alert', ['module' => $this->getApp()->getModule('user')]) ?>
-
-<div class="row">
-    <div class="col-md-3">
+<?= Html::beginTag('div', ['class' => 'row']) ?>
+	<?= Html::beginTag('div', ['class' => 'col-md-3']) ?>
         <?= $this->render('_menu') ?>
-    </div>
-    <div class="col-md-9">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title"><?= Html::encode($this->title) ?></h3>
-            </div>
-            <div class="panel-body">
-                <?php $form = ActiveForm::begin([
-                    'id' => 'account-form',
-                    'options' => ['class' => 'form-horizontal'],
-                    'fieldConfig' => [
-                        'template' => "{label}\n<div class=\"col-lg-9\">{input}</div>\n<div class=\"col-sm-offset-3 col-lg-9\">{error}\n{hint}</div>",
-                        'labelOptions' => ['class' => 'col-lg-3 control-label'],
-                    ],
-                    'enableAjaxValidation' => true,
-                    'enableClientValidation' => false,
-                ]); ?>
+	<?= Html::endTag('div') ?>
+	<?= Html::beginTag('div', ['class' => 'col-md-9']) ?>
+		<?= Html::tag('h2', '<b>' . Html::encode($this->title) . '</b>', ['class' => 'text-center']) ?>
 
-                <?= $form->field($model, 'email') ?>
+        <?php $form = ActiveForm::begin([
+            'id' => 'account-form',
+			'layout' => 'default',
+        	'enableAjaxValidation' => true,
+        	'enableClientValidation' => false,
+			'options' => ['class' => 'form-profile'],
+			'validateOnBlur' => false,
+			'validateOnType' => false,
+        	'validateOnChange' => false,
+        ]); ?>
 
-                <?= $form->field($model, 'username') ?>
 
-                <?= $form->field($model, 'new_password')->passwordInput() ?>
+			<?= $form->field($model, 'email')
+				->textInput([
+					'tabindex' => '1',
+				])
+				->label($this->app->t('user', 'Email'))
+			?>
 
-                <hr/>
+        	<?= $form->field($model, 'username')
+				->textInput([
+					'tabindex' => '2',
+				])
+				->label($this->app->t('user', 'Username'))
+			?>
 
-                <?= $form->field($model, 'current_password')->passwordInput() ?>
+			<?= $form->field($model, 'new_password')
+				->passwordInput([
+					'tabindex' => '3',
+				])
+				->label($this->app->t('user', 'New Password'))
+			?>
 
-                <div class="form-group">
-                    <div class="col-lg-offset-3 col-lg-9">
-                        <?= Html::submitButton($this->getApp()->t('user', 'Save'), ['class' => 'btn btn-block btn-success']) ?><br>
-                    </div>
-                </div>
+        	<?= $form->field($model, 'current_password')
+				->passwordInput([
+					'tabindex' => '4',
+				])
+				->label($this->app->t('user', 'Current Password'))
+			?>
 
-                <?php ActiveForm::end(); ?>
-            </div>
-        </div>
+			<?= Html::submitButton($this->app->t('user', 'Save'), [
+				'class' => 'btn btn-lg btn-primary btn-block', 'name' => 'account-save-button', 'tabindex' => '5',
+	    	]); ?>
 
-        <?php if ($model->module->enableAccountDelete) : ?>
-            <div class="panel panel-danger">
-                <div class="panel-heading">
-                    <h3 class="panel-title"><?= $this->getApp()->t('user', 'Delete account') ?></h3>
-                </div>
-                <div class="panel-body">
-                    <p>
-                        <?= $this->getApp()->t('user', 'Once you delete your account, there is no going back') ?>.
-                        <?= $this->getApp()->t('user', 'It will be deleted forever') ?>.
-                        <?= $this->getApp()->t('user', 'Please be certain') ?>.
-                    </p>
-                    <?= Html::a($this->getApp()->t('user', 'Delete account'), ['delete'], [
-                        'class' => 'btn btn-danger',
-                        'data-method' => 'post',
-                        'data-confirm' => $this->getApp()->t('user', 'Are you sure? There is no going back'),
-                    ]) ?>
-                </div>
-            </div>
-        <?php endif ?>
-    </div>
-</div>
+		<?php ActiveForm::end(); ?>
+
+	<?= Html::endTag('div') ?>
+<?php echo Html::endTag('div');

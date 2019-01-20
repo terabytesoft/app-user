@@ -9,7 +9,7 @@ use yii\base\Security;
  * Password helper.
  *
  **/
-class Password
+class PasswordHelper
 {
     use ModuleTrait;
 
@@ -22,9 +22,9 @@ class Password
 	 * __construct
 	 *
      **/
-    public function __construct(Security $security)
+    public function __construct()
     {
-        $this->security = $security;
+        $this->security = new Security();
     }
 
     /**
@@ -38,7 +38,7 @@ class Password
      */
     public function hash($password)
     {
-        return $this->security->generatePasswordHash($password, $this->modules->cost);
+        return $this->security->generatePasswordHash($password, $this->getModule()->cost);
     }
 
     /**

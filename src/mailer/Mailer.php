@@ -2,14 +2,14 @@
 
 namespace app\user\mailer;
 
-use app\user\models\Token;
-use app\user\models\User;
+use app\user\models\TokenModel;
+use app\user\models\UserModel;
 use app\user\traits\ModuleTrait;
 use yii\base\Component;
 use yii\helpers\Yii;
 
 /**
- * Mailer.
+ * Mailer
  *
  */
 class Mailer extends Component
@@ -30,7 +30,7 @@ class Mailer extends Component
     /**
 	 * getWelcomeSubject
 	 *
-     * @return string.
+     * @return string
      */
     public function getWelcomeSubject(): string
     {
@@ -50,9 +50,9 @@ class Mailer extends Component
 	 *
 	 * @param string $welcomeSubject
 	 *
-     * @return string.
+     * @return string
      */
-    public function setWelcomeSubject(string $welcomeSubject): string
+    public function setWelcomeSubject(string $welcomeSubject)
     {
         $this->welcomeSubject = $welcomeSubject;
     }
@@ -60,7 +60,7 @@ class Mailer extends Component
     /**
 	 * getNewPasswordSubject
 	 *
-     * @return string.
+     * @return string
      */
     public function getNewPasswordSubject(): string
     {
@@ -80,7 +80,7 @@ class Mailer extends Component
 	 *
 	 * @param string $newPasswordSubject
 	 *
-     * @return string.
+     * @return string
      */
     public function setNewPasswordSubject(string $newPasswordSubject)
     {
@@ -90,7 +90,7 @@ class Mailer extends Component
     /**
 	 * getConfirmationSubject
 	 *
-     * @return string.
+     * @return string
      */
     public function getConfirmationSubject(): string
     {
@@ -110,9 +110,9 @@ class Mailer extends Component
 	 *
 	 * @param string $newPasswordSubject
 	 *
-     * @return string.
+     * @return string
      */
-    public function setConfirmationSubject(string $confirmationSubject): string
+    public function setConfirmationSubject(string $confirmationSubject)
     {
         $this->confirmationSubject = $confirmationSubject;
     }
@@ -120,7 +120,7 @@ class Mailer extends Component
     /**
 	 * getReconfirmationSubject
 	 *
-     * @return string.
+     * @return string
      */
     public function getReconfirmationSubject(): string
     {
@@ -140,7 +140,7 @@ class Mailer extends Component
 	 *
 	 * @param string $reconfirmationSubject
 	 *
-     * @return string.
+     * @return string
      */
     public function setReconfirmationSubject($reconfirmationSubject): string
     {
@@ -150,7 +150,7 @@ class Mailer extends Component
     /**
 	 * getRecoverySubject
 	 *
-     * @return string.
+     * @return string
      */
     public function getRecoverySubject(): string
     {
@@ -170,7 +170,7 @@ class Mailer extends Component
 	 *
 	 * @param string $recoverySubject
 	 *
-     * @return string|null.
+     * @return string|null
      */
     public function setRecoverySubject(string $recoverySubject)
     {
@@ -182,13 +182,13 @@ class Mailer extends Component
 	 *
      * sends an email to a user after registration.
      *
-     * @param User  $user
-     * @param Token $token
-     * @param bool  $showPassword
+     * @param UserModel $user
+     * @param TokenModel $token
+     * @param bool $showPassword
      *
-     * @return bool.
+     * @return bool
      */
-    public function sendWelcomeMessage(User $user, Token $token = null, $showPassword = false): bool
+    public function sendWelcomeMessage(UserModel $user, TokenModel $token = null, $showPassword = false): bool
     {
         return $this->sendMessage(
             $user->email,
@@ -201,14 +201,14 @@ class Mailer extends Component
     /**
 	 * sendGeneratedPassword
 	 *
-     * sends a new generated password to a user.
+     * sends a new generated password to a user
      *
-     * @param User     $user
+     * @param UserModel $user
      * @param Password $password
      *
-     * @return bool.
+     * @return bool
      */
-    public function sendGeneratedPassword(User $user, $password): bool
+    public function sendGeneratedPassword(UserModel $user, $password): bool
     {
         return $this->sendMessage(
             $user->email,
@@ -221,14 +221,14 @@ class Mailer extends Component
     /**
 	 * sendConfirmationMessage
 	 *
-     * sends an email to a user with confirmation link.
+     * sends an email to a user with confirmation link
      *
-     * @param User  $user
-     * @param Token $token
+     * @param UserModel $user
+     * @param TokenModel $token
      *
-     * @return bool.
+     * @return bool
      */
-    public function sendConfirmationMessage(User $user, Token $token): bool
+    public function sendConfirmationMessage(UserModel $user, TokenModel $token): bool
     {
         return $this->sendMessage(
             $user->email,
@@ -243,12 +243,12 @@ class Mailer extends Component
 	 *
      * sends an email to a user with reconfirmation link.
      *
-     * @param User  $user
-     * @param Token $token
+     * @param UserModel $user
+     * @param TokenModel $token
      *
-     * @return bool.
+     * @return bool
      */
-    public function sendReconfirmationMessage(User $user, Token $token): bool
+    public function sendReconfirmationMessage(UserModel $user, TokenModel $token): bool
     {
         if ($token->type == Token::TYPE_CONFIRM_NEW_EMAIL) {
             $email = $user->unconfirmed_email;
@@ -267,15 +267,16 @@ class Mailer extends Component
     /**
 	 * sendRecoveryMessage
 	 *
-     * sends an email to a user with recovery link.
+     * sends an email to a user with recovery link
      *
-     * @param User  $user
-     * @param Token $token
+     * @param UserModel $user
+     * @param TokenModel $token
      *
-     * @return bool.
+     * @return bool
      */
-    public function sendRecoveryMessage(User $user, Token $token): bool
+    public function sendRecoveryMessage(UserModel $user, TokenModel $token)
     {
+		$this->app->session->set('sendRecoveryMessage', true);
         return $this->sendMessage(
             $user->email,
             $this->getRecoverySubject(),
@@ -292,7 +293,7 @@ class Mailer extends Component
      * @param string $view
      * @param array  $params
      *
-     * @return bool.
+     * @return bool
      */
     protected function sendMessage($to, $subject, $view, $params = []): bool
     {
