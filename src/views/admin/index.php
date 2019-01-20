@@ -14,13 +14,14 @@ use yii\web\View;
 
 $this->title = $this->getApp()->t('user', 'Manage users');
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
 
 <?= $this->render('/_alert', ['module' => $this->getApp()->getModule('user')]) ?>
 
 <?= $this->render('/admin/_menu') ?>
 
-<?= GridView::widget([
+<?php echo GridView::widget([
 		'dataProvider' => $dataProvider,
 		'filterModel' => $searchModel,
 		'layout' => "{items}\n{pager}",
