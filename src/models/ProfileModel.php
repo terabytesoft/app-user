@@ -11,16 +11,19 @@ use yii\activerecord\ActiveRecord;
  *
  * This is the model class for table "profile"
  *
+ * Database fields:
  * @property integer $user_id
- * @property string $name
- * @property string $public_email
- * @property string $gravatar_email
- * @property string $gravatar_id
- * @property string $location
- * @property string $website
- * @property string $bio
- * @property string $timezone
- * @property UserModel $user
+ * @property string  $name
+ * @property string  $public_email
+ * @property string  $gravatar_email
+ * @property string  $gravatar_id
+ * @property string  $location
+ * @property string  $website
+ * @property string  $bio
+ * @property string  $timezone
+ *
+ * Dependencies:
+ * @property \app\user\Module module
  * @property \yii\web\Application app
  **/
 class ProfileModel extends ActiveRecord

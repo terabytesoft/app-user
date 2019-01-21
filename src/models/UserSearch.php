@@ -10,34 +10,41 @@ use yii\helpers\Yii;
 
 /**
  * UserSearch represents the model behind the search form about User.
- */
+ *
+ * Dependencies:
+ * @property object db
+ **/
 class UserSearch extends Model
 {
 	use ModuleTrait;
 
-    /** @var integer */
+    /** @var integer **/
     public $id;
 
-    /** @var string */
+    /** @var string **/
     public $username;
 
-    /** @var string */
+    /** @var string **/
     public $email;
 
-    /** @var int */
+    /** @var int **/
     public $created_at;
 
-    /** @var int */
+    /** @var int **/
     public $last_login_at;
 
-    /** @var string */
+    /** @var string **/
     public $registration_ip;
 
-    /** @var Finder */
+    /** @var Finder **/
     protected $finder;
 
-    /** @inheritdoc */
-    public function rules()
+    /**
+	 * rules
+	 *
+     * @return array the validation rules
+     **/
+    public function rules(): array
     {
         return [
             'fieldsSafe' => [['id', 'username', 'email', 'registration_ip', 'created_at', 'last_login_at'], 'safe'],
@@ -46,7 +53,7 @@ class UserSearch extends Model
         ];
     }
 
-    /** @inheritdoc */
+    /** @inheritdoc **/
     public function attributeLabels()
     {
         return [
@@ -63,7 +70,7 @@ class UserSearch extends Model
      * @param $params
      *
      * @return ActiveDataProvider
-     */
+     **/
     public function search($params)
     {
 		$this->finder = new Finder();

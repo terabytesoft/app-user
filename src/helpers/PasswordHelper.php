@@ -6,8 +6,10 @@ use app\user\traits\ModuleTrait;
 use yii\base\Security;
 
 /**
- * Password helper.
+ * PasswordHelper
  *
+ * Dependencies:
+ * @property \app\user\Module module
  **/
 class PasswordHelper
 {
@@ -15,7 +17,7 @@ class PasswordHelper
 
     /**
      * @var Security
-     */
+     **/
     protected $security;
 
     /**
@@ -30,21 +32,21 @@ class PasswordHelper
     /**
      * hash
      *
-     * Wrapper for yii security helper method.
+     * wrapper for yii security helper method
      *
      * @param $password
      *
      * @return string
-     */
+     **/
     public function hash($password)
     {
-        return $this->security->generatePasswordHash($password, $this->getModule()->cost);
+        return $this->security->generatePasswordHash($password, $this->module->cost);
     }
 
     /**
      * validate
      *
-     * Wrapper for yii security helper method.
+     * wrapper for yii security helper method
      *
      * @param $password
      * @param $hash

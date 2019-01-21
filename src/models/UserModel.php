@@ -43,6 +43,7 @@ use yii\web\IdentityInterface;
  * @property Profile   $profile
  *
  * Dependencies:
+ * @property \app\user\Module module
  * @property \yii\web\Application app
  * @property-read Finder $finder
  * @property-read Mailer $mailer

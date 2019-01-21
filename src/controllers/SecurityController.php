@@ -162,14 +162,14 @@ class SecurityController extends Controller
         }
 
         if ($account === null) {
-            $accountObj = new Account();
+            $accountObj = new AccountModel();
             $account = $accountObj::create($client);
         }
 
         $this->trigger(AuthEvent::init());
         $this->trigger(AuthEvent::beforeAuthenticate());
 
-        if ($account->user instanceof User) {
+        if ($account->user instanceof UserModel) {
             if ($account->user->isBlocked) {
                 $this->app->session->setFlash(
                     'danger',

@@ -11,8 +11,10 @@ use yii\helpers\Yii;
 /**
  * Mailer
  *
+ * Dependencies:
+ * @property \app\user\Module module
  * @property \yii\web\Application app
- */
+ **/
 class Mailer extends Component
 {
 	use ModuleTrait;
@@ -32,7 +34,7 @@ class Mailer extends Component
 	 * getWelcomeSubject
 	 *
      * @return string
-     */
+     **/
     public function getWelcomeSubject(): string
     {
         if ($this->welcomeSubject == null) {
@@ -52,7 +54,7 @@ class Mailer extends Component
 	 * @param string $welcomeSubject
 	 *
      * @return string
-     */
+     **/
     public function setWelcomeSubject(string $welcomeSubject)
     {
         $this->welcomeSubject = $welcomeSubject;
@@ -62,7 +64,7 @@ class Mailer extends Component
 	 * getNewPasswordSubject
 	 *
      * @return string
-     */
+     **/
     public function getNewPasswordSubject(): string
     {
         if ($this->newPasswordSubject == null) {
@@ -82,7 +84,7 @@ class Mailer extends Component
 	 * @param string $newPasswordSubject
 	 *
      * @return string
-     */
+     **/
     public function setNewPasswordSubject(string $newPasswordSubject)
     {
         $this->newPasswordSubject = $newPasswordSubject;
@@ -92,7 +94,7 @@ class Mailer extends Component
 	 * getConfirmationSubject
 	 *
      * @return string
-     */
+     **/
     public function getConfirmationSubject(): string
     {
         if ($this->confirmationSubject == null) {
@@ -112,7 +114,7 @@ class Mailer extends Component
 	 * @param string $newPasswordSubject
 	 *
      * @return string
-     */
+     **/
     public function setConfirmationSubject(string $confirmationSubject)
     {
         $this->confirmationSubject = $confirmationSubject;
@@ -122,7 +124,7 @@ class Mailer extends Component
 	 * getReconfirmationSubject
 	 *
      * @return string
-     */
+     **/
     public function getReconfirmationSubject(): string
     {
         if ($this->reconfirmationSubject == null) {
@@ -142,7 +144,7 @@ class Mailer extends Component
 	 * @param string $reconfirmationSubject
 	 *
      * @return string
-     */
+     **/
     public function setReconfirmationSubject($reconfirmationSubject)
     {
         $this->reconfirmationSubject = $reconfirmationSubject;
@@ -152,7 +154,7 @@ class Mailer extends Component
 	 * getRecoverySubject
 	 *
      * @return string
-     */
+     **/
     public function getRecoverySubject()
     {
         if ($this->recoverySubject == null) {
@@ -172,7 +174,7 @@ class Mailer extends Component
 	 * @param string $recoverySubject
 	 *
      * @return string|null
-     */
+     **/
     public function setRecoverySubject(string $recoverySubject)
     {
         $this->recoverySubject = $recoverySubject;
@@ -188,7 +190,7 @@ class Mailer extends Component
      * @param bool $showPassword
      *
      * @return bool
-     */
+     **/
     public function sendWelcomeMessage(UserModel $user, TokenModel $token = null, $showPassword = false): bool
     {
         return $this->sendMessage(
@@ -208,7 +210,7 @@ class Mailer extends Component
      * @param Password $password
      *
      * @return bool
-     */
+     **/
     public function sendGeneratedPassword(UserModel $user, $password): bool
     {
         return $this->sendMessage(
@@ -228,7 +230,7 @@ class Mailer extends Component
      * @param TokenModel $token
      *
      * @return bool
-     */
+     **/
     public function sendConfirmationMessage(UserModel $user, TokenModel $token): bool
     {
         return $this->sendMessage(
@@ -248,7 +250,7 @@ class Mailer extends Component
      * @param TokenModel $token
      *
      * @return bool
-     */
+     **/
     public function sendReconfirmationMessage(UserModel $user, TokenModel $token): bool
     {
         if ($token->type == TokenModel::TYPE_CONFIRM_NEW_EMAIL) {
@@ -274,7 +276,7 @@ class Mailer extends Component
      * @param TokenModel $token
      *
      * @return bool
-     */
+     **/
     public function sendRecoveryMessage(UserModel $user, TokenModel $token)
     {
 		$this->app->session->set('sendRecoveryMessage', true);
@@ -295,7 +297,7 @@ class Mailer extends Component
      * @param array  $params
      *
      * @return bool
-     */
+     **/
     protected function sendMessage($to, $subject, $view, $params = []): bool
     {
         $mailer = $this->mailerComponent === null ? $this->module->getApp()->mailer : $this->module->getApp()->get($this->mailerComponent);

@@ -4,6 +4,7 @@ namespace app\user\forms;
 
 use app\user\finder\Finder;
 use app\user\mailer\Mailer;
+use app\user\models\UserModel;
 use app\user\traits\ModuleTrait;
 use yii\base\Model;
 
@@ -12,6 +13,7 @@ use yii\base\Model;
  *
  * Model for collecting data on password recovery
  *
+ * Dependencies:
  * @property \app\user\Module module
  * @property \yii\web\Application app
  **/

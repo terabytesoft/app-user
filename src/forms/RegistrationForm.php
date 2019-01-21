@@ -3,6 +3,7 @@
 namespace app\user\forms;
 
 use app\user\traits\ModuleTrait;
+use app\user\models\UserModel;
 use yii\base\Model;
 
 /**
@@ -10,6 +11,7 @@ use yii\base\Model;
  *
  * Registration form collects user input on registration process, validates it and creates new User model
  *
+ * Dependencies:
  * @property \app\user\Module module
  * @property \yii\web\Application app
  **/

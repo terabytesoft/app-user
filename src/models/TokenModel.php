@@ -9,12 +9,16 @@ use yii\helpers\Url;
 /**
  * Token Active Record model.
  *
+ * Database fields:
  * @property integer $user_id
- * @property string $code
+ * @property string  $code
  * @property integer $created_at
  * @property integer $type
- * @property string $url
- * @property bool $isExpired
+ * @property string  $url
+ * @property bool    $isExpired
+ *
+ * Dependencies:
+ * @property \app\user\Module module
  * @property \yii\web\Application app
  */
 class TokenModel extends ActiveRecord

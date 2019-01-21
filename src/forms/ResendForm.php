@@ -4,6 +4,7 @@ namespace app\user\forms;
 
 use app\user\finder\Finder;
 use app\user\mailer\Mailer;
+use app\user\models\UserModel;
 use app\user\traits\ModuleTrait;
 use yii\base\Model;
 
@@ -13,6 +14,7 @@ use yii\base\Model;
  * ResendForm gets user email address and if user with given email is registered it sends new confirmation message
  * to him in case he did not validate his email
  *
+ * Dependencies:
  * @property \app\user\Module module
  * @property \yii\web\Application app
  **/

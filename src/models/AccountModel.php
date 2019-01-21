@@ -16,17 +16,24 @@ use yii\helpers\Yii;
 /**
  * AccountModel
  *
+ * Database fields:
  * @property integer $id Id
- * @property integer $user_id User id, null if account is not bind to user
- * @property string $provider Name of service
- * @property string $client_id Account id
- * @property string $data Account properties returned by social network (json encoded)
- * @property string $decodedData Json-decoded properties
- * @property string $code
+ * @property integer $user_id - null if account is not bind to user
+ * @property string  $provider - name of service
+ * @property string  $client_id
+ * @property string  $data - account properties returned by social network (json encoded)
+ * @property string  $decodedData - json-decoded properties
+ * @property string  $code
  * @property integer $created_at
- * @property string $email
- * @property string $username
- * @property UserModels $user User that this account is connected for
+ * @property string  $email
+ * @property string  $username
+ *
+ * Defined relations:
+ * @property \app\user\models\UserModels $user - that this account is connected for social accounts
+ *
+ * Dependencies:
+ * @property \app\user\Module module
+ * @property \yii\web\Application app
  **/
 class AccountModel extends ActiveRecord
 {
@@ -90,7 +97,7 @@ class AccountModel extends ActiveRecord
      **/
     public function getConnectUrl()
     {
-        $code = $this->module->getApp()->security->generateRandomString();
+        $code = $this->app->security->generateRandomString();
         $this->updateAttributes(['code' => md5($code)]);
 
         return Url::to(['/user/registration/connect', 'code' => $code]);
