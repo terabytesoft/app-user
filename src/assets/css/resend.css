@@ -1,5 +1,6 @@
 /**
- * form-resend is the css for web application user
+ * form-resend
+ *
  **/
 
 /**********************************************************************************************************************
@@ -11,8 +12,8 @@
     padding: 15px;
     margin: auto;
 }
-  .form-resend input[type="email"] {
-    margin-bottom: -1px;
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
-  }
+    .form-resend input[type="email"] {
+        margin-bottom: -1px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }

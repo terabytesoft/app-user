@@ -32,7 +32,7 @@ if ($this->app->controller->action->id === 'account') {
 		'label' => $this->app->t('user', 'Delete account'),
 		'url' => ['delete'],
 		'linkOptions' => [
-			'class' => 'nav-link',
+			'class' => 'btn-outline-danger nav-link',
 			'data-method' => 'post',
 			'data-confirm' => $this->app->t('user', 'Are you sure? There is no going back'),
 		],

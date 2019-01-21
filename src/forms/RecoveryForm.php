@@ -4,8 +4,6 @@ namespace app\user\forms;
 
 use app\user\finder\Finder;
 use app\user\mailer\Mailer;
-use app\user\models\TokenModel;
-use app\user\models\UserModel;
 use app\user\traits\ModuleTrait;
 use yii\base\Model;
 
@@ -14,6 +12,7 @@ use yii\base\Model;
  *
  * Model for collecting data on password recovery
  *
+ * @property \app\user\Module module
  * @property \yii\web\Application app
  **/
 class RecoveryForm extends Model
@@ -33,11 +32,12 @@ class RecoveryForm extends Model
 	/**
      * __construct
 	 *
-     */
+     **/
     public function __construct()
     {
 		$this->_finder = new Finder();
 		$this->_mailer = new Mailer();
+		$this->_user = new $this->module->modelMap['User'];
     }
 
     /**
@@ -65,7 +65,7 @@ class RecoveryForm extends Model
             'emailRequired' => ['email', 'required'],
             'emailPattern' => ['email', 'email'],
 			['email', 'exist',
-				'targetClass' => UserModel::class,
+				'targetClass' => $this->_user,
 				'message' => $this->app->t('user', 'There is no user with this email address.'),
             ],
             'passwordRequired' => ['password', 'required'],
@@ -93,9 +93,9 @@ class RecoveryForm extends Model
         $this->_user = $this->_finder->findUserByEmail($this->email);
 
         if ($this->_user instanceof UserModel) {
-            $token = new TokenModel();
+            $token = new $this->module->modelMap['Token'];
             $token->user_id = $this->_user->id;
-            $token->type = TokenModel::TYPE_RECOVERY;
+            $token->type = $token::TYPE_RECOVERY;
 
             if (!$token->save(false)) {
                 $result = false;

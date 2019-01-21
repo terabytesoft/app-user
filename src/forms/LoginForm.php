@@ -16,6 +16,7 @@ use yii\helpers\Yii;
  * LoginForm get user's login and password, validates them and logs the user in. If user has been blocked, it adds
  * an error to login form
  *
+ * @property \app\user\Module module
  * @property \yii\web\Application app
  **/
 class LoginForm extends Model
@@ -33,11 +34,12 @@ class LoginForm extends Model
     /**
      * __construct
 	 *
-     */
+     **/
     public function __construct()
     {
 		$this->_finder = new Finder();
 		$this->_passwordhelper = new PasswordHelper();
+		$this->_user = new $this->module->modelMap['User'];
     }
 
     /**
@@ -123,7 +125,7 @@ class LoginForm extends Model
         }
 
         return $result;
-    }
+	}
 
     /**
      * loginList
@@ -132,7 +134,7 @@ class LoginForm extends Model
      **/
     public function loginList(): array
     {
-        $userModel = $this->module->modelMap['User'];
+		$userModel = $this->_user;
 
         return ArrayHelper::map($userModel::find()->where(['blocked_at' => null])->all(), 'username', function ($userModel) {
             return sprintf('%s (%s)', Html::encode($userModel->username), Html::encode($userModel->email));

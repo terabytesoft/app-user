@@ -2,10 +2,7 @@
 
 namespace app\user\forms;
 
-use app\user\Module;
 use app\user\mailer\Mailer;
-use app\user\models\TokenModel;
-use app\user\models\UserModel;
 use app\user\helpers\PasswordHelper;
 use app\user\traits\ModuleTrait;
 use yii\base\Model;
@@ -15,8 +12,8 @@ use yii\base\Model;
  *
  * SettingsForm gets user's username, email and password and changes them
  *
+ * @property \app\user\Module module
  * @property \yii\web\Application app
- * @property UserModel user
  **/
 class SettingsForm extends Model
 {
@@ -37,12 +34,13 @@ class SettingsForm extends Model
 	 **/
     public function __construct()
     {
-		$this->_mailer = new Mailer();
-		$this->_passwordhelper = new PasswordHelper();
-        $this->setAttributes([
+		$this->setAttributes([
             'username' => $this->user->username,
             'email'    => $this->user->unconfirmed_email ?: $this->user->email,
 		], false);
+
+		$this->_mailer = new Mailer();
+		$this->_passwordhelper = new PasswordHelper();
     }
 
     /**
@@ -83,7 +81,7 @@ class SettingsForm extends Model
     protected function defaultEmailChange(): void
     {
         $this->user->unconfirmed_email = $this->email;
-		$token = new TokenModel();
+		$token = new $this->module->modelMap['Token'];
 		$token->user_id = $this->user->id;
 		$token->type = $token::TYPE_CONFIRM_NEW_EMAIL;
         $token->save(false);
@@ -111,11 +109,11 @@ class SettingsForm extends Model
      *
      * finds user by [[username]]
      *
-	 * @return UserModel|null|true
+	 * @return \app\user\models\UserModel|null|true
 	 **/
     public function getUser()
     {
-        if ($this->_user == null) {
+        if ($this->_user === null) {
             $this->_user = $this->app->user->identity;
         }
 
@@ -152,13 +150,13 @@ class SettingsForm extends Model
                 $this->user->unconfirmed_email = null;
             } elseif ($this->email != $this->user->email) {
                 switch ($this->module->emailChangeStrategy) {
-                    case Module::STRATEGY_INSECURE:
+                    case $this->module::STRATEGY_INSECURE:
                         $this->insecureEmailChange();
                         break;
-                    case Module::STRATEGY_DEFAULT:
+                    case $this->module::STRATEGY_DEFAULT:
                         $this->defaultEmailChange();
                         break;
-                    case Module::STRATEGY_SECURE:
+                    case $this->module::STRATEGY_SECURE:
                         $this->secureEmailChange();
                         break;
                     default:
@@ -185,7 +183,7 @@ class SettingsForm extends Model
     {
         $this->defaultEmailChange();
 
-		$token = new TokenModel();
+		$token = new $this->module->modelMap['Token'];
 		$token->user_id = $this->user->id;
 		$token->type = $token::TYPE_CONFIRM_OLD_EMAIL;
 		$token->save(false);

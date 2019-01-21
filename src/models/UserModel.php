@@ -2,7 +2,6 @@
 
 namespace app\user\models;
 
-use app\user\Module;
 use app\user\finder\Finder;
 use app\user\helpers\PasswordHelper;
 use app\user\mailer\Mailer;
@@ -46,7 +45,6 @@ use yii\web\IdentityInterface;
  * Dependencies:
  * @property \yii\web\Application app
  * @property-read Finder $finder
- * @property-read Module $module
  * @property-read Mailer $mailer
  **/
 class UserModel extends ActiveRecord implements IdentityInterface
@@ -309,7 +307,7 @@ class UserModel extends ActiveRecord implements IdentityInterface
     /**
      * create
      *
-     * creates new user account. If Module::enableGeneratingPassword is set true, this method
+     * creates new user account. If $this->module::enableGeneratingPassword is set true, this method
      * will generate password
      *
      * @return bool
@@ -350,7 +348,7 @@ class UserModel extends ActiveRecord implements IdentityInterface
     /**
      * register
      *
-     * this method is used to register new user account. If Module::enableConfirmation is set true, this method
+     * this method is used to register new user account. If $this->module::enableConfirmation is set true, this method
      * will generate new confirmation token and use mailer to send it to the user
      *
      * @return bool
@@ -442,7 +440,7 @@ class UserModel extends ActiveRecord implements IdentityInterface
             if (empty($this->unconfirmed_email)) {
                 $this->app->session->setFlash('danger', Yii::t('user', 'An error occurred processing your request'));
             } elseif ($this->finder->findUser(['email' => $this->unconfirmed_email])->exists() === false) {
-                if ($this->module->emailChangeStrategy === Module::STRATEGY_SECURE) {
+                if ($this->module->emailChangeStrategy === $this->module::STRATEGY_SECURE) {
                     switch ($token->type) {
                         case TokenModel::TYPE_CONFIRM_NEW_EMAIL:
                             $this->flags |= self::NEW_EMAIL_CONFIRMED;
@@ -467,7 +465,7 @@ class UserModel extends ActiveRecord implements IdentityInterface
                     }
                 }
 
-                if ($this->module->emailChangeStrategy === Module::STRATEGY_DEFAULT
+                if ($this->module->emailChangeStrategy === $this->module::STRATEGY_DEFAULT
                     || ($this->flags & self::NEW_EMAIL_CONFIRMED && $this->flags & self::OLD_EMAIL_CONFIRMED)) {
                     $this->email = $this->unconfirmed_email;
                     $this->unconfirmed_email = null;

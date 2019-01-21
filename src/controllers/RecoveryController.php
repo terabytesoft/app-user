@@ -61,8 +61,9 @@ class RecoveryController extends Controller
 	 *
      * shows page where user can request password recovery
      *
-     * @return string|object
      * @throws \yii\web\NotFoundHttpException
+	 *
+     * @return string|object
      **/
     public function actionRequest()
     {
@@ -111,11 +112,11 @@ class RecoveryController extends Controller
 	 *
      * displays page where user can reset password
      *
-     * @param int    $id
+     * @param int $id
      * @param string $code
-     *
-     * @return string|object
      * @throws \yii\web\NotFoundHttpException
+	 *
+     * @return string|object
      **/
     public function actionReset(int $id, string $code)
     {

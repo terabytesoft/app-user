@@ -69,7 +69,7 @@ class UserSearch extends Model
 		$this->finder = new Finder();
         $query = $this->finder->getUserQuery();
 
-		$db = $this->module->getDb();
+		$db = $this->db;
 
         $dataProvider = new ActiveDataProvider(
 			$db,

@@ -2,7 +2,6 @@
 
 namespace app\user\forms;
 
-use app\user\models\UserModel;
 use app\user\traits\ModuleTrait;
 use yii\base\Model;
 
@@ -11,6 +10,7 @@ use yii\base\Model;
  *
  * Registration form collects user input on registration process, validates it and creates new User model
  *
+ * @property \app\user\Module module
  * @property \yii\web\Application app
  **/
 class RegistrationForm extends Model
@@ -26,7 +26,7 @@ class RegistrationForm extends Model
     /**
      * __construct
 	 *
-     */
+     **/
     public function __construct()
     {
 		$this->_user = new $this->module->modelMap['User'];
@@ -107,7 +107,7 @@ class RegistrationForm extends Model
      * by default this method set all attributes of this model to the attributes of User model, so you should properly
      * configure safe attributes of your User model
      *
-     * @param UserModel $user
+     * @param \app\user\models\UserModel $user
      **/
     protected function loadAttributes(UserModel $_user): void
     {

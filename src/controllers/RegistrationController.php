@@ -24,7 +24,7 @@ use yii\web\filters\AccessControl;
  * resending confirmation tokens, email confirmation and registration via social networks
  *
  * @property Module $module
- */
+ **/
 class RegistrationController extends Controller
 {
     use AjaxValidationTrait;
@@ -37,7 +37,7 @@ class RegistrationController extends Controller
      * @param string $id
      * @param Module $module
      * @param Finder $finder
-     */
+     **/
     public function __construct(string $id, Module $module, Finder $finder)
     {
         $this->finder = $finder;
@@ -69,9 +69,10 @@ class RegistrationController extends Controller
      * After successful registration if enableConfirmation is enabled shows info message otherwise
      * redirects to home page
      *
-     * @return string|object
      * @throws \yii\web\HttpException
-     */
+	 *
+	 * @return string|object
+     **/
     public function actionRegister()
     {
         if (!$this->module->enableRegistration) {
@@ -122,10 +123,10 @@ class RegistrationController extends Controller
      * displays page where user can create new account that will be connected to social account
      *
      * @param string|\yii\web\Response
-     *
-     * @return string|\yii\web\Response
      * @throws NotFoundHttpException
-     */
+	 *
+     * @return string|\yii\web\Response
+     **/
     public function actionConnect(string $code)
     {
         $account = $this->finder->findAccount()->byCode($code)->one();
@@ -164,10 +165,10 @@ class RegistrationController extends Controller
      *
      * @param int    $id
      * @param string $code
-     *
-     * @return mixed
      * @throws \yii\web\HttpException
-     */
+	 *
+     * @return mixed
+     **/
     public function actionConfirm(int $id, string $code)
     {
         $user = $this->finder->findUserById($id);
@@ -208,8 +209,9 @@ class RegistrationController extends Controller
 	 *
      * displays page where user can request new confirmation token. If resending was successful, displays message
      *
-     * @return string|object
      * @throws \yii\web\HttpException
+	 *
+     * @return string|object
      */
     public function actionResend()
     {

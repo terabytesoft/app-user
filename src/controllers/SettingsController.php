@@ -9,8 +9,8 @@ use app\user\events\ProfileEvent;
 use app\user\events\UserEvent;
 use app\user\finder\Finder;
 use app\user\forms\SettingsForm;
-use app\user\models\Profile;
-use app\user\models\User;
+use app\user\models\ProfileModel;
+use app\user\models\UserModel;
 use app\user\traits\AjaxValidationTrait;
 use yii\web\Controller;
 use yii\web\ForbiddenHttpException;
@@ -39,7 +39,7 @@ class SettingsController extends Controller
      * @param string $id
      * @param Module $module
      * @param Finder $finder
-     */
+     **/
     public function __construct(string $id, Module $module, Finder $finder)
     {
         $this->finder = $finder;
@@ -85,13 +85,13 @@ class SettingsController extends Controller
      * shows profile settings form
      *
      * @return string|\yii\web\Response
-     */
+     **/
     public function actionProfile()
     {
         $model = $this->finder->findProfileById($this->app->user->identity->getId());
 
-        if ($model == null) {
-            $model = new Profile();
+        if ($model === null) {
+            $model = new ProfileModel();
             $model->link('user', $this->app->user->identity);
         }
 
@@ -123,7 +123,7 @@ class SettingsController extends Controller
      * displays page where user can update account settings (username, email or password)
      *
      * @return string|\yii\web\Response
-     */
+     **/
     public function actionAccount()
     {
         $model = new SettingsForm();
@@ -157,15 +157,15 @@ class SettingsController extends Controller
      *
      * @param int    $id
      * @param string $code
-     *
+	 * @throws \yii\web\HttpException
+	 *
      * @return string|\yii\web\Response
-     * @throws \yii\web\HttpException
-     */
+     **/
     public function actionConfirm(int $id, string $code)
     {
         $user = $this->finder->findUserById($id);
 
-        if ($user === null || $this->module->emailChangeStrategy == Module::STRATEGY_INSECURE) {
+        if ($user === null || $this->module->emailChangeStrategy === Module::STRATEGY_INSECURE) {
             throw new NotFoundHttpException();
         }
 
@@ -199,10 +199,10 @@ class SettingsController extends Controller
      * disconnects a network account from user
      *
      * @param int $id
-     *
-     * @return \yii\web\Response
      * @throws \yii\web\NotFoundHttpException
      * @throws \yii\web\ForbiddenHttpException
+	 *
+     * @return \yii\web\Response
      **/
     public function actionDisconnect(int $id)
     {
@@ -230,8 +230,9 @@ class SettingsController extends Controller
 	 *
      * completely deletes user's account
      *
+	 * @throws \Exception
+	 *
      * @return \yii\web\Response
-     * @throws \Exception
      **/
     public function actionDelete()
     {
@@ -239,7 +240,7 @@ class SettingsController extends Controller
             throw new NotFoundHttpException($this->app->t('user', 'Not found'));
         }
 
-        $user  = $this->app->user->identity;
+        $user = $this->app->user->identity;
 
         $this->trigger(UserEvent::init());
         $this->app->user->logout();

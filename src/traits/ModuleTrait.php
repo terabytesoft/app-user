@@ -2,42 +2,40 @@
 
 namespace app\user\traits;
 
-use app\user\Module;
 use yii\helpers\Yii;
 
 /**
- * Trait ModuleTrait
+ * ModuleTrait
  *
- * @property-read Module $module
- */
+ **/
 trait ModuleTrait
 {
     /**
      * getModule
      *
-     * @return object module
-     */
-    public function getModule()
+     * @return \app\user\Module module
+     **/
+    public function getModule(): \app\user\Module
     {
-        return (object) Yii::getContainer()->get('app')->modules['user'];
+        return Yii::getContainer()->get('app')->modules['user'];
     }
 
     /**
      * getDb
      *
-     * @return string
-     */
-    public static function getDb()
+     * @return object db
+     **/
+    public static function getDb(): object
     {
-        return Yii::getContainer()->get('db');
+        return (object) Yii::getContainer()->get('db');
     }
 
     /**
      * getApp
      *
      * @return \yii\web\Application app
-     */
-    public function getApp()
+     **/
+    public function getApp():  \yii\web\Application
     {
         return Yii::getContainer()->get('app');
 	}

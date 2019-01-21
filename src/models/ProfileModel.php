@@ -26,17 +26,6 @@ use yii\activerecord\ActiveRecord;
 class ProfileModel extends ActiveRecord
 {
     use ModuleTrait;
-    /** @var \app\user\Module **/
-    protected $module;
-
-    /**
-     * init
-     *
-     **/
-    public function init()
-    {
-        $this->module = $this->module->modelMap['user'];
-    }
 
     /**
      * tableName
@@ -67,7 +56,7 @@ class ProfileModel extends ActiveRecord
      **/
     public function getUser()
     {
-        return $this->hasOne($this->module->modelMap['user'], ['id' => 'user_id']);
+        return $this->hasOne($this->module->modelMap['User'], ['id' => 'user_id']);
     }
 
     /**
