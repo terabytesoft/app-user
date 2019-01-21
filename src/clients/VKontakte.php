@@ -8,7 +8,9 @@ use yii\authclient\clients\VKontakte as BaseVKontakte;
 /**
  * VKontakte
  *
- * @property self $app
+ * Dependencies:
+ * @property \app\user\Module module
+ * @property \yii\web\Application app
  */
 class VKontakte extends BaseVKontakte implements ClientInterface
 {

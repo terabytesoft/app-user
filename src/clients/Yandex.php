@@ -8,7 +8,9 @@ use yii\authclient\clients\Yandex as BaseYandex;
 /**
  * Yandex
  *
- * @property self $app
+ * Dependencies:
+ * @property \app\user\Module module
+ * @property \yii\web\Application app
  **/
 class Yandex extends BaseYandex implements ClientInterface
 {

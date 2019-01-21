@@ -199,7 +199,7 @@ class SecurityController extends Controller
      **/
     public function connect(ClientInterface $client)
     {
-		$account = new Account();
+		$account = new AccountModel();
 
 		$this->trigger(AuthEvent::init());
 		$this->trigger(AuthEvent::beforeConnect());
