@@ -17,7 +17,7 @@ trait ModuleTrait
      **/
     public function getModule(): \app\user\Module
     {
-        return Yii::getContainer()->get('app')->modules['user'];
+        return Yii::getContainer()->get('app')->getModule('user');
     }
 
     /**
