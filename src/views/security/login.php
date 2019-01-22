@@ -4,7 +4,7 @@ use app\user\assets\LoginAsset;
 use app\user\forms\LoginForm;
 use app\user\widgets\Connect;
 use yii\bootstrap4\ActiveForm;
-use yii\helpers\Html;
+use yii\bootstrap4\Html;
 
 /**
  * @var app\user\Module $module
@@ -29,6 +29,29 @@ LoginAsset::register($this);
 			'Please fill out the following fields to Sign in.'
 		) ?>
     <?= Html::endTag('p') ?>
+
+	<?php $auth = Connect::begin([
+		'baseAuthUrl' => ['/user/security/auth'],
+        'popupMode' => false,
+	]) ?>
+
+		<?php if ($auth->getClients()) : ?>
+
+			<?= Html::beginTag('div', ['class' => 'align-items-center bd-highlight border border-primary d-flex flex-row justify-content-between mb-3']) ?>
+
+				<?php foreach ($auth->getClients() as $client) : ?>
+					<?= Html::beginTag('div', ['class' => 'p-2']) ?>
+						<?= Html::a('', $auth->createClientUrl($client), [
+                        	'class' => 'auth-icon ' . $client->getName() . ' bd-highlight btn btn-block',
+						]) ?>
+					<?= Html::endTag('div') ?>
+				<?php endforeach; ?>
+
+			<?= Html::endTag('div') ?>
+
+		<?php endif ?>
+
+	<?php Connect::end() ?>
 
 	<?php if (!$module->debug) : ?>
 

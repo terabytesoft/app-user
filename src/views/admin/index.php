@@ -1,8 +1,8 @@
 <?php
 
+use yii\bootstrap4\Html;
 use yii\dataview\GridView;
 use yii\dataview\columns\ActionColumn;
-use yii\bootstrap4\Html;
 use yii\helpers\Url;
 use yii\web\View;
 

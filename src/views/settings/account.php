@@ -9,7 +9,7 @@ use yii\bootstrap4\Html;
  * @var app\user\models\SettingsForm $model
  */
 
-$this->title = $this->getApp()->t('user', 'Account settings');
+$this->title = $this->getApp()->t('user', 'Account Form');
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>

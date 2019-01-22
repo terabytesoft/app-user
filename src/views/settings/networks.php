@@ -8,7 +8,7 @@ use yii\bootstrap4\Html;
  * @var $form yii\bootstrap4\ActiveForm
  */
 
-$this->title = $this->app->t('user', 'Social Accounts');
+$this->title = $this->app->t('user', 'Social Accounts Form');
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>

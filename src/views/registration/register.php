@@ -3,7 +3,7 @@
 use app\user\assets\RegistrationAsset;
 use app\user\widgets\Connect;
 use yii\bootstrap4\ActiveForm;
-use yii\helpers\Html;
+use yii\bootstrap4\Html;
 
 /**
  * @var yii\web\View $this
