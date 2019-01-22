@@ -4,6 +4,7 @@ namespace app\user\models;
 
 use app\user\clients\ClientInterface;
 use app\user\finder\Finder;
+use app\user\models\AccountModel;
 use app\user\models\UserModel;
 use app\user\models\query\AccountQuery;
 use app\user\traits\ModuleTrait;
@@ -32,15 +33,16 @@ use yii\helpers\Yii;
  * @property \app\user\models\UserModels $user - that this account is connected for social accounts
  *
  * Dependencies:
- * @property \app\user\Module module
  * @property \yii\web\Application app
+ * @property object container
+ * @property \app\user\Module module
  **/
 class AccountModel extends ActiveRecord
 {
     use ModuleTrait;
 
     /** @var Finder **/
-    protected static $finder;
+    protected $finder;
 
     /** @var **/
     private $_data;
@@ -107,7 +109,7 @@ class AccountModel extends ActiveRecord
      * connect
      *
      **/
-    public function connect(User $user)
+    public function connect(UserModel $user)
     {
         return $this->updateAttributes([
             'username' => null,
@@ -131,11 +133,11 @@ class AccountModel extends ActiveRecord
      * create
      *
      **/
-    public static function create(BaseClientInterface $client)
+    public function create(BaseClientInterface $client)
     {
-		/** @var Account $account */
+		/** @var Account $account **/
         $account = Yii::createObject([
-            '__class'      => static::class,
+            '__class'    => static::class,
             'provider'   => $client->getId(),
             'client_id'  => $client->getUserAttributes()['id'],
             'data'       => Json::encode($client->getUserAttributes()),
@@ -148,7 +150,7 @@ class AccountModel extends ActiveRecord
             ], false);
         }
 
-        if (($user = static::fetchUser($account)) instanceof User) {
+        if (($user = $this->fetchUser($account)) instanceof UserModel) {
             $account->user_id = $user->id;
         }
 
@@ -164,7 +166,7 @@ class AccountModel extends ActiveRecord
      *
      * @param BaseClientInterface $client
      **/
-    public static function connectWithUser(BaseClientInterface $client)
+    public function connectWithUser(BaseClientInterface $client)
     {
         if (Yii::getApp()->user->isGuest) {
             Yii::getApp()->session->setFlash('danger', Yii::getApp()->t('user', 'Something went wrong'));
@@ -172,7 +174,7 @@ class AccountModel extends ActiveRecord
             return;
         }
 
-        $account = static::fetchAccount($client);
+        $account = $this->fetchAccount($client);
 
         if ($account->user === null) {
             $account->link('user', Yii::getApp()->user->identity);
@@ -196,9 +198,9 @@ class AccountModel extends ActiveRecord
      *
      * @throws \yii\base\InvalidConfigException
      **/
-    protected static function fetchAccount(BaseClientInterface $client)
+    protected function fetchAccount(BaseClientInterface $client)
     {
-        $account = static::getFinder()->findAccount()->byClient($client)->one();
+        $account = $this->getFinder()->findAccount()->byClient($client)->one();
 
         if (null === $account) {
             $account = Yii::createObject([
@@ -222,9 +224,9 @@ class AccountModel extends ActiveRecord
      *
      * @return bool|UserModel False when can't create user
      **/
-    protected static function fetchUser(Account $account)
+    protected function fetchUser(AccountModel $account)
     {
-        $user = static::getFinder()->findUserByEmail($account->email);
+        $user = $this->getFinder()->findUserByEmail($account->email);
 
         if (null !== $user) {
             return $user;
@@ -253,12 +255,12 @@ class AccountModel extends ActiveRecord
      *
      * @return Finder
      **/
-    protected static function getFinder()
+    protected function getFinder()
     {
-        if (static::$finder === null) {
-            static::$finder = Yii::$container->get(Finder::class);
+        if ($this->finder === null) {
+            $this->finder = $this->getContainer(Finder::class);
         }
 
-        return static::$finder;
+        return $this->finder;
     }
 }

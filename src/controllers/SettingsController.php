@@ -57,8 +57,8 @@ class SettingsController extends Controller
             'verbs' => [
                 '__class' => VerbFilter::class,
                 'actions' => [
-                    'disconnect' => ['post'],
-                    'delete'     => ['post'],
+                    'disconnect' => ['POST'],
+                    'delete'     => ['POST'],
                 ],
             ],
             'access' => [

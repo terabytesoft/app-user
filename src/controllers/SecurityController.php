@@ -163,7 +163,7 @@ class SecurityController extends Controller
 
         if ($account === null) {
             $accountObj = new AccountModel();
-            $account = $accountObj::create($client);
+            $account = $accountObj->create($client);
         }
 
         $this->trigger(AuthEvent::init());

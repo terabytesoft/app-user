@@ -11,14 +11,14 @@ use yii\helpers\Yii;
 trait ModuleTrait
 {
     /**
-     * getModule
+     * getApp
      *
-     * @return \app\user\Module module
+     * @return \yii\web\Application app
      **/
-    public function getModule(): \app\user\Module
+    public function getApp():  \yii\web\Application
     {
-        return Yii::getContainer()->get('app')->getModule('user');
-    }
+        return Yii::getContainer()->get('app');
+	}
 
     /**
      * getDb
@@ -30,13 +30,24 @@ trait ModuleTrait
         return (object) Yii::getContainer()->get('db');
     }
 
-    /**
-     * getApp
+	/**
+     * getContainer
      *
-     * @return \yii\web\Application app
+     * @return object container
      **/
-    public function getApp():  \yii\web\Application
+    public function getContainer(string $param): object
     {
-        return Yii::getContainer()->get('app');
-	}
+        return (object) Yii::getContainer()->get($param);
+    }
+
+
+	/**
+     * getModule
+     *
+     * @return \app\user\Module module
+     **/
+    public function getModule(): \app\user\Module
+    {
+        return Yii::getContainer()->get('app')->getModule('user');
+    }
 }

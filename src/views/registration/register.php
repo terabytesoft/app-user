@@ -1,6 +1,7 @@
 <?php
 
 use app\user\assets\RegistrationAsset;
+use app\user\widgets\Connect;
 use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
 
@@ -27,6 +28,25 @@ RegistrationAsset::register($this);
 			'Please fill out the following fields to Sign up.'
 		) ?>
     <?= Html::endTag('p') ?>
+
+	<?php $auth = Connect::begin([
+            'baseAuthUrl' => ['/user/security/auth'],
+            'popupMode' => false,
+	]) ?>
+
+		<?= Html::beginTag('div', ['class' => 'align-items-center bd-highlight border border-primary d-flex flex-row justify-content-between mb-3']) ?>
+
+			<?php foreach ($auth->getClients() as $client) : ?>
+				<?= Html::beginTag('div', ['class' => 'p-2']) ?>
+					<?= Html::a('', $auth->createClientUrl($client), [
+                        'class' => 'auth-icon ' . $client->getName() . ' bd-highlight btn btn-block',
+					]) ?>
+				<?= Html::endTag('div') ?>
+			<?php endforeach; ?>
+
+		<?= Html::endTag('div') ?>
+
+	<?php Connect::end() ?>
 
     <?php $form = ActiveForm::begin([
         'id' => 'form-registration',

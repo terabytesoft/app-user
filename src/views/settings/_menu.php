@@ -21,7 +21,7 @@ $menuSettings = [
 		'linkOptions' => ['class' => 'nav-link'],
 	],
 	[
-		'label' => $this->app->t('user', 'Networks'),
+		'label' => $this->app->t('user', 'Social Accounts'),
 		'url' => ['/user/settings/networks'],
 		'linkOptions' => ['class' => 'nav-link'],
 	],

@@ -2,8 +2,8 @@
 
 use app\user\helpers\TimeZoneHelper;
 use yii\helpers\ArrayHelper;
-use yii\helpers\Html;
 use yii\bootstrap4\ActiveForm;
+use yii\bootstrap4\Html;
 
 /**
  * @var TimeZoneHelper $timezoneHelper
