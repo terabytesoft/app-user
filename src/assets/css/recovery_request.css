@@ -1,18 +1,18 @@
 /**
- * form-resend
+ * form-recovery-request
  *
  **/
 
 /**********************************************************************************************************************
  * FORMS                                                                                                              *
  **********************************************************************************************************************/
-.form-resend {
+.form-recovery-request {
     width: 100%;
     max-width: 420px;
     padding: 15px;
     margin: auto;
 }
-    .form-resend input[type="email"] {
+    .form-recovery-request input[type="email"] {
         margin-bottom: -1px;
         border-bottom-right-radius: 0;
         border-bottom-left-radius: 0;

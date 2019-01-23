@@ -67,11 +67,11 @@ class AdminController extends Controller
             'verbs' => [
                 '__class' => VerbFilter::class,
                 'actions' => [
-                    'delete'          => ['post'],
-                    'confirm'         => ['post'],
-                    'resend-password' => ['post'],
-                    'block'           => ['post'],
-                    'switch'          => ['post'],
+                    'delete'          => ['POST'],
+                    'confirm'         => ['POST'],
+                    'resend-password' => ['POST'],
+                    'block'           => ['POST'],
+                    'switch'          => ['POST'],
                 ],
             ],
             'access' => [
@@ -408,7 +408,7 @@ class AdminController extends Controller
 
                 $this->trigger(UserEvent::afterBlock());
                 $this->app->session->setFlash(
-                    'success',
+                    'danger',
                     $this->app->t('user', 'User has been blocked')
                 );
             }

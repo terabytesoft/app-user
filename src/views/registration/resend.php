@@ -1,24 +1,32 @@
 <?php
 
-use app\user\assets\ResendAsset;
+/**
+ * registration/resend
+ *
+ * Resend form
+ *
+ * View web application user
+ **/
+
+use app\user\assets\RegistrationResendAsset;
 use yii\bootstrap4\ActiveForm;
 use yii\bootstrap4\Html;
 
 /**
- * @var yii\web\View $this
- * @var app\user\forms\ResendForm $model
+ * @var \app\user\forms\ResendForm $model
+ * @var \yii\web\View $this
  */
 
-$this->title = $this->getApp()->t('user', 'Request new confirmation message');
+$this->title = $this->app->t('user', 'Request new confirmation message');
 $this->params['breadcrumbs'][] = $this->title;
 
-ResendAsset::register($this);
+RegistrationResendAsset::register($this);
 
 ?>
 
-<?= Html::tag('h1', '<b>' . Html::encode($this->title) . '</b>', ['class' => 'text-center c-grey-900 mb-40']) ?>
+<?= Html::tag('h2', '<b>' . Html::encode($this->title) . '</b>', ['class' => 'text-center']) ?>
 
-<?= Html::beginTag('div', ['class' => 'form-resend']) ?>
+<?= Html::beginTag('div', ['class' => 'form-registration-resend']) ?>
 
     <?= Html::beginTag('p', ['class' => 'text-center mb-4']) ?>
         <?= $this->app->t(
@@ -28,10 +36,11 @@ ResendAsset::register($this);
     <?= Html::endTag('p') ?>
 
     <?php $form = ActiveForm::begin([
-        'id' => 'form-resend',
-        'layout' => 'default',
+        'id' => 'form-registration-resend',
+		'layout' => 'default',
+        'enableAjaxValidation' => true,
+        'enableClientValidation' => false,
         'fieldConfig' => [
-            'template' => '{input}{label}{hint}{error}',
             'horizontalCssClasses' => [
                 'label' => '',
                 'offset' => '',
@@ -39,15 +48,14 @@ ResendAsset::register($this);
                 'error' => 'text-center',
                 'hint' => '',
                 'field' => 'form-label-group',
-            ],
+			],
             'options' => ['class' => 'form-label-group'],
+            'template' => '{input}{label}{hint}{error}'
         ],
-        'enableAjaxValidation' => true,
-        'enableClientValidation' => false,
-        'options' => ['class' => 'form-resend'],
+        'options' => ['class' => 'form-registration-resend'],
         'validateOnType' => false,
         'validateOnChange' => false,
-    ]); ?>
+    ]) ?>
 
         <?= $form->field($model, 'email')->textInput([
 	        'oninput' => 'this.setCustomValidity("")',
@@ -58,12 +66,10 @@ ResendAsset::register($this);
             ])->label($this->app->t('user', 'Email'));
         ?>
 
-        <?= Html::submitButton($this->getApp()->t('user', 'Continue'), [
-            'class' => 'btn btn-lg btn-primary btn-block', 'name' => 'signup-button', 'tabindex' => '2'
-        ]); ?>
+        <?= Html::submitButton($this->app->t('user', 'Continue'), [
+            'class' => 'btn btn-lg btn-primary btn-block', 'name' => 'resend-button', 'tabindex' => '2'
+        ]) ?>
 
-    <?php ActiveForm::end(); ?>
-
-
+	<?php ActiveForm::end(); ?>
 
 <?php echo Html::endTag('div');

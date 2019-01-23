@@ -1,25 +1,33 @@
 <?php
 
-use app\user\assets\ResetAsset;
+/**
+ * recovery/reset
+ *
+ * Reset form
+ *
+ * View web application user
+ **/
+
+use app\user\assets\RecoveryResetAsset;
 use yii\bootstrap4\ActiveForm;
 use yii\bootstrap4\Html;
 
 /**
- * @var yii\web\View $this
- * @var yii\widgets\ActiveForm $form
- * @var app\user\models\RecoveryForm $model
- */
+ * @var \app\user\form\RecoveryForm $model
+ * @var \yii\web\View $this
+ * @var \yii\widgets\ActiveForm $form
+ **/
 
 $this->title = $this->getApp()->t('user', 'Reset your password');
 $this->params['breadcrumbs'][] = $this->title;
 
-ResetAsset::register($this);
+RecoveryResetAsset::register($this);
 
 ?>
 
-<?= Html::tag('h1', '<b>' . Html::encode($this->title) . '</b>', ['class' => 'text-center c-grey-900 mb-40']) ?>
+<?= Html::tag('h2', '<b>' . Html::encode($this->title) . '</b>', ['class' => 'text-center']) ?>
 
-<?= Html::beginTag('div', ['class' => 'form-reset']) ?>
+<?= Html::beginTag('div', ['class' => 'form-recovery-reset']) ?>
 
 	<?= Html::beginTag('p', ['class' => 'text-center mb-4']) ?>
         <?= $this->app->t(
@@ -29,10 +37,11 @@ ResetAsset::register($this);
     <?= Html::endTag('p') ?>
 
 	<?php $form = ActiveForm::begin([
-    	'id' => 'form-reset',
+    	'id' => 'form-recovery-reset',
 		'layout' => 'default',
+		'enableAjaxValidation' => true,
+        'enableClientValidation' => false,
 		'fieldConfig' => [
-			'template' => '{input}{label}{hint}{error}',
 			'horizontalCssClasses' => [
 				'label' => '',
 				'offset' => '',
@@ -42,13 +51,12 @@ ResetAsset::register($this);
                 'field' => 'form-label-group',
 			],
 			'options' => ['class' => 'form-label-group'],
+			'template' => '{input}{label}{hint}{error}',
 		],
-        'enableAjaxValidation' => true,
-        'enableClientValidation' => false,
 		'options' => ['class' => 'form-reset'],
 		'validateOnType' => false,
         'validateOnChange' => false,
-    ]); ?>
+    ]) ?>
 
     	<?= $form->field($model, 'password')->passwordInput([
 				'oninput' => 'this.setCustomValidity("")',
@@ -58,10 +66,10 @@ ResetAsset::register($this);
 				'tabindex' => '1',
 		])->label($this->app->t('user', 'Password')) ?>
 
-    	<?= Html::submitButton($this->getApp()->t('user', 'Finish'), [
-			'class' => 'btn btn-lg btn-primary btn-block', 'name' => 'signup-button', 'tabindex' => '2'
+    	<?= Html::submitButton($this->getApp()->t('user', 'Reset Password'), [
+			'class' => 'btn btn-block btn-lg btn-primary', 'name' => 'reset-button', 'tabindex' => '2'
 		]) ?>
 
-	<?php ActiveForm::end(); ?>
+	<?php ActiveForm::end() ?>
 
 <?php echo Html::endTag('div');

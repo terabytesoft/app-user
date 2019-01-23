@@ -1,20 +1,21 @@
 <?php
 
+/**
+ * RegistrationRegisterAsset
+ *
+ * assets form
+ **/
+
 namespace app\user\assets;
 
 use yii\web\AssetBundle;
 
-/**
- * RequestAsset
- *
- * assets RequestForm
- **/
-class RequestAsset extends AssetBundle
+class RegistrationRegisterAsset extends AssetBundle
 {
     public $sourcePath = '@app/user/assets/';
 
 	public $css = [
-		'css/request.css',
+		'css/registration_register.css',
     ];
 
 	public $js = [

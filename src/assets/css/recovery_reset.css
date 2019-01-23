@@ -1,0 +1,19 @@
+/**
+ * form-recovery-reset
+ *
+ **/
+
+/**********************************************************************************************************************
+ * FORMS                                                                                                              *
+ **********************************************************************************************************************/
+.form-recovery-reset {
+    width: 100%;
+    max-width: 420px;
+    padding: 15px;
+    margin: auto;
+}
+    .form-recovery-reset input[type="email"] {
+        margin-bottom: -1px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }

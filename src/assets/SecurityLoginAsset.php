@@ -1,20 +1,21 @@
 <?php
 
+/**
+ * SecurityLoginAsset
+ *
+ * assets form
+ **/
+
 namespace app\user\assets;
 
 use yii\web\AssetBundle;
 
-/**
- * LoginAsset
- *
- * assets LoginForm
- **/
-class LoginAsset extends AssetBundle
+class SecurityLoginAsset extends AssetBundle
 {
     public $sourcePath = '@app/user/assets/';
 
 	public $css = [
-		'css/login.css',
+		'css/security_login.css',
     ];
 
 	public $js = [

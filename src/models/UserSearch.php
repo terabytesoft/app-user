@@ -80,8 +80,12 @@ class UserSearch extends Model
 
         $dataProvider = new ActiveDataProvider(
 			$db,
-            $query
-        );
+			$query
+		);
+
+		$dataProvider->setPagination([
+		    'pageSize' => 10,
+		]);
 
         if (!($this->load($params) && $this->validate())) {
             return $dataProvider;

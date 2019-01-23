@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * settings/profile
+ *
+ * Profile form
+ *
+ * View web application user
+ **/
+
 use app\user\helpers\TimeZoneHelper;
 use yii\bootstrap4\ActiveForm;
 use yii\bootstrap4\Html;
@@ -7,10 +15,10 @@ use yii\helpers\ArrayHelper;
 
 /**
  * @var TimeZoneHelper $timezoneHelper
- * @var app\user\models\Profile $model
- * @var yii\web\View $this
- * @var yii\widgets\ActiveForm $form
- */
+ * @var \app\user\models\ProfileModel $model
+ * @var \yii\bootstrap4\ActiveForm $form
+ * @var \yii\web\View $this
+ **/
 
 $timezoneHelper = new TimeZoneHelper();
 
@@ -20,22 +28,25 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <?= Html::beginTag('div', ['class' => 'row']) ?>
+
 	<?= Html::beginTag('div', ['class' => 'col-md-3']) ?>
         <?= $this->render('_menu') ?>
 	<?= Html::endTag('div') ?>
+
 	<?= Html::beginTag('div', ['class' => 'col-md-9']) ?>
+
 		<?= Html::tag('h2', '<b>' . Html::encode($this->title) . '</b>', ['class' => 'text-center']) ?>
 
         <?php $form = ActiveForm::begin([
-            'id' => 'profile-form',
+            'id' => 'form-settings-profile',
 			'layout' => 'default',
         	'enableAjaxValidation' => true,
         	'enableClientValidation' => false,
-			'options' => ['class' => 'form-profile'],
+			'options' => ['class' => 'form-settings-profile'],
 			'validateOnBlur' => false,
 			'validateOnType' => false,
         	'validateOnChange' => false,
-        ]); ?>
+        ]) ?>
 
 			<?= $form->field($model, 'name')
 				->textInput([
@@ -94,10 +105,11 @@ $this->params['breadcrumbs'][] = $this->title;
 			?>
 
 			<?= Html::submitButton($this->app->t('user', 'Save'), [
-				'class' => 'btn btn-lg btn-primary btn-block', 'name' => 'profile-save-button', 'tabindex' => '8',
+				'class' => 'btn btn-block btn-lg btn-primary', 'name' => 'profile-button', 'tabindex' => '8',
 	        ]); ?>
 
-        <?php ActiveForm::end(); ?>
+        <?php ActiveForm::end() ?>
 
 	<?= Html::endTag('div') ?>
+
 <?php echo Html::endTag('div');

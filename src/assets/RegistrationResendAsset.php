@@ -1,20 +1,21 @@
 <?php
 
+/**
+ * RegistrationResendAsset
+ *
+ * assets form
+ **/
+
 namespace app\user\assets;
 
 use yii\web\AssetBundle;
 
-/**
- * ResetAsset
- *
- * assets ResetForm
- **/
-class ResetAsset extends AssetBundle
+class RegistrationResendAsset extends AssetBundle
 {
     public $sourcePath = '@app/user/assets/';
 
 	public $css = [
-		'css/reset.css',
+		'css/registration_resend.css',
     ];
 
 	public $js = [

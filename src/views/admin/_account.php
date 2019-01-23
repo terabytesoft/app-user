@@ -1,35 +1,47 @@
 <?php
 
+/**
+ * admin/_account
+ *
+ * Account Form
+ *
+ * View web application user
+ **/
+
+
 use yii\bootstrap4\ActiveForm;
 use yii\bootstrap4\Html;
 
 /**
- * @var yii\web\View $this
- * @var app\user\models\User $user
- */
+ * @var \app\user\models\UserModel $user
+ * @var \yii\web\View $this
+ **/
+
+$this->title = $this->app->t('user', 'Account Form');
+
 ?>
 
 <?php $this->beginContent('@app/user/views/admin/update.php', ['user' => $user]) ?>
 
-<?php $form = ActiveForm::begin([
-    'layout' => 'horizontal',
-    'enableAjaxValidation' => true,
-    'enableClientValidation' => false,
-    'fieldConfig' => [
-        'horizontalCssClasses' => [
-            'wrapper' => 'col-sm-9',
-        ],
-    ],
-]); ?>
+	<?= Html::tag('h2', '<b>' . Html::encode($this->title) . '</b>', ['class' => 'text-center']) ?>
 
-<?= $this->render('_user', ['form' => $form, 'user' => $user]) ?>
+	<?php $form = ActiveForm::begin([
+		'id' => 'form-admin-account',
+		'enableAjaxValidation' => true,
+		'enableClientValidation' => false,
+		'layout' => 'default',
+		'options' => ['class' => 'form-profile'],
+		'validateOnChange' => false,
+		'validateOnBlur' => false,
+		'validateOnType' => false,
+	]) ?>
 
-<div class="form-group">
-    <div class="col-lg-offset-3 col-lg-9">
-        <?= Html::submitButton($this->getApp()->t('user', 'Update'), ['class' => 'btn btn-block btn-success']) ?>
-    </div>
-</div>
+		<?= $this->render('_user', ['form' => $form, 'user' => $user]) ?>
 
-<?php ActiveForm::end(); ?>
+		<?= Html::submitButton($this->app->t('user', 'Update'), [
+			'class' => 'btn btn-block btn-lg btn-primary', 'tabindex' => '4',
+		]) ?>
 
-<?php $this->endContent() ?>
+	<?php ActiveForm::end() ?>
+
+<?php $this->endContent();

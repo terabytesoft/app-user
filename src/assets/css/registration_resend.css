@@ -1,24 +1,19 @@
 /**
- * form-login
+ * form-registration-resend
  *
  **/
 
 /**********************************************************************************************************************
  * FORMS                                                                                                              *
  **********************************************************************************************************************/
-.form-login {
+.form-registration-resend {
     width: 100%;
     max-width: 420px;
     padding: 15px;
     margin: auto;
 }
-	.form-login input[type="email"] {
-    	margin-bottom: -1px;
-    	border-bottom-right-radius: 0;
-    	border-bottom-left-radius: 0;
-  	}
-  	.form-login input[type="password"] {
-    	margin-bottom: 10px;
-    	border-top-left-radius: 0;
-    	border-top-right-radius: 0;
-  	}
+    .form-registration-resend input[type="email"] {
+        margin-bottom: -1px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }

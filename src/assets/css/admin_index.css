@@ -1,19 +1,44 @@
 /**
- * form-reset
+ * form-admin-index
  *
  **/
 
 /**********************************************************************************************************************
  * FORMS                                                                                                              *
  **********************************************************************************************************************/
-.form-reset {
-    width: 100%;
-    max-width: 420px;
-    padding: 15px;
-    margin: auto;
+.grid-font-consolas {
+	font-family: consolas;
+	font-size: 14px;
 }
-    .form-reset input[type="email"] {
-        margin-bottom: -1px;
-        border-bottom-right-radius: 0;
-        border-bottom-left-radius: 0;
-    }
+
+.w-25p {
+	width: 25px;
+}
+
+.w-30p {
+	width: 30px;
+}
+
+.w-40p {
+	width: 40px;
+}
+
+.w-100p {
+	width: 100px;
+}
+
+.w-130p {
+	width: 130px;
+}
+
+.w-150p	{
+	width: 150px;
+}
+
+.w-200p	{
+	width: 200px;
+}
+
+.w-250p	{
+	width: 250px;
+}

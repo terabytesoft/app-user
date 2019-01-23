@@ -1,11 +1,19 @@
 <?php
 
+/**
+ * settings/_menu
+ *
+ * Login form
+ *
+ * View web application user
+ **/
+
 use yii\bootstrap4\Html;
 use yii\bootstrap4\Nav;
 
 /**
  * @var app\user\models\UserModel $user
- */
+ **/
 
 $user = $this->app->user->identity;
 
@@ -49,9 +57,9 @@ if ($this->app->controller->action->id === 'account') {
 <?php echo Nav::widget([
 	'items' => $menuSettings,
 	'options' => [
+		'aria-orientation' => 'vertical',
 		'class' => 'nav flex-column nav-pills',
 		'id' => 'v-pills-tab',
 		'role'=> 'tablist',
-		'aria-orientation' => 'vertical'
 	],
 ]);

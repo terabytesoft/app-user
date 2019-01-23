@@ -1,23 +1,23 @@
 /**
- * form-registration
+ * form-registration-register
  *
  **/
 
 /**********************************************************************************************************************
  * FORMS                                                                                                              *
  **********************************************************************************************************************/
-.form-registration {
+.form-registration-register {
     width: 100%;
     max-width: 420px;
     padding: 15px;
     margin: auto;
 }
-    .form-registration input[type="email"] {
+    .form-registration-register input[type="email"] {
         margin-bottom: -1px;
         border-bottom-right-radius: 0;
         border-bottom-left-radius: 0;
     }
-    .form-registration input[type="password"] {
+    .form-registration-register input[type="password"] {
         margin-bottom: 10px;
         border-top-left-radius: 0;
         border-top-right-radius: 0;

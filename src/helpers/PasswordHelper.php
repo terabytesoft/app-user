@@ -40,7 +40,7 @@ class PasswordHelper
      **/
     public function hash($password)
     {
-        return $this->security->generatePasswordHash($password, $this->module->cost);
+        return $this->security->generatePasswordHash($password, $this->getModule()->cost);
     }
 
     /**

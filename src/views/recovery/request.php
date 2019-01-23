@@ -1,25 +1,33 @@
 <?php
 
-use app\user\assets\RequestAsset;
+/**
+ * recovery/request
+ *
+ * Request form
+ *
+ * View web application user
+ **/
+
+use app\user\assets\RecoveryRequestAsset;
 use yii\bootstrap4\ActiveForm;
 use yii\bootstrap4\Html;
 
 /**
- * @var yii\web\View $this
- * @var yii\widgets\ActiveForm $form
- * @var app\user\models\RecoveryForm $model
- */
+ * @var \app\user\forms\RecoveryForm $model
+ * @var \yii\bootstrap4\ActiveForm $form
+ * @var \yii\web\View $this
+ **/
 
-$this->title = $this->getApp()->t('user', 'Recover your password');
+$this->title = $this->app->t('user', 'Recover your password');
 $this->params['breadcrumbs'][] = $this->title;
 
-RequestAsset::register($this);
+RecoveryRequestAsset::register($this);
 
 ?>
 
-<?= Html::tag('h1', '<b>' . Html::encode($this->title) . '</b>', ['class' => 'text-center c-grey-900 mb-40']) ?>
+<?= Html::tag('h2', '<b>' . Html::encode($this->title) . '</b>', ['class' => 'text-center']) ?>
 
-<?= Html::beginTag('div', ['class' => 'form-request']) ?>
+<?= Html::beginTag('div', ['class' => 'form-recovery-request']) ?>
 
     <?= Html::beginTag('p', ['class' => 'text-center mb-4']) ?>
         <?= $this->app->t(
@@ -29,10 +37,11 @@ RequestAsset::register($this);
     <?= Html::endTag('p') ?>
 
     <?php $form = ActiveForm::begin([
-        'id' => 'form-request',
+        'id' => 'form-recovery-request',
 		'layout' => 'default',
+        'enableClientValidation' => false,
+        'enableAjaxValidation' => true,
 		'fieldConfig' => [
-			'template' => '{input}{label}{hint}{error}',
 			'horizontalCssClasses' => [
 				'label' => '',
 				'offset' => '',
@@ -42,13 +51,12 @@ RequestAsset::register($this);
                 'field' => 'form-label-group',
 			],
 			'options' => ['class' => 'form-label-group'],
+			'template' => '{input}{label}{hint}{error}',
 		],
-        'enableAjaxValidation' => true,
-        'enableClientValidation' => false,
 		'options' => ['class' => 'form-request'],
 		'validateOnType' => false,
         'validateOnChange' => false,
-    ]); ?>
+    ]) ?>
 
         <?= $form->field($model, 'email')->textInput([
 			'oninput' => 'this.setCustomValidity("")',
@@ -58,10 +66,10 @@ RequestAsset::register($this);
 			'tabindex' => '1',
 		])->label($this->app->t('user', 'Email')) ?>
 
-        <?= Html::submitButton($this->getApp()->t('user', 'Continue'), [
-            'class' => 'btn btn-lg btn-primary btn-block', 'name' => 'signup-button', 'tabindex' => '2'
-        ]); ?><br>
+        <?= Html::submitButton($this->app->t('user', 'Request Password'), [
+            'class' => 'btn btn-block btn-lg btn-primary', 'name' => 'request-button', 'tabindex' => '2'
+        ]) ?>
 
-    <?php ActiveForm::end(); ?>
+    <?php ActiveForm::end() ?>
 
 <?php echo Html::endTag('div');

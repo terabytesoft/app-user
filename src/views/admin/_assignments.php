@@ -14,7 +14,10 @@ use app\rbac\widgets\Assignments;
     'options' => [
         'class' => 'alert-info alert-dismissible',
     ],
-    'body' => $this->getApp()->t('user', 'You can assign multiple roles or permissions to user by using the form below'),
+    'body' => $this->app()->t(
+		'user',
+		'You can assign multiple roles or permissions to user by using the form below'
+	),
 ]) ?>
 
 <?= Assignments::widget(['userId' => $user->id]) ?>

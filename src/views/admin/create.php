@@ -1,74 +1,96 @@
 <?php
 
+/**
+ * admin/create
+ *
+ * Create user
+ *
+ * View web application user
+ **/
+
 use yii\bootstrap4\ActiveForm;
-use yii\bootstrap4\Nav;
 use yii\bootstrap4\Html;
+use yii\bootstrap4\Nav;
 
 /**
- * @var yii\web\View $this
- * @var dektrium\user\models\User $user
- */
+ * @var \app\user\models\UserModel $user
+ * @var \yii\web\View $this
+ **/
 
 $this->title = $this->app->t('user', 'Create a user account');
 $this->params['breadcrumbs'][] = ['label' => $this->app->t('user', 'Users'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
-?>
 
-<?= $this->render('/_alert', ['module' => $this->app->getModule('user'),]) ?>
+?>
 
 <?= $this->render('_menu') ?>
 
-<div class="row">
-    <div class="col-md-3">
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <?= Nav::widget([
-                    'options' => [
-                        'class' => 'nav-pills nav-stacked',
-                    ],
-                    'items' => [
-                        ['label' => $this->app->t('user', 'Account details'), 'url' => ['/user/admin/create']],
-                        ['label' => $this->app->t('user', 'Profile details'), 'options' => [
-                            'class' => 'disabled',
-                            'onclick' => 'return false;',
-                        ]],
-                        ['label' => $this->app->t('user', 'Information'), 'options' => [
-                            'class' => 'disabled',
-                            'onclick' => 'return false;',
-                        ]],
-                    ],
-                ]) ?>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-9">
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <div class="alert alert-info">
-                    <?= $this->app->t('user', 'Credentials will be sent to the user by email') ?>.
-                    <?= $this->app->t('user', 'A password will be generated automatically if not provided') ?>.
-                </div>
-                <?php $form = ActiveForm::begin([
-                    'layout' => 'horizontal',
-                    'enableAjaxValidation' => true,
-                    'enableClientValidation' => false,
-                    'fieldConfig' => [
-                        'horizontalCssClasses' => [
-                            'wrapper' => 'col-sm-9',
-                        ],
-                    ],
-                ]); ?>
+<?= Html::beginTag('div', ['class' => 'row']) ?>
 
-                <?= $this->render('_user', ['form' => $form, 'user' => $user]) ?>
+	<?= Html::beginTag('div', ['class' => 'col-md-3']) ?>
 
-                <div class="form-group">
-                    <div class="col-lg-offset-3 col-lg-9">
-                        <?= Html::submitButton($this->app->t('user', 'Save'), ['class' => 'btn btn-block btn-success']) ?>
-                    </div>
-                </div>
+		<?= Html::beginTag('h5', ['class' => 'text-center']) ?>
 
-                <?php ActiveForm::end(); ?>
-            </div>
-        </div>
-    </div>
-</div>
+			<?= $this->app->t('user', 'Menu Settings') ?>
+
+		<?= Html::endTag('h5') ?>
+
+            <?= Nav::widget([
+                'options' => [
+					'id' => 'menu-admin-create',
+					'aria-orientation' => 'vertical',
+					'class' => 'flex-column nav nav-pills',
+					'role'=> 'tablist',
+                ],
+                'items' => [
+                    [
+						'label' => $this->app->t('user', 'Account'),
+						'url' => ['/user/admin/create']
+					],
+                    [
+						'label' => $this->app->t('user', 'Profile'),
+						'options' => [
+                           	'class' => 'disabled',
+                           	'onclick' => 'return false;',
+						]
+					],
+					['label' => $this->app->t('user', 'Information'),
+						'options' => [
+                           	'class' => 'disabled',
+                           	'onclick' => 'return false;',
+						]
+					],
+                ],
+            ]) ?>
+
+	<?= Html::endTag('div') ?>
+
+	<?= Html::beginTag('div', ['class' => 'col-md-9']) ?>
+
+		<?= Html::beginTag('div', ['class' => 'alert alert-info', 'role' => 'alert']) ?>
+            <?= $this->app->t('user', 'Credentials will be sent to the user by email') ?>.
+            <?= $this->app->t('user', 'A password will be generated automatically if not provided') ?>.
+		<?= Html::endTag('div') ?>
+
+        <?php $form = ActiveForm::begin([
+			'id' => 'form-admin-create',
+			'enableAjaxValidation' => true,
+			'enableClientValidation' => false,
+			'layout' => 'default',
+			'options' => ['class' => 'form-profile'],
+			'validateOnChange' => false,
+			'validateOnBlur' => false,
+			'validateOnType' => false,
+		]) ?>
+
+        	<?= $this->render('_user', ['form' => $form, 'user' => $user]) ?>
+
+			<?= Html::submitButton($this->app->t('user', 'Save'), [
+				'class' => 'btn btn-block btn-lg btn-primary', 'tabindex' => '4',
+			]) ?>
+
+    	<?php ActiveForm::end() ?>
+
+	<?= Html::endTag('div') ?>
+
+<?php echo Html::endTag('div');
