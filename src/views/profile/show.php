@@ -12,6 +12,7 @@ use assets\fontawesome\dev\css\NpmSolidAsset;
 use yii\bootstrap4\Html;
 
 /**
+ * @property \app\user\models\UserModel $user
  * @var \app\user\models\ProfileModel $profile
  * @var \yii\web\View $this
  **/

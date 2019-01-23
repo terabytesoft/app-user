@@ -253,7 +253,7 @@ $columns = 	[
 
 <?= $this->render('/admin/_menu') ?>
 
-<?= GridView::widget([
+<?php echo GridView::widget([
 	'id' => 'form-admin-index',
 	'as clientScript' => [
 		'__class' => \yii\jquery\GridViewClientScript::class,

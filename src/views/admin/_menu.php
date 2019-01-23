@@ -10,7 +10,7 @@ use yii\bootstrap4\Nav;
 
 ?>
 
-<?= Nav::widget([
+<?php echo Nav::widget([
     'options' => [
 		'id' => 'menu-admin',
         'class' => 'mb-1 nav-tabs',
