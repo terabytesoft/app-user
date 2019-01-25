@@ -143,6 +143,7 @@ class Module extends BaseModule implements \yii\di\Initiable
      **/
     public function init(): void
     {
+		$this->accountQuery = $this->getAccountQuery();
 		$this->accountModel = $this->getAccountModel();
 		$this->profileModel = $this->getProfileModel();
 		$this->profileQuery = $this->getProfileQuery();
