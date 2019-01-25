@@ -83,7 +83,7 @@ class RegistrationForm extends Model
     {
         $this->userModel->setScenario('register');
 
-        $this->loadAttributes($this->userModel);
+        $this->loadAttributes();
 
         if (!$this->userModel->register()) {
             $result = false;
@@ -101,10 +101,9 @@ class RegistrationForm extends Model
      * by default this method set all attributes of this model to the attributes of User model, so you should properly
      * configure safe attributes of your User model
      *
-     * @param \app\user\models\UserModel $userModel
      **/
-    protected function loadAttributes(UserModel $userModel): void
+    protected function loadAttributes(): void
     {
-        $userModel->setAttributes($this->attributes);
+        $this->userModel->setAttributes($this->attributes);
     }
 }
