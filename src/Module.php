@@ -121,7 +121,7 @@ class Module extends BaseModule implements \yii\di\Initiable
      * @var bool is the user module in DEBUG mode? Will be set to false automatically
      * if the application leaves debug mode
      */
-    public $debug = true;
+    public $debug = false;
 
     /** @var string The database connection to use for models in this module **/
     public $dbConnection = 'db';
