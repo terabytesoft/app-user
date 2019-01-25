@@ -12,8 +12,9 @@ use yii\helpers\Console;
  *
  * Confirms a user
  *
- * @property self $app
- * @property Module $module
+ * Dependencies:
+ * @property \app\user\Module module
+ * @property \yii\web\Application app
  **/
 class ConfirmController extends Controller
 {

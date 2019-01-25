@@ -18,7 +18,7 @@ class UserQuery extends ActiveQuery
      *
      * @param int $id User id to be used on search
      *
-     * @return array|UserModel
+     * @return array|\yii\activerecord\ActiveRecord
      */
     public function findUserById($id)
     {
@@ -32,7 +32,7 @@ class UserQuery extends ActiveQuery
      *
      * @param string $usernameOrEmail Username or email to be used on search
      *
-     * @return UserModel
+     * @return array|\yii\activerecord\ActiveRecord
      */
     public function findUserByUsernameOrEmail($usernameOrEmail)
     {
@@ -50,7 +50,7 @@ class UserQuery extends ActiveQuery
      *
      * @param string $username Username to be used on search
      *
-     * @return array|UserModel
+     * @return array|\yii\activerecord\ActiveRecord
      */
     public function findUserByUsername($username)
     {
@@ -64,7 +64,7 @@ class UserQuery extends ActiveQuery
      *
      * @param string $email Email to be used on search
      *
-     * @return array|UserModel
+     * @return array|\yii\activerecord\ActiveRecord
      */
     public function findUserByEmail($email)
     {

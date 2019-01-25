@@ -3,7 +3,6 @@
 namespace app\user\forms;
 
 use app\user\traits\ModuleTrait;
-use app\user\models\UserModel;
 use yii\base\Model;
 
 /**
@@ -102,9 +101,8 @@ class RegistrationForm extends Model
      * by default this method set all attributes of this model to the attributes of User model, so you should properly
      * configure safe attributes of your User model
      *
-     * @param UserModel $user
      **/
-    protected function loadAttributes(UserModel $userModel): void
+    protected function loadAttributes(): void
     {
         $this->userModel->setAttributes($this->attributes);
     }

@@ -87,7 +87,7 @@ class UserModel extends ActiveRecord implements IdentityInterface
     /**
      * getUserQuery
      *
-     * @return UserQuery
+     * @return \app\user\querys\UserQuery
      *
      * @throws \yii\base\InvalidConfigException
      **/
@@ -99,7 +99,7 @@ class UserModel extends ActiveRecord implements IdentityInterface
 	/**
      * getTokenQuery
      *
-     * @return TokenQuery
+     * @return \app\user\querys\TokenQuery
      *
      * @throws \yii\base\InvalidConfigException
      **/

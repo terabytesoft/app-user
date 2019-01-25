@@ -12,8 +12,9 @@ use yii\helpers\Console;
  *
  * Deletes a user
  *
- * @property self $app
- * @property Module $module
+ * Dependencies:
+ * @property \app\user\Module module
+ * @property \yii\web\Application app
  **/
 class DeleteController extends Controller
 {

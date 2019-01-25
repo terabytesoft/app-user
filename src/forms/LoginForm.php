@@ -1,5 +1,13 @@
 <?php
 
+namespace app\user\forms;
+
+use app\user\helpers\PasswordHelper;
+use app\user\traits\ModuleTrait;
+use yii\base\Model;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
+
 /**
  * LoginForm
  *
@@ -10,15 +18,6 @@
  * @property \app\user\Module module
  * @property \yii\web\Application app
  **/
-
-namespace app\user\forms;
-
-use app\user\helpers\PasswordHelper;
-use app\user\traits\ModuleTrait;
-use yii\base\Model;
-use yii\helpers\ArrayHelper;
-use yii\helpers\Html;
-
 class LoginForm extends Model
 {
 	use ModuleTrait;
@@ -98,7 +97,7 @@ class LoginForm extends Model
 	}
 
     /**
-     * @return User
+     * @return \app\user\models\UserModel
      */
     public function getUser()
     {

@@ -26,7 +26,9 @@ class Module extends BaseModule implements \yii\di\Initiable
     /** email is changed after user clicks both confirmation links sent to his old and new email addresses **/
     const STRATEGY_SECURE = 2;
 
-	public $accountModel;
+    public $accountModel;
+
+    public $accountQuery;
 
 	public $loginForm;
 

@@ -12,12 +12,15 @@ use yii\helpers\Console;
  *
  * Creates new user account
  *
- * @property self $app
- * @property Module $module
+ * Dependencies:
+ * @property \app\user\Module module
+ * @property \yii\web\Application app
  **/
 class CreateController extends Controller
 {
 	use ModuleTrait;
+
+    protected $userModel;
 
     /**
 	 * __construct

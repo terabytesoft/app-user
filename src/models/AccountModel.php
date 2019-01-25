@@ -66,19 +66,19 @@ class AccountModel extends ActiveRecord
 	/**
      * getaccountQuery
      *
-     * @return AccountQuery
+     * @return \app\user\querys\AccountQuery
      *
      * @throws \yii\base\InvalidConfigException
      **/
     protected function getAccountQuery()
     {
-        return $this->tokenQuery = $this->module->accountQuery;
+        return $this->accountQuery = $this->module->accountQuery;
     }
 
     /**
      * getUserQuery
      *
-     * @return UserQuery
+     * @return \app\user\querys\UserQuery
      *
      * @throws \yii\base\InvalidConfigException
      **/

@@ -12,8 +12,9 @@ use yii\helpers\Console;
  *
  * Updates user's password
  *
- * @property self $app
- * @property Module $module
+ * Dependencies:
+ * @property \app\user\Module module
+ * @property \yii\web\Application app
  **/
 class PasswordController extends Controller
 {
