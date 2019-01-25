@@ -2,7 +2,6 @@
 
 namespace app\user\models;
 
-use app\user\finder\Finder;
 use app\user\helpers\PasswordHelper;
 use app\user\mailer\Mailer;
 use app\user\traits\ModuleTrait;
@@ -45,7 +44,6 @@ use yii\web\IdentityInterface;
  * Dependencies:
  * @property \app\user\Module module
  * @property \yii\web\Application app
- * @property-read Finder $finder
  * @property-read Mailer $mailer
  **/
 class UserModel extends ActiveRecord implements IdentityInterface
@@ -62,6 +60,9 @@ class UserModel extends ActiveRecord implements IdentityInterface
     // following constants are used on secured email changing process
     const OLD_EMAIL_CONFIRMED = 0b1;
 	const NEW_EMAIL_CONFIRMED = 0b10;
+
+	protected $tokenQuery;
+	protected $userQuery;
 
 	private $_passwordhelper;
 
@@ -84,15 +85,27 @@ class UserModel extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * getFinder
+     * getUserQuery
      *
-     * @return Finder
+     * @return UserQuery
      *
      * @throws \yii\base\InvalidConfigException
      **/
-    protected function getFinder()
+    protected function getUserQuery()
     {
-        return Yii::getContainer()->get(Finder::class);
+        return $this->userQuery = $this->module->userQuery;
+    }
+
+	/**
+     * getTokenQuery
+     *
+     * @return TokenQuery
+     *
+     * @throws \yii\base\InvalidConfigException
+     **/
+    protected function getTokenQuery()
+    {
+        return $this->tokenQuery = $this->module->tokenQuery;
     }
 
     /**
@@ -147,7 +160,7 @@ class UserModel extends ActiveRecord implements IdentityInterface
      **/
     public function getProfile()
     {
-        return $this->hasOne($this->module->modelMap['Profile'], ['user_id' => 'id']);
+        return $this->hasOne($this->module->modelMap['ProfileModel'], ['user_id' => 'id']);
     }
 
     /**
@@ -157,7 +170,7 @@ class UserModel extends ActiveRecord implements IdentityInterface
      **/
     public function setProfile(Profile $profile)
     {
-        $this->_profile = $profile;
+		$this->_profile = $profile;
     }
 
     /**
@@ -168,7 +181,7 @@ class UserModel extends ActiveRecord implements IdentityInterface
     public function getAccounts()
     {
         $connected = [];
-        $accounts  = $this->hasMany($this->module->modelMap['Account'], ['user_id' => 'id'])->all();
+        $accounts  = $this->hasMany($this->module->modelMap['AccountModel'], ['user_id' => 'id'])->all();
 
         /** @var Account $account */
         foreach ($accounts as $account) {
@@ -185,7 +198,7 @@ class UserModel extends ActiveRecord implements IdentityInterface
      *
      * @param  string $provider
      *
-     * @return null|AccountModel
+     * @return null|\app\user\models\AccountModel
      **/
     public function getAccountByProvider($provider)
     {
@@ -427,9 +440,11 @@ class UserModel extends ActiveRecord implements IdentityInterface
     public function attemptEmailChange($code)
     {
         // TODO refactor method
+		$this->getUserquery();
+		$this->getTokenQuery();
 
         /** @var TokenModel $token */
-        $token = $this->finder->findToken([
+        $token = $this->tokenQuery->findToken([
             'user_id' => $this->id,
             'code'    => $code,
         ])->andWhere(['in', 'type', [TokenModel::TYPE_CONFIRM_NEW_EMAIL, TokenModel::TYPE_CONFIRM_OLD_EMAIL]])->one();
@@ -440,7 +455,7 @@ class UserModel extends ActiveRecord implements IdentityInterface
             $token->delete();
             if (empty($this->unconfirmed_email)) {
                 $this->app->session->setFlash('danger', Yii::t('user', 'An error occurred processing your request'));
-            } elseif ($this->finder->findUser(['email' => $this->unconfirmed_email])->exists() === false) {
+            } elseif ($this->userQuery->findUser(['email' => $this->unconfirmed_email])->exists() === false) {
                 if ($this->module->emailChangeStrategy === $this->module::STRATEGY_SECURE) {
                     switch ($token->type) {
                         case TokenModel::TYPE_CONFIRM_NEW_EMAIL:
@@ -554,7 +569,7 @@ class UserModel extends ActiveRecord implements IdentityInterface
 
         $this->username = $username;
 
-        $max = $this->finder->userQuery->max('id');
+        $max = $this->userQuery->max('id');
 
         // generate username like "user1", "user2", etc...
         do {
@@ -594,7 +609,7 @@ class UserModel extends ActiveRecord implements IdentityInterface
         if ($insert) {
             if ($this->_profile === null) {
                 $this->_profile = Yii::createObject([
-                    '__class' => ProfileModel::class
+                    '__class' => $this->module->modelMap['ProfileModel']
                 ]);
             }
             $this->_profile->link('user', $this);

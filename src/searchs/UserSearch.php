@@ -1,9 +1,9 @@
 <?php
 
-namespace app\user\models;
+namespace app\user\searchs;
 
-use app\user\finder\Finder;
 use app\user\traits\ModuleTrait;
+use yii\activerecord\ActiveQuery;
 use yii\activerecord\data\ActiveDataProvider;
 use yii\base\Model;
 use yii\helpers\Yii;
@@ -35,9 +35,6 @@ class UserSearch extends Model
 
     /** @var string **/
     public $registration_ip;
-
-    /** @var Finder **/
-    protected $finder;
 
     /**
 	 * rules
@@ -71,10 +68,9 @@ class UserSearch extends Model
      *
      * @return ActiveDataProvider
      **/
-    public function search($params)
+    public function search($params, ActiveQuery $userQuery)
     {
-		$this->finder = new Finder();
-        $query = $this->finder->getUserQuery();
+        $query = $userQuery;
 
 		$db = $this->db;
 

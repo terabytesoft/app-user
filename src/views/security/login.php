@@ -9,7 +9,6 @@
  **/
 
 use app\user\assets\SecurityLoginAsset;
-use app\user\forms\LoginForm;
 use app\user\widgets\Connect;
 use yii\bootstrap4\ActiveForm;
 use yii\bootstrap4\Html;

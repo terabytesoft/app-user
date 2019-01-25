@@ -2,13 +2,11 @@
 
 namespace app\user\events;
 
-use app\user\forms\RecoveryForm;
-use app\user\models\Token;
 use yii\base\Event;
 
 /**
- * @property Token        $token
- * @property RecoveryForm $form
+ * ResetPasswordEvent
+ *
  **/
 class ResetPasswordEvent extends Event
 {
@@ -41,56 +39,6 @@ class ResetPasswordEvent extends Event
      * triggered with app\user\events\ResetPasswordEvent
      **/
     const AFTER_RESET = 'app\user\events\ResetPasswordEvent::AFTER_RESET';
-
-    /**
-     * @var RecoveryForm
-     **/
-    private $_form;
-
-    /**
-     * @var Token
-     **/
-    private $_token;
-
-    /**
-     * getToken
-     *
-     * @return Token
-     **/
-    public function getToken()
-    {
-        return $this->_token;
-    }
-
-    /**
-     * setToken
-     *
-     * @param Token $token
-     **/
-    public function setToken(Token $token = null)
-    {
-        $this->_token = $token;
-    }
-
-    /**
-     * RecoveryForm
-     *
-     * @return RecoveryForm
-     **/
-    public function getForm()
-    {
-        return $this->_form;
-    }
-
-    /**
-     * RecoveryForm
-     *
-     * @param RecoveryForm $form
-     **/
-    public function setForm(RecoveryForm $form = null)
-    {
-        $this->_form = $form;
-    }
 
 	/**
 	 * init

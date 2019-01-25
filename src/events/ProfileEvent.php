@@ -2,11 +2,11 @@
 
 namespace app\user\events;
 
-use app\user\models\Profile;
 use yii\base\Event;
 
 /**
- * @property Profile $model
+ * ProfileEvent
+ *
  **/
 class ProfileEvent extends Event
 {

@@ -24,6 +24,7 @@
         "yiisoft/yii-swiftmailer": "^3.0@dev"
     },
     "require-dev": {
+        "codeception/codeception": "2.5.x-dev",
         "foxy/foxy": "^1.0",
         "hiqdev/composer-config-plugin": "^1.0@dev",
         "phpunit/phpunit": "^7.5",

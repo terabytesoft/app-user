@@ -1,8 +1,7 @@
 <?php
 
-namespace app\user\models\query;
+namespace app\user\querys;
 
-use app\user\models\AccountModel;
 use yii\authclient\ClientInterface;
 use yii\activerecord\ActiveQuery;
 

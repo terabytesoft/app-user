@@ -3,10 +3,7 @@
 namespace app\user\models;
 
 use app\user\clients\ClientInterface;
-use app\user\finder\Finder;
-use app\user\models\AccountModel;
 use app\user\models\UserModel;
-use app\user\models\query\AccountQuery;
 use app\user\traits\ModuleTrait;
 use yii\activerecord\ActiveRecord;
 use yii\authclient\ClientInterface as BaseClientInterface;
@@ -39,13 +36,13 @@ use yii\helpers\Yii;
  **/
 class AccountModel extends ActiveRecord
 {
-    use ModuleTrait;
+	use ModuleTrait;
 
-    /** @var Finder **/
-    protected $finder;
+	protected $accountQuery;
+	protected $userQuery;
 
     /** @var **/
-    private $_data;
+	private $_data;
 
     /**
      * tableName
@@ -63,7 +60,31 @@ class AccountModel extends ActiveRecord
      **/
     public function getUser()
     {
-        return $this->hasOne($this->module->modelMap['User'], ['id' => 'user_id']);
+        return $this->hasOne($this->module->modelMap['UserModel'], ['id' => 'user_id']);
+    }
+
+	/**
+     * getaccountQuery
+     *
+     * @return AccountQuery
+     *
+     * @throws \yii\base\InvalidConfigException
+     **/
+    protected function getAccountQuery()
+    {
+        return $this->tokenQuery = $this->module->accountQuery;
+    }
+
+    /**
+     * getUserQuery
+     *
+     * @return UserQuery
+     *
+     * @throws \yii\base\InvalidConfigException
+     **/
+    protected function getUserQuery()
+    {
+        return $this->userQuery = $this->module->userQuery;
     }
 
     /**
@@ -117,17 +138,7 @@ class AccountModel extends ActiveRecord
             'code'     => null,
             'user_id'  => $user->id,
         ]);
-    }
-
-    /**
-     * find
-     *
-     * @return AccountQuery
-     **/
-    public static function find()
-    {
-        return Yii::createObject(AccountQuery::class, [get_called_class()]);
-    }
+	}
 
     /**
      * create
@@ -200,7 +211,8 @@ class AccountModel extends ActiveRecord
      **/
     protected function fetchAccount(BaseClientInterface $client)
     {
-        $account = $this->getFinder()->findAccount()->byClient($client)->one();
+		$this->accountQuery = $this->getAccountQuery();
+        $account = $this->accountQuery->byClient($client)->one();
 
         if (null === $account) {
             $account = Yii::createObject([
@@ -226,7 +238,8 @@ class AccountModel extends ActiveRecord
      **/
     protected function fetchUser(AccountModel $account)
     {
-        $user = $this->getFinder()->findUserByEmail($account->email);
+		$this->userQuery = $this->getUserQuery();
+        $user = $this->userQuery->findUserByEmail($account->email);
 
         if (null !== $user) {
             return $user;
@@ -248,19 +261,5 @@ class AccountModel extends ActiveRecord
         }
 
         return $user->create() ? $user : false;
-    }
-
-    /**
-     * getFinder
-     *
-     * @return Finder
-     **/
-    protected function getFinder()
-    {
-        if ($this->finder === null) {
-            $this->finder = $this->getContainer(Finder::class);
-        }
-
-        return $this->finder;
-    }
+	}
 }

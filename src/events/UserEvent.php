@@ -2,19 +2,14 @@
 
 namespace app\user\events;
 
-use app\user\models\User;
 use yii\base\Event;
 
 /**
- * @property User $model
+ * ResetPasswordEvent
+ *
  **/
 class UserEvent extends Event
 {
-    /**
-     * @var User
-     **/
-    private $_user;
-
 	/**
 	 * event is triggered raised after executing init action
 	 * triggered with app\user\events\UserEvent
@@ -285,25 +280,5 @@ class UserEvent extends Event
 	public static function afterProfileUpdate(): self
 	{
         return new static(static::AFTER_PROFILE_UPDATE);
-    }
-
-    /**
-     * getUser
-     *
-     * @return User
-     **/
-    public function getUser()
-    {
-        return $this->_user;
-    }
-
-    /**
-     * setUser
-     *
-     * @param User $form
-     **/
-    public function setUser(User $form)
-    {
-        $this->_user = $form;
     }
 }

@@ -59,7 +59,7 @@ class ProfileModel extends ActiveRecord
      **/
     public function getUser()
     {
-        return $this->hasOne($this->module->modelMap['User'], ['id' => 'user_id']);
+        return $this->hasOne($this->module->modelMap['UserModel'], ['id' => 'user_id']);
     }
 
     /**

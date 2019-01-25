@@ -61,6 +61,7 @@ RegistrationRegisterAsset::register($this);
 
 		<?= $form->field($model, 'email')
 			->textInput([
+				'autofocus' => true,
 				'oninput' => 'this.setCustomValidity("")',
 				'oninvalid' => 'this.setCustomValidity("' . $this->app->t('user', 'Enter Email Here') . '")',
 				'placeholder' => $this->app->t('user', 'Email'),
@@ -71,7 +72,6 @@ RegistrationRegisterAsset::register($this);
 
 		<?= $form->field($model, 'username')
 			->textInput([
-				'autofocus' => true,
 				'oninput' => 'this.setCustomValidity("")',
 				'oninvalid' => 'this.setCustomValidity("' . $this->app->t('user', 'Enter Username Here') . '")',
 				'placeholder' => $this->app->t('user', 'Username'),

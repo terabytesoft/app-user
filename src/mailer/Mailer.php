@@ -6,7 +6,6 @@ use app\user\models\TokenModel;
 use app\user\models\UserModel;
 use app\user\traits\ModuleTrait;
 use yii\base\Component;
-use yii\helpers\Yii;
 
 /**
  * Mailer

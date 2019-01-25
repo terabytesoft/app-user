@@ -23,9 +23,10 @@ class SettingsForm extends Model
 {
     use ModuleTrait;
 
-	private $_mailer;
-	private $_passwordhelper;
-	private $_user;
+	protected $mailer;
+	protected $passwordhelper;
+	protected $tokenModel;
+	protected $userModel;
 
     public $email;
     public $username;
@@ -43,8 +44,9 @@ class SettingsForm extends Model
             'email'    => $this->user->unconfirmed_email ?: $this->user->email,
 		], false);
 
-		$this->_mailer = new Mailer();
-		$this->_passwordhelper = new PasswordHelper();
+		$this->mailer = new Mailer();
+		$this->passwordhelper = new PasswordHelper();
+		$this->tokenModel = $this->module->tokenModel;
     }
 
     /**
@@ -63,12 +65,12 @@ class SettingsForm extends Model
             'emailRequired' => ['email', 'required'],
             'emailPattern' => ['email', 'email'],
             'emailUsernameUnique' => [['email', 'username'], 'unique', 'when' => function ($model, $attribute) {
-                return $this->user->$attribute != $model->$attribute;
-            }, 'targetClass' => $this->module->modelMap['User']],
+                return $this->userModel->$attribute != $model->$attribute;
+            }, 'targetClass' => $this->userModel],
             'newPasswordLength' => ['new_password', 'string', 'max' => 72, 'min' => 6],
             'currentPasswordRequired' => ['current_password', 'required'],
             'currentPasswordValidate' => ['current_password', function ($attr) {
-                if (!$this->_passwordhelper->validate($this->$attr, $this->user->password_hash)) {
+                if (!$this->passwordhelper->validate($this->$attr, $this->userModel->password_hash)) {
                     $this->addError($attr, $this->app->t('user', 'Current password is not valid'));
                 }
             }],
@@ -84,13 +86,13 @@ class SettingsForm extends Model
      **/
     protected function defaultEmailChange(): void
     {
-        $this->user->unconfirmed_email = $this->email;
-		$token = new $this->module->modelMap['Token'];
-		$token->user_id = $this->user->id;
+        $this->userModel->unconfirmed_email = $this->email;
+		$token = $this->tokenModel;
+		$token->user_id = $this->userModel->id;
 		$token->type = $token::TYPE_CONFIRM_NEW_EMAIL;
         $token->save(false);
 
-		$this->_mailer->sendReconfirmationMessage($this->user, $token);
+		$this->mailer->sendReconfirmationMessage($this->userModel, $token);
 
 		$this->app->session->setFlash(
             'info',
@@ -117,11 +119,11 @@ class SettingsForm extends Model
 	 **/
     public function getUser()
     {
-        if ($this->_user === null) {
-            $this->_user = $this->app->user->identity;
+        if ($this->userModel === null) {
+            $this->userModel = $this->app->user->identity;
         }
 
-        return $this->_user;
+        return $this->userModel;
     }
 
 	/**
@@ -133,7 +135,7 @@ class SettingsForm extends Model
      **/
     protected function insecureEmailChange(): void
     {
-        $this->user->email = $this->email;
+        $this->userModel->email = $this->email;
         $this->app->session->setFlash('success', $this->app->t('user', 'Your email address has been changed'));
     }
 
@@ -147,12 +149,12 @@ class SettingsForm extends Model
     public function save(): bool
     {
         if ($this->validate()) {
-            $this->user->scenario = 'settings';
-            $this->user->username = $this->username;
-            $this->user->password = $this->new_password;
-            if ($this->email == $this->user->email && $this->user->unconfirmed_email != null) {
-                $this->user->unconfirmed_email = null;
-            } elseif ($this->email != $this->user->email) {
+            $this->userModel->scenario = 'settings';
+            $this->userModel->username = $this->username;
+            $this->userModel->password = $this->new_password;
+            if ($this->email == $this->userModel->email && $this->userModel->unconfirmed_email != null) {
+                $this->userModel->unconfirmed_email = null;
+            } elseif ($this->email != $this->userModel->email) {
                 switch ($this->module->emailChangeStrategy) {
                     case $this->module::STRATEGY_INSECURE:
                         $this->insecureEmailChange();
@@ -187,17 +189,17 @@ class SettingsForm extends Model
     {
         $this->defaultEmailChange();
 
-		$token = new $this->module->modelMap['Token'];
-		$token->user_id = $this->user->id;
+		$token = $this->tokenModel;
+		$token->user_id = $this->userModel->id;
 		$token->type = $token::TYPE_CONFIRM_OLD_EMAIL;
 		$token->save(false);
 
-        $this->mailer->sendReconfirmationMessage($this->user, $token);
+        $this->mailer->sendReconfirmationMessage($this->userModel, $token);
 
         // unset flags if they exist
-        $this->user->flags &= ~User::NEW_EMAIL_CONFIRMED;
-        $this->user->flags &= ~User::OLD_EMAIL_CONFIRMED;
-        $this->user->save(false);
+        $this->userModel->flags &= ~User::NEW_EMAIL_CONFIRMED;
+        $this->userModel->flags &= ~User::OLD_EMAIL_CONFIRMED;
+        $this->userModel->save(false);
 
         $this->app->session->setFlash(
             'info',

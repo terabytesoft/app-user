@@ -52,7 +52,7 @@ class PasswordHelper
      * @param $hash
      *
      * @return bool
-     */
+     **/
     public function validate($password, $hash)
     {
         return $this->security->validatePassword($password, $hash);
@@ -69,7 +69,7 @@ class PasswordHelper
      * @param $length
      *
      * @return string
-     */
+     **/
     public function generate($length)
     {
         $sets = [

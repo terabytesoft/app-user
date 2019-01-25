@@ -3,15 +3,10 @@
 namespace app\user\controllers;
 
 use app\user\Module;
-use app\user\finder\Finder;
 use app\user\events\ConnectEvent;
 use app\user\events\FormEvent;
 use app\user\events\ResetPasswordEvent;
 use app\user\events\UserEvent;
-use app\user\forms\RegistrationForm;
-use app\user\forms\ResendForm;
-use app\user\models\TokenModel;
-use app\user\models\UserModel;
 use app\user\traits\AjaxValidationTrait;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -27,20 +22,32 @@ use yii\web\filters\AccessControl;
  **/
 class RegistrationController extends Controller
 {
-    use AjaxValidationTrait;
+	use AjaxValidationTrait;
 
-    protected $finder;
+	protected $accountQuery;
+	protected $registrationForm;
+	protected $resendForm;
+	protected $tokenModel;
+	protected $tokenQuery;
+	protected $userModel;
+	protected $userQuery;
 
     /**
 	 * __construct
 	 *
      * @param string $id
      * @param Module $module
-     * @param Finder $finder
      **/
-    public function __construct(string $id, Module $module, Finder $finder)
+    public function __construct(string $id, Module $module)
     {
-        $this->finder = $finder;
+		$this->accountQuery = $module->accountQuery;
+		$this->registrationForm = new $module->formMap['RegistrationForm'];
+		$this->resendForm = new $module->formMap['ResendForm'];
+		$this->tokenModel = $module->tokenModel;
+		$this->tokenQuery = $module->tokenQuery;
+		$this->userModel = $module->userModel;
+		$this->userQuery = $module->userQuery;
+
         parent::__construct($id, $module);
     }
 
@@ -81,8 +88,8 @@ class RegistrationController extends Controller
 
         $this->trigger(FormEvent::init());
 
-        /** @var RegistrationForm $model */
-        $model = new RegistrationForm();
+        /** @var \app\user\forms\RegistrationForm $model */
+        $model = $this->registrationForm;
 
         $this->trigger(FormEvent::beforeRegister());
         $this->performAjaxValidation($model);
@@ -129,7 +136,7 @@ class RegistrationController extends Controller
      **/
     public function actionConnect(string $code)
     {
-        $account = $this->finder->findAccount()->byCode($code)->one();
+        $account = $this->accountQuery->byCode($code)->one();
 
         if ($account === null || $account->getIsConnected()) {
             throw new NotFoundHttpException();
@@ -137,7 +144,7 @@ class RegistrationController extends Controller
 
         $this->trigger(ConnectEvent::init());
 
-		$user = new UserModel();
+		$user = $this->userModel;
 		$user->scenario = 'connect';
 		$user->username = $account->username;
 		$user->email = $account->email;
@@ -171,7 +178,7 @@ class RegistrationController extends Controller
      **/
     public function actionConfirm(int $id, string $code)
     {
-        $user = $this->finder->findUserById($id);
+        $user = $this->userQuery->findUserById($id);
 
         if ($user === null || $this->module->enableConfirmation === false) {
             throw new NotFoundHttpException();
@@ -180,12 +187,12 @@ class RegistrationController extends Controller
         $this->trigger(UserEvent::init());
         $this->trigger(UserEvent::beforeConfirm());
 
-        $token = $this->finder->findTokenByParams($user->id, $code, TokenModel::TYPE_CONFIRMATION);
+        $token = $this->tokenQuery->findTokenByParams($user->id, $code, $this->tokenModel::TYPE_CONFIRMATION);
 
 		$this->app->session->set('token', $token);
 		$result = false;
 
-        if ($token instanceof TokenModel && !$token->isExpired) {
+        if ($token instanceof $this->module->modelMap['TokenModel'] && !$token->isExpired) {
 			$token->delete();
             if ($result = $user->confirm()) {
 				$this->app->user->login($user, $this->module->rememberFor);
@@ -221,7 +228,7 @@ class RegistrationController extends Controller
 
         $this->trigger(FormEvent::init());
 
-        $model = new ResendForm();
+        $model = $this->resendForm;
 
         $this->trigger(FormEvent::beforeResend());
         $this->performAjaxValidation($model);

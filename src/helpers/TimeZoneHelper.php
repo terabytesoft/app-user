@@ -3,15 +3,16 @@
 namespace app\user\helpers;
 
 /**
- * Timezone helper.
- */
+ * Timezone helper
+ *
+ **/
 class TimeZoneHelper
 {
     /**
      * Get all of the time zones with the offsets sorted by their offset
      *
      * @return array
-     */
+     **/
     public function getAll()
     {
         $timeZones = [];

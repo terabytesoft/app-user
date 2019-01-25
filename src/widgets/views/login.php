@@ -6,9 +6,9 @@ use yii\helpers\Url;
 
 /**
  * @var string $action
- * @var app\user\models\LoginForm $model
- * @var yii\bootstrap4\ActiveForm $form
- * @var yii\web\View $this
+ * @var \app\user\models\LoginForm $model
+ * @var \yii\bootstrap4\ActiveForm $form
+ * @var \yii\web\View $this
  */
 
 ?>

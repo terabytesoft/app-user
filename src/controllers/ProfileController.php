@@ -3,7 +3,6 @@
 namespace app\user\controllers;
 
 use app\user\Module;
-use app\user\finder\Finder;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\filters\AccessControl;
@@ -17,19 +16,19 @@ use yii\web\filters\AccessControl;
  **/
 class ProfileController extends Controller
 {
-    protected $finder;
+    protected $profileQuery;
 
     /**
 	 * __construct
 	 *
      * @param string $id
      * @param Module $module
-     * @param Finder $finder
      **/
-    public function __construct(string $id, Module $module, Finder $finder)
+    public function __construct(string $id, Module $module)
     {
-        $this->finder = $finder;
-        parent::__construct($id, $module);
+		$this->profileQuery = $module->profileQuery;
+
+		parent::__construct($id, $module);
     }
 
 	/**
@@ -74,7 +73,7 @@ class ProfileController extends Controller
      **/
     public function actionShow(int $id)
     {
-        $profile = $this->finder->findProfileById($id);
+        $profile = $this->profileQuery->findProfileById($id);
 
         if ($profile === null) {
             throw new NotFoundHttpException();

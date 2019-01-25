@@ -5,9 +5,6 @@ namespace app\user\controllers;
 use app\user\Module;
 use app\user\events\FormEvent;
 use app\user\events\ResetPasswordEvent;
-use app\user\finder\Finder;
-use app\user\forms\RecoveryForm;
-use app\user\models\TokenModel;
 use app\user\traits\AjaxValidationTrait;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -24,19 +21,23 @@ class RecoveryController extends Controller
 {
     use AjaxValidationTrait;
 
-    protected $finder;
+	protected $tokenModel;
+	protected $tokenQuery;
+	protected $recoveryForm;
 
     /**
 	 * __construct
 	 *
      * @param string $id
      * @param Module $module
-     * @param Finder $finder
      **/
-    public function __construct(string $id, Module $module, Finder $finder)
+    public function __construct(string $id, Module $module)
     {
-        $this->finder = $finder;
-        parent::__construct($id, $module);
+		$this->tokenModel = $module->tokenModel;
+		$this->tokenQuery = $module->tokenQuery;
+		$this->recoveryForm = new $module->formMap['RecoveryForm'];
+
+		parent::__construct($id, $module);
     }
 
 	/**
@@ -71,7 +72,7 @@ class RecoveryController extends Controller
             throw new NotFoundHttpException();
         }
 
-        $model = new RecoveryForm();
+        $model = $this->recoveryForm;
         $model->scenario = $model::SCENARIO_REQUEST;
 
         $this->trigger(FormEvent::init());
@@ -124,13 +125,13 @@ class RecoveryController extends Controller
             throw new NotFoundHttpException();
         }
 
-        $token = $this->finder->findToken([
+        $token = $this->tokenQuery->findToken([
             'user_id' => $id,
             'code' => $code,
-            'type' => TokenModel::TYPE_RECOVERY
+            'type' => $this->tokenModel::TYPE_RECOVERY
         ])->one();
 
-        if (empty($token) || ! $token instanceof TokenModel) {
+        if (empty($token) || ! $token instanceof \app\user\models\TokenModel) {
             throw new NotFoundHttpException();
         }
 
@@ -149,7 +150,7 @@ class RecoveryController extends Controller
             );
         }
 
-		$model = new RecoveryForm();
+		$model = $this->recoveryForm;
 		$model->scenario = $model::SCENARIO_RESET;
 
         $this->performAjaxValidation($model);

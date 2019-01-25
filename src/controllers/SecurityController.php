@@ -5,10 +5,6 @@ namespace app\user\controllers;
 use app\user\Module;
 use app\user\events\AuthEvent;
 use app\user\events\FormEvent;
-use app\user\finder\Finder;
-use app\user\forms\LoginForm;
-use app\user\models\AccountModel;
-use app\user\models\UserModel;
 use app\user\traits\AjaxValidationTrait;
 use yii\authclient\AuthAction;
 use yii\authclient\ClientInterface;
@@ -27,20 +23,24 @@ use yii\web\filters\VerbFilter;
  **/
 class SecurityController extends Controller
 {
-    use AjaxValidationTrait;
+	use AjaxValidationTrait;
 
-    protected $finder;
+	protected $accountModel;
+	protected $accountQuery;
+	protected $loginForm;
 
     /**
 	 * __construct
 	 *
      * @param string $id
      * @param Module $module
-     * @param Finder $finder
      **/
-    public function __construct(string $id, Module $module, Finder $finder)
+    public function __construct(string $id, Module $module)
     {
-        $this->finder = $finder;
+		$this->accountModel = $module->accountModel;
+		$this->accountQuery = $module->accountQuery;
+		$this->loginForm = new $module->formMap['LoginForm'];
+
         parent::__construct($id, $module);
     }
 
@@ -100,7 +100,7 @@ class SecurityController extends Controller
             $this->goHome();
         }
 
-        $model = new LoginForm();
+        $model = $this->loginForm;
 
         $this->trigger(FormEvent::init());
         $this->performAjaxValidation($model);
@@ -146,7 +146,7 @@ class SecurityController extends Controller
      **/
     public function authenticate(ClientInterface $client)
     {
-        $account = $this->finder->findAccount()->byClient($client)->one();
+        $account = $this->accountQuery->byClient($client)->one();
 
         if (!$this->module->enableRegistration && ($account === null || $account->user === null)) {
             $this->app->session->setFlash(
@@ -162,14 +162,14 @@ class SecurityController extends Controller
         }
 
         if ($account === null) {
-            $accountObj = new AccountModel();
+            $accountObj = $this->accountModel;
             $account = $accountObj->create($client);
         }
 
         $this->trigger(AuthEvent::init());
         $this->trigger(AuthEvent::beforeAuthenticate());
 
-        if ($account->user instanceof UserModel) {
+        if ($account->user instanceof $this->module->modelMap['UserModel']) {
             if ($account->user->isBlocked) {
                 $this->app->session->setFlash(
                     'danger',
@@ -199,7 +199,7 @@ class SecurityController extends Controller
      **/
     public function connect(ClientInterface $client)
     {
-		$account = new AccountModel();
+		$account = $this->accountModel;
 
 		$this->trigger(AuthEvent::init());
 		$this->trigger(AuthEvent::beforeConnect());

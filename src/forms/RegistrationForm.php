@@ -19,20 +19,11 @@ class RegistrationForm extends Model
 {
     use ModuleTrait;
 
-	private $_user;
+	protected $userModel;
 
     public $email;
     public $password;
 	public $username;
-
-    /**
-     * __construct
-	 *
-     **/
-    public function __construct()
-    {
-		$this->_user = new $this->module->modelMap['User'];
-    }
 
     /**
 	 * rules
@@ -41,16 +32,18 @@ class RegistrationForm extends Model
      **/
     public function rules(): array
     {
+		$this->userModel = $this->module->userModel;
+
         return [
             // username rules
             'usernameTrim'     => ['username', 'trim'],
             'usernameLength'   => ['username', 'string', 'min' => 3, 'max' => 255],
-            'usernamePattern'  => ['username', 'match', 'pattern' => $this->_user::$usernameRegexp],
+            'usernamePattern'  => ['username', 'match', 'pattern' => $this->userModel::$usernameRegexp],
             'usernameRequired' => ['username', 'required'],
             'usernameUnique'   => [
                 'username',
                 'unique',
-                'targetClass' => $this->_user,
+                'targetClass' => $this->userModel,
                 'message' => $this->app->t('user', 'This username has already been taken')
             ],
             // email rules
@@ -60,7 +53,7 @@ class RegistrationForm extends Model
             'emailUnique'   => [
                 'email',
                 'unique',
-                'targetClass' => $this->_user,
+                'targetClass' => $this->userModel,
                 'message' => $this->app->t('user', 'This email address has already been taken')
             ],
             // password rules
@@ -89,11 +82,11 @@ class RegistrationForm extends Model
      **/
     public function register(bool $result = true): bool
     {
-        $this->_user->setScenario('register');
+        $this->userModel->setScenario('register');
 
-        $this->loadAttributes($this->_user);
+        $this->loadAttributes($this->userModel);
 
-        if (!$this->_user->register()) {
+        if (!$this->userModel->register()) {
             $result = false;
         }
 
@@ -109,10 +102,10 @@ class RegistrationForm extends Model
      * by default this method set all attributes of this model to the attributes of User model, so you should properly
      * configure safe attributes of your User model
      *
-     * @param \app\user\models\UserModel $user
+     * @param UserModel $user
      **/
-    protected function loadAttributes(UserModel $_user): void
+    protected function loadAttributes(UserModel $userModel): void
     {
-        $this->_user->setAttributes($this->attributes);
+        $this->userModel->setAttributes($this->attributes);
     }
 }

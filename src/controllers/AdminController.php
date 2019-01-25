@@ -6,15 +6,8 @@ use app\user\Module;
 use app\user\events\FormEvent;
 use app\user\events\ProfileEvent;
 use app\user\events\UserEvent;
-use app\user\finder\Finder;
 use app\user\filters\AccessRule;
-use app\user\models\Profile;
-use app\user\models\UserModel;
-use app\user\models\UserSearch;
-use app\user\helpers\Password;
-use yii\helpers\Yii;
 use yii\base\Model;
-use yii\base\Module as Module2;
 use yii\exceptions\ExitException;
 use yii\helpers\Url;
 use yii\web\Controller;
@@ -41,19 +34,25 @@ class AdminController extends Controller
      **/
     const ORIGINAL_USER_SESSION_KEY = 'original_user';
 
-    protected $finder;
+	protected $profileModel;
+	protected $userModel;
+	protected $userQuery;
+	protected $userSearch;
 
     /**
 	 * __construct
 	 *
      * @param string $id
      * @param Module $module
-     * @param Finder $finder
      **/
-    public function __construct(string $id, Module $module, Finder $finder)
+    public function __construct(string $id, Module $module)
     {
-        $this->finder = $finder;
-        parent::__construct($id, $module);
+		$this->profileModel = $module->profileModel;
+		$this->userModel = $module->userModel;
+		$this->userQuery = $module->userQuery;
+		$this->userSearch = $module->userSearch;
+
+		parent::__construct($id, $module);
     }
 
 	/**
@@ -105,9 +104,9 @@ class AdminController extends Controller
     {
         Url::remember('', 'actions-redirect');
 
-        $searchModel = new UserSearch();
+        $searchModel = $this->userSearch;
 
-        $dataProvider = $searchModel->search($this->app->request->get());
+        $dataProvider = $searchModel->search($this->app->request->get(), $this->userQuery);
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
@@ -125,7 +124,7 @@ class AdminController extends Controller
      **/
     public function actionCreate()
     {
-		$user = new UserModel();
+		$user = $this->userModel;
 		$user->scenario = 'create';
 
         $this->trigger(UserEvent::init());
@@ -198,7 +197,7 @@ class AdminController extends Controller
         $profile = $user->profile;
 
         if ($profile == null) {
-            $profile = new Profile();
+            $profile = $this->profileModel;
             $profile->link('user', $user);
         }
 
@@ -457,12 +456,12 @@ class AdminController extends Controller
      *
      * @param int $id
      *
-     * @return UserModel the loaded model
+     * @return \app\user\models\UserModel the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      **/
     protected function findModel(int $id)
     {
-        $user = $this->finder->findUserById($id);
+        $user = $this->userQuery->findUserById($id);
         if ($user === null) {
             throw new NotFoundHttpException('The requested page does not exist');
         }

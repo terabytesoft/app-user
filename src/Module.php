@@ -2,7 +2,9 @@
 
 namespace app\user;
 
+use yii\activerecord\ActiveQuery;
 use yii\base\Module as BaseModule;
+use yii\base\Model;
 
 /**
  * Module
@@ -11,7 +13,7 @@ use yii\base\Module as BaseModule;
  *
  * @property array $modelMap
  **/
-class Module extends BaseModule
+class Module extends BaseModule implements \yii\di\Initiable
 {
     const VERSION = '0.0.1';
 
@@ -23,6 +25,24 @@ class Module extends BaseModule
 
     /** email is changed after user clicks both confirmation links sent to his old and new email addresses **/
     const STRATEGY_SECURE = 2;
+
+	public $accountModel;
+
+	public $loginForm;
+
+	public $profileModel;
+
+	public $profileQuery;
+
+	public $tokenModel;
+
+	public $tokenQuery;
+
+	public $userModel;
+
+	public $userQuery;
+
+	public $userSearch;
 
     /** @var bool Whether to show flash messages **/
     public $enableFlashMessages = true;
@@ -76,6 +96,18 @@ class Module extends BaseModule
     public $modelMap = [
     ];
 
+	/** @var array Form map **/
+    public $formMap = [
+    ];
+
+	/** @var array Query map **/
+    public $queryMap = [
+    ];
+
+	/** @var array Search map **/
+	public $searchMap = [
+	];
+
     /**
      * @var string the prefix for user module URL
      *
@@ -87,7 +119,7 @@ class Module extends BaseModule
      * @var bool is the user module in DEBUG mode? Will be set to false automatically
      * if the application leaves debug mode
      */
-    public $debug = false;
+    public $debug = true;
 
     /** @var string The database connection to use for models in this module **/
     public $dbConnection = 'db';
@@ -101,5 +133,111 @@ class Module extends BaseModule
         'forgot'                                 => 'recovery/request',
         'recover/<id:\d+>/<code:[A-Za-z0-9_-]+>' => 'recovery/reset',
         'settings/<action:\w+>'                  => 'settings/<action>'
-    ];
+	];
+
+    /**
+     * __construct
+	 *
+     **/
+    public function init(): void
+    {
+		$this->accountModel = $this->getAccountModel();
+		$this->profileModel = $this->getProfileModel();
+		$this->profileQuery = $this->getProfileQuery();
+		$this->tokenModel = $this->getTokenModel();
+		$this->tokenQuery = $this->getTokenQuery();
+		$this->userModel = $this->getUserModel();
+		$this->userQuery = $this->getUserQuery();
+		$this->userSearch = $this->getUserSearch();
+    }
+
+    /**
+	 * getAccountModel
+	 *
+     * @return Model
+     **/
+    public function getAccountModel(): Model
+    {
+		return new $this->modelMap['AccountModel'];
+	}
+
+    /**
+	 * getAccountQuery
+	 *
+     * @return ActiveQuery
+     **/
+    public function getAccountQuery(): ActiveQuery
+    {
+		return new $this->queryMap['AccountQuery']($this->modelMap['AccountModel']);
+	}
+
+	/**
+	 * getProfileModel
+	 *
+     * @return Model
+     **/
+    public function getProfileModel(): Model
+    {
+		return new $this->modelMap['ProfileModel'];
+	}
+
+    /**
+	 * getAccountQuery
+	 *
+     * @return ActiveQuery
+     **/
+    public function getProfileQuery(): ActiveQuery
+    {
+		return new $this->queryMap['ProfileQuery']($this->modelMap['ProfileModel']);
+	}
+
+	/**
+	 * getUserModel
+	 *
+     * @return Model
+     **/
+    public function getTokenModel(): Model
+    {
+		return new $this->modelMap['TokenModel'];
+	}
+
+    /**
+	 * getAccountQuery
+	 *
+     * @return ActiveQuery
+     **/
+    public function getTokenQuery(): ActiveQuery
+    {
+		return new $this->queryMap['TokenQuery']($this->modelMap['TokenModel']);
+	}
+
+	/**
+	 * getUserModel
+	 *
+     * @return Model
+     **/
+    public function getUserModel(): Model
+    {
+		return new $this->modelMap['UserModel'];
+	}
+
+    /**
+	 * getUserQuery
+	 *
+     * @return ActiveQuery
+     **/
+    public function getUserQuery(): ActiveQuery
+    {
+		return new $this->queryMap['UserQuery']($this->modelMap['UserModel']);
+	}
+
+	/**
+	 * getUserSearch
+	 *
+     * @return Model
+     **/
+    public function getUserSearch(): Model
+    {
+		return new $this->searchMap['UserSearch'];
+	}
 }

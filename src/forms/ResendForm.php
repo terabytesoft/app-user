@@ -2,7 +2,6 @@
 
 namespace app\user\forms;
 
-use app\user\finder\Finder;
 use app\user\mailer\Mailer;
 use app\user\models\UserModel;
 use app\user\traits\ModuleTrait;
@@ -22,22 +21,12 @@ class ResendForm extends Model
 {
 	use ModuleTrait;
 
-	private $_finder;
-	private $_mailer;
-	private $_user;
+	protected $mailer;
+	protected $tokenModel;
+	protected $userModel;
+	protected $userQuery;
 
     public $email;
-
-	/**
-     * __construct
-	 *
-     */
-    public function __construct()
-    {
-		$this->_finder = new Finder();
-		$this->_mailer = new Mailer();
-		$this->_user = new $this->module->modelMap['User'];
-    }
 
 	/**
 	 * rules
@@ -46,12 +35,14 @@ class ResendForm extends Model
      **/
     public function rules(): array
     {
+		$this->userModel = $this->module->userModel;
+
         return [
             'emailRequired' => ['email', 'required'],
             'emailPattern' => ['email', 'email'],
             'emailPattern'  => ['email', 'email'],
 			['email', 'exist',
-				'targetClass' => $this->_user,
+				'targetClass' => $this->userModel,
 				'message' => $this->app->t('user', 'There is no user with this email address.'),
             ],
         ];
@@ -76,14 +67,17 @@ class ResendForm extends Model
      **/
     public function resend(bool $result = false): bool
     {
-        $this->_user = $this->_finder->findUserByEmail($this->email);
+		$this->mailer = new Mailer();
+		$this->tokenModel = $this->module->tokenModel;
+		$this->userQuery = $this->module->userQuery;
+		$this->userModel = $this->userQuery->findUserByEmail($this->email);
 
-        if ($this->_user instanceof UserModel && !$this->_user->isConfirmed) {
-            $token = new $this->module->modelMap['Token'];
-            $token->user_id = $this->_user->id;
+        if ($this->userModel instanceof UserModel && !$this->userModel->isConfirmed) {
+            $token = $this->tokenModel;
+            $token->user_id = $this->userModel->id;
             $token->type = $token::TYPE_CONFIRMATION;
             $token->save(false);
-            $this->_mailer->sendConfirmationMessage($this->_user, $token);
+            $this->mailer->sendConfirmationMessage($this->userModel, $token);
             $result = true;
         }
 

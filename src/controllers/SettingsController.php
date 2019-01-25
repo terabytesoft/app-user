@@ -7,10 +7,6 @@ use app\user\events\ConnectEvent;
 use app\user\events\FormEvent;
 use app\user\events\ProfileEvent;
 use app\user\events\UserEvent;
-use app\user\finder\Finder;
-use app\user\forms\SettingsForm;
-use app\user\models\ProfileModel;
-use app\user\models\UserModel;
 use app\user\traits\AjaxValidationTrait;
 use yii\web\Controller;
 use yii\web\ForbiddenHttpException;
@@ -31,19 +27,27 @@ class SettingsController extends Controller
 
     public $defaultAction = 'profile';
 
-    protected $finder;
+	protected $accountQuery;
+	protected $profileModel;
+	protected $profileQuery;
+	protected $settingsForm;
+	protected $userQuery;
 
     /**
 	 * __construct
 	 *
      * @param string $id
      * @param Module $module
-     * @param Finder $finder
      **/
-    public function __construct(string $id, Module $module, Finder $finder)
+    public function __construct(string $id, Module $module)
     {
-        $this->finder = $finder;
-        parent::__construct($id, $module);
+		$this->accountQuery = $module->accountQuery;
+		$this->profileModel = $module->profileModel;
+		$this->profileQuery = $module->profileQuery;
+		$this->settingsForm = new $module->formMap['SettingsForm'];
+		$this->userQuery = $module->userQuery;
+
+		parent::__construct($id, $module);
     }
 
 	/**
@@ -88,10 +92,10 @@ class SettingsController extends Controller
      **/
     public function actionProfile()
     {
-        $model = $this->finder->findProfileById($this->app->user->identity->getId());
+        $model = $this->profileQuery->findProfileById($this->app->user->identity->getId());
 
         if ($model === null) {
-            $model = new ProfileModel();
+            $model = $this->profileModel;
             $model->link('user', $this->app->user->identity);
         }
 
@@ -126,7 +130,7 @@ class SettingsController extends Controller
      **/
     public function actionAccount()
     {
-        $model = new SettingsForm();
+        $model = new $this->settingsForm;
 
         $this->trigger(FormEvent::init());
         $this->performAjaxValidation($model);
@@ -163,7 +167,7 @@ class SettingsController extends Controller
      **/
     public function actionConfirm(int $id, string $code)
     {
-        $user = $this->finder->findUserById($id);
+        $user = $this->userQuery->findUserById($id);
 
         if ($user === null || $this->module->emailChangeStrategy === Module::STRATEGY_INSECURE) {
             throw new NotFoundHttpException();
@@ -206,7 +210,7 @@ class SettingsController extends Controller
      **/
     public function actionDisconnect(int $id)
     {
-        $account = $this->finder->findAccount()->byId($id)->one();
+        $account = $this->accountQuery->byId($id)->one();
 
         if ($account === null) {
             throw new NotFoundHttpException();

@@ -40,7 +40,6 @@ trait ModuleTrait
         return (object) Yii::getContainer()->get($param);
     }
 
-
 	/**
      * getModule
      *

@@ -2,13 +2,11 @@
 
 namespace app\user\events;
 
-use app\user\models\Account;
-use yii\authclient\ClientInterface;
 use yii\base\Event;
 
 /**
- * @property Account         $account
- * @property ClientInterface $client
+ * AuthEvent
+ *
  **/
 class AuthEvent extends Event
 {
@@ -41,16 +39,6 @@ class AuthEvent extends Event
      * triggered with app\user\events\AuthEvent.
      **/
     const AFTER_CONNECT = 'app\user\events\AuthEvent::AFTER_CONNECT';
-
-    /**
-     * @var ClientInterface
-     **/
-    private $_client;
-
-    /**
-     * @var Account
-     **/
-    private $_account;
 
 	/**
 	 * init
@@ -101,44 +89,4 @@ class AuthEvent extends Event
 	{
 		return new static(static::AFTER_CONNECT);
 	}
-
-    /**
-     * getAccount
-     *
-     * @return Account
-     **/
-    public function getAccount()
-    {
-        return $this->_account;
-    }
-
-    /**
-     * setAccount
-     *
-     * @param Account $account
-     */
-    public function setAccount(Account $account)
-    {
-        $this->_account = $account;
-    }
-
-    /**
-     * getClient
-     *
-     * @return ClientInterface
-     */
-    public function getClient()
-    {
-        return $this->_client;
-    }
-
-    /**
-     * setClient
-     *
-     * @param ClientInterface $client
-     */
-    public function setClient(ClientInterface $client)
-    {
-        $this->_client = $client;
-    }
 }

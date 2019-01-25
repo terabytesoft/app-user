@@ -2,7 +2,6 @@
 
 namespace app\user\forms;
 
-use app\user\finder\Finder;
 use app\user\mailer\Mailer;
 use app\user\models\UserModel;
 use app\user\traits\ModuleTrait;
@@ -24,23 +23,13 @@ class RecoveryForm extends Model
     const SCENARIO_REQUEST = self::SCENARIO_DEFAULT;
     const SCENARIO_RESET = 'reset';
 
-	private $_finder;
-	private $_mailer;
-	private $_user;
+	protected $mailer;
+	protected $userModel;
+	protected $userQuery;
+	protected $tokenModel;
 
     public $email;
     public $password;
-
-	/**
-     * __construct
-	 *
-     **/
-    public function __construct()
-    {
-		$this->_finder = new Finder();
-		$this->_mailer = new Mailer();
-		$this->_user = new $this->module->modelMap['User'];
-    }
 
     /**
 	 * scenarios
@@ -62,12 +51,14 @@ class RecoveryForm extends Model
      **/
     public function rules(): array
     {
+		$this->userModel = $this->module->userModel;
+
         return [
             'emailTrim' => ['email', 'trim'],
             'emailRequired' => ['email', 'required'],
             'emailPattern' => ['email', 'email'],
 			['email', 'exist',
-				'targetClass' => $this->_user,
+				'targetClass' => $this->userModel,
 				'message' => $this->app->t('user', 'There is no user with this email address.'),
             ],
             'passwordRequired' => ['password', 'required'],
@@ -92,18 +83,21 @@ class RecoveryForm extends Model
      **/
     public function sendRecoveryMessage(bool $result = false): bool
     {
-        $this->_user = $this->_finder->findUserByEmail($this->email);
+		$this->mailer = new Mailer();
+		$this->tokenModel = $this->module->tokenModel;
+		$this->userQuery = $this->module->userQuery;
+        $this->userModel = $this->userQuery->findUserByEmail($this->email);
 
-        if ($this->_user instanceof UserModel) {
-            $token = new $this->module->modelMap['Token'];
-            $token->user_id = $this->_user->id;
+        if ($this->userModel instanceof UserModel) {
+            $token = new $this->tokenModel;
+            $token->user_id = $this->userModel->id;
             $token->type = $token::TYPE_RECOVERY;
 
             if (!$token->save(false)) {
                 $result = false;
             }
 
-            if (!$this->_mailer->sendRecoveryMessage($this->_user, $token)) {
+            if (!$this->mailer->sendRecoveryMessage($this->userModel, $token)) {
                 $result = false;
 			}
 

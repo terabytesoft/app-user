@@ -3,7 +3,6 @@
 namespace app\user\commands;
 
 use app\user\Module;
-use app\user\models\User;
 use app\user\traits\ModuleTrait;
 use yii\console\Controller;
 use yii\helpers\Console;
@@ -21,6 +20,19 @@ class CreateController extends Controller
 	use ModuleTrait;
 
     /**
+	 * __construct
+	 *
+     * @param string $id
+     * @param Module $module
+     **/
+    public function __construct(string $id, Module $module)
+    {
+		$this->userModel = $module->userModel;
+
+        parent::__construct($id, $module);
+    }
+
+    /**
 	 * actionIndex
 	 *
      * this command creates new user account. If password is not set, this command will generate new 8-char password
@@ -33,7 +45,7 @@ class CreateController extends Controller
      **/
     public function actionIndex($email, $username, $password = null): void
     {
-		$user = new User();
+		$user = $this->userModel;
 		$user->scenario = 'create';
 		$user->email = $email;
 		$user->username = $username;

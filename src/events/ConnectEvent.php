@@ -2,13 +2,11 @@
 
 namespace app\user\events;
 
-use app\user\models\User;
-use app\user\models\Account;
 use yii\base\Event;
 
 /**
- * @property User    $model
- * @property Account $account
+ * ConnectEvent
+ *
  **/
 class ConnectEvent extends Event
 {
@@ -45,7 +43,7 @@ class ConnectEvent extends Event
 	 * init
      *
 	 * @return self created event
-	 */
+	 **/
 	public static function init(): self
 	{
 		return new static(static::INIT);
@@ -55,7 +53,7 @@ class ConnectEvent extends Event
      * beforeConnect
 	 *
 	 * @return self created event
-	 */
+	 **/
 	public static function beforeConnect(): self
 	{
 		return new static(static::BEFORE_CONNECT);
@@ -65,7 +63,7 @@ class ConnectEvent extends Event
 	 * afterConnect
      *
 	 * @return self created event
-	 */
+	 **/
 	public static function afterConnect(): self
 	{
 		return new static(static::AFTER_CONNECT);
@@ -75,7 +73,7 @@ class ConnectEvent extends Event
 	 * beforeDisconnect
      *
 	 * @return self created event
-	 */
+	 **/
 	public static function beforeDisconnect(): self
 	{
 		return new static(static::BEFORE_DISCONNECT);
@@ -85,57 +83,9 @@ class ConnectEvent extends Event
 	 * afterDisconnect
      *
 	 * @return self created event
-	 */
+	 **/
 	public static function afterDisconnect(): self
 	{
 		return new static(static::AFTER_DISCONNECT);
 	}
-
-    /**
-     * @var User
-     */
-    private $_user;
-
-    /**
-     * @var Account
-     */
-    private $_account;
-
-    /**
-     * getAccount
-     *
-     * @return Account
-     */
-    public function getAccount()
-    {
-        return $this->_account;
-    }
-
-    /**
-     * setAccount
-     *
-     * @param Account $account
-     */
-    public function setAccount(Account $account)
-    {
-        $this->_account = $account;
-    }
-
-    /**
-     * getUser
-     *
-     * @return User
-     */
-    public function getUser()
-    {
-        return $this->_user;
-    }
-
-    /**
-     * @param User $form
-     */
-    public function setUser(User $user)
-    {
-        $this->_user = $user;
-    }
 }
