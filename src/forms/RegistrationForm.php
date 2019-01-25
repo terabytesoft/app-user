@@ -101,9 +101,10 @@ class RegistrationForm extends Model
      * by default this method set all attributes of this model to the attributes of User model, so you should properly
      * configure safe attributes of your User model
      *
+     * @param \app\user\models\UserModel $userModel
      **/
-    protected function loadAttributes(): void
+    protected function loadAttributes(UserModel $userModel): void
     {
-        $this->userModel->setAttributes($this->attributes);
+        $userModel->setAttributes($this->attributes);
     }
 }
