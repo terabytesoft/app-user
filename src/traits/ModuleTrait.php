@@ -25,7 +25,7 @@ trait ModuleTrait
      *
      * @return object db
      **/
-    public static function getDb(): object
+    public static function getDb()
     {
         return (object) Yii::getContainer()->get('db');
     }
