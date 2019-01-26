@@ -16,7 +16,7 @@ service:
   - mysql
 
 before_install:
-  - mysql -e 'CREATE DATABASE app-user-test;'
+  - mysql -e 'CREATE DATABASE app_user_test;'
   - mysql -u root --password="1234"
 
 install:
