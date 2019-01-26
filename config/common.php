@@ -44,7 +44,7 @@ return [
         '__class'   => \yii\db\Connection::class,
         'dsn'       => 'mysql:host=localhost;dbname=app_user_tests;charset=utf8',
         'username'  => 'root',
-        'password'  => '1234',
+        'password'  => '',
     ],
     'cache' => [
         '__class' => yii\cache\Cache::class,

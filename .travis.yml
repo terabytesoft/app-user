@@ -17,7 +17,7 @@ service:
 
 before_install:
   - mysql -e 'CREATE DATABASE app_user_test;'
-  - mysql -u root --password="1234"
+  - mysql -u root --password=""
 
 install:
   - travis_retry composer self-update && composer --version
