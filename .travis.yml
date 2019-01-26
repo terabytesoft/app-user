@@ -16,7 +16,7 @@ service:
   - mysql
 
 before_install:
-  - mysql -e 'CREATE DATABASE app_user_test;'
+  - mysql -e 'CREATE DATABASE app_user_tests;'
 
 install:
   - travis_retry composer self-update && composer --version
