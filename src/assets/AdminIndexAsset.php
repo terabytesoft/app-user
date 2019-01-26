@@ -22,6 +22,7 @@ class AdminIndexAsset extends AssetBundle
     ];
 
 	public $depends = [
+        \app\user\assets\FloatingLabelAsset::class,
 		\yii\jquery\YiiAsset::class,
 		\yii\bootstrap4\BootstrapAsset::class,
 	];

@@ -147,7 +147,7 @@ class LoginForm extends Model
     {
 		$this->passwordHelper = new PasswordHelper();
         if ($this->user === null || !$this->passwordHelper->validate($this->password, $this->user->password_hash)) {
-            $this->addError($attribute, $this->app->t('user', 'Invalid login or password'));
+            $this->addError($attribute, $this->app->t('user', 'Invalid login or password.'));
         }
     }
 }

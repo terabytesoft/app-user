@@ -19,7 +19,7 @@ use yii\bootstrap4\Html;
  * @var \yii\web\View $this
  **/
 
-$this->title = $this->app->t('user', 'Sign in');
+$this->title = $this->app->t('user', 'Login');
 $this->params['breadcrumbs'][] = $this->title;
 
 SecurityLoginAsset::register($this);
@@ -33,7 +33,7 @@ SecurityLoginAsset::register($this);
     <?= Html::beginTag('p', ['class' => 'text-center mb-4']) ?>
         <?= $this->app->t(
 			'user',
-			'Please fill out the following fields to Sign in.'
+			'Please fill out the following fields to Login.'
 		) ?>
     <?= Html::endTag('p') ?>
 
@@ -155,11 +155,11 @@ SecurityLoginAsset::register($this);
         <?php if ($module->enablePasswordRecovery) : ?>
 
             <?= $this->app->t(
-                'basic',
+                'user',
                 'If you forgot your password you can'
             ) . ' ' .
 			Html::a(
-				$this->app->t('basic', 'reset it here'),
+				$this->app->t('user', 'reset it here'),
 				['/user/recovery/request']
 			) ?>
 
@@ -167,7 +167,7 @@ SecurityLoginAsset::register($this);
 
         <?= Html::endTag('div') ?>
 
-		<?= Html::submitButton($this->app->t('user', 'Sign in'), [
+		<?= Html::submitButton($this->app->t('user', 'Login'), [
 			'class' => 'btn btn-block btn-lg btn-primary', 'name' => 'login-button', 'tabindex' => '4',
         ]); ?>
 
