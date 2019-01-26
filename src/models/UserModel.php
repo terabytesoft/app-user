@@ -289,7 +289,7 @@ class UserModel extends ActiveRecord implements IdentityInterface
             'usernameUnique'   => [
                 'username',
                 'unique',
-                'message' => Yii::t('user', 'This username has already been taken')
+                'message' => Yii::t('user', 'This username has already been taken.')
             ],
 
             // email rules
@@ -300,7 +300,7 @@ class UserModel extends ActiveRecord implements IdentityInterface
             'emailUnique'   => [
                 'email',
                 'unique',
-                'message' => Yii::t('user', 'This email address has already been taken')
+                'message' => Yii::t('user', 'This email address has already been taken.')
             ],
 
             // password rules

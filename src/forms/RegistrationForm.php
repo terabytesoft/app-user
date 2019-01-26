@@ -43,7 +43,7 @@ class RegistrationForm extends Model
                 'username',
                 'unique',
                 'targetClass' => $this->userModel,
-                'message' => $this->app->t('user', 'This username has already been taken')
+                'message' => $this->app->t('user', 'This username has already been taken.')
             ],
             // email rules
             'emailTrim'     => ['email', 'trim'],
@@ -53,7 +53,7 @@ class RegistrationForm extends Model
                 'email',
                 'unique',
                 'targetClass' => $this->userModel,
-                'message' => $this->app->t('user', 'This email address has already been taken')
+                'message' => $this->app->t('user', 'This email address has already been taken.')
             ],
             // password rules
             'passwordRequired' => ['password', 'required', 'skipOnEmpty' => $this->module->enableGeneratingPassword],

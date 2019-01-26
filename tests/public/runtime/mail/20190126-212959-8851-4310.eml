@@ -1,0 +1,191 @@
+Message-ID: <9c75befd16a8da722b1ad4384c01535a@localhost>
+Date: Sat, 26 Jan 2019 21:29:59 +0000
+Subject: Welcome to app-user
+From: no-reply@example.com
+To: prueba1000@example.com
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="_=_swift_1548538199_ac1f562c25e7a29ceabc7876f9afa888_=_"
+
+
+--_=_swift_1548538199_ac1f562c25e7a29ceabc7876f9afa888_=_
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+
+
+Hello,
+
+Your account on app-user has been created.
+
+In order =
+to complete your registration, please click the link below.
+
+http://loc=
+alhost:8080/user/registration/confirm?id=3D48&code=3DgCYBnvL798d5GzRRxNy_75=
+hjWng6boG4
+If you cannot click the link, please try pasting the text into=
+ your browser.
+
+If you did not make this request you can ignore this em=
+ail.
+
+
+--_=_swift_1548538199_ac1f562c25e7a29ceabc7876f9afa888_=_
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://w=
+ww.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns=3D"http://w=
+ww.w3.org/1999/xhtml" style=3D"font-family: 'Helvetica Neue', 'Helvetica', =
+Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6; margin: 0;=
+ padding: 0;">
+<head>
+    <meta name=3D"viewport" content=3D"width=3Dde=
+vice-width" />
+    <meta http-equiv=3D"Content-Type" content=3D"text/html=
+; charset=3DUTF-8" />
+    </head>
+<body bgcolor=3D"#f6f6f6" style=3D"fo=
+nt-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; fon=
+t-size: 100%; line-height: 1.6; -webkit-font-smoothing: antialiased; -webki=
+t-text-size-adjust: none; width: 100% !important; height: 100%; margin: 0; =
+padding: 0;">
+<table class=3D"body-wrap" style=3D"font-family: 'Helvetica=
+ Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-he=
+ight: 1.6; width: 100%; margin: 0; padding: 20px;">
+    <tr style=3D"font=
+-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-=
+size: 100%; line-height: 1.6; margin: 0; padding: 0;">
+        <td style=
+=3D"font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-seri=
+f; font-size: 100%; line-height: 1.6; margin: 0; padding: 0;"></td>
+     =
+   <td class=3D"container" bgcolor=3D"#FFFFFF" style=3D"font-family: 'Helve=
+tica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; lin=
+e-height: 1.6; display: block !important; max-width: 600px !important; clea=
+r: both !important; margin: 0 auto; padding: 0; border: 1px solid #f0f0f0;"=
+>
+            <div class=3D"content" style=3D"font-family: 'Helvetica Neu=
+e', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height=
+: 1.6; max-width: 600px; display: block; margin: 0 auto; padding: 20px;">=
+
+                <table style=3D"font-family: 'Helvetica Neue', 'Helvetic=
+a', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6; width:=
+ 100%; margin: 0; padding: 0;">
+                    <tr style=3D"font-fam=
+ily: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size=
+: 100%; line-height: 1.6; margin: 0; padding: 0;">
+                      =
+  <td style=3D"font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial=
+, sans-serif; font-size: 100%; line-height: 1.6; margin: 0; padding: 0;">=
+
+                                                       =20
+<p style=3D"f=
+ont-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; fo=
+nt-size: 14px; line-height: 1.6; font-weight: normal; margin: 0 0 10px; pad=
+ding: 0;">
+    Hello,
+</p>
+
+<p style=3D"font-family: 'Helvetica Neu=
+e', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; line-height=
+: 1.6; font-weight: normal; margin: 0 0 10px; padding: 0;">
+    Your acco=
+unt on app-user has been created.
+   =20
+</p>
+
+    <p style=3D"font-f=
+amily: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-si=
+ze: 14px; line-height: 1.6; font-weight: normal; margin: 0 0 10px; padding:=
+ 0;">
+        In order to complete your registration, please click the li=
+nk below.
+    </p>
+    <p style=3D"font-family: 'Helvetica Neue', 'Helv=
+etica', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6; fo=
+nt-weight: normal; margin: 0 0 10px; padding: 0;">
+        <a href=3D"htt=
+p://localhost:8080/user/registration/confirm?id=3D48&amp;code=3DgCYBnvL798d=
+5GzRRxNy_75hjWng6boG4">http://localhost:8080/user/registration/confirm?id=
+=3D48&amp;code=3DgCYBnvL798d5GzRRxNy_75hjWng6boG4</a>    </p>
+    <p styl=
+e=3D"font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-ser=
+if; font-size: 14px; line-height: 1.6; font-weight: normal; margin: 0 0 10p=
+x; padding: 0;">
+        If you cannot click the link, please try pasting=
+ the text into your browser.
+    </p>
+
+<p style=3D"font-family: 'Helv=
+etica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; li=
+ne-height: 1.6; font-weight: normal; margin: 0 0 10px; padding: 0;">
+    =
+If you did not make this request you can ignore this email.
+</p>
+      =
+                                              </td>
+                    <=
+/tr>
+                </table>
+            </div>
+        </td>
+    =
+    <td style=3D"font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Ari=
+al, sans-serif; font-size: 100%; line-height: 1.6; margin: 0; padding: 0;">=
+</td>
+    </tr>
+</table>
+<table class=3D"footer-wrap" style=3D"font-f=
+amily: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-si=
+ze: 100%; line-height: 1.6; width: 100%; clear: both !important; margin: 0;=
+ padding: 0;"><tr style=3D"font-family: 'Helvetica Neue', 'Helvetica', Helv=
+etica, Arial, sans-serif; font-size: 100%; line-height: 1.6; margin: 0; pad=
+ding: 0;"><td style=3D"font-family: 'Helvetica Neue', 'Helvetica', Helvetic=
+a, Arial, sans-serif; font-size: 100%; line-height: 1.6; margin: 0; padding=
+: 0;"></td>
+    <td class=3D"container" style=3D"font-family: 'Helvetica =
+Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-hei=
+ght: 1.6; display: block !important; max-width: 600px !important; clear: bo=
+th !important; margin: 0 auto; padding: 0;">
+        <div class=3D"conten=
+t" style=3D"font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, s=
+ans-serif; font-size: 100%; line-height: 1.6; max-width: 600px; display: bl=
+ock; margin: 0 auto; padding: 20px;">
+            <table style=3D"font-fa=
+mily: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-siz=
+e: 100%; line-height: 1.6; width: 100%; margin: 0; padding: 0;">
+        =
+        <tr style=3D"font-family: 'Helvetica Neue', 'Helvetica', Helvetica,=
+ Arial, sans-serif; font-size: 100%; line-height: 1.6; margin: 0; padding: =
+0;">
+                    <td align=3D"center" style=3D"font-family: 'Helv=
+etica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; li=
+ne-height: 1.6; margin: 0; padding: 0;">
+                        <p style=
+=3D"font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-seri=
+f; font-size: 12px; line-height: 1.6; color: #666; font-weight: normal; mar=
+gin: 0 0 10px; padding: 0;">
+                            =C2=A9 app-user =
+2019.
+                        </p>
+                    </td>
+        =
+        </tr>
+            </table>
+        </div>
+    </td>
+    <td=
+ style=3D"font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, san=
+s-serif; font-size: 100%; line-height: 1.6; margin: 0; padding: 0;"></td>=
+
+    </tr>
+</table>
+</body>
+</html>
+
+
+--_=_swift_1548538199_ac1f562c25e7a29ceabc7876f9afa888_=_--

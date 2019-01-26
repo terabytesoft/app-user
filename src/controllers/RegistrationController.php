@@ -102,7 +102,7 @@ class RegistrationController extends Controller
                     'info',
                     $this->app->t(
                         'user',
-                        'Your account has been created and a message with further instructions has been sent to your email'
+                        'Your account has been created and a message with further instructions has been sent to your email.'
                     )
                 );
             } else {

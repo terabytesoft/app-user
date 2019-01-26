@@ -40,10 +40,12 @@ return [
             ],
         ],
 	],
-	'authClientCollection' => [
-		'__class' => yii\authclient\Collection::class,
-		'clients' => [],
-	],
+    'db' => [
+        '__class'   => \yii\db\Connection::class,
+        'dsn'       => 'mysql:host=localhost;dbname=app-user-tests;charset=utf8',
+        'username'  => 'root',
+        'password'  => '1234',
+    ],
     'cache' => [
         '__class' => yii\cache\Cache::class,
         'handler' => [
