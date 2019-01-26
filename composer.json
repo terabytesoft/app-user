@@ -11,6 +11,7 @@
     "require": {
 		"php": ">=7.1.0",
         "ezyang/htmlpurifier": "^4.6",
+        "terabytesoft/alert": "^0.0.1@dev",
         "terabytesoft/font-awesome": "^0.0.1@dev",
         "yiisoft/active-record": "^3.0@dev",
         "yiisoft/db-mysql": "^3.0@dev",
@@ -37,7 +38,7 @@
         "psr-4": {"app\\user\\": "src"}
     },
     "autoload-dev": {
-        "psr-4": {"app\\user\\tests\\": "tests"}
+        "psr-4": {"app\\user\\tests\\": "tests/src"}
     },
     "extra": {
         "branch-alias": {
@@ -47,7 +48,14 @@
             "defines": "config/defines.php",
             "params": "config/params.php",
             "common": "config/common.php",
-            "web": "config/web.php"
+            "web": "config/web.php",
+            "codecept": [
+                "$defines",
+                "$params",
+                "$common",
+                "$web",
+                "config/tests.php"
+            ]
         }
     }
 }
