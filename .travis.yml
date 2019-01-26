@@ -25,7 +25,7 @@ install:
 before_script:
   - vendor/bin/codecept build
   - vendor/bin/yii migrate --migrationPath=@app/user/migrations --interactive=0
-  - php -S localhost:8080 -t /tests/public > /dev/null 2>&1&
+  - php -S localhost:8080 -t tests/public > /dev/null 2>&1&
 
 script:
   - vendor/bin/codecept run
