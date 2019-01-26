@@ -22,8 +22,6 @@ class RegistrationRegisterAsset extends AssetBundle
     ];
 
 	public $depends = [
-        \app\user\assets\FloatingLabelAsset::class,
-        \app\user\assets\LayoutAdminAsset::class,
 		\yii\jquery\YiiAsset::class,
 		\yii\bootstrap4\BootstrapAsset::class,
 	];

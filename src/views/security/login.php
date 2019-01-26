@@ -22,6 +22,10 @@ use yii\bootstrap4\Html;
 $this->title = $this->app->t('user', 'Login');
 $this->params['breadcrumbs'][] = $this->title;
 
+if ($module->floatLabels) {
+    \app\user\assets\FloatingLabelAsset::register($this);
+}
+
 SecurityLoginAsset::register($this);
 
 ?>
@@ -36,34 +40,6 @@ SecurityLoginAsset::register($this);
 			'Please fill out the following fields to Login.'
 		) ?>
     <?= Html::endTag('p') ?>
-
-	<?php $auth = Connect::begin([
-		'baseAuthUrl' => ['/user/security/auth'],
-        'popupMode' => false,
-	]) ?>
-
-		<?php if ($auth->getClients()) : ?>
-
-			<?= Html::beginTag(
-				'div',
-				[
-					'class' => 'align-items-center border border-primary d-flex flex-row justify-content-between mb-3'
-				]
-			) ?>
-
-				<?php foreach ($auth->getClients() as $client) : ?>
-					<?= Html::beginTag('div', ['class' => 'p-2']) ?>
-						<?= Html::a('', $auth->createClientUrl($client), [
-                        	'class' => 'auth-icon ' . $client->getName() . ' btn btn-block',
-						]) ?>
-					<?= Html::endTag('div') ?>
-				<?php endforeach; ?>
-
-			<?= Html::endTag('div') ?>
-
-		<?php endif ?>
-
-	<?php Connect::end() ?>
 
 	<?php if (!$module->debug) : ?>
 
@@ -82,7 +58,9 @@ SecurityLoginAsset::register($this);
                 	'field' => 'form-label-group',
 				],
 				'options' => ['class' => 'form-label-group'],
-				'template' => '{input}{label}{hint}{error}',
+                'template' => ($module->floatLabels) ?
+                    '{input}{label}{hint}{error}' :
+                    '<div>{label}{input}{hint}{error}</div>',
 			] ,
 			'options' => ['class' => 'form-security-login'],
 			'validateOnBlur' => false,
@@ -168,7 +146,7 @@ SecurityLoginAsset::register($this);
         <?= Html::endTag('div') ?>
 
 		<?= Html::submitButton($this->app->t('user', 'Login'), [
-			'class' => 'btn btn-block btn-lg btn-primary', 'name' => 'login-button', 'tabindex' => '4',
+			'class' => 'btn btn-block btn-lg btn-primary mt-3', 'name' => 'login-button', 'tabindex' => '4',
         ]); ?>
 
     <?php ActiveForm::end() ?>
@@ -185,5 +163,33 @@ SecurityLoginAsset::register($this);
             <?= Html::a($this->app->t('user', 'Don\'t have an account? Sign up!'), ['/user/registration/register']) ?>
         <?= Html::endTag('p') ?>
     <?php endif ?>
+
+	<?php $auth = Connect::begin([
+		'baseAuthUrl' => ['/user/security/auth'],
+        'popupMode' => false,
+    ]) ?>
+
+        <?php if ($auth->getClients()) : ?>
+
+            <?= Html::beginTag(
+                'div',
+                [
+                    'class' => 'align-items-center d-flex flex-row justify-content-around mb-3'
+                ]
+            ) ?>
+
+                <?php foreach ($auth->getClients() as $client) : ?>
+                    <?= Html::beginTag('div', ['class' => 'p-2']) ?>
+                        <?= Html::a('', $auth->createClientUrl($client), [
+                            'class' => 'auth-icon ' . $client->getName() . ' btn btn-block',
+                        ]) ?>
+                    <?= Html::endTag('div') ?>
+                <?php endforeach; ?>
+
+            <?= Html::endTag('div') ?>
+
+        <?php endif ?>
+
+    <?php Connect::end() ?>
 
 <?php echo Html::endTag('div');

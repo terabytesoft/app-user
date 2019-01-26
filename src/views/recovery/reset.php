@@ -21,6 +21,10 @@ use yii\bootstrap4\Html;
 $this->title = $this->getApp()->t('user', 'Reset your password');
 $this->params['breadcrumbs'][] = $this->title;
 
+if ($module->floatLabels) {
+    \app\user\assets\FloatingLabelAsset::register($this);
+}
+
 RecoveryResetAsset::register($this);
 
 ?>
@@ -51,7 +55,9 @@ RecoveryResetAsset::register($this);
                 'field' => 'form-label-group',
 			],
 			'options' => ['class' => 'form-label-group'],
-			'template' => '{input}{label}{hint}{error}',
+            'template' => ($module->floatLabels) ?
+                '{input}{label}{hint}{error}' :
+                '<div>{label}{input}{hint}{error}</div>',
 		],
 		'options' => ['class' => 'form-reset'],
 		'validateOnType' => false,
@@ -67,7 +73,7 @@ RecoveryResetAsset::register($this);
 		])->label($this->app->t('user', 'Password')) ?>
 
     	<?= Html::submitButton($this->getApp()->t('user', 'Reset Password'), [
-			'class' => 'btn btn-block btn-lg btn-primary', 'name' => 'reset-button', 'tabindex' => '2'
+			'class' => 'btn btn-block btn-lg btn-primary mt-3', 'name' => 'reset-button', 'tabindex' => '2'
 		]) ?>
 
 	<?php ActiveForm::end() ?>

@@ -44,7 +44,9 @@ class Module extends BaseModule implements \yii\di\Initiable
 
 	public $userQuery;
 
-	public $userSearch;
+    public $userSearch;
+
+    public $floatLabels = false;
 
     /** @var bool Whether to show flash messages **/
     public $enableFlashMessages = true;

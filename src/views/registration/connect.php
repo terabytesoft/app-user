@@ -22,6 +22,10 @@ use yii\bootstrap4\Html;
 $this->title = $this->getApp()->t('user', 'Sign in');
 $this->params['breadcrumbs'][] = $this->title;
 
+if ($module->floatLabels) {
+    \app\user\assets\FloatingLabelAsset::register($this);
+}
+
 RegistrationConnectAsset::register($this);
 
 ?>
@@ -52,7 +56,9 @@ RegistrationConnectAsset::register($this);
                 'field' => 'form-label-group',
 			],
 			'options' => ['class' => 'form-label-group'],
-			'template' => '{input}{label}{hint}{error}',
+            'template' => ($module->floatLabels) ?
+                '{input}{label}{hint}{error}' :
+                '<div>{label}{input}{hint}{error}</div>',
 		],
 		'options' => ['class' => 'form-registration-connect'],
 		'validateOnType' => false,
@@ -81,7 +87,7 @@ RegistrationConnectAsset::register($this);
 		?>
 
 		<?= Html::submitButton($this->getApp()->t('user', 'Continue'), [
-            'class' => 'btn btn-block btn-lg btn-primary', 'name' => 'connect-button', 'tabindex' => '3'
+            'class' => 'btn btn-block btn-lg btn-primary mt-3', 'name' => 'connect-button', 'tabindex' => '3'
         ]) ?>
 
 

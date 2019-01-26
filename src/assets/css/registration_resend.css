@@ -12,8 +12,3 @@
     padding: 15px;
     margin: auto;
 }
-    .form-registration-resend input[type="email"] {
-        margin-bottom: -1px;
-        border-bottom-right-radius: 0;
-        border-bottom-left-radius: 0;
-    }

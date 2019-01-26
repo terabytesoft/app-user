@@ -20,6 +20,10 @@ use yii\bootstrap4\Html;
 $this->title = $this->app->t('user', 'Request new confirmation message');
 $this->params['breadcrumbs'][] = $this->title;
 
+if ($module->floatLabels) {
+    \app\user\assets\FloatingLabelAsset::register($this);
+}
+
 RegistrationResendAsset::register($this);
 
 ?>
@@ -50,7 +54,9 @@ RegistrationResendAsset::register($this);
                 'field' => 'form-label-group',
 			],
             'options' => ['class' => 'form-label-group'],
-            'template' => '{input}{label}{hint}{error}'
+            'template' => ($module->floatLabels) ?
+                '{input}{label}{hint}{error}' :
+                '<div>{label}{input}{hint}{error}</div>',
         ],
         'options' => ['class' => 'form-registration-resend'],
         'validateOnType' => false,
@@ -67,7 +73,7 @@ RegistrationResendAsset::register($this);
         ?>
 
         <?= Html::submitButton($this->app->t('user', 'Continue'), [
-            'class' => 'btn btn-lg btn-primary btn-block', 'name' => 'resend-button', 'tabindex' => '2'
+            'class' => 'btn btn-block btn-lg btn-primary mt-3', 'name' => 'resend-button', 'tabindex' => '2'
         ]) ?>
 
 	<?php ActiveForm::end(); ?>

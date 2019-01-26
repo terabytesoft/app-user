@@ -22,6 +22,10 @@ use yii\bootstrap4\Html;
 $this->title = $this->getApp()->t('user', 'Sign up');
 $this->params['breadcrumbs'][] = $this->title;
 
+if ($module->floatLabels) {
+    \app\user\assets\FloatingLabelAsset::register($this);
+}
+
 RegistrationRegisterAsset::register($this);
 
 ?>
@@ -52,7 +56,9 @@ RegistrationRegisterAsset::register($this);
                 'field' => 'form-label-group',
 			],
 			'options' => ['class' => 'form-label-group'],
-			'template' => '{input}{label}{hint}{error}',
+            'template' => ($module->floatLabels) ?
+                '{input}{label}{hint}{error}' :
+                '<div>{label}{input}{hint}{error}</div>',
 		],
 		'options' => ['class' => 'form-registration'],
 		'validateOnType' => false,
@@ -93,12 +99,12 @@ RegistrationRegisterAsset::register($this);
         <?php endif ?>
 
         <?= Html::submitButton($this->getApp()->t('user', 'Sign up'), [
-            'class' => 'btn-block btn btn-lg btn-primary', 'name' => 'register-button', 'tabindex' => '4'
+            'class' => 'btn-block btn btn-lg btn-primary mt-3', 'name' => 'register-button', 'tabindex' => '4'
         ]) ?>
 
     <?php ActiveForm::end() ?>
 
-    <?= Html::beginTag('p', ['class' => 'text-center']) ?>
+    <?= Html::beginTag('p', ['class' => 'mt-3 text-center']) ?>
         <?= Html::a($this->getApp()->t('user', 'Already registered? Sign in!'), ['/user/security/login']) ?>
 	<?= Html::endTag('p') ?>
 

@@ -21,6 +21,10 @@ use yii\bootstrap4\Html;
 $this->title = $this->app->t('user', 'Recover your password');
 $this->params['breadcrumbs'][] = $this->title;
 
+if ($module->floatLabels) {
+    \app\user\assets\FloatingLabelAsset::register($this);
+}
+
 RecoveryRequestAsset::register($this);
 
 ?>
@@ -51,7 +55,9 @@ RecoveryRequestAsset::register($this);
                 'field' => 'form-label-group',
 			],
 			'options' => ['class' => 'form-label-group'],
-			'template' => '{input}{label}{hint}{error}',
+            'template' => ($module->floatLabels) ?
+                '{input}{label}{hint}{error}' :
+                '<div>{label}{input}{hint}{error}</div>',
 		],
 		'options' => ['class' => 'form-request'],
 		'validateOnType' => false,
@@ -67,7 +73,7 @@ RecoveryRequestAsset::register($this);
 		])->label($this->app->t('user', 'Email')) ?>
 
         <?= Html::submitButton($this->app->t('user', 'Request Password'), [
-            'class' => 'btn btn-block btn-lg btn-primary', 'name' => 'request-button', 'tabindex' => '2'
+            'class' => 'btn btn-block btn-lg btn-primary mt-3', 'name' => 'request-button', 'tabindex' => '2'
         ]) ?>
 
     <?php ActiveForm::end() ?>
