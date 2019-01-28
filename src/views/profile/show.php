@@ -35,7 +35,7 @@ ProfileShowAsset::register($this);
 		    ) ?>
         <?= Html::endTag('p') ?>
 
-        <?= Html::tag('hr', ['class' => 'mb-4']) ?>
+        <?= Html::tag('hr', '', ['class' => 'mb-4']) ?>
 
         <?= Html::beginTag('div', ['class' => 'form-profile-show-body']) ?>
 

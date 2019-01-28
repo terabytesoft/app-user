@@ -39,7 +39,7 @@ RegistrationResendAsset::register($this);
 		) ?>
     <?= Html::endTag('p') ?>
 
-    <?= Html::tag('hr', ['class' => 'mb-4']) ?>
+    <?= Html::tag('hr', '', ['class' => 'mb-4']) ?>
 
     <?php $form = ActiveForm::begin([
         'id' => 'form-registration-resend',

@@ -41,7 +41,7 @@ SecurityLoginAsset::register($this);
 		) ?>
     <?= Html::endTag('p') ?>
 
-    <?= Html::tag('hr', ['class' => 'mb-4']) ?>
+    <?= Html::tag('hr', '', ['class' => 'mb-4']) ?>
 
 	<?php if (!$module->debug) : ?>
 

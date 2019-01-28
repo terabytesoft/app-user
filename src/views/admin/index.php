@@ -255,7 +255,7 @@ $columns = 	[
 
     <?= Html::tag('h2', '<b>' . Html::encode($this->title) . '</b>', ['class' => 'form-admin-index-title']) ?>
 
-    <?= Html::tag('hr', ['class' => 'mb-4']) ?>
+    <?= Html::tag('hr', '', ['class' => 'mb-4']) ?>
 
     <?= $this->render('/admin/_menu') ?>
 
