@@ -29,16 +29,18 @@ RecoveryResetAsset::register($this);
 
 ?>
 
-<?= Html::tag('h2', '<b>' . Html::encode($this->title) . '</b>', ['class' => 'text-center']) ?>
-
 <?= Html::beginTag('div', ['class' => 'form-recovery-reset']) ?>
 
-	<?= Html::beginTag('p', ['class' => 'text-center mb-4']) ?>
+    <?= Html::tag('h2', '<b>' . Html::encode($this->title) . '</b>', ['class' => 'form-recovery-reset-title']) ?>
+
+	<?= Html::beginTag('p', ['class' => 'form-recovery-reset-subtitle']) ?>
         <?= $this->app->t(
 			'user',
 			'Please fill out the following fields to' . '<br/>' . 'Reset your password.'
 		) ?>
     <?= Html::endTag('p') ?>
+
+    <?= Html::tag('hr', ['class' => 'mb-4']) ?>
 
 	<?php $form = ActiveForm::begin([
     	'id' => 'form-recovery-reset',
@@ -59,7 +61,7 @@ RecoveryResetAsset::register($this);
                 '{input}{label}{hint}{error}' :
                 '<div>{label}{input}{hint}{error}</div>',
 		],
-		'options' => ['class' => 'form-reset'],
+		'options' => ['class' => 'forms-recovery-reset'],
 		'validateOnType' => false,
         'validateOnChange' => false,
     ]) ?>

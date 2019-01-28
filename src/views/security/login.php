@@ -30,16 +30,18 @@ SecurityLoginAsset::register($this);
 
 ?>
 
-<?= Html::tag('h2', '<b>' . Html::encode($this->title) . '</b>', ['class' => 'text-center']) ?>
-
 <?= Html::beginTag('div', ['class' => 'form-security-login']) ?>
 
-    <?= Html::beginTag('p', ['class' => 'text-center mb-4']) ?>
+    <?= Html::tag('h2', '<b>' . Html::encode($this->title) . '</b>', ['class' => 'form-security-login-title']) ?>
+
+    <?= Html::beginTag('p', ['class' => 'form-security-login-subtitle']) ?>
         <?= $this->app->t(
 			'user',
 			'Please fill out the following fields to Login.'
 		) ?>
     <?= Html::endTag('p') ?>
+
+    <?= Html::tag('hr', ['class' => 'mb-4']) ?>
 
 	<?php if (!$module->debug) : ?>
 
@@ -62,7 +64,7 @@ SecurityLoginAsset::register($this);
                     '{input}{label}{hint}{error}' :
                     '<div>{label}{input}{hint}{error}</div>',
 			] ,
-			'options' => ['class' => 'form-security-login'],
+			'options' => ['class' => 'forms-security-login'],
 			'validateOnBlur' => false,
 			'validateOnType' => false,
         	'validateOnChange' => false,
@@ -150,6 +152,8 @@ SecurityLoginAsset::register($this);
         ]); ?>
 
     <?php ActiveForm::end() ?>
+
+    <?= Html::tag('hr', ['class' => 'mb-4']) ?>
 
     <?php if ($module->enableConfirmation) : ?>
             <?= Html::beginTag('p', ['class' => 'text-center']) ?>

@@ -39,69 +39,72 @@ if ($this->app->user->isGuest) {
 	<!DOCTYPE html>
 	<?= Html::beginTag('html', ['lang' => $this->app->language]) ?>
 
-	    <?= Html::beginTag('head') ?>
-		    <?= Html::tag('meta', '', ['charset' => $this->app->encoding]) ?>
-		    <?= Html::tag('meta', '', ['http-equiv' => 'X-UA-Compatible', 'content' => 'IE=edge']) ?>
-		    <?= Html::tag('meta', '', ['name' => 'viewport', 'content' => 'width=device-width, initial-scale=1']) ?>
-		    <?= Html::csrfMetaTags() ?>
-		    <?= Html::tag('title', Html::encode($this->title)) ?>
-            <?php $this->head() ?>
-        <?= Html::endTag('head') ?>
+		<?= Html::beginTag('head') ?>
+			<?= Html::tag('meta', '', ['charset' => $this->app->encoding]) ?>
+			<?= Html::tag('meta', '', ['http-equiv' => 'X-UA-Compatible', 'content' => 'IE=edge']) ?>
+			<?= Html::tag('meta', '', ['name' => 'viewport', 'content' => 'width=device-width, initial-scale=1']) ?>
+			<?= Html::csrfMetaTags() ?>
+			<?= Html::tag('title', Html::encode($this->title)) ?>
+			<?php $this->head() ?>
+		<?= Html::endTag('head') ?>
 
 		<?php $this->beginBody() ?>
 
-		    <?= Html::beginTag('body') ?>
+			<?= Html::beginTag('body') ?>
 
-                <?= Html::beginTag('div', ['class' => 'cover d-flex w-100 h-100 p-3 mx-auto flex-column']) ?>
+				<?= Html::beginTag('wrapper', ['class' => 'd-flex flex-column']) ?>
 
-                    <?= Html::beginTag('header', ['class' => 'masthead mb-auto']) ?>
+                    <?php NavBar::begin([
+						'brandLabel' => $this->app->t('user', $this->app->name),
+						'brandUrl' => $this->app->homeUrl,
+						'options' => [
+						    'class' => 'navbar  navbar-dark bg-dark navbar-expand-lg',
+						],
+					]);
 
-                        <?php NavBar::begin([
-				            'brandLabel' => $this->app->t('user', $this->app->name),
-				            'brandUrl' => $this->app->homeUrl,
-			    	        'options' => [
-			                    'class' => 'navbar  navbar-dark navbar-expand-lg',
-					        ],
-                        ]);
+                    echo Nav::widget([
+					    'options' => ['class' => 'navbar-nav float-right ml-auto'],
+					    'items' => $menuItems,
+					]);
 
-                        echo Nav::widget([
-			                'options' => ['class' => 'navbar-nav float-right ml-auto'],
-			                'items' => $menuItems,
-                        ]);
+                    NavBar::end(); ?>
 
-                        NavBar::end(); ?>
+                    <?= Html::beginTag('div', ['class' => 'container flex-fill']) ?>
 
-                    <?= Html::endTag('header') ?>
+                        <?= Alert::widget() ?>
+						<?= $content ?>
 
-                    <?= Html::beginTag('main', ['class' => 'inner cover', 'role' => 'main']) ?>
-                            <?= Alert::widget() ?>
-				            <?= $content ?>
-                    <?= Html::endTag('main') ?>
+					<?= Html::endTag('div') ?>
 
-                    <?= Html::beginTag('footer', ['class' => 'mastfoot mt-auto']) ?>
-                        <?= Html::beginTag('div', ['class' => '']) ?>
-                            <?= Html::beginTag('p', ['class' => 'float-left']) ?>
-                                <?= '&copy; ' . $this->app->t('user', 'My Company') . ' ' . date('Y') ?>
-                            <?= Html::endTag('p') ?>
-                            <?= Html::beginTag('p', ['class' => 'float-right']) ?>
-                                <?= $this->app->t('user', 'Powered by') ?>
-                                <?= Html::a(
-                                    $this->app->t(
-                                        'user',
-                                        'Yii Framework'
-                                    ),
-                                    'http://www.yiiframework.com/',
-                                    ['rel' => 'external']
-                                ) ?>
-                            <?= Html::endTag('p') ?>
-                        <?= Html::endTag('div') ?>
-                    <?= Html::endTag('footer') ?>
+					<?= Html::beginTag('footer', ['class' => 'footer']) ?>
 
-                <?= Html::endTag('div') ?>
+						<?= Html::beginTag('div', ['class' => 'container flex-fill']) ?>
 
-            <?= Html::endTag('body') ?>
+							<?= Html::beginTag('p', ['class' => 'float-left text-white']) ?>
+								<?= '&copy; ' . $this->app->t('user', 'My Company') . ' ' . date('Y') ?>
+							<?= Html::endTag('p') ?>
 
-        <?php $this->endBody() ?>
+							<?= Html::beginTag('p', ['class' => 'float-right text-white']) ?>
+								<?= $this->app->t('user', 'Powered by') ?>
+								<?= Html::a(
+									$this->app->t(
+										'user',
+										'Yii Framework'
+									),
+									'http://www.yiiframework.com/',
+									['rel' => 'external']
+								) ?>
+							<?= Html::endTag('p') ?>
+
+						<?= Html::endTag('div') ?>
+
+					<?= Html::endTag('footer') ?>
+
+				<?= Html::endTag('wrapper') ?>
+
+			<?= Html::endTag('body') ?>
+
+		<?php $this->endBody() ?>
 
 	<?= Html::endTag('html') ?>
 

@@ -29,16 +29,18 @@ RecoveryRequestAsset::register($this);
 
 ?>
 
-<?= Html::tag('h2', '<b>' . Html::encode($this->title) . '</b>', ['class' => 'text-center']) ?>
-
 <?= Html::beginTag('div', ['class' => 'form-recovery-request']) ?>
 
-    <?= Html::beginTag('p', ['class' => 'text-center mb-4']) ?>
+    <?= Html::tag('h2', '<b>' . Html::encode($this->title) . '</b>', ['class' => 'form-recovery-request-title']) ?>
+
+    <?= Html::beginTag('p', ['class' => 'form-recovery-request-subtitle']) ?>
         <?= $this->app->t(
 			'user',
 			'Please fill out the following fields to' . '<br/>' . 'Recover your password.'
 		) ?>
     <?= Html::endTag('p') ?>
+
+    <?= Html::tag('hr', ['class' => 'mb-4']) ?>
 
     <?php $form = ActiveForm::begin([
         'id' => 'form-recovery-request',
@@ -59,7 +61,7 @@ RecoveryRequestAsset::register($this);
                 '{input}{label}{hint}{error}' :
                 '<div>{label}{input}{hint}{error}</div>',
 		],
-		'options' => ['class' => 'form-request'],
+		'options' => ['class' => 'forms-recovery-request'],
 		'validateOnType' => false,
         'validateOnChange' => false,
     ]) ?>

@@ -28,16 +28,18 @@ RegistrationResendAsset::register($this);
 
 ?>
 
-<?= Html::tag('h2', '<b>' . Html::encode($this->title) . '</b>', ['class' => 'text-center']) ?>
-
 <?= Html::beginTag('div', ['class' => 'form-registration-resend']) ?>
 
-    <?= Html::beginTag('p', ['class' => 'text-center mb-4']) ?>
+    <?= Html::tag('h2', '<b>' . Html::encode($this->title) . '</b>', ['class' => 'form-registration-resend-title']) ?>
+
+    <?= Html::beginTag('p', ['class' => 'form-registration-resend-subtitle']) ?>
         <?= $this->app->t(
 			'user',
 			'Please fill out the following fields to Resend.'
 		) ?>
     <?= Html::endTag('p') ?>
+
+    <?= Html::tag('hr', ['class' => 'mb-4']) ?>
 
     <?php $form = ActiveForm::begin([
         'id' => 'form-registration-resend',
@@ -58,7 +60,7 @@ RegistrationResendAsset::register($this);
                 '{input}{label}{hint}{error}' :
                 '<div>{label}{input}{hint}{error}</div>',
         ],
-        'options' => ['class' => 'form-registration-resend'],
+        'options' => ['class' => 'forms-registration-resend'],
         'validateOnType' => false,
         'validateOnChange' => false,
     ]) ?>

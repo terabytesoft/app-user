@@ -1,25 +1,28 @@
 <?php
 
 /**
- * LayoutAdminAsset
+ * ProfileShowAsset
  *
  * assets form
  **/
 
-namespace app\user\tests\assets;
+namespace app\user\assets;
 
 use yii\web\AssetBundle;
 
-class LayoutAdminAsset extends AssetBundle
+class ProfileShowAsset extends AssetBundle
 {
-    public $sourcePath = '@app/user/tests/assets/';
+    public $sourcePath = '@app/user/assets/';
 
 	public $css = [
-		'css/main.css',
+		'css/profile_show.css',
+    ];
+
+	public $js = [
     ];
 
 	public $depends = [
-		\yii\jquery\YiiAsset::class,
+        \assets\fontawesome\dev\css\NpmSolidAsset::class,
 		\yii\bootstrap4\BootstrapAsset::class,
     ];
 

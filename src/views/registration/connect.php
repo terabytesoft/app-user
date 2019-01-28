@@ -30,16 +30,18 @@ RegistrationConnectAsset::register($this);
 
 ?>
 
-<?= Html::tag('h2', '<b>' . Html::encode($this->title) . '</b>', ['class' => 'text-center']) ?>
-
 <?= Html::beginTag('div', ['class' => 'form-registration-connect']) ?>
 
-    <?= Html::beginTag('p', ['class' => 'text-center mb-4']) ?>
+    <?= Html::tag('h2', '<b>' . Html::encode($this->title) . '</b>', ['class' => 'form-registration-connect-title']) ?>
+
+    <?= Html::beginTag('p', ['class' => 'form-registration-connect-subtitle']) ?>
 		<?= $this->getApp()->t(
             'user',
             'In order to finish your registration, we need you to enter following fields'
         ) ?>
     <?= Html::endTag('p') ?>
+
+    <?= Html::tag('hr', ['class' => 'mb-4']) ?>
 
     <?php $form = ActiveForm::begin([
 		'id' => 'form-registration-connect',
@@ -60,7 +62,7 @@ RegistrationConnectAsset::register($this);
                 '{input}{label}{hint}{error}' :
                 '<div>{label}{input}{hint}{error}</div>',
 		],
-		'options' => ['class' => 'form-registration-connect'],
+		'options' => ['class' => 'forms-registration-connect'],
 		'validateOnType' => false,
         'validateOnChange' => false,
     ]) ?>
@@ -93,6 +95,7 @@ RegistrationConnectAsset::register($this);
 
     <?php ActiveForm::end() ?>
 
+    <?= Html::tag('hr', ['class' => 'mb-4']) ?>
 
 	<?= Html::beginTag('p', ['class' => 'text-center']) ?>
         <?= Html::a(

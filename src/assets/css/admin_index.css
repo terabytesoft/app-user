@@ -7,38 +7,31 @@
  * FORMS                                                                                                              *
  **********************************************************************************************************************/
 .grid-font-consolas {
+    background: #EAEDED;
 	font-family: consolas;
 	font-size: 14px;
 }
 
-.w-25p {
-	width: 25px;
+.form-admin-index-title {
+    text-align: center;
 }
 
-.w-30p {
-	width: 30px;
+.form-admin-index-field-block {
+    text-align: center;
 }
 
-.w-40p {
-	width: 40px;
+.form-admin-index-field-confirm {
+    text-align: center;
 }
 
-.w-100p {
-	width: 100px;
+.form-admin-index-field-created_at {
+    white-space: nowrap !important;
 }
 
-.w-130p {
-	width: 130px;
+.form-admin-index-field-last_login_at {
+    white-space: nowrap !important;
 }
 
-.w-150p	{
-	width: 150px;
-}
-
-.w-200p	{
-	width: 200px;
-}
-
-.w-250p	{
-	width: 250px;
+.form-admin-index-field-registration_ip {
+    white-space: nowrap !important;
 }

@@ -30,16 +30,18 @@ RegistrationRegisterAsset::register($this);
 
 ?>
 
-<?= Html::tag('h2', '<b>' . Html::encode($this->title) . '</b>', ['class' => 'text-center']) ?>
-
 <?= Html::beginTag('div', ['class' => 'form-registration-register']) ?>
 
-    <?= Html::beginTag('p', ['class' => 'text-center mb-4']) ?>
+    <?= Html::tag('h2', '<b>' . Html::encode($this->title) . '</b>', ['class' => 'form-registration-register-title']) ?>
+
+    <?= Html::beginTag('p', ['class' => 'form-registration-register-subtitle']) ?>
         <?= $this->app->t(
 			'user',
 			'Please fill out the following fields to Sign up.'
 		) ?>
     <?= Html::endTag('p') ?>
+
+    <?= Html::tag('hr', ['class' => 'mb-4']) ?>
 
     <?php $form = ActiveForm::begin([
         'id' => 'form-registration-register',
@@ -60,7 +62,7 @@ RegistrationRegisterAsset::register($this);
                 '{input}{label}{hint}{error}' :
                 '<div>{label}{input}{hint}{error}</div>',
 		],
-		'options' => ['class' => 'form-registration'],
+		'options' => ['class' => 'forms-registration-register'],
 		'validateOnType' => false,
         'validateOnChange' => false,
     ]) ?>
@@ -103,6 +105,8 @@ RegistrationRegisterAsset::register($this);
         ]) ?>
 
     <?php ActiveForm::end() ?>
+
+    <?= Html::tag('hr', ['class' => 'mb-4']) ?>
 
     <?= Html::beginTag('p', ['class' => 'mt-3 text-center']) ?>
         <?= Html::a($this->getApp()->t('user', 'Already registered? Sign in!'), ['/user/security/login']) ?>

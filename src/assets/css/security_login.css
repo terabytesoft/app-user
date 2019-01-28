@@ -7,8 +7,19 @@
  * FORMS                                                                                                              *
  **********************************************************************************************************************/
  .form-security-login {
-    width: 100%;
+    background: #EAEDED;
+    border-top: 3px solid #494f54;
+    margin: auto;
     max-width: 420px;
     padding: 15px;
-    margin: auto;
+    width: 100%;
+}
+
+.form-security-login-title {
+    text-align: center;
+}
+
+.form-security-login-subtitle {
+    text-align: center;
+    margin-bottom: 1.5rem;
 }

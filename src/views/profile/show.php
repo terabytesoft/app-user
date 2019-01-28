@@ -8,7 +8,7 @@
  * View web application user
  **/
 
-use assets\fontawesome\dev\css\NpmSolidAsset;
+use app\user\assets\ProfileShowAsset;
 use yii\bootstrap4\Html;
 
 /**
@@ -20,95 +20,120 @@ use yii\bootstrap4\Html;
 $this->title = $this->app->t('user', 'Profile Details');
 $this->params['breadcrumbs'][] = empty($profile->name) ? $profile->user->username : $profile->name;
 
-NpmSolidAsset::register($this);
+ProfileShowAsset::register($this);
 
 ?>
 
-<?= Html::beginTag('div', ['class' => 'row']) ?>
+<?= Html::beginTag('div', ['class' => 'form-profile-show']) ?>
 
-	<?= Html::beginTag('div', ['class' => 'col-md-3']) ?>
+        <?= Html::tag('h2', '<b>' . Html::encode($this->title) . '</b>', ['class' => 'form-profile-show-title']) ?>
 
-        <?= Html::img($profile->getAvatarUrl(230), [
-            'class' => 'img-rounded img-responsive',
-            'title' => $profile->name,
-            ]) ?>
+        <?= Html::beginTag('p', ['class' => 'form-profile-show-subtitle']) ?>
+            <?= $this->app->t(
+			    'user',
+			    'Show the details of the User.'
+		    ) ?>
+        <?= Html::endTag('p') ?>
 
-	<?= Html::endTag('div') ?>
+        <?= Html::tag('hr', ['class' => 'mb-4']) ?>
 
-	<?= Html::beginTag(
-		'div',
-		[
-			'id' => 'form-admin-info',
-			'class' => 'col-md-9 d-flex flex-column justify-content-around mb-3',
-		]
-	) ?>
+        <?= Html::beginTag('div', ['class' => 'form-profile-show-body']) ?>
 
-		<?= Html::tag('h2', '<b>' . Html::encode($this->title) . '</b>', ['class' => 'text-center']) ?>
+            <?= Html::img($profile->getAvatarUrl(230), [
+                'class' => 'form-profile-show-img img-responsive img-circle',
+                'title' => $profile->name,
+                ]) ?>
 
-		<strong>
-			<?= Html::encode(
-				empty($profile->name) ?
-				$this->app->t('user', 'Username:') :
-				$this->app->t('user', 'Name:')
-			) ?>
-		</strong>
-		<?= Html::beginTag('div', ['class' => 'alert alert-info flex-fill p-2', 'role' => 'alert']) ?>
+            <?= Html::tag('p', $this->app->t('user', 'Gravatar image'), ['class' => 'text-muted text-center mt-2']); ?>
 
-			<?= Html::encode(empty($profile->name) ? $profile->user->username : $profile->name) ?>
+        <?= Html::endTag('div') ?>
 
-		<?= Html::endTag('div') ?>
+        <?= Html::beginTag('div', ['class' => 'form-profile-show-content']) ?>
 
-		<strong><?= Html::encode($this->app->t('user', 'Email - (Public):')) ?></strong>
-		<?= Html::beginTag('div', ['class' => 'alert alert-info flex-fill p-2', 'role' => 'alert']) ?>
-			<?= Html::tag('i', '', ['class' => 'fas fa-envelope']) ?>
-			<?= Html::a(
-				Html::encode(empty($profile->public_email) ? '(not set)' : 'mailto:' . $profile->public_email),
-				Html::encode(empty($profile->public_email) ? 'javascript:;' : 'mailto:' . $profile->public_email)
-			) ?>
-		<?= Html::endTag('div') ?>
+            <?= Html::beginTag('div', ['class' => 'form-profile-show-fields-title']) ?>
+    	        <?= Html::encode(
+			        empty($profile->name) ?
+			        $this->app->t('user', 'Username:') :
+                    $this->app->t('user', 'Name:')
+                )?>
+            <?= Html::endTag('div') ?>
 
-		<strong><?= Html::encode($this->app->t('user', 'Website:')) ?></strong>
-		<?= Html::beginTag('div', ['class' => 'alert alert-info flex-fill p-2', 'role' => 'alert']) ?>
-            <?= Html::tag('i', '', ['class' => 'fas fa-globe']) ?>
-			<?= Html::a(
-				Html::encode(empty($profile->website) ? '(not set)' : $profile->website),
-				Html::encode(empty($profile->website) ? 'javascript:;' : $profile->website)
-			) ?>
-		<?= Html::endTag('div') ?>
+            <?= Html::beginTag('div', ['class' => 'alert alert-info flex-fill p-2', 'role' => 'alert']) ?>
+                <?= Html::encode(empty($profile->name) ? $profile->user->username : $profile->name) ?>
+            <?= Html::endTag('div') ?>
 
-		<strong><?= Html::encode($this->app->t('user', 'Location:')) ?></strong>
-		<?= Html::beginTag('div', ['class' => 'alert alert-info flex-fill p-2', 'role' => 'alert']) ?>
-			<?= Html::tag('i', '', ['class' => 'fas fa-map-marked']) ?>
-			<?= Html::encode(empty($profile->location) ? '(not set)' : $profile->location) ?>
-		<?= Html::endTag('div') ?>
+            <?= Html::beginTag('div', ['class' => 'form-profile-show-fields-title']) ?>
+                <?= Html::encode($this->app->t('user', 'Email - (Public):')) ?>
+            <?= Html::endTag('div') ?>
 
-		<strong><?= Html::encode($this->app->t('user', 'Time Zone:')) ?></strong>
-		<?= Html::beginTag('div', ['class' => 'alert alert-info flex-fill p-2', 'role' => 'alert']) ?>
-			<?= Html::tag('i', '', ['class' => 'fas fa-user-clock']) ?>
-			<?= Html::encode(empty($profile->timezone) ? '(not set)' : $profile->timezone) ?>
-		<?= Html::endTag('div') ?>
+		    <?= Html::beginTag('div', ['class' => 'alert alert-info flex-fill p-2', 'role' => 'alert']) ?>
+			    <?= Html::tag('i', '', ['class' => 'fas fa-envelope']) ?>
+			    <?= Html::a(
+				    Html::encode(empty($profile->public_email) ? '(not set)' : 'mailto:' . $profile->public_email),
+				    Html::encode(empty($profile->public_email) ? 'javascript:;' : 'mailto:' . $profile->public_email)
+			    ) ?>
+		    <?= Html::endTag('div') ?>
 
-		<strong><?= Html::encode($this->app->t('user', 'Gravatar Email:')) ?></strong>
-		<?= Html::beginTag('div', ['class' => 'alert alert-info flex-fill p-2', 'role' => 'alert']) ?>
-			<?= Html::tag('i', '', ['class' => 'fas fa-image']) ?>
-			<?= Html::encode(empty($profile->gravatar_email) ? '(not set)' : $profile->gravatar_email) ?>
-		<?= Html::endTag('div') ?>
+            <?= Html::beginTag('div', ['class' => 'form-profile-show-fields-title']) ?>
+                <?= Html::encode($this->app->t('user', 'Website:')) ?>
+            <?= Html::endTag('div') ?>
 
-		<strong><?= Html::encode($this->app->t('user', 'Bio:')) ?></strong>
-		<?= Html::beginTag('div', ['class' => 'alert alert-info flex-fill p-2', 'role' => 'alert']) ?>
-			<?= Html::tag('i', '', ['class' => 'fas fa-atlas']) ?>
-			<?= Html::encode(empty($profile->bio) ? '(not set)' : $profile->bio) ?>
-		<?= Html::endTag('div') ?>
+		    <?= Html::beginTag('div', ['class' => 'alert alert-info flex-fill p-2', 'role' => 'alert']) ?>
+                <?= Html::tag('i', '', ['class' => 'fas fa-globe']) ?>
+			    <?= Html::a(
+				    Html::encode(empty($profile->website) ? '(not set)' : $profile->website),
+				    Html::encode(empty($profile->website) ? 'javascript:;' : $profile->website)
+			    ) ?>
+		    <?= Html::endTag('div') ?>
 
-		<strong><?= Html::encode($this->app->t('user', 'Register:')) ?></strong>
-		<?= Html::beginTag('div', ['class' => 'alert alert-info flex-fill p-2', 'role' => 'alert']) ?>
-			<?= Html::tag('i', '', ['class' => 'fas fa-registered']) ?>
-			<?= Html::encode(empty($profile->user->created_at) ?
-				'(not set)' :
-				$this->app->t('user', 'Joined on {0, date}', [$profile->user->created_at]))
-			?>
-		<?= Html::endTag('div') ?>
+            <?= Html::beginTag('div', ['class' => 'form-profile-show-fields-title']) ?>
+                <?= Html::encode($this->app->t('user', 'Location:')) ?>
+            <?= Html::endTag('div') ?>
 
-	<?= Html::endTag('div') ?>
+		    <?= Html::beginTag('div', ['class' => 'alert alert-info flex-fill p-2', 'role' => 'alert']) ?>
+			    <?= Html::tag('i', '', ['class' => 'fas fa-map-marked']) ?>
+			    <?= Html::encode(empty($profile->location) ? '(not set)' : $profile->location) ?>
+		    <?= Html::endTag('div') ?>
+
+            <?= Html::beginTag('div', ['class' => 'form-profile-show-fields-title']) ?>
+                <?= Html::encode($this->app->t('user', 'Time Zone:')) ?>
+            <?= Html::endTag('div') ?>
+
+		    <?= Html::beginTag('div', ['class' => 'alert alert-info flex-fill p-2', 'role' => 'alert']) ?>
+			    <?= Html::tag('i', '', ['class' => 'fas fa-user-clock']) ?>
+			    <?= Html::encode(empty($profile->timezone) ? '(not set)' : $profile->timezone) ?>
+            <?= Html::endTag('div') ?>
+
+            <?= Html::beginTag('div', ['class' => 'form-profile-show-fields-title']) ?>
+                <?= Html::encode($this->app->t('user', 'Gravatar Email:')) ?>
+            <?= Html::endTag('div') ?>
+
+		    <?= Html::beginTag('div', ['class' => 'alert alert-info flex-fill p-2', 'role' => 'alert']) ?>
+		        <?= Html::tag('i', '', ['class' => 'fas fa-image']) ?>
+		        <?= Html::encode(empty($profile->gravatar_email) ? '(not set)' : $profile->gravatar_email) ?>
+		    <?= Html::endTag('div') ?>
+
+            <?= Html::beginTag('div', ['class' => 'form-profile-show-fields-title']) ?>
+                <?= Html::encode($this->app->t('user', 'Bio:')) ?>
+            <?= Html::endTag('div') ?>
+
+            <?= Html::beginTag('div', ['class' => 'alert alert-info flex-fill p-2', 'role' => 'alert']) ?>
+			    <?= Html::tag('i', '', ['class' => 'fas fa-atlas']) ?>
+			    <?= Html::encode(empty($profile->bio) ? '(not set)' : $profile->bio) ?>
+		    <?= Html::endTag('div') ?>
+
+            <?= Html::beginTag('div', ['class' => 'form-profile-show-fields-title']) ?>
+                <?= Html::encode($this->app->t('user', 'Register:')) ?>
+            <?= Html::endTag('div') ?>
+
+		    <?= Html::beginTag('div', ['class' => 'alert alert-info flex-fill p-2', 'role' => 'alert']) ?>
+			    <?= Html::tag('i', '', ['class' => 'fas fa-registered']) ?>
+			    <?= Html::encode(empty($profile->user->created_at) ?
+				    '(not set)' :
+				    $this->app->t('user', 'Joined on {0, date}', [$profile->user->created_at]))
+			    ?>
+            <?= Html::endTag('div') ?>
+
+        <?= Html::endTag('div') ?>
 
 <?php echo Html::endTag('div');

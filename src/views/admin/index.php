@@ -34,26 +34,26 @@ NpmSolidAsset::register($this);
 $columns = 	[
 	[
 		'attribute' => 'id',
-		'contentOptions' => ['class' => 'w-40p'],
-		'filterInputOptions' => ['class' => 'form-control w-40p'],
+		'contentOptions' => ['class' => 'form-admin-index-field-id'],
+		'filterInputOptions' => ['class' => 'form-control'],
 		'label' => $this->app->t('user', 'id'),
 	],
 	[
 		'attribute' => 'username',
-		'contentOptions' => ['class' => 'w-100p'],
-		'filterInputOptions' => ['class' => 'form-control w-100p'],
+		'contentOptions' => ['class' => 'form-admin-index-field-username'],
+		'filterInputOptions' => ['class' => 'form-control'],
 		'label' => $this->app->t('user', 'Username'),
 	],
 	[
 		'attribute' => 'email',
-		'contentOptions' => ['class' => 'w-250p'],
-		'filterInputOptions' => ['class' => 'form-control w-250p'],
+		'contentOptions' => ['class' => 'form-admin-index-field-email'],
+		'filterInputOptions' => ['class' => 'form-control'],
 		'label' => $this->app->t('user', 'Email'),
 	],
 	[
 		'attribute' => 'registration_ip',
-		'contentOptions' => ['class' => 'text-nowrap w-40p'],
-		'filterInputOptions' => ['class' => 'form-control w-40p'],
+		'contentOptions' => ['class' => 'form-admin-index-field-registration_ip'],
+		'filterInputOptions' => ['class' => 'form-control'],
 		'label' => $this->app->t('user', 'Ip'),
 		'value' => function ($model) {
 			return $model->registration_ip === null
@@ -63,8 +63,8 @@ $columns = 	[
 	],
 	[
 		'attribute' => 'created_at',
-		'contentOptions' => ['class' => 'text-nowrap w-130p'],
-		'filterInputOptions' => ['class' => 'form-control w-130p'],
+		'contentOptions' => ['class' => 'form-admin-index-field-created_at'],
+		'filterInputOptions' => ['class' => 'form-control'],
 		'label' => $this->app->t('user', 'Register Time'),
 		'value' => function ($model) {
 			if (extension_loaded('intl')) {
@@ -76,8 +76,8 @@ $columns = 	[
 	],
 	[
 		'attribute' => 'last_login_at',
-		'contentOptions' => ['class' => 'text-nowrap w-130p'],
-		'filterInputOptions' => ['class' => 'form-control w-130p'],
+		'contentOptions' => ['class' => 'form-admin-index-field-last_login_at'],
+		'filterInputOptions' => ['class' => 'form-control'],
 		'label' => $this->app->t('user', 'Last Login'),
 		'value' => function ($model) {
 			if (!$model->last_login_at || $model->last_login_at == 0) {
@@ -90,7 +90,7 @@ $columns = 	[
 		},
 	],
 	[
-		'contentOptions' => ['class' => 'text-center'],
+		'contentOptions' => ['class' => 'form-admin-index-field-confirm'],
 		'format' => 'raw',
 		'header' => $this->app->t('user', 'Confirm'),
 		'value' => function ($model) {
@@ -123,7 +123,7 @@ $columns = 	[
 		'visible' => $this->app->getModule('user')->enableConfirmation,
 	],
 	[
-		'contentOptions' => ['class' => 'text-center'],
+		'contentOptions' => ['class' => 'form-admin-index-field-block'],
 		'format' => 'raw',
 		'header' => $this->app->t('user', 'Block'),
 		'value' => function ($model) {
@@ -242,7 +242,7 @@ $columns = 	[
 				);
 			},
 		],
-		'contentOptions' => ['class' => 'align-items-start d-flex flex-row'],
+		'contentOptions' => ['class' => 'd-flex'],
 		'header' => $this->app->t('user', 'User Actions'),
 		'headerOptions' => ['class' => 'text-center'],
 		'template' => '{delete} {info} {resend-password} {switch} {update}',
@@ -251,35 +251,43 @@ $columns = 	[
 
 ?>
 
-<?= $this->render('/admin/_menu') ?>
+<?= Html::beginTag('div', ['class' => 'form-admin-index']) ?>
 
-<?php echo GridView::widget([
-	'id' => 'form-admin-index',
-	'as clientScript' => [
-		'__class' => \yii\jquery\GridViewClientScript::class,
-	 ],
-	'columns' => $columns,
-	'dataProvider' => $dataProvider,
-	'filterModel' => $searchModel,
-	'layout' => "{items}\n{pager}",
-	'options' => [
-		'class' => 'container-fluid grid-font-consolas '
-	],
-	'pager' => [
-		'activePageCssClass' => 'page-item active',
-		'disabledListItemSubTagOptions' => [
-			'tag' => 'a',
-			'class' => 'page-link'
-		],
-		'disabledPageCssClass' => 'page-item disabled',
-		'linkOptions' => [
-			'class' => 'page-link'
-		],
-		'options' => [
-			'class' => 'pagination float-right ml-auto'
-		],
-	],
-	'tableOptions' => [
-		'class' => 'table table-sm table-hover'
-	],
-]);
+    <?= Html::tag('h2', '<b>' . Html::encode($this->title) . '</b>', ['class' => 'form-admin-index-title']) ?>
+
+    <?= Html::tag('hr', ['class' => 'mb-4']) ?>
+
+    <?= $this->render('/admin/_menu') ?>
+
+    <?php echo GridView::widget([
+	    'id' => 'form-admin-index',
+	    'as clientScript' => [
+		    '__class' => \yii\jquery\GridViewClientScript::class,
+	    ],
+	    'columns' => $columns,
+	    'dataProvider' => $dataProvider,
+	    'filterModel' => $searchModel,
+	    'layout' => "{items}\n{pager}",
+	    'options' => [
+		    'class' => 'grid-font-consolas'
+	    ],
+	    'pager' => [
+		    'activePageCssClass' => 'page-item active',
+		    'disabledListItemSubTagOptions' => [
+			    'tag' => 'a',
+			    'class' => 'page-link'
+		    ],
+		    'disabledPageCssClass' => 'page-item disabled',
+		    'linkOptions' => [
+			    'class' => 'page-link'
+		    ],
+		    'options' => [
+			    'class' => 'pagination float-right ml-auto'
+		    ],
+	    ],
+	    'tableOptions' => [
+		    'class' => 'table table-sm table-hover'
+	    ],
+    ]); ?>
+
+<?php echo Html::endTag('div');
