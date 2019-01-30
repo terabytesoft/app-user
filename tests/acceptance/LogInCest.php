@@ -5,7 +5,7 @@ use yii\helpers\Yii;
 /**
  * LoginCest
  *
- * tests login form
+ * tests acceptance
  **/
 class LogInCest
 {
@@ -69,10 +69,10 @@ class LogInCest
     }
 
     /**
-     * LogInFormEmptyDataTest
+     * LogInEmptyDataTest
      *
      **/
-    public function LogInFormEmptyDataTest(AcceptanceTester $I)
+    public function LogInEmptyDataTest(AcceptanceTester $I)
     {
         $I->amGoingTo('login submit form with empty data.');
         $I->click(Yii::t('user', 'Login'), '.btn');
@@ -100,11 +100,11 @@ class LogInCest
     }
 
     /**
-     * LogInSubmitFormWrongDataTest
+     * LogInSubmitFormSuccessDataTest
      *
-     * @depends SignUpCest:SignUpFormRegisterSuccessDataTest
+     * @depends SignUpCest:SignUpRegisterSuccessDataTest
      **/
-    public function LogInSubmitFormSuccessDataTest(AcceptanceTester $I)
+    public function LogInFormSubmitFormSuccessDataTest(AcceptanceTester $I)
     {
         $I->amGoingTo('login submit form with data success.');
         $I->fillField('#login-form-login', 'admin');

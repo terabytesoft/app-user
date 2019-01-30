@@ -5,7 +5,7 @@ use yii\helpers\Yii;
 /**
  * SingUpCest
  *
- * tests login form
+ * tests acceptance
  **/
 class SignUpCest
 {
@@ -43,10 +43,10 @@ class SignUpCest
     }
 
    /**
-    * SignUpFormRegisterSuccessDataTest
+    * SignUpRegisterSuccessDataTest
     *
     **/
-    public function SignUpFormRegisterSuccessDataTest(AcceptanceTester $I)
+    public function SignUpRegisterSuccessDataTest(AcceptanceTester $I)
     {
         $I->amGoingTo('sign up submit form register with success data.');
         $I->fillField('#register-form-email', 'administrator@example.com');
@@ -60,10 +60,10 @@ class SignUpCest
     }
 
     /**
-     * SignUpFormRegisterEmptyDataTest
+     * SignUpRegisterEmptyDataTest
      *
      **/
-    public function SignUpFormRegisterEmptyDataTest(AcceptanceTester $I)
+    public function SignUpRegisterEmptyDataTest(AcceptanceTester $I)
     {
         $I->amGoingTo('sign up submit form register with empty data.');
         $I->click(Yii::t('user', 'Sign up'), '.btn');
@@ -76,10 +76,10 @@ class SignUpCest
     }
 
    /**
-    * SignUpFormRegisterWrongEmailDataTest
+    * SignUpRegisterWrongEmailDataTest
     *
     **/
-    public function SignUpFormRegisterWrongEmailDataTest(AcceptanceTester $I)
+    public function SignUpRegisterWrongEmailDataTest(AcceptanceTester $I)
     {
         $I->amGoingTo('sign up submit form register with wrong email data.');
         $I->fillField('#register-form-email', 'register');
@@ -93,10 +93,10 @@ class SignUpCest
     }
 
    /**
-    * SignUpFormRegisterEmailExistDataTest
+    * SignUpRegisterEmailExistDataTest
     *
     **/
-    public function SignUpFormRegisterEmailExistDataTest(AcceptanceTester $I)
+    public function SignUpRegisterEmailExistDataTest(AcceptanceTester $I)
     {
         $I->amGoingTo('sign up submit form register with email exist data.');
         $I->fillField('#register-form-email', 'administrator@example.com');
@@ -110,10 +110,10 @@ class SignUpCest
     }
 
    /**
-    * SignUpFormRegisterInvalidUsernameDataTest
+    * SignUpRegisterInvalidUsernameDataTest
     *
     **/
-    public function SignUpFormRegisterInvalidUsernameDataTest(AcceptanceTester $I)
+    public function SignUpRegisterInvalidUsernameDataTest(AcceptanceTester $I)
     {
         $I->amGoingTo('sign up submit form register with invalid username data.');
         $I->fillField('#register-form-email', 'demo@example.com');
@@ -136,10 +136,10 @@ class SignUpCest
     }
 
    /**
-    * SignUpFormRegisterUsernameExistDataTest
+    * SignUpRegisterUsernameExistDataTest
     *
     **/
-    public function SignUpFormRegisterUsernameExistDataTest(AcceptanceTester $I)
+    public function SignUpRegisterUsernameExistDataTest(AcceptanceTester $I)
     {
         $I->amGoingTo('sign up submit form register with exist username data.');
         $I->fillField('#register-form-email', 'demo@example.com');
@@ -153,10 +153,10 @@ class SignUpCest
     }
 
    /**
-    * SignUpFormRegisterInvalidPasswordDataTest
+    * SignUpRegisterInvalidPasswordDataTest
     *
     **/
-    public function SignUpFormRegisterInvalidPasswordDataTest(AcceptanceTester $I)
+    public function SignUpRegisterInvalidPasswordDataTest(AcceptanceTester $I)
     {
         $I->amGoingTo('sign up submit form register with invalid password data.');
         $I->fillField('#register-form-email', 'demo@example.com');
