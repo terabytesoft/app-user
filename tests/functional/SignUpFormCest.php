@@ -50,8 +50,8 @@ class SignUpFormCest
     {
         $I->amGoingTo('sign up submit form register with success data.');
         $I->submitForm('#form-registration-register', [
-            'register-form[email]' => 'administrator@example.com',
-            'register-form[username]' => 'admin',
+            'register-form[email]' => 'demo@example.com',
+            'register-form[username]' => 'demo',
             'register-form[password]' => '123456',
         ]);
         $I->expectTo('see messages register confirm');
