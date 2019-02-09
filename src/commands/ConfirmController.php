@@ -14,7 +14,6 @@ use yii\helpers\Console;
  *
  * Dependencies:
  * @property \app\user\Module module
- * @property \yii\activerecord\ActiveQuery userQuery
  * @property \yii\web\Application app
  **/
 class ConfirmController extends Controller
@@ -28,6 +27,7 @@ class ConfirmController extends Controller
 	 *
      * @param string $id
      * @param Module $module
+     * @property \yii\activerecord\ActiveQuery userQuery
      **/
     public function __construct(string $id, Module $module)
     {
