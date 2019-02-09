@@ -148,7 +148,7 @@ class SecurityController extends Controller
     {
         $account = $this->accountQuery->byClient($client)->one();
 
-        if (!$this->module->enableRegistration && ($account === null || $account->user === null)) {
+        if (!$this->module->accountRegistration && ($account === null || $account->user === null)) {
             $this->app->session->setFlash(
                 'danger',
                 $this->app->t(

@@ -254,7 +254,7 @@ class AdminController extends Controller
      **/
     public function actionSwitch($id = null)
     {
-        if (!$this->module->enableImpersonateUser) {
+        if (!$this->module->accountImpersonateUser) {
             throw new ForbiddenHttpException(
                 $this->app->t(
 					'user',
@@ -268,7 +268,12 @@ class AdminController extends Controller
             $this->app->session->remove(self::ORIGINAL_USER_SESSION_KEY);
         } else {
             if (!$this->app->user->identity->isAdmin) {
-                throw new ForbiddenHttpException;
+                throw new ForbiddenHttpException(
+                    $this->app->t(
+                        'user',
+                        'The user does not have administrator permissions'
+                    )
+                );
             }
             $user = $this->findModel($id);
             $this->app->session->set(self::ORIGINAL_USER_SESSION_KEY, $this->app->user->id);

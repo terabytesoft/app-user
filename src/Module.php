@@ -13,148 +13,198 @@ use yii\base\Model;
  *
  * @property array $modelMap
  **/
-class Module extends BaseModule implements \yii\di\Initiable
+class Module extends BaseModule
 {
     const VERSION = '0.0.1';
 
-    /** email is changed right after user enter's new email address **/
+    /**
+     *
+     * Email is changed right after user enter's new email address
+     **/
     const STRATEGY_INSECURE = 0;
 
-    /** email is changed after user clicks confirmation link sent to his new email address **/
+    /**
+     *
+     * Email is changed after user clicks confirmation link sent to his new email address
+     **/
     const STRATEGY_DEFAULT = 1;
 
-    /** email is changed after user clicks both confirmation links sent to his old and new email addresses **/
+    /**
+     *
+     * Email is changed after user clicks both confirmation links sent to his old and new email addresses
+     **/
     const STRATEGY_SECURE = 2;
 
-    public $accountModel;
-
-    public $accountQuery;
-
-	public $loginForm;
-
-	public $profileModel;
-
-	public $profileQuery;
-
-	public $tokenModel;
-
-	public $tokenQuery;
-
-	public $userModel;
-
-	public $userQuery;
-
-    public $userSearch;
-
-    public $floatLabels = false;
-
-    /** @var bool Whether to show flash messages **/
-    public $enableFlashMessages = true;
-
-    /** @var bool Whether to enable registration **/
-    public $enableRegistration = true;
-
-    /** @var bool Whether to remove password field from registration form **/
-    public $enableGeneratingPassword = false;
-
-    /** @var bool Whether user has to confirm his account **/
-    public $enableConfirmation = true;
-
-    /** @var bool Whether to allow logging in without confirmation **/
-    public $enableUnconfirmedLogin = false;
-
-    /** @var bool Whether to enable password recovery **/
-    public $enablePasswordRecovery = true;
-
-    /** @var bool Whether user can remove his account **/
-    public $enableAccountDelete = false;
-
-    /** @var bool Enable the 'impersonate as another user' function **/
-    public $enableImpersonateUser = true;
-
-    /** @var int Email changing strategy **/
-    public $emailChangeStrategy = self::STRATEGY_DEFAULT;
-
-    /** @var int The time you want the user will be remembered without asking for credentials **/
-    public $rememberFor = 1209600; // two weeks
-
-    /** @var int The time before a confirmation token becomes invalid **/
-    public $confirmWithin = 86400; // 24 hours
-
-    /** @var int The time before a recovery token becomes invalid **/
-    public $recoverWithin = 21600; // 6 hours
-
-    /** @var int Cost parameter used by the Blowfish hash algorithm **/
-    public $cost = 10;
-
-    /** @var array An array of administrator's usernames **/
-    public $admins = [];
-
-    /** @var string The Administrator permission name **/
-    public $adminPermission;
-
-    /** @var array Mailer configuration **/
-    public $mailer = [];
-
-    /** @var array Model map **/
-    public $modelMap = [
-    ];
-
-	/** @var array Form map **/
-    public $formMap = [
-    ];
-
-	/** @var array Query map **/
-    public $queryMap = [
-    ];
-
-	/** @var array Search map **/
-	public $searchMap = [
-	];
+    /**
+     * @var array
+     *
+     * An array of administrator's usernames
+     **/
+    public $accountAdmins = [];
 
     /**
-     * @var string the prefix for user module URL
+     * @var bool
+     *
+     * Whether user can remove his account
+     **/
+    public $accountDelete;
+
+    /**
+     * @var bool
+     *
+     * Whether user has to confirm his account
+     **/
+    public $accountConfirmation;
+
+    /**
+     * @var bool
+     *
+     * Whether to remove password field from registration form
+     **/
+    public $accountGeneratingPassword;
+
+    /**
+     * @var bool
+     *
+     * Enable the 'impersonate as another user' function
+     **/
+    public $accountImpersonateUser;
+
+    /**
+     * @var bool
+     *
+     * Whether to enable password recovery
+     **/
+    public $accountPasswordRecovery;
+
+   /**
+    * @var bool
+    *
+    * Whether to enable registration
+    **/
+    public $accountRegistration;
+
+    /**
+     * @var bool
+     *
+     * Whether to allow logging in without confirmation
+     **/
+    public $accountUnconfirmedLogin;
+
+    /**
+     * @var string
+     *
+     * The Administrator permission name
+     **/
+    public $adminPermission;
+
+    /**
+     * @var int
+     *
+     * Cost parameter used by the Blowfish hash algorithm
+     **/
+    public $cost;
+
+    /**
+     * @var string
+     *
+     * The database connection to use for models in this module
+     **/
+    public $dbConnection = 'db';
+
+    /**
+     * @var bool
+     *
+     * The user module in DEBUG mode? Will be set to false automatically
+     * if the application leaves debug mode
+     **/
+    public $debug;
+
+    /**
+     * @var int
+     *
+     * Email changing strategy
+     **/
+    public $emailChangeStrategy;
+
+    /**
+     * @var array
+     *
+     * Floatting Labels Bootstrap4
+     **/
+    public $floatLabels;
+
+    /**
+     * @var array
+     *
+     * Form Model Overriding Map
+     **/
+    public $formMap = [];
+
+    /**
+     * @var array
+     *
+     * Mailer configuration
+     **/
+    public $mailer = [];
+
+    /**
+     * @var array
+     *
+     * Model Overriding Map
+     **/
+    public $modelMap = [];
+
+    /**
+     * @var array
+     *
+     * Query Overriding Map
+     **/
+    public $queryMap = [];
+
+    /**
+     * @var array
+     *
+     * Search Overriding Map
+     **/
+	public $searchMap = [];
+
+    /**
+     * @var int
+     *
+     * The time you want the user will be remembered without asking for credentials
+     **/
+    public $rememberFor;
+
+    /**
+     * @var int
+     *
+     * The time before a confirmation token becomes invalid
+     **/
+    public $tokenConfirmWithin;
+
+    /**
+     * @var int
+     *
+     * The time before a recovery token becomes invalid
+     **/
+    public $tokenRecoverWithin;
+
+    /**
+     * @var string
+     *
+     * The prefix for user module URL
      *
      * @See [[GroupUrlRule::prefix]]
      */
-    public $urlPrefix = 'user';
+    public $urlPrefix;
 
     /**
-     * @var bool is the user module in DEBUG mode? Will be set to false automatically
-     * if the application leaves debug mode
-     */
-    public $debug = false;
-
-    /** @var string The database connection to use for models in this module **/
-    public $dbConnection = 'db';
-
-    /** @var array The rules to be used in URL management **/
-    public $urlRules = [
-        '<id:\d+>'                               => 'profile/show',
-        '<action:(login|logout|auth)>'           => 'security/<action>',
-        '<action:(register|resend)>'             => 'registration/<action>',
-        'confirm/<id:\d+>/<code:[A-Za-z0-9_-]+>' => 'registration/confirm',
-        'forgot'                                 => 'recovery/request',
-        'recover/<id:\d+>/<code:[A-Za-z0-9_-]+>' => 'recovery/reset',
-        'settings/<action:\w+>'                  => 'settings/<action>'
-	];
-
-    /**
-     * __construct
-	 *
+     * @var array
+     *
+     * The rules to be used in URL management
      **/
-    public function init(): void
-    {
-		$this->accountQuery = $this->getAccountQuery();
-		$this->accountModel = $this->getAccountModel();
-		$this->profileModel = $this->getProfileModel();
-		$this->profileQuery = $this->getProfileQuery();
-		$this->tokenModel = $this->getTokenModel();
-		$this->tokenQuery = $this->getTokenQuery();
-		$this->userModel = $this->getUserModel();
-		$this->userQuery = $this->getUserQuery();
-		$this->userSearch = $this->getUserSearch();
-    }
+    public $urlRules = [];
 
     /**
 	 * getAccountModel

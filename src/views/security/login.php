@@ -132,7 +132,7 @@ SecurityLoginAsset::register($this);
 
         <?= Html::beginTag('div', ['class' => 'text-center mb-4', 'style' => 'color:#999;margin:1em 0']) ?>
 
-        <?php if ($module->enablePasswordRecovery) : ?>
+        <?php if ($module->accountPasswordRecovery) : ?>
 
             <?= $this->app->t(
                 'user',
@@ -155,14 +155,14 @@ SecurityLoginAsset::register($this);
 
     <?= Html::tag('hr', ['class' => 'mb-4']) ?>
 
-    <?php if ($module->enableConfirmation) : ?>
+    <?php if ($module->accountConfirmation) : ?>
             <?= Html::beginTag('p', ['class' => 'text-center']) ?>
                 <?= Html::a($this->app->t('user', 'Didn\'t receive confirmation message?'), ['/user/registration/resend']) ?>
             <?= Html::endTag('p') ?>
 
     <?php endif ?>
 
-    <?php if ($module->enableRegistration) : ?>
+    <?php if ($module->accountRegistration) : ?>
         <?= Html::beginTag('p', ['class' => 'text-center']) ?>
             <?= Html::a($this->app->t('user', 'Don\'t have an account? Sign up!'), ['/user/registration/register']) ?>
         <?= Html::endTag('p') ?>

@@ -68,7 +68,7 @@ class RecoveryController extends Controller
      **/
     public function actionRequest()
     {
-        if (!$this->module->enablePasswordRecovery) {
+        if (!$this->module->accountPasswordRecovery) {
             throw new NotFoundHttpException();
         }
 
@@ -105,6 +105,7 @@ class RecoveryController extends Controller
 
         return $this->render('request', [
             'model' => $model,
+            'module' => $this->module,
         ]);
     }
 
@@ -121,7 +122,7 @@ class RecoveryController extends Controller
      **/
     public function actionReset(int $id, string $code)
     {
-        if (!$this->module->enablePasswordRecovery) {
+        if (!$this->module->accountPasswordRecovery) {
             throw new NotFoundHttpException();
         }
 
@@ -182,6 +183,7 @@ class RecoveryController extends Controller
 
         return $this->render('reset', [
             'model' => $model,
+            'module' => $this->module,
         ]);
     }
 }

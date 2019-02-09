@@ -161,7 +161,7 @@ class SettingsController extends Controller
      *
      * @param int    $id
      * @param string $code
-	 * @throws \yii\web\HttpException
+	 * @throws ForbiddenHttpException
 	 *
      * @return string|\yii\web\Response
      **/
@@ -170,7 +170,9 @@ class SettingsController extends Controller
         $user = $this->userQuery->findUserById($id);
 
         if ($user === null || $this->module->emailChangeStrategy === Module::STRATEGY_INSECURE) {
-            throw new NotFoundHttpException();
+            throw new ForbiddenHttpException(
+                $this->app->t('user', 'The email can not be changed without confirmation')
+            );
         }
 
         $this->trigger(UserEvent::init());
@@ -240,7 +242,7 @@ class SettingsController extends Controller
      **/
     public function actionDelete()
     {
-        if (!$this->module->enableAccountDelete) {
+        if (!$this->module->accountDelete) {
             throw new NotFoundHttpException($this->app->t('user', 'Not found'));
         }
 

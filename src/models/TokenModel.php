@@ -74,10 +74,10 @@ class TokenModel extends ActiveRecord
             case self::TYPE_CONFIRMATION:
             case self::TYPE_CONFIRM_NEW_EMAIL:
             case self::TYPE_CONFIRM_OLD_EMAIL:
-                $expirationTime = $this->module->confirmWithin;
+                $expirationTime = $this->module->tokenConfirmWithin;
                 break;
             case self::TYPE_RECOVERY:
-                $expirationTime = $this->module->recoverWithin;
+                $expirationTime = $this->module->tokenRecoverWithin;
                 break;
             default:
                 throw new \RuntimeException();

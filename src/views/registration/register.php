@@ -88,7 +88,7 @@ RegistrationRegisterAsset::register($this);
 			])->label($this->app->t('user', 'Username'))
 		?>
 
-        <?php if ($module->enableGeneratingPassword === false) : ?>
+        <?php if ($module->accountGeneratingPassword === false) : ?>
 			<?= $form->field($model, 'password')
 				->passwordInput([
 					'oninput' => 'this.setCustomValidity("")',

@@ -9,7 +9,7 @@
 <?= $module->getApp()->t('user', 'Hello') ?>,
 
 <?= $module->getApp()->t('user', 'Your account on {0} has been created', [$module->getApp()->name]) ?>.
-<?php if ($module->enableGeneratingPassword) : ?>
+<?php if ($module->accountGeneratingPassword) : ?>
 <?= $module->getApp()->t('user', 'We have generated a password for you') ?>:
 <?= $user->password ?>
 <?php endif ?>

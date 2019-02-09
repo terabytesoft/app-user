@@ -321,7 +321,7 @@ class UserModel extends ActiveRecord implements IdentityInterface
     /**
      * create
      *
-     * creates new user account. If $this->module::enableGeneratingPassword is set true, this method
+     * creates new user account. If $this->module::accountGeneratingPassword is set true, this method
      * will generate password
      *
      * @return bool
@@ -335,7 +335,7 @@ class UserModel extends ActiveRecord implements IdentityInterface
         $transaction = $this->getDb()->beginTransaction();
 
         try {
-            $this->password = ($this->password === null && $this->module->enableGeneratingPassword) ? $this->_passwordhelper->generate(8) : $this->password;
+            $this->password = ($this->password === null && $this->module->accountGeneratingPassword) ? $this->_passwordhelper->generate(8) : $this->password;
 
             $this->trigger(self::BEFORE_CREATE);
 
@@ -362,7 +362,7 @@ class UserModel extends ActiveRecord implements IdentityInterface
     /**
      * register
      *
-     * this method is used to register new user account. If $this->module::enableConfirmation is set true, this method
+     * this method is used to register new user account. If $this->module::accountConfirmation is set true, this method
      * will generate new confirmation token and use mailer to send it to the user
      *
      * @return bool
@@ -376,8 +376,8 @@ class UserModel extends ActiveRecord implements IdentityInterface
         $transaction = $this->getDb()->beginTransaction();
 
         try {
-            $this->confirmed_at = $this->module->enableConfirmation ? null : time();
-            $this->password     = $this->module->enableGeneratingPassword ? $this->_passwordhelper->generate(8) : $this->password;
+            $this->confirmed_at = $this->module->accountConfirmation ? null : time();
+            $this->password     = $this->module->accountGeneratingPassword ? $this->_passwordhelper->generate(8) : $this->password;
 
             $this->trigger(self::BEFORE_REGISTER);
 
@@ -386,7 +386,7 @@ class UserModel extends ActiveRecord implements IdentityInterface
                 return false;
             }
 
-            if ($this->module->enableConfirmation) {
+            if ($this->module->accountConfirmation) {
                 /** @var Token $token */
                 $token = Yii::createObject([
                     '__class' => TokenModel::class,

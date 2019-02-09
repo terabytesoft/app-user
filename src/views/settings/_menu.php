@@ -44,7 +44,7 @@ if ($this->app->controller->action->id === 'account') {
 			'data-method' => 'post',
 			'data-confirm' => $this->app->t('user', 'Are you sure? There is no going back'),
 		],
-		'visible' => ($this->app->modules['user']->enableAccountDelete),
+		'visible' => ($this->app->modules['user']->accountDelete),
 	];
 }
 

@@ -120,7 +120,7 @@ $columns = 	[
 				);
 			}
 		},
-		'visible' => $this->app->getModule('user')->enableConfirmation,
+		'visible' => $this->app->getModule('user')->accountConfirmation,
 	],
 	[
 		'contentOptions' => ['class' => 'form-admin-index-field-block'],
@@ -211,7 +211,7 @@ $columns = 	[
 				}
 			},
 			'switch' => function ($url, $model) {
-				if ($this->app->getModule('user')->enableImpersonateUser) {
+				if ($this->app->getModule('user')->accountImpersonateUser) {
 					return Html::a(
 						Html::tag('i', '', [
 							'class' => 'fas fa-user-circle fa-stack-2x',

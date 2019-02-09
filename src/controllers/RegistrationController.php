@@ -9,7 +9,7 @@ use app\user\events\ResetPasswordEvent;
 use app\user\events\UserEvent;
 use app\user\traits\AjaxValidationTrait;
 use yii\web\Controller;
-use yii\web\NotFoundHttpException;
+use yii\web\ForbiddenHttpException;
 use yii\web\filters\AccessControl;
 
 /**
@@ -73,17 +73,19 @@ class RegistrationController extends Controller
 	 * actionRegister
 	 *
      * displays the registration page
-     * After successful registration if enableConfirmation is enabled shows info message otherwise
+     * After successful registration if accountConfirmation is enabled shows info message otherwise
      * redirects to home page
      *
-     * @throws \yii\web\HttpException
+     * @throws ForbiddenHttpException
 	 *
 	 * @return string|object
      **/
     public function actionRegister()
     {
-        if (!$this->module->enableRegistration) {
-            throw new NotFoundHttpException();
+        if (!$this->module->accountRegistration) {
+            throw new ForbiddenHttpException(
+                $this->app->t('user', 'Account register is disabled')
+            );
         }
 
         $this->trigger(FormEvent::init());
@@ -172,7 +174,7 @@ class RegistrationController extends Controller
      *
      * @param int    $id
      * @param string $code
-     * @throws \yii\web\HttpException
+     * @throws ForbiddenHttpException
 	 *
      * @return mixed
      **/
@@ -180,8 +182,10 @@ class RegistrationController extends Controller
     {
         $user = $this->userQuery->findUserById($id);
 
-        if ($user === null || $this->module->enableConfirmation === false) {
-            throw new NotFoundHttpException();
+        if ($user === null || $this->module->accountConfirmation === false) {
+            throw new ForbiddenHttpException(
+                $this->app->t('user', 'Account confirm is disabled')
+            );
         }
 
         $this->trigger(UserEvent::init());
@@ -216,14 +220,16 @@ class RegistrationController extends Controller
 	 *
      * displays page where user can request new confirmation token. If resending was successful, displays message
      *
-     * @throws \yii\web\HttpException
+     * @throws ForbiddenHttpException
 	 *
      * @return string|object
      */
     public function actionResend()
     {
-        if ($this->module->enableConfirmation === false) {
-            throw new NotFoundHttpException();
+        if ($this->module->accountConfirmation === false) {
+            throw new ForbiddenHttpException(
+                $this->app->t('user', 'Account confirm is disabled')
+            );
         }
 
         $this->trigger(FormEvent::init());
@@ -259,6 +265,7 @@ class RegistrationController extends Controller
 
         return $this->render('resend', [
             'model' => $model,
+            'module' => $this->module,
         ]);
     }
 }
