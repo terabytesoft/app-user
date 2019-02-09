@@ -113,7 +113,7 @@ class ProfileModel extends ActiveRecord
             return new \DateTimeZone($this->timezone);
         } catch (Exception $e) {
             // Default to application time zone if the user hasn't set their time zone
-            return new \DateTimeZone(Yii::getApp()->timeZone);
+            return new \DateTimeZone($this->app->timeZone);
         }
     }
 

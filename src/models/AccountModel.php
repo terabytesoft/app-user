@@ -179,8 +179,8 @@ class AccountModel extends ActiveRecord
      **/
     public function connectWithUser(BaseClientInterface $client)
     {
-        if (Yii::getApp()->user->isGuest) {
-            Yii::getApp()->session->setFlash('danger', Yii::getApp()->t('user', 'Something went wrong'));
+        if ($this->app->user->isGuest) {
+            $this->app->session->setFlash('danger', $this->app->t('user', 'Something went wrong'));
 
             return;
         }
@@ -188,12 +188,12 @@ class AccountModel extends ActiveRecord
         $account = $this->fetchAccount($client);
 
         if ($account->user === null) {
-            $account->link('user', Yii::getApp()->user->identity);
-            Yii::getApp()->session->setFlash('success', Yii::getApp()->t('user', 'Your account has been connected'));
+            $account->link('user', $this->app->user->identity);
+            $this->app->session->setFlash('success', $this->app->t('user', 'Your account has been connected'));
         } else {
-            Yii::getApp()->session->setFlash(
+            $this->app->session->setFlash(
                 'danger',
-                Yii::getApp()->t('user', 'This account has already been connected to another user')
+                $this->app->t('user', 'This account has already been connected to another user')
             );
         }
     }
