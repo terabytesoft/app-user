@@ -213,9 +213,58 @@ class Module extends BaseModule
 	/**
 	 * @var ActiveQuery
 	 *
+	 * The account query
+	 **/
+	protected $accountQuery;
+
+	/**
+	 * @var Model
+	 *
+	 * The profile model
+	 **/
+	protected $profileModel;
+
+	/**
+	 * @var ActiveQuery
+	 *
+	 * The profile query
+	 **/
+	protected $profileQuery;
+
+	/**
+	 * @var Model
+	 *
+	 * The token model
+	 **/
+	protected $tokenModel;
+
+	/**
+	 * @var ActiveQuery
+	 *
+	 * The token query
+	 **/
+	protected $tokenQuery;
+
+	/**
+	 * @var Model
+	 *
+	 * The user model
+	 **/
+	protected $userModel;
+
+	/**
+	 * @var ActiveQuery
+	 *
 	 * The user query
 	 **/
-	protected $userQuery;
+    protected $userQuery;
+
+	/**
+	 * @var Model
+	 *
+	 * The user search model
+	 **/
+	protected $userSearch;
 
 	/**
 	 * getAccountModel.
