@@ -103,13 +103,13 @@ class LogInFormCest
     /**
      * LogInFormSubmitFormSuccessDataTest
      *
-     * @depends SignUpCest:SignUpFormRegisterSuccessDataTest
+     * @depends SignUpFormCest:SignUpFormRegisterSuccessDataTest
      **/
     public function LogInFormSubmitFormSuccessDataTest(FunctionalTester $I)
     {
         $I->amGoingTo('login submit form with data success.');
         $I->submitForm('#form-security-login', [
-            'login-form[login]' => 'admin',
+            'login-form[login]' => 'demo',
             'login-form[password]' => '123456',
         ]);
         $I->expectTo('link logout');

@@ -17,13 +17,13 @@ return [
 			],
 			'github' => [
 				'__class'      => app\user\clients\GitHub::class,
-				'clientId'     => '7afc666da1ae57442cda',
-				'clientSecret' => '792e32c8a7cc7c91593544543f6fa9a4cb97427e',
+				'clientId'     => 'CLIENT_ID',
+				'clientSecret' => 'CLIENT_SECRET',
 			],
 			'google' => [
 				'__class'      => app\user\clients\Google::class,
-				'clientId'     => '319494364463-nips821b85egq6eqj012s8rttttceu19.apps.googleusercontent.com',
-				'clientSecret' => 'Qid1ro6WKEMLictWk-1p9na6',
+				'clientId'     => 'CLIENT_ID',
+				'clientSecret' => 'CLIENT_SECRET',
 			],
 			'linkedin' => [
 				'__class'        => app\user\clients\LinkedIn::class,
