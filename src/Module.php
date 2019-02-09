@@ -3,11 +3,11 @@
 namespace app\user;
 
 use yii\activerecord\ActiveQuery;
-use yii\base\Module as BaseModule;
 use yii\base\Model;
+use yii\base\Module as BaseModule;
 
 /**
- * Module
+ * Class Module.
  *
  * This is the main module class for the app-user
  *
@@ -15,284 +15,295 @@ use yii\base\Model;
  **/
 class Module extends BaseModule
 {
-    const VERSION = '0.0.1';
+	const VERSION = '0.0.1';
 
-    /**
-     *
-     * Email is changed right after user enter's new email address
-     **/
-    const STRATEGY_INSECURE = 0;
+	/**
+	 * Email is changed right after user enter's new email address.
+	 **/
+	const STRATEGY_INSECURE = 0;
 
-    /**
-     *
-     * Email is changed after user clicks confirmation link sent to his new email address
-     **/
-    const STRATEGY_DEFAULT = 1;
+	/**
+	 * Email is changed after user clicks confirmation link sent to his new email address.
+	 **/
+	const STRATEGY_DEFAULT = 1;
 
-    /**
-     *
-     * Email is changed after user clicks both confirmation links sent to his old and new email addresses
-     **/
-    const STRATEGY_SECURE = 2;
+	/**
+	 * Email is changed after user clicks both confirmation links sent to his old and new email addresses.
+	 **/
+	const STRATEGY_SECURE = 2;
 
-    /**
-     * @var array
-     *
-     * An array of administrator's usernames
-     **/
-    public $accountAdmins = [];
+	/**
+	 * @var array
+	 *
+	 * An array of administrator's usernames
+	 **/
+	public $accountAdmins = [];
 
-    /**
-     * @var bool
-     *
-     * Whether user can remove his account
-     **/
-    public $accountDelete;
+	/**
+	 * @var bool
+	 *
+	 * Whether user can remove his account
+	 **/
+	public $accountDelete;
 
-    /**
-     * @var bool
-     *
-     * Whether user has to confirm his account
-     **/
-    public $accountConfirmation;
+	/**
+	 * @var bool
+	 *
+	 * Whether user has to confirm his account
+	 **/
+	public $accountConfirmation;
 
-    /**
-     * @var bool
-     *
-     * Whether to remove password field from registration form
-     **/
-    public $accountGeneratingPassword;
+	/**
+	 * @var bool
+	 *
+	 * Whether to remove password field from registration form
+	 **/
+	public $accountGeneratingPassword;
 
-    /**
-     * @var bool
-     *
-     * Enable the 'impersonate as another user' function
-     **/
-    public $accountImpersonateUser;
+	/**
+	 * @var bool
+	 *
+	 * Enable the 'impersonate as another user' function
+	 **/
+	public $accountImpersonateUser;
 
-    /**
-     * @var bool
-     *
-     * Whether to enable password recovery
-     **/
-    public $accountPasswordRecovery;
+	/**
+	 * @var bool
+	 *
+	 * Whether to enable password recovery
+	 **/
+	public $accountPasswordRecovery;
 
-   /**
-    * @var bool
-    *
-    * Whether to enable registration
-    **/
-    public $accountRegistration;
+	/**
+	 * @var bool
+	 *
+	 * Whether to enable registration
+	 **/
+	public $accountRegistration;
 
-    /**
-     * @var bool
-     *
-     * Whether to allow logging in without confirmation
-     **/
-    public $accountUnconfirmedLogin;
+	/**
+	 * @var bool
+	 *
+	 * Whether to allow logging in without confirmation
+	 **/
+	public $accountUnconfirmedLogin;
 
-    /**
-     * @var string
-     *
-     * The Administrator permission name
-     **/
-    public $adminPermission;
+	/**
+	 * @var string
+	 *
+	 * The Administrator permission name
+	 **/
+	public $adminPermission;
 
-    /**
-     * @var int
-     *
-     * Cost parameter used by the Blowfish hash algorithm
-     **/
-    public $cost;
+	/**
+	 * @var int
+	 *
+	 * Cost parameter used by the Blowfish hash algorithm
+	 **/
+	public $cost;
 
-    /**
-     * @var string
-     *
-     * The database connection to use for models in this module
-     **/
-    public $dbConnection = 'db';
+	/**
+	 * @var string
+	 *
+	 * The database connection to use for models in this module
+	 **/
+	public $dbConnection = 'db';
 
-    /**
-     * @var bool
-     *
-     * The user module in DEBUG mode? Will be set to false automatically
-     * if the application leaves debug mode
-     **/
-    public $debug;
+	/**
+	 * @var bool
+	 *
+	 * The user module in DEBUG mode? Will be set to false automatically
+	 * if the application leaves debug mode
+	 **/
+	public $debug;
 
-    /**
-     * @var int
-     *
-     * Email changing strategy
-     **/
-    public $emailChangeStrategy;
+	/**
+	 * @var int
+	 *
+	 * Email changing strategy
+	 **/
+	public $emailChangeStrategy;
 
-    /**
-     * @var array
-     *
-     * Floatting Labels Bootstrap4
-     **/
-    public $floatLabels;
+	/**
+	 * @var array
+	 *
+	 * Floatting Labels Bootstrap4
+	 **/
+	public $floatLabels;
 
-    /**
-     * @var array
-     *
-     * Form Model Overriding Map
-     **/
-    public $formMap = [];
+	/**
+	 * @var array
+	 *
+	 * Form Model Overriding Map
+	 **/
+	public $formMap = [];
 
-    /**
-     * @var array
-     *
-     * Mailer configuration
-     **/
-    public $mailer = [];
+	/**
+	 * @var array
+	 *
+	 * Mailer configuration
+	 **/
+	public $mailer = [];
 
-    /**
-     * @var array
-     *
-     * Model Overriding Map
-     **/
-    public $modelMap = [];
+	/**
+	 * @var array
+	 *
+	 * Model Overriding Map
+	 **/
+	public $modelMap = [];
 
-    /**
-     * @var array
-     *
-     * Query Overriding Map
-     **/
-    public $queryMap = [];
+	/**
+	 * @var array
+	 *
+	 * Query Overriding Map
+	 **/
+	public $queryMap = [];
 
-    /**
-     * @var array
-     *
-     * Search Overriding Map
-     **/
+	/**
+	 * @var array
+	 *
+	 * Search Overriding Map
+	 **/
 	public $searchMap = [];
 
-    /**
-     * @var int
-     *
-     * The time you want the user will be remembered without asking for credentials
-     **/
-    public $rememberFor;
-
-    /**
-     * @var int
-     *
-     * The time before a confirmation token becomes invalid
-     **/
-    public $tokenConfirmWithin;
-
-    /**
-     * @var int
-     *
-     * The time before a recovery token becomes invalid
-     **/
-    public $tokenRecoverWithin;
-
-    /**
-     * @var string
-     *
-     * The prefix for user module URL
-     *
-     * @See [[GroupUrlRule::prefix]]
-     */
-    public $urlPrefix;
-
-    /**
-     * @var array
-     *
-     * The rules to be used in URL management
-     **/
-    public $urlRules = [];
-
-    /**
-	 * getAccountModel
+	/**
+	 * @var int
 	 *
-     * @return Model
-     **/
-    public function getAccountModel(): Model
-    {
-		return new $this->modelMap['AccountModel'];
+	 * The time you want the user will be remembered without asking for credentials
+	 **/
+	public $rememberFor;
+
+	/**
+	 * @var int
+	 *
+	 * The time before a confirmation token becomes invalid
+	 **/
+	public $tokenConfirmWithin;
+
+	/**
+	 * @var int
+	 *
+	 * The time before a recovery token becomes invalid
+	 **/
+	public $tokenRecoverWithin;
+
+	/**
+	 * @var string
+	 *
+	 * The prefix for user module URL
+	 *
+	 * @See [[GroupUrlRule::prefix]]
+	 */
+	public $urlPrefix;
+
+	/**
+	 * @var array
+	 *
+	 * The rules to be used in URL management
+	 **/
+	public $urlRules = [];
+
+	/**
+	 * @var Model
+	 *
+	 * The account model
+	 **/
+	protected $accountModel;
+
+	/**
+	 * @var ActiveQuery
+	 *
+	 * The user query
+	 **/
+	protected $userQuery;
+
+	/**
+	 * getAccountModel.
+	 *
+	 * @return Model
+	 **/
+	public function getAccountModel(): Model
+	{
+		return new $this->modelMap['AccountModel']();
 	}
 
-    /**
-	 * getAccountQuery
+	/**
+	 * getAccountQuery.
 	 *
-     * @return ActiveQuery
-     **/
-    public function getAccountQuery(): ActiveQuery
-    {
+	 * @return ActiveQuery
+	 **/
+	public function getAccountQuery(): ActiveQuery
+	{
 		return new $this->queryMap['AccountQuery']($this->modelMap['AccountModel']);
 	}
 
 	/**
-	 * getProfileModel
+	 * getProfileModel.
 	 *
-     * @return Model
-     **/
-    public function getProfileModel(): Model
-    {
-		return new $this->modelMap['ProfileModel'];
+	 * @return Model
+	 **/
+	public function getProfileModel(): Model
+	{
+		return new $this->modelMap['ProfileModel']();
 	}
 
-    /**
-	 * getAccountQuery
+	/**
+	 * getAccountQuery.
 	 *
-     * @return ActiveQuery
-     **/
-    public function getProfileQuery(): ActiveQuery
-    {
+	 * @return ActiveQuery
+	 **/
+	public function getProfileQuery(): ActiveQuery
+	{
 		return new $this->queryMap['ProfileQuery']($this->modelMap['ProfileModel']);
 	}
 
 	/**
-	 * getUserModel
+	 * getUserModel.
 	 *
-     * @return Model
-     **/
-    public function getTokenModel(): Model
-    {
-		return new $this->modelMap['TokenModel'];
+	 * @return Model
+	 **/
+	public function getTokenModel(): Model
+	{
+		return new $this->modelMap['TokenModel']();
 	}
 
-    /**
-	 * getAccountQuery
+	/**
+	 * getAccountQuery.
 	 *
-     * @return ActiveQuery
-     **/
-    public function getTokenQuery(): ActiveQuery
-    {
+	 * @return ActiveQuery
+	 **/
+	public function getTokenQuery(): ActiveQuery
+	{
 		return new $this->queryMap['TokenQuery']($this->modelMap['TokenModel']);
 	}
 
 	/**
-	 * getUserModel
+	 * getUserModel.
 	 *
-     * @return Model
-     **/
-    public function getUserModel(): Model
-    {
-		return new $this->modelMap['UserModel'];
+	 * @return Model
+	 **/
+	public function getUserModel(): Model
+	{
+		return new $this->modelMap['UserModel']();
 	}
 
-    /**
-	 * getUserQuery
+	/**
+	 * Get the value of userQuery.
 	 *
-     * @return ActiveQuery
-     **/
-    public function getUserQuery(): ActiveQuery
-    {
+	 * @return ActiveQuery
+	 **/
+	public function getUserQuery(): ActiveQuery
+	{
 		return new $this->queryMap['UserQuery']($this->modelMap['UserModel']);
 	}
 
 	/**
-	 * getUserSearch
+	 * getUserSearch.
 	 *
-     * @return Model
-     **/
-    public function getUserSearch(): Model
-    {
-		return new $this->searchMap['UserSearch'];
+	 * @return Model
+	 **/
+	public function getUserSearch(): Model
+	{
+		return new $this->searchMap['UserSearch']();
 	}
 }
