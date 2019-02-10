@@ -2,20 +2,20 @@
 
 namespace app\user\controllers;
 
-use app\user\Module;
 use app\user\events\ConnectEvent;
 use app\user\events\FormEvent;
 use app\user\events\ProfileEvent;
 use app\user\events\UserEvent;
+use app\user\Module;
 use app\user\traits\AjaxValidationTrait;
 use yii\web\Controller;
-use yii\web\ForbiddenHttpException;
-use yii\web\NotFoundHttpException;
 use yii\web\filters\AccessControl;
 use yii\web\filters\VerbFilter;
+use yii\web\ForbiddenHttpException;
+use yii\web\NotFoundHttpException;
 
 /**
- * SettingsController
+ * Class SettingsController.
  *
  * SettingsController manages updating user settings (e.g. profile, email and password)
  *
@@ -23,246 +23,223 @@ use yii\web\filters\VerbFilter;
  **/
 class SettingsController extends Controller
 {
-    use AjaxValidationTrait;
+	use AjaxValidationTrait;
 
-    public $defaultAction = 'profile';
-
-	protected $accountQuery;
-	protected $profileModel;
-	protected $profileQuery;
-	protected $settingsForm;
-	protected $userQuery;
-
-    /**
-	 * __construct
-	 *
-     * @param string $id
-     * @param Module $module
-     **/
-    public function __construct(string $id, Module $module)
-    {
-		$this->accountQuery = $module->accountQuery;
-		$this->profileModel = $module->profileModel;
-		$this->profileQuery = $module->profileQuery;
-		$this->settingsForm = new $module->formMap['SettingsForm'];
-		$this->userQuery = $module->userQuery;
-
-		parent::__construct($id, $module);
-    }
+	public $defaultAction = 'profile';
 
 	/**
-     * behaviors
-     *
+	 * behaviors.
+	 *
 	 * @return array behaviors config
 	 **/
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                '__class' => VerbFilter::class,
-                'actions' => [
-                    'disconnect' => ['POST'],
-                    'delete'     => ['POST'],
-                ],
-            ],
-            'access' => [
-                '__class' => AccessControl::class,
-                'rules' => [
-                    [
-                        'allow'   => true,
-                        'actions' => ['profile', 'account', 'networks', 'disconnect', 'delete'],
-                        'roles'   => ['@'],
-                    ],
-                    [
-                        'allow'   => true,
-                        'actions' => ['confirm'],
-                        'roles'   => ['?', '@'],
-                    ],
-                ],
-            ],
-        ];
-    }
+	public function behaviors()
+	{
+		return [
+			'verbs' => [
+				'__class' => VerbFilter::class,
+				'actions' => [
+					'disconnect' => ['POST'],
+					'delete' => ['POST'],
+				],
+			],
+			'access' => [
+				'__class' => AccessControl::class,
+				'rules' => [
+					[
+						'allow' => true,
+						'actions' => ['profile', 'account', 'networks', 'disconnect', 'delete'],
+						'roles' => ['@'],
+					],
+					[
+						'allow' => true,
+						'actions' => ['confirm'],
+						'roles' => ['?', '@'],
+					],
+				],
+			],
+		];
+	}
 
-    /**
-	 * actionProfile
+	/**
+	 * actionProfile.
 	 *
-     * shows profile settings form
-     *
-     * @return string|\yii\web\Response
-     **/
-    public function actionProfile()
-    {
-        $model = $this->profileQuery->findProfileById($this->app->user->identity->getId());
-
-        if ($model === null) {
-            $model = $this->profileModel;
-            $model->link('user', $this->app->user->identity);
-        }
-
-        $this->trigger(ProfileEvent::init());
-        $this->performAjaxValidation($model);
-        $this->trigger(ProfileEvent::beforeProfileUpdate());
-
-        if ($model->load($this->app->request->post()) && $model->save()) {
-            $this->app->getSession()->setFlash(
-                'success',
-                $this->app->t(
-                    'user',
-                    'Your profile has been updated'
-                )
-            );
-            $this->trigger(ProfileEvent::afterProfileUpdate());
-
-            return $this->refresh();
-        }
-
-        return $this->render('profile', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-	 * actionAccount
+	 * shows profile settings form
 	 *
-     * displays page where user can update account settings (username, email or password)
-     *
-     * @return string|\yii\web\Response
-     **/
-    public function actionAccount()
-    {
-        $model = new $this->settingsForm;
+	 * @return string|\yii\web\Response
+	 **/
+	public function actionProfile()
+	{
+		$model = $this->module->profileQuery->findProfileById($this->app->user->identity->getId());
 
-        $this->trigger(FormEvent::init());
-        $this->performAjaxValidation($model);
-        $this->trigger(FormEvent::beforeAccountUpdate());
+		if ($model === null) {
+			$model = $this->module->profileModel;
+			$model->link('user', $this->app->user->identity);
+		}
 
-        if ($model->load($this->app->request->post()) && $model->save()) {
-            $this->app->session->setFlash(
-                'success',
-                $this->app->t(
-                    'user',
-                    'Your account details have been updated'
-                )
-            );
-            $this->trigger(FormEvent::afterAccountUpdate());
+		$this->trigger(ProfileEvent::init());
+		$this->performAjaxValidation($model);
+		$this->trigger(ProfileEvent::beforeProfileUpdate());
 
-            return $this->refresh();
-        }
+		if ($model->load($this->app->request->post()) && $model->save()) {
+			$this->app->getSession()->setFlash(
+				'success',
+				$this->app->t(
+					'user',
+					'Your profile has been updated'
+				)
+			);
+			$this->trigger(ProfileEvent::afterProfileUpdate());
 
-        return $this->render('account', [
-            'model' => $model,
-        ]);
-    }
+			return $this->refresh();
+		}
 
-    /**
-	 * actionConfirm
+		return $this->render('profile', [
+			'model' => $model,
+		]);
+	}
+
+	/**
+	 * actionAccount.
 	 *
-     * attempts changing user's email address
-     *
-     * @param int    $id
-     * @param string $code
+	 * displays page where user can update account settings (username, email or password)
+	 *
+	 * @return string|\yii\web\Response
+	 **/
+	public function actionAccount()
+	{
+		$model = $this->module->settingsForm;
+
+		$this->trigger(FormEvent::init());
+		$this->performAjaxValidation($model);
+		$this->trigger(FormEvent::beforeAccountUpdate());
+
+		if ($model->load($this->app->request->post()) && $model->save()) {
+			$this->app->session->setFlash(
+				'success',
+				$this->app->t(
+					'user',
+					'Your account details have been updated'
+				)
+			);
+			$this->trigger(FormEvent::afterAccountUpdate());
+
+			return $this->refresh();
+		}
+
+		return $this->render('account', [
+			'model' => $model,
+		]);
+	}
+
+	/**
+	 * actionConfirm.
+	 *
+	 * attempts changing user's email address
+	 *
+	 * @param int    $id
+	 * @param string $code
 	 * @throws ForbiddenHttpException
 	 *
-     * @return string|\yii\web\Response
-     **/
-    public function actionConfirm(int $id, string $code)
-    {
-        $user = $this->userQuery->findUserById($id);
+	 * @return string|\yii\web\Response
+	 **/
+	public function actionConfirm(int $id, string $code)
+	{
+		$user = $this->module->userQuery->findUserById($id);
 
-        if ($user === null || $this->module->emailChangeStrategy === Module::STRATEGY_INSECURE) {
-            throw new ForbiddenHttpException(
-                $this->app->t('user', 'The email can not be changed without confirmation')
-            );
-        }
+		if ($user === null || $this->module->emailChangeStrategy === Module::STRATEGY_INSECURE) {
+			throw new ForbiddenHttpException(
+				$this->app->t('user', 'The email can not be changed without confirmation')
+			);
+		}
 
-        $this->trigger(UserEvent::init());
-        $this->trigger(UserEvent::beforeConfirm());
+		$this->trigger(UserEvent::init());
+		$this->trigger(UserEvent::beforeConfirm());
 
-        $user->attemptEmailChange($code);
+		$user->attemptEmailChange($code);
 
-        $this->trigger(UserEvent::afterConfirm());
+		$this->trigger(UserEvent::afterConfirm());
 
-        return $this->redirect(['account']);
-    }
+		return $this->redirect(['account']);
+	}
 
-    /**
-	 * actionNetworks
+	/**
+	 * actionNetworks.
 	 *
-     * displays list of connected network accounts
-     *
-     * @return string
-     **/
-    public function actionNetworks(): string
-    {
-        return $this->render('networks', [
-            'user' => $this->app->user->identity,
-        ]);
-    }
-
-    /**
-	 * actionDisconnect
+	 * displays list of connected network accounts
 	 *
-     * disconnects a network account from user
-     *
-     * @param int $id
-     * @throws \yii\web\NotFoundHttpException
-     * @throws \yii\web\ForbiddenHttpException
+	 * @return string
+	 **/
+	public function actionNetworks(): string
+	{
+		return $this->render('networks', [
+			'user' => $this->app->user->identity,
+		]);
+	}
+
+	/**
+	 * actionDisconnect.
 	 *
-     * @return \yii\web\Response
-     **/
-    public function actionDisconnect(int $id)
-    {
-        $account = $this->accountQuery->byId($id)->one();
-
-        if ($account === null) {
-            throw new NotFoundHttpException();
-        }
-        if ($account->user_id != $this->app->user->id) {
-            throw new ForbiddenHttpException();
-        }
-
-        $this->trigger(ConnectEvent::init());
-        $this->trigger(ConnectEvent::beforeDisconnect());
-
-        $account->delete();
-
-        $this->trigger(ConnectEvent::afterDisconnect());
-
-        return $this->redirect(['networks']);
-    }
-
-    /**
-	 * actionDelete
+	 * disconnects a network account from user
 	 *
-     * completely deletes user's account
-     *
+	 * @param int $id
+	 * @throws \yii\web\NotFoundHttpException
+	 * @throws \yii\web\ForbiddenHttpException
+	 *
+	 * @return \yii\web\Response
+	 **/
+	public function actionDisconnect(int $id)
+	{
+		$account = $this->module->accountQuery->byId($id)->one();
+
+		if ($account === null) {
+			throw new NotFoundHttpException();
+		}
+		if ($account->user_id != $this->app->user->id) {
+			throw new ForbiddenHttpException();
+		}
+
+		$this->trigger(ConnectEvent::init());
+		$this->trigger(ConnectEvent::beforeDisconnect());
+
+		$account->delete();
+
+		$this->trigger(ConnectEvent::afterDisconnect());
+
+		return $this->redirect(['networks']);
+	}
+
+	/**
+	 * actionDelete.
+	 *
+	 * completely deletes user's account
+	 *
 	 * @throws \Exception
 	 *
-     * @return \yii\web\Response
-     **/
-    public function actionDelete()
-    {
-        if (!$this->module->accountDelete) {
-            throw new NotFoundHttpException($this->app->t('user', 'Not found'));
-        }
+	 * @return \yii\web\Response
+	 **/
+	public function actionDelete()
+	{
+		if (!$this->module->accountDelete) {
+			throw new NotFoundHttpException($this->app->t('user', 'Not found'));
+		}
 
-        $user = $this->app->user->identity;
+		$user = $this->app->user->identity;
 
-        $this->trigger(UserEvent::init());
-        $this->app->user->logout();
-        $this->trigger(UserEvent::beforeDelete());
+		$this->trigger(UserEvent::init());
+		$this->app->user->logout();
+		$this->trigger(UserEvent::beforeDelete());
 
-        $user->delete();
+		$user->delete();
 
-        $this->trigger(UserEvent::afterDelete());
-        $this->app->session->setFlash(
-            'info',
-            $this->app->t(
-                'user',
-                'Your account has been completely deleted'
-            )
-        );
+		$this->trigger(UserEvent::afterDelete());
+		$this->app->session->setFlash(
+			'info',
+			$this->app->t(
+				'user',
+				'Your account has been completely deleted'
+			)
+		);
 
-        return $this->goHome();
-    }
+		return $this->goHome();
+	}
 }

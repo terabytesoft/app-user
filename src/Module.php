@@ -220,6 +220,13 @@ class Module extends BaseModule
 	/**
 	 * @var Model
 	 *
+	 * The login form model
+	 **/
+	protected $loginForm;
+
+	/**
+	 * @var Model
+	 *
 	 * The profile model
 	 **/
 	protected $profileModel;
@@ -229,7 +236,28 @@ class Module extends BaseModule
 	 *
 	 * The profile query
 	 **/
-	protected $profileQuery;
+    protected $profileQuery;
+
+	/**
+	 * @var Model
+	 *
+	 * The recovery form model
+	 **/
+    protected $recoveryForm;
+
+	/**
+	 * @var Model
+	 *
+	 * The registration form model
+	 **/
+	protected $registrationForm;
+
+	/**
+	 * @var Model
+	 *
+	 * The resend form model
+	 **/
+	protected $resendForm;
 
 	/**
 	 * @var Model
@@ -257,7 +285,7 @@ class Module extends BaseModule
 	 *
 	 * The user query
 	 **/
-    protected $userQuery;
+	protected $userQuery;
 
 	/**
 	 * @var Model
@@ -267,7 +295,7 @@ class Module extends BaseModule
 	protected $userSearch;
 
 	/**
-	 * getAccountModel.
+	 * Get the value of accountModel.
 	 *
 	 * @return Model
 	 **/
@@ -277,7 +305,7 @@ class Module extends BaseModule
 	}
 
 	/**
-	 * getAccountQuery.
+	 * Get the value of accountQuery.
 	 *
 	 * @return ActiveQuery
 	 **/
@@ -287,7 +315,17 @@ class Module extends BaseModule
 	}
 
 	/**
-	 * getProfileModel.
+	 * Get the value of loginForm.
+	 *
+	 * @return Model
+	 **/
+	public function getLoginForm()
+	{
+		return new $this->formMap['LoginForm']();
+	}
+
+	/**
+	 * Get the value of profileModel.
 	 *
 	 * @return Model
 	 **/
@@ -297,7 +335,7 @@ class Module extends BaseModule
 	}
 
 	/**
-	 * getAccountQuery.
+	 * Get the value of profileQuery.
 	 *
 	 * @return ActiveQuery
 	 **/
@@ -307,7 +345,47 @@ class Module extends BaseModule
 	}
 
 	/**
-	 * getUserModel.
+	 * Get the value of recoveryForm.
+	 *
+	 * @return Model
+	 **/
+	public function getRecoveryForm()
+	{
+		return new $this->formMap['RecoveryForm']();
+	}
+
+	/**
+	 * Get the value of registrationForm.
+	 *
+	 * @return Model
+	 **/
+	public function getRegistrationForm()
+	{
+		return new $this->formMap['RegistrationForm']();
+	}
+
+	/**
+	 * Get the value of resendForm.
+	 *
+	 * @return Model
+	 **/
+	public function getResendForm()
+	{
+		return new $this->formMap['ResendForm']();
+	}
+
+	/**
+	 * Get the value of settingsForm.
+	 *
+	 * @return Model
+	 **/
+	public function getSettingsForm()
+	{
+		return new $this->formMap['SettingsForm']();
+	}
+
+	/**
+	 * Get the value of tokenModel.
 	 *
 	 * @return Model
 	 **/
@@ -317,7 +395,7 @@ class Module extends BaseModule
 	}
 
 	/**
-	 * getAccountQuery.
+	 * Get the value of tokenQuery.
 	 *
 	 * @return ActiveQuery
 	 **/
@@ -327,7 +405,7 @@ class Module extends BaseModule
 	}
 
 	/**
-	 * getUserModel.
+	 * Get the value of userModel.
 	 *
 	 * @return Model
 	 **/
@@ -347,7 +425,7 @@ class Module extends BaseModule
 	}
 
 	/**
-	 * getUserSearch.
+	 * Get the value of userSearch.
 	 *
 	 * @return Model
 	 **/

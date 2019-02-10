@@ -2,16 +2,16 @@
 
 namespace app\user\controllers;
 
-use app\user\Module;
 use app\user\events\FormEvent;
 use app\user\events\ResetPasswordEvent;
+use app\user\Module;
 use app\user\traits\AjaxValidationTrait;
 use yii\web\Controller;
-use yii\web\NotFoundHttpException;
 use yii\web\filters\AccessControl;
+use yii\web\NotFoundHttpException;
 
 /**
- * RecoveryController
+ * Class RecoveryController.
  *
  * Manages password recovery process
  *
@@ -19,67 +19,48 @@ use yii\web\filters\AccessControl;
  **/
 class RecoveryController extends Controller
 {
-    use AjaxValidationTrait;
-
-	protected $tokenModel;
-	protected $tokenQuery;
-	protected $recoveryForm;
-
-    /**
-	 * __construct
-	 *
-     * @param string $id
-     * @param Module $module
-     **/
-    public function __construct(string $id, Module $module)
-    {
-		$this->tokenModel = $module->tokenModel;
-		$this->tokenQuery = $module->tokenQuery;
-		$this->recoveryForm = new $module->formMap['RecoveryForm'];
-
-		parent::__construct($id, $module);
-    }
+	use AjaxValidationTrait;
 
 	/**
-     * behaviors
-     *
+	 * behaviors.
+	 *
 	 * @return array behaviors config
 	 **/
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                '__class' => AccessControl::class,
-                'rules' => [
-                    ['allow' => true, 'actions' => ['request', 'reset'], 'roles' => ['?']],
-                ],
-            ],
-        ];
-    }
+	public function behaviors()
+	{
+		return [
+			'access' => [
+				'__class' => AccessControl::class,
+				'rules' => [
+					['allow' => true, 'actions' => ['request', 'reset'], 'roles' => ['?']],
+				],
+			],
+		];
+	}
 
-    /**
-	 * actionRequest
+	/**
+	 * actionRequest.
 	 *
-     * shows page where user can request password recovery
-     *
-     * @throws \yii\web\NotFoundHttpException
+	 * shows page where user can request password recovery
 	 *
-     * @return string|object
-     **/
-    public function actionRequest()
-    {
-        if (!$this->module->accountPasswordRecovery) {
-            throw new NotFoundHttpException();
-        }
+	 * @throws \yii\web\NotFoundHttpException
+	 *
+	 * @return string|object
+	 **/
+	public function actionRequest()
+	{
+		if (!$this->module->accountPasswordRecovery) {
+			throw new NotFoundHttpException();
+		}
 
-        $model = $this->recoveryForm;
-        $model->scenario = $model::SCENARIO_REQUEST;
+		$model = $this->module->recoveryForm;
+		$model->scenario = $model::SCENARIO_REQUEST;
 
-        $this->trigger(FormEvent::init());
-        $this->performAjaxValidation($model);
-        $this->trigger(FormEvent::beforeRequest());
+		$this->trigger(FormEvent::init());
+		$this->performAjaxValidation($model);
+		$this->trigger(FormEvent::beforeRequest());
 
-        if ($model->load($this->app->request->post()) && $model->validate()) {
+		if ($model->load($this->app->request->post()) && $model->validate()) {
 			if ($model->sendRecoveryMessage()) {
 				$this->trigger(FormEvent::afterRequest());
 
@@ -96,68 +77,68 @@ class RecoveryController extends Controller
 					$this->app->t(
 						'user',
 						'A message has not been sent to your email address. Contact the administrator.'
-                    )
-                );
+					)
+				);
 			}
 
-    		return $this->goHome();
-        }
+			return $this->goHome();
+		}
 
-        return $this->render('request', [
-            'model' => $model,
-            'module' => $this->module,
-        ]);
-    }
+		return $this->render('request', [
+			'model' => $model,
+			'module' => $this->module,
+		]);
+	}
 
-    /**
-	 * actionReset
+	/**
+	 * actionReset.
 	 *
-     * displays page where user can reset password
-     *
-     * @param int $id
-     * @param string $code
-     * @throws \yii\web\NotFoundHttpException
+	 * displays page where user can reset password
 	 *
-     * @return string|object
-     **/
-    public function actionReset(int $id, string $code)
-    {
-        if (!$this->module->accountPasswordRecovery) {
-            throw new NotFoundHttpException();
-        }
+	 * @param int $id
+	 * @param string $code
+	 * @throws \yii\web\NotFoundHttpException
+	 *
+	 * @return string|object
+	 **/
+	public function actionReset(int $id, string $code)
+	{
+		if (!$this->module->accountPasswordRecovery) {
+			throw new NotFoundHttpException();
+		}
 
-        $token = $this->tokenQuery->findToken([
-            'user_id' => $id,
-            'code' => $code,
-            'type' => $this->tokenModel::TYPE_RECOVERY
-        ])->one();
+		$token = $this->module->tokenQuery->findToken([
+			'user_id' => $id,
+			'code' => $code,
+			'type' => $this->module->tokenModel::TYPE_RECOVERY,
+		])->one();
 
-        if (empty($token) || ! $token instanceof \app\user\models\TokenModel) {
-            throw new NotFoundHttpException();
-        }
+		if (empty($token) || !$token instanceof \app\user\models\TokenModel) {
+			throw new NotFoundHttpException();
+		}
 
-        $this->trigger(ResetPasswordEvent::init());
-        $this->trigger(ResetPasswordEvent::beforeTokenValidate());
+		$this->trigger(ResetPasswordEvent::init());
+		$this->trigger(ResetPasswordEvent::beforeTokenValidate());
 
-        if ($token === null || $token->isExpired || $token->user === null) {
-            $this->trigger(ResetPasswordEvent::afterTokenValidate());
+		if ($token === null || $token->isExpired || $token->user === null) {
+			$this->trigger(ResetPasswordEvent::afterTokenValidate());
 
-            $this->app->session->setFlash(
-                'danger',
-                $this->app->t(
-                    'user',
-                    'Recovery link is invalid or expired. Please try requesting a new one.'
-                )
-            );
-        }
+			$this->app->session->setFlash(
+				'danger',
+				$this->app->t(
+					'user',
+					'Recovery link is invalid or expired. Please try requesting a new one.'
+				)
+			);
+		}
 
-		$model = $this->recoveryForm;
+		$model = $this->module->recoveryForm;
 		$model->scenario = $model::SCENARIO_RESET;
 
-        $this->performAjaxValidation($model);
-        $this->trigger(ResetPasswordEvent::beforeReset());
+		$this->performAjaxValidation($model);
+		$this->trigger(ResetPasswordEvent::beforeReset());
 
-        if ($model->load($this->app->getRequest()->post()) && $model->validate()) {
+		if ($model->load($this->app->getRequest()->post()) && $model->validate()) {
 			if ($token->user->resetPassword($model->password)) {
 				$this->trigger(ResetPasswordEvent::afterReset());
 				$this->app->session->setFlash(
@@ -179,11 +160,11 @@ class RecoveryController extends Controller
 			}
 
 			return $this->goHome();
-        }
+		}
 
-        return $this->render('reset', [
-            'model' => $model,
-            'module' => $this->module,
-        ]);
-    }
+		return $this->render('reset', [
+			'model' => $model,
+			'module' => $this->module,
+		]);
+	}
 }

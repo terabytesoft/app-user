@@ -8,11 +8,10 @@ use yii\console\Controller;
 use yii\helpers\Console;
 
 /**
- * CreateController
+ * Class CreateController.
  *
  * Creates new user account
  *
- * Dependencies:
  * @property \app\user\Module module
  * @property \yii\web\Application app
  **/
@@ -20,49 +19,34 @@ class CreateController extends Controller
 {
 	use ModuleTrait;
 
-    protected $userModel;
-
-    /**
-	 * __construct
+	/**
+	 * actionIndex.
 	 *
-     * @param string $id
-     * @param Module $module
-     **/
-    public function __construct(string $id, Module $module)
-    {
-		$this->userModel = $module->userModel;
-
-        parent::__construct($id, $module);
-    }
-
-    /**
-	 * actionIndex
+	 * this command creates new user account. If password is not set, this command will generate new 8-char password
+	 * after saving user to database, this command uses mailer component to send credentials (username and password) to
+	 * user via email
 	 *
-     * this command creates new user account. If password is not set, this command will generate new 8-char password
-     * after saving user to database, this command uses mailer component to send credentials (username and password) to
-     * user via email
-     *
-     * @param string      $email    Email address
-     * @param string      $username Username
-     * @param null|string $password Password (if null it will be generated automatically)
-     **/
-    public function actionIndex($email, $username, $password = null): void
-    {
-		$user = $this->userModel;
+	 * @param string      $email    Email address
+	 * @param string      $username Username
+	 * @param null|string $password Password (if null it will be generated automatically)
+	 **/
+	public function actionIndex($email, $username, $password = null): void
+	{
+		$user = $this->module->userModel;
 		$user->scenario = 'create';
 		$user->email = $email;
 		$user->username = $username;
 		$user->password = $password;
 
-        if ($user->create()) {
-            $this->stdout($this->app->t('user', 'User has been created') . "!\n", Console::FG_GREEN);
-        } else {
-            $this->stdout($this->app->t('user', 'Please fix following errors:') . "\n", Console::FG_RED);
-            foreach ($user->errors as $errors) {
-                foreach ($errors as $error) {
-                    $this->stdout(' - ' . $error . "\n", Console::FG_RED);
-                }
-            }
-        }
-    }
+		if ($user->create()) {
+			$this->stdout($this->app->t('user', 'User has been created') . "!\n", Console::FG_GREEN);
+		} else {
+			$this->stdout($this->app->t('user', 'Please fix following errors:') . "\n", Console::FG_RED);
+			foreach ($user->errors as $errors) {
+				foreach ($errors as $error) {
+					$this->stdout(' - ' . $error . "\n", Console::FG_RED);
+				}
+			}
+		}
+	}
 }

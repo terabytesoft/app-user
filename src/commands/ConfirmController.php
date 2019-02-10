@@ -12,30 +12,12 @@ use yii\helpers\Console;
  *
  * Confirms a user
  *
- * Dependencies:
- *
- * @property Module $module
- * @property \yii\activerecord\ActiveQuery $userQuery
- * @property \yii\web\Application app
+ * @property \app\user\Module $module
+ * @property \yii\web\Application $app
  **/
 class ConfirmController extends Controller
 {
 	use ModuleTrait;
-
-	protected $userQuery;
-
-	/**
-	 * __construct.
-	 *
-	 * @param string $id
-	 * @param Module $module
-	 **/
-	public function __construct(string $id, Module $module)
-	{
-		$this->userQuery = $module->userQuery;
-
-		parent::__construct($id, $module);
-	}
 
 	/**
 	 * actionIndex.
@@ -46,7 +28,7 @@ class ConfirmController extends Controller
 	 **/
 	public function actionIndex($search): void
 	{
-		$user = $this->userQuery->findUserByUsernameOrEmail($search);
+		$user = $this->module->userQuery->findUserByUsernameOrEmail($search);
 		if ($user === null) {
 			$this->stdout($this->app->t('user', 'User is not found') . "\n", Console::FG_RED);
 		} else {
