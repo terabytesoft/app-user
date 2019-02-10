@@ -1,5 +1,6 @@
 paths:
     tests: tests
+    log: tests/log
     output: tests/_output
     data: tests/_data
     support: tests/_support
@@ -13,3 +14,10 @@ settings:
 extensions:
     enabled:
         - Codeception\Extension\RunFailed
+coverage:
+    enabled: true
+    remote: false
+    c3_url: 'http://127.0.0.1:8080'
+    whitelist:
+        include:
+            - src/*
