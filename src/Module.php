@@ -2,6 +2,7 @@
 
 namespace app\user;
 
+use app\user\forms\RecoveryForm;
 use yii\activerecord\ActiveQuery;
 use yii\base\Model;
 use yii\base\Module as BaseModule;
@@ -239,7 +240,7 @@ class Module extends BaseModule
     protected $profileQuery;
 
 	/**
-	 * @var Model
+	 * @var \app\user\forms\RecoveryForm
 	 *
 	 * The recovery form model
 	 **/
@@ -347,9 +348,9 @@ class Module extends BaseModule
 	/**
 	 * Get the value of recoveryForm.
 	 *
-	 * @return Model
+	 * @return \app\user\forms\RecoveryFormn
 	 **/
-	public function getRecoveryForm()
+	public function getRecoveryForm(): RecoveryForm
 	{
 		return new $this->formMap['RecoveryForm']();
 	}
