@@ -23,16 +23,9 @@ install:
   - travis_retry composer update --dev --prefer-dist --no-interaction
 
 before_script:
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-  - chmod +x ./cc-test-reporter
-  - ./cc-test-reporter before-build
   - vendor/bin/codecept build
   - vendor/bin/yii migrate --migrationPath=@app/user/migrations --interactive=0
-  - php -S 127.0.0.1:8080 -t tests/public > /dev/null 2>&1&
+  - php -S localhost:8080 -t tests/public > /dev/null 2>&1&
 
 script:
-  - vendor/bin/codecept run --coverage --coverage-xml --coverage-html -vvv
-
-after_script:
-  - mv tests/_output/coverage.xml clover.xml
-  - ./cc-test-reporter after-build --coverage-input-type clover --id 43087cf5d8eca4e3a4fd511dc8bc7a6f248550d85bfedfae776859e9cf4be0f6 --exit-code $TRAVIS_TEST_RESULT
+  - vendor/bin/codecept run
