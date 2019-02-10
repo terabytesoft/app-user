@@ -125,7 +125,7 @@ class Module extends BaseModule
 	public $emailChangeStrategy;
 
 	/**
-	 * @var array
+	 * @var bool
 	 *
 	 * Floatting Labels Bootstrap4
 	 **/

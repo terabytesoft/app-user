@@ -2,17 +2,16 @@
 
 namespace app\user\models;
 
-use app\models\UserModel;
 use app\user\traits\ModuleTrait;
 use yii\activerecord\ActiveRecord;
 
 /**
- * ProfileModel
+ * Class ProfileModel.
  *
  * This is the model class for table "profile"
  *
  * Database fields:
- * @property integer $user_id
+ * @property int $user_id
  * @property string  $name
  * @property string  $public_email
  * @property string  $gravatar_email
@@ -28,135 +27,136 @@ use yii\activerecord\ActiveRecord;
  **/
 class ProfileModel extends ActiveRecord
 {
-    use ModuleTrait;
+	use ModuleTrait;
 
-    /**
-     * tableName
-     *
-     **/
-    public static function tableName()
-    {
-        return '{{%profile}}';
-    }
-
-    /**
-     * getAvatarUrl
-     *
-     * returns avatar url or null if avatar is not set
-     *
-     * @param int $size
-     * @return null|string
-     **/
-    public function getAvatarUrl($size = 200)
-    {
-        return '//gravatar.com/avatar/' . $this->gravatar_id . '?s=' . $size;
-    }
-
-    /**
-     * getUser
-     *
-     * @return \yii\activerecord\ActiveQueryInterface
-     **/
-    public function getUser()
-    {
-        return $this->hasOne($this->module->modelMap['UserModel'], ['id' => 'user_id']);
-    }
-
-    /**
-	 * rules
+	/**
+	 * tableName.
 	 *
-     * @return array the validation rules
-     **/
-    public function rules(): array
-    {
-        return [
-            'bioString'            => ['bio', 'string'],
-            'timeZoneValidation'   => ['timezone', 'validateTimeZone'],
-            'publicEmailPattern'   => ['public_email', 'email'],
-            'gravatarEmailPattern' => ['gravatar_email', 'email'],
-            'websiteUrl'           => ['website', 'url'],
-            'nameLength'           => ['name', 'string', 'max' => 255],
-            'publicEmailLength'    => ['public_email', 'string', 'max' => 255],
-            'gravatarEmailLength'  => ['gravatar_email', 'string', 'max' => 255],
-            'locationLength'       => ['location', 'string', 'max' => 255],
-            'websiteLength'        => ['website', 'string', 'max' => 255],
-        ];
-    }
+	 **/
+	public static function tableName()
+	{
+		return '{{%profile}}';
+	}
 
-    /**
-     * validateTimeZone
-     *
-     * validates the timezone attribute
-     * Adds an error when the specified time zone doesn't exist
-     *
-     * @param string $attribute the attribute being validated
-     * @param array $params values for the placeholders in the error message
-     **/
-    public function validateTimeZone($attribute, $params)
-    {
-        if (!in_array($this->$attribute, timezone_identifiers_list())) {
-            $this->addError($attribute, $this->app->t('user', 'Time zone is not valid'));
-        }
-    }
+	/**
+	 * getAvatarUrl.
+	 *
+	 * returns avatar url or null if avatar is not set
+	 *
+	 * @param int $size
+	 * @return null|string
+	 **/
+	public function getAvatarUrl($size = 200)
+	{
+		return '//gravatar.com/avatar/' . $this->gravatar_id . '?s=' . $size;
+	}
 
-    /**
-     * getTimeZone
-     *
-     * get the user's time zone
-     * defaults to the application timezone if not specified by the user
-     *
-     * @return \DateTimeZone
-     **/
-    public function getTimeZone()
-    {
-        try {
-            return new \DateTimeZone($this->timezone);
-        } catch (Exception $e) {
-            // Default to application time zone if the user hasn't set their time zone
-            return new \DateTimeZone($this->app->timeZone);
-        }
-    }
+	/**
+	 * getUser.
+	 *
+	 * @return \yii\activerecord\ActiveQueryInterface
+	 **/
+	public function getUser()
+	{
+		return $this->hasOne($this->module->modelMap['UserModel'], ['id' => 'user_id']);
+	}
 
-    /**
-     * setTimeZone
-     *
-     * set the user's time zone
-     *
-     * @param \DateTimeZone $timezone the timezone to save to the user's profile
-     **/
-    public function setTimeZone(\DateTimeZone $timeZone)
-    {
-        $this->setAttribute('timezone', $timeZone->getName());
-    }
+	/**
+	 * rules.
+	 *
+	 * @return array the validation rules
+	 **/
+	public function rules(): array
+	{
+		return [
+			'bioString' => ['bio', 'string'],
+			'timeZoneValidation' => ['timezone', 'validateTimeZone'],
+			'publicEmailPattern' => ['public_email', 'email'],
+			'gravatarEmailPattern' => ['gravatar_email', 'email'],
+			'websiteUrl' => ['website', 'url'],
+			'nameLength' => ['name', 'string', 'max' => 255],
+			'publicEmailLength' => ['public_email', 'string', 'max' => 255],
+			'gravatarEmailLength' => ['gravatar_email', 'string', 'max' => 255],
+			'locationLength' => ['location', 'string', 'max' => 255],
+			'websiteLength' => ['website', 'string', 'max' => 255],
+		];
+	}
 
-    /**
-     * toLocalTime
-     *
-     * converts DateTime to user's local time
-     *
-     * @param \DateTime the datetime to convert
-     * @return \DateTime
-     **/
-    public function toLocalTime(\DateTime $dateTime = null)
-    {
-        if ($dateTime === null) {
-            $dateTime = new \DateTime();
-        }
+	/**
+	 * validateTimeZone.
+	 *
+	 * validates the timezone attribute
+	 * Adds an error when the specified time zone doesn't exist
+	 *
+	 * @param string $attribute the attribute being validated
+	 * @param array $params values for the placeholders in the error message
+	 **/
+	public function validateTimeZone($attribute, $params)
+	{
+		if (!in_array($this->$attribute, timezone_identifiers_list())) {
+			$this->addError($attribute, $this->app->t('user', 'Time zone is not valid'));
+		}
+	}
 
-        return $dateTime->setTimezone($this->getTimeZone());
-    }
+	/**
+	 * getTimeZone.
+	 *
+	 * get the user's time zone
+	 * defaults to the application timezone if not specified by the user
+	 *
+	 * @return \DateTimeZone
+	 **/
+	public function getTimeZone()
+	{
+		try {
+			return new \DateTimeZone($this->timezone);
+		} catch (\Exception $e) {
+			// Default to application time zone if the user hasn't set their time zone
+			return new \DateTimeZone($this->app->timeZone);
+		}
+	}
 
-    /**
-     * beforeSave
-     *
-     * @inheritdoc
-     **/
-    public function beforeSave($insert)
-    {
-        if ($this->isAttributeChanged('gravatar_email')) {
-            $this->setAttribute('gravatar_id', md5(strtolower(trim($this->getAttribute('gravatar_email')))));
-        }
+	/**
+	 * setTimeZone.
+	 *
+	 * set the user's time zone
+	 *
+	 * @param \DateTimeZone $timezone the timezone to save to the user's profile
+	 **/
+	public function setTimeZone(\DateTimeZone $timeZone)
+	{
+		$this->setAttribute('timezone', $timeZone->getName());
+	}
 
-        return parent::beforeSave($insert);
-    }
+	/**
+	 * toLocalTime.
+	 *
+	 * converts DateTime to user's local time
+	 *
+	 * @param \DateTime $dateTime the datetime to convert
+	 *
+	 * @return \DateTime
+	 **/
+	public function toLocalTime(\DateTime $dateTime = null)
+	{
+		if ($dateTime === null) {
+			$dateTime = new \DateTime();
+		}
+
+		return $dateTime->setTimezone($this->getTimeZone());
+	}
+
+	/**
+	 * beforeSave.
+	 *
+	 * @inheritdoc
+	 **/
+	public function beforeSave($insert)
+	{
+		if ($this->isAttributeChanged('gravatar_email')) {
+			$this->setAttribute('gravatar_id', md5(strtolower(trim($this->getAttribute('gravatar_email')))));
+		}
+
+		return parent::beforeSave($insert);
+	}
 }

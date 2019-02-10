@@ -26,9 +26,9 @@ class SiteController extends Controller
     /**
      * actionIndex
      *
-	 * @return array actions config
+	 * @return string actions config
 	 **/
-    public function actionIndex()
+    public function actionIndex(): string
     {
         return $this->render('index');
     }

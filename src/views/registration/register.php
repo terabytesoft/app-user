@@ -106,7 +106,7 @@ RegistrationRegisterAsset::register($this);
 
     <?php ActiveForm::end() ?>
 
-    <?= Html::tag('hr', ['class' => 'mb-4']) ?>
+    <?= Html::tag('hr', '', ['class' => 'mb-4']) ?>
 
     <?= Html::beginTag('p', ['class' => 'mt-3 text-center']) ?>
         <?= Html::a($this->getApp()->t('user', 'Already registered? Sign in!'), ['/user/security/login']) ?>

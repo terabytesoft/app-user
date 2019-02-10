@@ -153,7 +153,7 @@ SecurityLoginAsset::register($this);
 
     <?php ActiveForm::end() ?>
 
-    <?= Html::tag('hr', ['class' => 'mb-4']) ?>
+    <?= Html::tag('hr', '', ['class' => 'mb-4']) ?>
 
     <?php if ($module->accountConfirmation) : ?>
             <?= Html::beginTag('p', ['class' => 'text-center']) ?>
