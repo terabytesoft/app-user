@@ -2,9 +2,20 @@
 
 namespace app\user;
 
+use app\user\forms\LoginForm;
 use app\user\forms\RecoveryForm;
-use yii\activerecord\ActiveQuery;
-use yii\base\Model;
+use app\user\forms\RegistrationForm;
+use app\user\forms\ResendForm;
+use app\user\forms\SettingsForm;
+use app\user\models\AccountModel;
+use app\user\models\ProfileModel;
+use app\user\models\TokenModel;
+use app\user\models\UserModel;
+use app\user\querys\AccountQuery;
+use app\user\querys\ProfileQuery;
+use app\user\querys\TokenQuery;
+use app\user\querys\UserQuery;
+use app\user\searchs\UserSearch;
 use yii\base\Module as BaseModule;
 
 /**
@@ -34,273 +45,280 @@ class Module extends BaseModule
 	const STRATEGY_SECURE = 2;
 
 	/**
-	 * @var array
+	 * An array of administrator's usernames.
 	 *
-	 * An array of administrator's usernames
+	 * @var array
 	 **/
 	public $accountAdmins = [];
 
 	/**
-	 * @var bool
+	 * Whether user can remove his account.
 	 *
-	 * Whether user can remove his account
+	 * @var bool
 	 **/
 	public $accountDelete;
 
 	/**
-	 * @var bool
+	 * Whether user has to confirm his account.
 	 *
-	 * Whether user has to confirm his account
+	 * @var bool
 	 **/
 	public $accountConfirmation;
 
 	/**
-	 * @var bool
+	 * Whether to remove password field from registration form.
 	 *
-	 * Whether to remove password field from registration form
+	 * @var bool
 	 **/
 	public $accountGeneratingPassword;
 
 	/**
-	 * @var bool
+	 * Enable the 'impersonate as another user' function.
 	 *
-	 * Enable the 'impersonate as another user' function
+	 * @var bool
 	 **/
 	public $accountImpersonateUser;
 
 	/**
-	 * @var bool
+	 * Whether to enable password recovery.
 	 *
-	 * Whether to enable password recovery
+	 * @var bool
 	 **/
 	public $accountPasswordRecovery;
 
 	/**
-	 * @var bool
+	 * Whether to enable registration.
 	 *
-	 * Whether to enable registration
+	 * @var bool
 	 **/
 	public $accountRegistration;
 
 	/**
-	 * @var bool
+	 * Whether to allow logging in without confirmation.
 	 *
-	 * Whether to allow logging in without confirmation
+	 * @var bool
 	 **/
 	public $accountUnconfirmedLogin;
 
 	/**
-	 * @var string
+	 * The Administrator permission name.
 	 *
-	 * The Administrator permission name
+	 * @var string
 	 **/
 	public $adminPermission;
 
 	/**
-	 * @var int
+	 * Cost parameter used by the Blowfish hash algorithm.
 	 *
-	 * Cost parameter used by the Blowfish hash algorithm
+	 * @var int
 	 **/
 	public $cost;
 
 	/**
-	 * @var string
+	 * The database connection to use for models in this module.
 	 *
-	 * The database connection to use for models in this module
+	 * @var string
 	 **/
 	public $dbConnection = 'db';
 
 	/**
-	 * @var bool
-	 *
 	 * The user module in DEBUG mode? Will be set to false automatically
-	 * if the application leaves debug mode
+	 * if the application leaves debug mode.
+	 *
+	 * @var bool
 	 **/
 	public $debug;
 
 	/**
-	 * @var int
+	 * Email changing strategy.
 	 *
-	 * Email changing strategy
+	 * @var int
 	 **/
 	public $emailChangeStrategy;
 
 	/**
-	 * @var bool
+	 * Floatting Labels Bootstrap4.
 	 *
-	 * Floatting Labels Bootstrap4
+	 * @var bool
 	 **/
 	public $floatLabels;
 
 	/**
-	 * @var array
+	 * Form Overriding Map.
 	 *
-	 * Form Model Overriding Map
+	 * @var array
 	 **/
 	public $formMap = [];
 
 	/**
-	 * @var array
+	 * Mailer configuration.
 	 *
-	 * Mailer configuration
+	 * @var array
 	 **/
 	public $mailer = [];
 
 	/**
-	 * @var array
+	 * Model Overriding Map.
 	 *
-	 * Model Overriding Map
+	 * @var array
 	 **/
 	public $modelMap = [];
 
 	/**
-	 * @var array
+	 * Query Overriding Map.
 	 *
-	 * Query Overriding Map
+	 * @var array
 	 **/
 	public $queryMap = [];
 
 	/**
-	 * @var array
+	 * Search Overriding Map.
 	 *
-	 * Search Overriding Map
+	 * @var array
 	 **/
 	public $searchMap = [];
 
 	/**
-	 * @var int
+	 * The time you want the user will be remembered without asking for credentials.
 	 *
-	 * The time you want the user will be remembered without asking for credentials
+	 * @var int
 	 **/
 	public $rememberFor;
 
 	/**
-	 * @var int
+	 * The time before a confirmation token becomes invalid.
 	 *
-	 * The time before a confirmation token becomes invalid
+	 * @var int
 	 **/
 	public $tokenConfirmWithin;
 
 	/**
-	 * @var int
+	 * The time before a recovery token becomes invalid.
 	 *
-	 * The time before a recovery token becomes invalid
+	 * @var int
 	 **/
 	public $tokenRecoverWithin;
 
 	/**
-	 * @var string
-	 *
-	 * The prefix for user module URL
+	 * The prefix for user module URL.
 	 *
 	 * @See [[GroupUrlRule::prefix]]
+	 *
+	 * @var string
 	 */
 	public $urlPrefix;
 
 	/**
-	 * @var array
+	 * The rules to be used in URL management.
 	 *
-	 * The rules to be used in URL management
+	 * @var array
 	 **/
 	public $urlRules = [];
 
 	/**
-	 * @var Model
+	 * The value of accountModel.
 	 *
-	 * The account model
+	 * @var \app\user\models\AccountModel
 	 **/
 	protected $accountModel;
 
 	/**
-	 * @var ActiveQuery
+	 * The value of accountQuery.
 	 *
-	 * The account query
+	 * @var \app\user\querys\AccountQuery
 	 **/
 	protected $accountQuery;
 
 	/**
-	 * @var Model
+	 * The value of loginForm.
 	 *
-	 * The login form model
+	 * @var \app\user\forms\LoginForm
 	 **/
 	protected $loginForm;
 
 	/**
-	 * @var Model
+	 * The value of profileModel.
 	 *
-	 * The profile model
+	 * @var \app\user\models\ProfileModel
 	 **/
 	protected $profileModel;
 
 	/**
-	 * @var ActiveQuery
+	 * The value of profileQuery.
 	 *
-	 * The profile query
+	 * @var \app\user\querys\ProfileQuery
 	 **/
-    protected $profileQuery;
+	protected $profileQuery;
 
 	/**
+	 * The value of recoveryForm.
+	 *
 	 * @var \app\user\forms\RecoveryForm
-	 *
-	 * The recovery form model
 	 **/
-    protected $recoveryForm;
+	protected $recoveryForm;
 
 	/**
-	 * @var Model
+	 * The value of registrationForm.
 	 *
-	 * The registration form model
+	 * @var \app\user\forms\RegistrationForm
 	 **/
 	protected $registrationForm;
 
 	/**
-	 * @var Model
+	 * The value of resendForm.
 	 *
-	 * The resend form model
+	 * @var \app\user\forms\ResendForm
 	 **/
 	protected $resendForm;
 
 	/**
-	 * @var Model
+	 * The value of settingsForm.
 	 *
-	 * The token model
+	 * @var \app\user\forms\SettingsForm
+	 **/
+	protected $settingsForm;
+
+	/**
+	 * The value of tokenModel.
+	 *
+	 * @var \app\user\models\TokenModel
 	 **/
 	protected $tokenModel;
 
 	/**
-	 * @var ActiveQuery
+	 * The value of tokenQuery.
 	 *
-	 * The token query
+	 * @var \app\user\querys\TokenQuery
 	 **/
 	protected $tokenQuery;
 
 	/**
-	 * @var Model
+	 * The value of userModel.
 	 *
-	 * The user model
+	 * @var \app\user\models\UserModel
 	 **/
 	protected $userModel;
 
 	/**
-	 * @var ActiveQuery
+	 * The value of userQuery.
 	 *
-	 * The user query
+	 * @var \app\user\querys\UserQuery
 	 **/
 	protected $userQuery;
 
 	/**
-	 * @var Model
+	 * The value of userSearch.
 	 *
-	 * The user search model
+	 * @var \app\user\searchs\UserSearch
 	 **/
 	protected $userSearch;
 
 	/**
 	 * Get the value of accountModel.
 	 *
-	 * @return Model
+	 * @return \app\user\models\AccountModel
 	 **/
-	public function getAccountModel(): Model
+	public function getAccountModel(): AccountModel
 	{
 		return new $this->modelMap['AccountModel']();
 	}
@@ -308,9 +326,9 @@ class Module extends BaseModule
 	/**
 	 * Get the value of accountQuery.
 	 *
-	 * @return ActiveQuery
+	 * @return \app\user\querys\AccountQuery
 	 **/
-	public function getAccountQuery(): ActiveQuery
+	public function getAccountQuery(): AccountQuery
 	{
 		return new $this->queryMap['AccountQuery']($this->modelMap['AccountModel']);
 	}
@@ -318,9 +336,9 @@ class Module extends BaseModule
 	/**
 	 * Get the value of loginForm.
 	 *
-	 * @return Model
+	 * @return \app\user\forms\LoginForm
 	 **/
-	public function getLoginForm()
+	public function getLoginForm(): LoginForm
 	{
 		return new $this->formMap['LoginForm']();
 	}
@@ -328,9 +346,9 @@ class Module extends BaseModule
 	/**
 	 * Get the value of profileModel.
 	 *
-	 * @return Model
+	 * @return \app\user\models\ProfileModel
 	 **/
-	public function getProfileModel(): Model
+	public function getProfileModel(): ProfileModel
 	{
 		return new $this->modelMap['ProfileModel']();
 	}
@@ -338,9 +356,9 @@ class Module extends BaseModule
 	/**
 	 * Get the value of profileQuery.
 	 *
-	 * @return ActiveQuery
+	 * @return \app\user\querys\ProfileQuery
 	 **/
-	public function getProfileQuery(): ActiveQuery
+	public function getProfileQuery(): ProfileQuery
 	{
 		return new $this->queryMap['ProfileQuery']($this->modelMap['ProfileModel']);
 	}
@@ -348,7 +366,7 @@ class Module extends BaseModule
 	/**
 	 * Get the value of recoveryForm.
 	 *
-	 * @return \app\user\forms\RecoveryFormn
+	 * @return \app\user\forms\RecoveryForm
 	 **/
 	public function getRecoveryForm(): RecoveryForm
 	{
@@ -358,9 +376,9 @@ class Module extends BaseModule
 	/**
 	 * Get the value of registrationForm.
 	 *
-	 * @return Model
+	 * @return \app\user\forms\RegistrationForm
 	 **/
-	public function getRegistrationForm()
+	public function getRegistrationForm(): RegistrationForm
 	{
 		return new $this->formMap['RegistrationForm']();
 	}
@@ -368,9 +386,9 @@ class Module extends BaseModule
 	/**
 	 * Get the value of resendForm.
 	 *
-	 * @return Model
+	 * @return \app\user\forms\ResendForm
 	 **/
-	public function getResendForm()
+	public function getResendForm(): ResendForm
 	{
 		return new $this->formMap['ResendForm']();
 	}
@@ -378,9 +396,9 @@ class Module extends BaseModule
 	/**
 	 * Get the value of settingsForm.
 	 *
-	 * @return Model
+	 * @return \app\user\forms\SettingsForm
 	 **/
-	public function getSettingsForm()
+	public function getSettingsForm(): SettingsForm
 	{
 		return new $this->formMap['SettingsForm']();
 	}
@@ -388,9 +406,9 @@ class Module extends BaseModule
 	/**
 	 * Get the value of tokenModel.
 	 *
-	 * @return Model
+	 * @return \app\user\models\TokenModel
 	 **/
-	public function getTokenModel(): Model
+	public function getTokenModel(): TokenModel
 	{
 		return new $this->modelMap['TokenModel']();
 	}
@@ -398,9 +416,9 @@ class Module extends BaseModule
 	/**
 	 * Get the value of tokenQuery.
 	 *
-	 * @return ActiveQuery
+	 * @return \app\user\querys\TokenQuery
 	 **/
-	public function getTokenQuery(): ActiveQuery
+	public function getTokenQuery(): TokenQuery
 	{
 		return new $this->queryMap['TokenQuery']($this->modelMap['TokenModel']);
 	}
@@ -408,9 +426,9 @@ class Module extends BaseModule
 	/**
 	 * Get the value of userModel.
 	 *
-	 * @return Model
+	 * @return \app\user\models\UserModel
 	 **/
-	public function getUserModel(): Model
+	public function getUserModel(): UserModel
 	{
 		return new $this->modelMap['UserModel']();
 	}
@@ -418,9 +436,9 @@ class Module extends BaseModule
 	/**
 	 * Get the value of userQuery.
 	 *
-	 * @return ActiveQuery
+	 * @return \app\user\querys\UserQuery
 	 **/
-	public function getUserQuery(): ActiveQuery
+	public function getUserQuery(): UserQuery
 	{
 		return new $this->queryMap['UserQuery']($this->modelMap['UserModel']);
 	}
@@ -428,9 +446,9 @@ class Module extends BaseModule
 	/**
 	 * Get the value of userSearch.
 	 *
-	 * @return Model
+	 * @return \app\user\searchs\UserSearch
 	 **/
-	public function getUserSearch(): Model
+	public function getUserSearch(): UserSearch
 	{
 		return new $this->searchMap['UserSearch']();
 	}
