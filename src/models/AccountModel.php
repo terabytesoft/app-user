@@ -1,12 +1,12 @@
 <?php
 
-namespace app\user\models;
+namespace TerabyteSoft\Module\User\models;
 
-use app\user\clients\ClientInterface;
-use app\user\models\UserModel;
-use app\user\traits\ModuleTrait;
-use yii\activerecord\ActiveRecord;
-use yii\authclient\ClientInterface as BaseClientInterface;
+use TerabyteSoft\Module\User\Clients\ClientInterface;
+use TerabyteSoft\Module\User\Models\UserModel;
+use TerabyteSoft\Module\User\Traits\ModuleTrait;
+use Yiisoft\ActiveRecord\ActiveRecord;
+use Yiisoft\Yii\AuthClient\ClientInterface as BaseClientInterface;
 use yii\helpers\Json;
 use yii\helpers\Url;
 use yii\helpers\Yii;
@@ -27,12 +27,12 @@ use yii\helpers\Yii;
  * @property string  $username
  *
  * Defined relations:
- * @property \app\user\models\UserModels $user - that this account is connected for social accounts
+ * @property \TerabyteSoft\Module\User\Models\UserModels $user - that this account is connected for social accounts
  *
  * Dependencies:
  * @property \yii\web\Application app
  * @property object container
- * @property \app\user\Module module
+ * @property \TerabyteSoft\Module\User\Module module
  **/
 class AccountModel extends ActiveRecord
 {
@@ -56,7 +56,7 @@ class AccountModel extends ActiveRecord
     /**
      * getUser
      *
-     * @return \yii\activerecord\ActiveQuery
+     * @return \Yiisoft\ActiveRecord\ActiveQuery
      **/
     public function getUser()
     {
@@ -66,7 +66,7 @@ class AccountModel extends ActiveRecord
 	/**
      * getaccountQuery
      *
-     * @return \app\user\querys\AccountQuery
+     * @return \TerabyteSoft\Module\User\Querys\AccountQuery
      *
      * @throws \yii\base\InvalidConfigException
      **/
@@ -78,7 +78,7 @@ class AccountModel extends ActiveRecord
     /**
      * getUserQuery
      *
-     * @return \app\user\querys\UserQuery
+     * @return \TerabyteSoft\Module\User\Querys\UserQuery
      *
      * @throws \yii\base\InvalidConfigException
      **/

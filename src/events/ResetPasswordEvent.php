@@ -1,6 +1,6 @@
 <?php
 
-namespace app\user\events;
+namespace TerabyteSoft\Module\User\Events;
 
 use yii\base\Event;
 
@@ -12,33 +12,33 @@ class ResetPasswordEvent extends Event
 {
 	/**
 	 * event is triggered raised after executing init action
-	 * triggered with app\user\events\ResetPasswordEvent
+	 * triggered with TerabyteSoft\Module\User\Events\ResetPasswordEvent
 	 **/
-	const INIT = 'app\user\events\ResetPasswordEvent::INIT';
+	const INIT = 'TerabyteSoft\Module\User\Events\ResetPasswordEvent::INIT';
 
     /**
      * event is triggered before validating recovery token
-     * triggered with app\user\events\ResetPasswordEvent. May not have $form property set
+     * triggered with TerabyteSoft\Module\User\Events\ResetPasswordEvent. May not have $form property set
      **/
-    const BEFORE_TOKEN_VALIDATE = 'app\user\events\ResetPasswordEvent::BEFORE_TOKEN_VALIDATE';
+    const BEFORE_TOKEN_VALIDATE = 'TerabyteSoft\Module\User\Events\ResetPasswordEvent::BEFORE_TOKEN_VALIDATE';
 
     /**
      * event is triggered after validating recovery token
-     * triggered with app\user\events\ResetPasswordEvent. May not have $form property set
+     * triggered with TerabyteSoft\Module\User\Events\ResetPasswordEvent. May not have $form property set
      **/
-    const AFTER_TOKEN_VALIDATE = 'app\user\events\ResetPasswordEvent::AFTER_TOKEN_VALIDATE';
+    const AFTER_TOKEN_VALIDATE = 'TerabyteSoft\Module\User\Events\ResetPasswordEvent::AFTER_TOKEN_VALIDATE';
 
     /**
      * event is triggered before resetting password
-     * triggered with app\user\events\ResetPasswordEvent
+     * triggered with TerabyteSoft\Module\User\Events\ResetPasswordEvent
      **/
-    const BEFORE_RESET = 'app\user\events\ResetPasswordEvent::BEFORE_RESET';
+    const BEFORE_RESET = 'TerabyteSoft\Module\User\Events\ResetPasswordEvent::BEFORE_RESET';
 
     /**
      * event is triggered after resetting password
-     * triggered with app\user\events\ResetPasswordEvent
+     * triggered with TerabyteSoft\Module\User\Events\ResetPasswordEvent
      **/
-    const AFTER_RESET = 'app\user\events\ResetPasswordEvent::AFTER_RESET';
+    const AFTER_RESET = 'TerabyteSoft\Module\User\Events\ResetPasswordEvent::AFTER_RESET';
 
 	/**
 	 * init

@@ -1,9 +1,9 @@
 <?php
 
-use app\user\migrations\Migration;
-use yii\db\Query;
+use TerabyteSoft\Module\User\Migration\Migration;
+use Yiisoft\Db\Query;
 
-class m141222_110026_update_ip_field extends Migration
+class M141222_110026_update_ip_field extends Migration
 {
     public function up()
     {

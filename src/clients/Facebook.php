@@ -1,8 +1,8 @@
 <?php
 
-namespace app\user\clients;
+namespace TerabyteSoft\Module\User\Clients;
 
-use yii\authclient\clients\Facebook as BaseFacebook;
+use Yiisoft\Yii\AuthClient\Clients\Facebook as BaseFacebook;
 
 /**
  * Facebook

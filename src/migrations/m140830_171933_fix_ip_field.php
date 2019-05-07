@@ -1,8 +1,8 @@
 <?php
 
-use app\user\migrations\Migration;
+use TerabyteSoft\Module\User\Migration\Migration;
 
-class m140830_171933_fix_ip_field extends Migration
+class M140830_171933_fix_ip_field extends Migration
 {
     public function up()
     {

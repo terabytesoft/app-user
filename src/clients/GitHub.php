@@ -1,8 +1,8 @@
 <?php
 
-namespace app\user\clients;
+namespace TerabyteSoft\Module\User\Clients;
 
-use yii\authclient\clients\GitHub as BaseGitHub;
+use Yiisoft\Yii\AuthClient\Clients\GitHub as BaseGitHub;
 
 /**
  * GitHub

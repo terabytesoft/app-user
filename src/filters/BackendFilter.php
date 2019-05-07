@@ -1,6 +1,6 @@
 <?php
 
-namespace app\user\filters;
+namespace TerabyteSoft\Module\User\Filters;
 
 use yii\web\NotFoundHttpException;
 use yii\base\ActionFilter;

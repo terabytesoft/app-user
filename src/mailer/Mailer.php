@@ -1,16 +1,16 @@
 <?php
 
-namespace app\user\mailer;
+namespace TerabyteSoft\Module\User\Mailer;
 
-use app\user\models\TokenModel;
-use app\user\models\UserModel;
-use app\user\traits\ModuleTrait;
+use TerabyteSoft\Module\User\Models\TokenModel;
+use TerabyteSoft\Module\User\Models\UserModel;
+use TerabyteSoft\Module\User\Traits\ModuleTrait;
 use yii\base\Component;
 
 /**
  * Class Mailer.
  *
- * @property \app\user\Module module
+ * @property \TerabyteSoft\Module\User\Module module
  * @property \yii\web\Application app
  **/
 class Mailer extends Component

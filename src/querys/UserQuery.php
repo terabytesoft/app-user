@@ -5,9 +5,9 @@
  *
  **/
 
-namespace app\user\querys;
+namespace TerabyteSoft\Module\User\Querys;
 
-use yii\activerecord\ActiveQuery;
+use Yiisoft\ActiveRecord\ActiveQuery;
 
 class UserQuery extends ActiveQuery
 {
@@ -18,7 +18,7 @@ class UserQuery extends ActiveQuery
      *
      * @param int $id User id to be used on search
      *
-     * @return array|\yii\activerecord\ActiveRecord
+     * @return array|\Yiisoft\ActiveRecord\ActiveRecord
      */
     public function findUserById($id)
     {
@@ -32,7 +32,7 @@ class UserQuery extends ActiveQuery
      *
      * @param string $usernameOrEmail Username or email to be used on search
      *
-     * @return array|\yii\activerecord\ActiveRecord
+     * @return array|\Yiisoft\ActiveRecord\ActiveRecord
      */
     public function findUserByUsernameOrEmail($usernameOrEmail)
     {
@@ -50,7 +50,7 @@ class UserQuery extends ActiveQuery
      *
      * @param string $username Username to be used on search
      *
-     * @return array|\yii\activerecord\ActiveRecord
+     * @return array|\Yiisoft\ActiveRecord\ActiveRecord
      */
     public function findUserByUsername($username)
     {
@@ -64,7 +64,7 @@ class UserQuery extends ActiveQuery
      *
      * @param string $email Email to be used on search
      *
-     * @return array|\yii\activerecord\ActiveRecord
+     * @return array|\Yiisoft\ActiveRecord\ActiveRecord
      */
     public function findUserByEmail($email)
     {

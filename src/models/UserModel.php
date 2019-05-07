@@ -1,15 +1,15 @@
 <?php
 
-namespace app\user\models;
+namespace TerabyteSoft\Module\User\models;
 
-use app\user\helpers\PasswordHelper;
-use app\user\mailer\Mailer;
-use app\user\traits\ModuleTrait;
-use yii\activerecord\ActiveQuery;
-use yii\activerecord\ActiveRecord;
+use TerabyteSoft\Module\User\Helpers\PasswordHelper;
+use TerabyteSoft\Module\User\Mailer\Mailer;
+use TerabyteSoft\Module\User\Traits\ModuleTrait;
+use Yiisoft\ActiveRecord\ActiveQuery;
+use Yiisoft\ActiveRecord\ActiveRecord;
 use yii\behaviors\TimestampBehavior;
 use yii\exceptions\NotSupportedException;
-use yii\helpers\ArrayHelper;
+use Yiisoft\Arrays\ArrayHelper;
 use yii\helpers\Yii;
 use yii\web\Application as WebApplication;
 use yii\web\IdentityInterface;
@@ -42,7 +42,7 @@ use yii\web\IdentityInterface;
  * @property Profile   $profile
  *
  * Dependencies:
- * @property \app\user\Module module
+ * @property \TerabyteSoft\Module\User\Module module
  * @property \yii\web\Application app
  * @property-read Mailer $mailer
  **/
@@ -87,7 +87,7 @@ class UserModel extends ActiveRecord implements IdentityInterface
 	/**
 	 * getUserQuery.
 	 *
-	 * @return \app\user\querys\UserQuery
+	 * @return \TerabyteSoft\Module\User\Querys\UserQuery
 	 *
 	 * @throws \yii\base\InvalidConfigException
 	 **/
@@ -99,7 +99,7 @@ class UserModel extends ActiveRecord implements IdentityInterface
 	/**
 	 * getTokenQuery.
 	 *
-	 * @return \app\user\querys\TokenQuery
+	 * @return \TerabyteSoft\Module\User\Querys\TokenQuery
 	 *
 	 * @throws \yii\base\InvalidConfigException
 	 **/
@@ -198,7 +198,7 @@ class UserModel extends ActiveRecord implements IdentityInterface
 	 *
 	 * @param  string $provider
 	 *
-	 * @return null|\app\user\models\AccountModel
+	 * @return null|\TerabyteSoft\Module\User\Models\AccountModel
 	 **/
 	public function getAccountByProvider($provider)
 	{

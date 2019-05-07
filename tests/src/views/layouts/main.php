@@ -6,12 +6,12 @@
  * Layout web application user
  **/
 
-use app\user\tests\assets\LayoutAdminAsset;
-use app\widgets\Alert;
-use yii\jquery\YiiAsset;
-use yii\bootstrap4\Html;
-use yii\bootstrap4\Nav;
-use yii\bootstrap4\NavBar;
+use TerabyteSoft\Module\User\Tests\Assets\LayoutAdminAsset;
+use TerabyteSoft\Widgets\Alert;
+use \Yiisoft\Yii\JQuery\YiiAsset;
+use Yiisoft\Yii\Bootstrap4\Html;
+use Yiisoft\Yii\Bootstrap4\Nav;
+use Yiisoft\Yii\Bootstrap4\NavBar;
 
 LayoutAdminAsset::register($this);
 

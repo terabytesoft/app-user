@@ -1,10 +1,10 @@
 <?php
 
-namespace app\user\forms;
+namespace TerabyteSoft\Module\User\Forms;
 
-use app\user\mailer\Mailer;
-use app\user\helpers\PasswordHelper;
-use app\user\traits\ModuleTrait;
+use TerabyteSoft\Module\User\Mailer\Mailer;
+use TerabyteSoft\Module\User\Helpers\PasswordHelper;
+use TerabyteSoft\Module\User\Traits\ModuleTrait;
 use yii\base\Model;
 
 /**
@@ -13,10 +13,10 @@ use yii\base\Model;
  * SettingsForm gets user's username, email and password and changes them
  *
  * Defined relations:
- * @property \app\user\models\UserModels $user
+ * @property \TerabyteSoft\Module\User\Models\UserModels $user
  *
  * Dependencies:
- * @property \app\user\Module module
+ * @property \TerabyteSoft\Module\User\Module module
  * @property \yii\web\Application app
  **/
 class SettingsForm extends Model
@@ -115,7 +115,7 @@ class SettingsForm extends Model
      *
      * finds user by [[username]]
      *
-	 * @return \app\user\models\UserModel|null|true
+	 * @return \TerabyteSoft\Module\User\Models\UserModel|null|true
 	 **/
     public function getUser()
     {

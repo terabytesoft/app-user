@@ -1,9 +1,9 @@
 <?php
 
-namespace app\user\clients;
+namespace TerabyteSoft\Module\User\Clients;
 
-use yii\authclient\clients\Twitter as BaseTwitter;
-use yii\helpers\ArrayHelper;
+use Yiisoft\Yii\AuthClient\Clients\Twitter as BaseTwitter;
+use Yiisoft\Arrays\ArrayHelper;
 
 /**
  * Twitter

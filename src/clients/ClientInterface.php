@@ -1,8 +1,8 @@
 <?php
 
-namespace app\user\clients;
+namespace TerabyteSoft\Module\User\Clients;
 
-use yii\authclient\ClientInterface as BaseInterface;
+use Yiisoft\Yii\AuthClient\ClientInterface as BaseInterface;
 
 /**
  * ClientInterface

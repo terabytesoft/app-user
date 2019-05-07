@@ -1,8 +1,8 @@
 <?php
 
-use app\user\migrations\Migration;
+use TerabyteSoft\Module\User\Migration\Migration;
 
-class m141222_135246_alter_username_length extends Migration
+class M141222_135246_alter_username_length extends Migration
 {
     public function up()
     {

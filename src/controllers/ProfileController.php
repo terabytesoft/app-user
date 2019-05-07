@@ -1,8 +1,8 @@
 <?php
 
-namespace app\user\controllers;
+namespace TerabyteSoft\Module\User\Controllers;
 
-use app\user\Module;
+use TerabyteSoft\Module\User\Module;
 use yii\web\Controller;
 use yii\web\filters\AccessControl;
 use yii\web\NotFoundHttpException;

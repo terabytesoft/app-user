@@ -1,8 +1,8 @@
 <?php
 
-use app\user\migrations\Migration;
+use TerabyteSoft\Module\User\Migration\Migration;
 
-class m140209_132017_init extends Migration
+class M140209_132017_init extends Migration
 {
     public function up()
     {

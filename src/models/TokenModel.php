@@ -1,9 +1,9 @@
 <?php
 
-namespace app\user\models;
+namespace TerabyteSoft\Module\User\models;
 
-use app\user\traits\ModuleTrait;
-use yii\activerecord\ActiveRecord;
+use TerabyteSoft\Module\User\Traits\ModuleTrait;
+use Yiisoft\ActiveRecord\ActiveRecord;
 use yii\helpers\Url;
 
 /**
@@ -18,7 +18,7 @@ use yii\helpers\Url;
  * @property bool    $isExpired
  *
  * Dependencies:
- * @property \app\user\Module module
+ * @property \TerabyteSoft\Module\User\Module module
  * @property \yii\web\Application app
  */
 class TokenModel extends ActiveRecord
@@ -33,7 +33,7 @@ class TokenModel extends ActiveRecord
     /**
 	 * getUser
 	 *
-     * @return \yii\activerecord\ActiveQuery
+     * @return \Yiisoft\ActiveRecord\ActiveQuery
      */
     public function getUser()
     {

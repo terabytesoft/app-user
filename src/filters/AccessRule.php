@@ -1,14 +1,14 @@
 <?php
 
-namespace app\user\filters;
+namespace TerabyteSoft\Module\User\Filters;
 
-use app\user\traits\ModuleTrait;
+use TerabyteSoft\Module\User\Traits\ModuleTrait;
 
 /**
  * AccessRule
  *
  * Dependencies:
- * @property \app\user\Module module
+ * @property \TerabyteSoft\Module\User\Module module
  * @property \yii\web\Application app
  **/
 class AccessRule extends \yii\web\filters\AccessRule

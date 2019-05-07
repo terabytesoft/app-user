@@ -1,6 +1,6 @@
 <?php
 
-namespace app\user\events;
+namespace TerabyteSoft\Module\User\Events;
 
 use yii\base\Event;
 
@@ -12,33 +12,33 @@ class AuthEvent extends Event
 {
 	/**
 	 * event is triggered raised after executing init action
-	 * triggered with app\user\events\AuthEvent
+	 * triggered with TerabyteSoft\Module\User\Events\AuthEvent
 	 **/
-    const INIT = 'app\user\events\AuthEvent::INIT';
+    const INIT = 'TerabyteSoft\Module\User\Events\AuthEvent::INIT';
 
     /**
      * event is triggered before authenticating user via social network
-     * triggered with app\user\events\AuthEvent
+     * triggered with TerabyteSoft\Module\User\Events\AuthEvent
      **/
-    const BEFORE_AUTHENTICATE = 'app\user\events\AuthEvent::BEFORE_AUTHENTICATE';
+    const BEFORE_AUTHENTICATE = 'TerabyteSoft\Module\User\Events\AuthEvent::BEFORE_AUTHENTICATE';
 
     /**
      * event is triggered after authenticating user via social network
-     * triggered with app\user\events\AuthEvent
+     * triggered with TerabyteSoft\Module\User\Events\AuthEvent
      **/
-    const AFTER_AUTHENTICATE = 'app\user\events\AuthEvent::AFTER_AUTHENTICATE';
+    const AFTER_AUTHENTICATE = 'TerabyteSoft\Module\User\Events\AuthEvent::AFTER_AUTHENTICATE';
 
     /**
      * event is triggered before connecting social network account to user
-     * triggered with app\user\events\AuthEvent
+     * triggered with TerabyteSoft\Module\User\Events\AuthEvent
      **/
-    const BEFORE_CONNECT = 'app\user\events\AuthEvent::BEFORE_CONNECT';
+    const BEFORE_CONNECT = 'TerabyteSoft\Module\User\Events\AuthEvent::BEFORE_CONNECT';
 
     /**
      * event is triggered before connecting social network account to user
-     * triggered with app\user\events\AuthEvent.
+     * triggered with TerabyteSoft\Module\User\Events\AuthEvent.
      **/
-    const AFTER_CONNECT = 'app\user\events\AuthEvent::AFTER_CONNECT';
+    const AFTER_CONNECT = 'TerabyteSoft\Module\User\Events\AuthEvent::AFTER_CONNECT';
 
 	/**
 	 * init

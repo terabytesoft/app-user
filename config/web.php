@@ -18,6 +18,6 @@ return [
         'showScriptName' => false,
     ],
 	'user' => [
-        'identityClass' => \app\user\models\UserModel::class,
+        'identityClass' => \TerabyteSoft\Module\User\Models\UserModel::class,
 	],
 ];

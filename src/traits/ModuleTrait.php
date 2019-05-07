@@ -1,6 +1,6 @@
 <?php
 
-namespace app\user\traits;
+namespace TerabyteSoft\Module\User\Traits;
 
 use yii\helpers\Yii;
 
@@ -43,9 +43,9 @@ trait ModuleTrait
 	/**
      * getModule
      *
-     * @return \app\user\Module module
+     * @return \TerabyteSoft\Module\User\Module module
      **/
-    public function getModule(): \app\user\Module
+    public function getModule(): \TerabyteSoft\Module\User\Module
     {
         return Yii::getContainer()->get('app')->getModule('user');
     }

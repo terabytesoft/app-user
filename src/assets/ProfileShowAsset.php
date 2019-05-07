@@ -3,27 +3,27 @@
 /**
  * ProfileShowAsset
  *
- * assets form
+ * Assets Forms
  **/
 
-namespace app\user\assets;
+namespace TerabyteSoft\Module\User\Assets;
 
 use yii\web\AssetBundle;
 
 class ProfileShowAsset extends AssetBundle
 {
-    public $sourcePath = '@app/user/assets/';
+    public $sourcePath = '@TerabyteSoft/Module/User/Assets/';
 
 	public $css = [
-		'css/profile_show.css',
+		'Css/Profile_Show.css',
     ];
 
 	public $js = [
     ];
 
 	public $depends = [
-        \assets\fontawesome\dev\css\NpmSolidAsset::class,
-		\yii\bootstrap4\BootstrapAsset::class,
+        \TerabyteSoft\Assets\Fontawesome\Dev\Css\NpmSolidAsset::class,
+		\Yiisoft\Yii\Bootstrap4\BootstrapAsset::class,
     ];
 
     public $publishOptions = [

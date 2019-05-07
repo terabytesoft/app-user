@@ -1,11 +1,11 @@
 <?php
 
-namespace app\user\widgets;
+namespace TerabyteSoft\Module\User\Widgets;
 
-use app\user\traits\ModuleTrait;
-use yii\authclient\ClientInterface;
-use yii\authclient\widgets\AuthChoice;
-use yii\authclient\widgets\AuthChoiceAsset;
+use TerabyteSoft\Module\User\Traits\ModuleTrait;
+use Yiisoft\Yii\AuthClient\ClientInterface;
+use Yiisoft\Yii\AuthClient\Widgets\AuthChoice;
+use Yiisoft\Yii\AuthClient\Widgets\AuthChoiceAsset;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
@@ -66,7 +66,7 @@ class Connect extends AuthChoice implements \yii\di\Initiable
      *
      * @return bool
      **/
-    public function isConnected(ClientInterface $provider)
+    public function isConnected($provider)
     {
         return $this->accounts != null && isset($this->accounts[$provider->getId()]);
     }

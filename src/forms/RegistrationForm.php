@@ -1,8 +1,8 @@
 <?php
 
-namespace app\user\forms;
+namespace TerabyteSoft\Module\User\Forms;
 
-use app\user\traits\ModuleTrait;
+use TerabyteSoft\Module\User\Traits\ModuleTrait;
 use yii\base\Model;
 
 /**
@@ -11,7 +11,7 @@ use yii\base\Model;
  * Registration form collects user input on registration process, validates it and creates new User model
  *
  * Dependencies:
- * @property \app\user\Module module
+ * @property \TerabyteSoft\Module\User\Module module
  * @property \yii\web\Application app
  **/
 class RegistrationForm extends Model

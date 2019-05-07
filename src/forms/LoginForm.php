@@ -1,9 +1,9 @@
 <?php
 
-namespace app\user\forms;
+namespace TerabyteSoft\Module\User\Forms;
 
-use app\user\helpers\PasswordHelper;
-use app\user\traits\ModuleTrait;
+use TerabyteSoft\Module\User\Helpers\PasswordHelper;
+use TerabyteSoft\Module\User\Traits\ModuleTrait;
 use yii\base\Model;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
@@ -15,7 +15,7 @@ use yii\helpers\Html;
  * an error to login form
  *
  * Dependencies:
- * @property \app\user\Module module
+ * @property \TerabyteSoft\Module\User\Module module
  * @property \yii\web\Application app
  **/
 class LoginForm extends Model

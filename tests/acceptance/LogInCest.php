@@ -13,16 +13,16 @@ class LogInCest
      * _before
      *
      **/
-    public function _before(FunctionalTester $I)
+    public function _before(AcceptanceTester $I)
     {
         $I->amOnPage('/user/security/login');
     }
 
     /**
-     * LogInPageTest
+     * logInPageTest
      *
      **/
-    public function LogInPageTest(AcceptanceTester $I)
+    public function logInPageTest(AcceptanceTester $I)
     {
         $I->wantTo('ensure that login page works.');
         $I->expectTo('see page login.');
@@ -30,10 +30,10 @@ class LogInCest
     }
 
     /**
-     * LogInResetPasswordLink
+     * logInResetPasswordLink
      *
      **/
-    public function LogInResetPasswordLink(AcceptanceTester $I)
+    public function logInResetPasswordLink(AcceptanceTester $I)
     {
         $I->wantTo('ensure that link reset password link works.');
         $I->SeeLink(Yii::t('user', 'reset it here'));
@@ -43,10 +43,10 @@ class LogInCest
     }
 
     /**
-     * LogInResendReceiveConfirmationMessageLink
+     * logInResendReceiveConfirmationMessageLink
      *
      **/
-    public function LogInResendReceiveConfirmationMessageLink(AcceptanceTester $I)
+    public function logInResendReceiveConfirmationMessageLink(AcceptanceTester $I)
     {
         $I->wantTo('ensure that link resend receive confirmation message link works.');
         $I->SeeLink(Yii::t('user', 'Didn\'t receive confirmation message?'));
@@ -56,10 +56,10 @@ class LogInCest
     }
 
     /**
-     * LogInDontIHaveAccountLink
+     * logInDontIHaveAccountLink
      *
      **/
-    public function LogInDontIHaveAccountLink(AcceptanceTester $I)
+    public function logInDontIHaveAccountLink(AcceptanceTester $I)
     {
         $I->wantTo('ensure that link receive confirmation message works.');
         $I->SeeLink(Yii::t('user', 'Don\'t have an account? Sign up!'));
@@ -69,10 +69,10 @@ class LogInCest
     }
 
     /**
-     * LogInEmptyDataTest
+     * logInEmptyDataTest
      *
      **/
-    public function LogInEmptyDataTest(AcceptanceTester $I)
+    public function logInEmptyDataTest(AcceptanceTester $I)
     {
         $I->amGoingTo('login submit form with empty data.');
         $I->click(Yii::t('user', 'Login'), '.btn');
@@ -84,10 +84,10 @@ class LogInCest
     }
 
     /**
-     * LogInSubmitFormWrongDataTest
+     * logInSubmitFormWrongDataTest
      *
      **/
-    public function LogInSubmitFormWrongDataTest(AcceptanceTester $I)
+    public function logInSubmitFormWrongDataTest(AcceptanceTester $I)
     {
         $I->amGoingTo('login submit form with data wrong.');
         $I->fillField('#login-form-login', 'admin');
@@ -100,11 +100,11 @@ class LogInCest
     }
 
     /**
-     * LogInSubmitFormSuccessDataTest
+     * logInSubmitFormSuccessDataTest
      *
      * @depends SignUpCest:SignUpRegisterSuccessDataTest
      **/
-    public function LogInFormSubmitFormSuccessDataTest(AcceptanceTester $I)
+    public function logInFormSubmitFormSuccessDataTest(AcceptanceTester $I)
     {
         $I->amGoingTo('login submit form with data success.');
         $I->fillField('#login-form-login', 'admin');

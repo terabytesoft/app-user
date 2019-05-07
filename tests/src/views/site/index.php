@@ -6,7 +6,7 @@
  * View web application user
  **/
 
-use yii\bootstrap4\Html;
+use Yiisoft\Yii\Bootstrap4\Html;
 
 $this->title = $this->app->t('user', 'Index');
 

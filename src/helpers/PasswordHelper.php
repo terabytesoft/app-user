@@ -1,15 +1,15 @@
 <?php
 
-namespace app\user\helpers;
+namespace TerabyteSoft\Module\User\Helpers;
 
-use app\user\traits\ModuleTrait;
+use TerabyteSoft\Module\User\Traits\ModuleTrait;
 use yii\base\Security;
 
 /**
  * PasswordHelper
  *
  * Dependencies:
- * @property \app\user\Module module
+ * @property \TerabyteSoft\Module\User\Module module
  **/
 class PasswordHelper
 {

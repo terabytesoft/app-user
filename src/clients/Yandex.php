@@ -1,15 +1,15 @@
 <?php
 
-namespace app\user\clients;
+namespace TerabyteSoft\Module\User\Clients;
 
-use app\user\traits\ModuleTrait;
-use yii\authclient\clients\Yandex as BaseYandex;
+use TerabyteSoft\Module\User\Traits\ModuleTrait;
+use Yiisoft\Yii\AuthClient\Clients\Yandex as BaseYandex;
 
 /**
  * Yandex
  *
  * Dependencies:
- * @property \app\user\Module module
+ * @property \TerabyteSoft\Module\User\Module module
  * @property \yii\web\Application app
  **/
 class Yandex extends BaseYandex implements ClientInterface

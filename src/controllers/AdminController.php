@@ -1,11 +1,11 @@
 <?php
 
-namespace app\user\controllers;
+namespace TerabyteSoft\Module\User\Controllers;
 
-use app\user\events\ProfileEvent;
-use app\user\events\UserEvent;
-use app\user\filters\AccessRule;
-use app\user\Module;
+use TerabyteSoft\Module\User\Events\ProfileEvent;
+use TerabyteSoft\Module\User\Events\UserEvent;
+use TerabyteSoft\Module\User\Filters\AccessRule;
+use TerabyteSoft\Module\User\Module;
 use yii\base\Model;
 use yii\exceptions\ExitException;
 use yii\helpers\Url;
@@ -15,7 +15,7 @@ use yii\web\filters\VerbFilter;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
-use yii\widgets\ActiveForm;
+use Yiisoft\Yii\Bootstrap4\ActiveForm;
 
 /**
  * Class AdminController.

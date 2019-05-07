@@ -1,6 +1,6 @@
 <?php
 
-namespace app\user\events;
+namespace TerabyteSoft\Module\User\Events;
 
 use yii\base\Event;
 
@@ -12,105 +12,105 @@ class UserEvent extends Event
 {
 	/**
 	 * event is triggered raised after executing init action
-	 * triggered with app\user\events\UserEvent
+	 * triggered with TerabyteSoft\Module\User\Events\UserEvent
 	 **/
-	const INIT = 'app\user\events\UserEvent::INIT';
+	const INIT = 'TerabyteSoft\Module\User\Events\UserEvent::INIT';
 
     /**
      * event is triggered before confirming user
-     * triggered with app\user\events\UserEvent
+     * triggered with TerabyteSoft\Module\User\Events\UserEvent
      **/
-    const BEFORE_CONFIRM = 'app\user\events\UserEvent::BEFORE_CONFIRM';
+    const BEFORE_CONFIRM = 'TerabyteSoft\Module\User\Events\UserEvent::BEFORE_CONFIRM';
 
     /**
      * event is triggered before confirming user
-     * triggered with app\user\events\UserEvent
+     * triggered with TerabyteSoft\Module\User\Events\UserEvent
      **/
-    const AFTER_CONFIRM = 'app\user\events\UserEvent::AFTER_CONFIRM';
+    const AFTER_CONFIRM = 'TerabyteSoft\Module\User\Events\UserEvent::AFTER_CONFIRM';
 
     /**
      * event is triggered before creating new user
-     * triggered with app\user\events\UserEvent
+     * triggered with TerabyteSoft\Module\User\Events\UserEvent
      **/
-    const BEFORE_CREATE = 'app\user\events\UserEvent::BEFORE_CREATE';
+    const BEFORE_CREATE = 'TerabyteSoft\Module\User\Events\UserEvent::BEFORE_CREATE';
 
     /**
      * event is triggered after creating new user
-     * triggered with app\user\events\UserEvent
+     * triggered with TerabyteSoft\Module\User\Events\UserEvent
      **/
-    const AFTER_CREATE = 'app\user\events\UserEvent::AFTER_CREATE';
+    const AFTER_CREATE = 'TerabyteSoft\Module\User\Events\UserEvent::AFTER_CREATE';
 
     /**
      * event is triggered before updating existing user
-     * triggered with app\user\events\UserEvent
+     * triggered with TerabyteSoft\Module\User\Events\UserEvent
      **/
-    const BEFORE_UPDATE = 'app\user\events\UserEvent::BEFORE_UPDATE';
+    const BEFORE_UPDATE = 'TerabyteSoft\Module\User\Events\UserEvent::BEFORE_UPDATE';
 
     /**
      * event is triggered after updating existing user
-     * triggered with app\user\events\UserEvent
+     * triggered with TerabyteSoft\Module\User\Events\UserEvent
      **/
-    const AFTER_UPDATE = 'app\user\events\UserEvent::AFTER_UPDATE';
+    const AFTER_UPDATE = 'TerabyteSoft\Module\User\Events\UserEvent::AFTER_UPDATE';
 
     /**
      * event is triggered before impersonating as another user
-     * triggered with app\user\events\UserEvent
+     * triggered with TerabyteSoft\Module\User\Events\UserEvent
      **/
-    const BEFORE_IMPERSONATE = 'app\user\events\UserEvent::BEFORE_IMPERSONATE';
+    const BEFORE_IMPERSONATE = 'TerabyteSoft\Module\User\Events\UserEvent::BEFORE_IMPERSONATE';
 
     /**
      * event is triggered after impersonating as another user
-     * triggered with app\user\events\UserEvent
+     * triggered with TerabyteSoft\Module\User\Events\UserEvent
      **/
-    const AFTER_IMPERSONATE = 'app\user\events\UserEvent::AFTER_IMPERSONATE';
+    const AFTER_IMPERSONATE = 'TerabyteSoft\Module\User\Events\UserEvent::AFTER_IMPERSONATE';
 
     /**
      * event is triggered before deleting existing user
-     * triggered with app\user\events\UserEvent
+     * triggered with TerabyteSoft\Module\User\Events\UserEvent
      **/
-    const BEFORE_DELETE = 'app\user\events\UserEvent::BEFORE_DELETE';
+    const BEFORE_DELETE = 'TerabyteSoft\Module\User\Events\UserEvent::BEFORE_DELETE';
 
     /**
      * event is triggered after deleting existing user
-     * triggered with app\user\events\UserEvent
+     * triggered with TerabyteSoft\Module\User\Events\UserEvent
      **/
-    const AFTER_DELETE = 'app\user\events\UserEvent::AFTER_DELETE';
+    const AFTER_DELETE = 'TerabyteSoft\Module\User\Events\UserEvent::AFTER_DELETE';
 
     /**
      * event is triggered before blocking existing user
-     * triggered with app\user\events\UserEvent
+     * triggered with TerabyteSoft\Module\User\Events\UserEvent
      **/
-    const BEFORE_BLOCK = 'app\user\events\UserEvent::BEFORE_BLOCK';
+    const BEFORE_BLOCK = 'TerabyteSoft\Module\User\Events\UserEvent::BEFORE_BLOCK';
 
     /**
      * event is triggered after blocking existing user
-     * triggered with app\user\events\UserEvent
+     * triggered with TerabyteSoft\Module\User\Events\UserEvent
      **/
-    const AFTER_BLOCK = 'app\user\events\UserEvent::AFTER_BLOCK';
+    const AFTER_BLOCK = 'TerabyteSoft\Module\User\Events\UserEvent::AFTER_BLOCK';
 
     /**
      * event is triggered before unblocking existing user
-     * triggered with app\user\events\UserEvent
+     * triggered with TerabyteSoft\Module\User\Events\UserEvent
      **/
-    const BEFORE_UNBLOCK = 'app\user\events\UserEvent::BEFORE_UNBLOCK';
+    const BEFORE_UNBLOCK = 'TerabyteSoft\Module\User\Events\UserEvent::BEFORE_UNBLOCK';
 
     /**
      * event is triggered after unblocking existing user
-     * triggered with app\user\events\UserEvent
+     * triggered with TerabyteSoft\Module\User\Events\UserEvent
      **/
-    const AFTER_UNBLOCK = 'app\user\events\UserEvent::AFTER_UNBLOCK';
+    const AFTER_UNBLOCK = 'TerabyteSoft\Module\User\Events\UserEvent::AFTER_UNBLOCK';
 
     /**
      * event is triggered before updating user's profile
-     * triggered with app\user\events\UserEvent
+     * triggered with TerabyteSoft\Module\User\Events\UserEvent
      **/
-    const BEFORE_PROFILE_UPDATE = 'app\user\events\UserEvent::BEFORE_PROFILE_UPDATE';
+    const BEFORE_PROFILE_UPDATE = 'TerabyteSoft\Module\User\Events\UserEvent::BEFORE_PROFILE_UPDATE';
 
     /**
      * event is triggered after updating user's profile
-     * triggered with app\user\events\UserEvent
+     * triggered with TerabyteSoft\Module\User\Events\UserEvent
      **/
-    const AFTER_PROFILE_UPDATE = 'app\user\events\UserEvent::AFTER_PROFILE_UPDATE';
+    const AFTER_PROFILE_UPDATE = 'TerabyteSoft\Module\User\Events\UserEvent::AFTER_PROFILE_UPDATE';
 
 	/**
 	 * init

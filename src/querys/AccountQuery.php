@@ -1,9 +1,9 @@
 <?php
 
-namespace app\user\querys;
+namespace TerabyteSoft\Module\User\Querys;
 
-use yii\authclient\ClientInterface;
-use yii\activerecord\ActiveQuery;
+use Yiisoft\Yii\AuthClient\ClientInterface;
+use Yiisoft\ActiveRecord\ActiveQuery;
 
 /**
  * @method Account|null one($db = null)

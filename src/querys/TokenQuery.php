@@ -5,9 +5,9 @@
  *
  **/
 
-namespace app\user\querys;
+namespace TerabyteSoft\Module\User\Querys;
 
-use yii\activerecord\ActiveQuery;
+use Yiisoft\ActiveRecord\ActiveQuery;
 
 class TokenQuery extends ActiveQuery
 {
@@ -34,7 +34,7 @@ class TokenQuery extends ActiveQuery
      * @param string  $code
      * @param integer $type
      *
-     * @return array|\app\user\models\TokenModel
+     * @return array|\TerabyteSoft\Module\User\Models\TokenModel
      */
     public function findTokenByParams($userId, $code, $type)
     {

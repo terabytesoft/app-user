@@ -1,12 +1,12 @@
 <?php
 
-namespace app\user\controllers;
+namespace TerabyteSoft\Module\User\Controllers;
 
-use app\user\events\ConnectEvent;
-use app\user\events\FormEvent;
-use app\user\events\UserEvent;
-use app\user\Module;
-use app\user\traits\AjaxValidationTrait;
+use TerabyteSoft\Module\User\Events\ConnectEvent;
+use TerabyteSoft\Module\User\Events\FormEvent;
+use TerabyteSoft\Module\User\Events\UserEvent;
+use TerabyteSoft\Module\User\Module;
+use TerabyteSoft\Module\User\Traits\AjaxValidationTrait;
 use yii\web\Controller;
 use yii\web\filters\AccessControl;
 use yii\web\ForbiddenHttpException;

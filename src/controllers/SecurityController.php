@@ -1,13 +1,13 @@
 <?php
 
-namespace app\user\controllers;
+namespace TerabyteSoft\Module\User\Controllers;
 
-use app\user\events\AuthEvent;
-use app\user\events\FormEvent;
-use app\user\Module;
-use app\user\traits\AjaxValidationTrait;
-use yii\authclient\AuthAction;
-use yii\authclient\ClientInterface;
+use TerabyteSoft\Module\User\Events\AuthEvent;
+use TerabyteSoft\Module\User\Events\FormEvent;
+use TerabyteSoft\Module\User\Module;
+use TerabyteSoft\Module\User\Traits\AjaxValidationTrait;
+use Yiisoft\Yii\AuthClient\AuthAction;
+use Yiisoft\Yii\AuthClient\ClientInterface;
 use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\filters\AccessControl;

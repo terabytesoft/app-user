@@ -1,10 +1,10 @@
 <?php
 
-namespace app\user\forms;
+namespace TerabyteSoft\Module\User\Forms;
 
-use app\user\mailer\Mailer;
-use app\user\models\UserModel;
-use app\user\traits\ModuleTrait;
+use TerabyteSoft\Module\User\Mailer\Mailer;
+use TerabyteSoft\Module\User\Models\UserModel;
+use TerabyteSoft\Module\User\Traits\ModuleTrait;
 use yii\base\Model;
 
 /**
@@ -13,7 +13,7 @@ use yii\base\Model;
  * Model for collecting data on password recovery
  *
  * Dependencies:
- * @property \app\user\Module module
+ * @property \TerabyteSoft\Module\User\Module module
  * @property \yii\web\Application app
  **/
 class RecoveryForm extends Model

@@ -8,14 +8,14 @@
  * View web application user
  **/
 
-use app\user\assets\SecurityLoginAsset;
-use app\user\widgets\Connect;
-use yii\bootstrap4\ActiveForm;
-use yii\bootstrap4\Html;
+use TerabyteSoft\Module\User\Assets\SecurityLoginAsset;
+use TerabyteSoft\Module\User\widgets\Connect;
+use Yiisoft\Yii\Bootstrap4\ActiveForm;
+use Yiisoft\Yii\Bootstrap4\Html;
 
 /**
- * @var \app\user\Module $module
- * @var \app\user\forms\LoginForm $model
+ * @var \TerabyteSoft\Module\User\Module $module
+ * @var \TerabyteSoft\Module\User\forms\LoginForm $model
  * @var \yii\web\View $this
  **/
 
@@ -23,7 +23,7 @@ $this->title = $this->app->t('user', 'Login');
 $this->params['breadcrumbs'][] = $this->title;
 
 if ($module->floatLabels) {
-    \app\user\assets\FloatingLabelAsset::register($this);
+    \TerabyteSoft\Module\User\Assets\FloatingLabelAsset::register($this);
 }
 
 SecurityLoginAsset::register($this);
@@ -167,33 +167,5 @@ SecurityLoginAsset::register($this);
             <?= Html::a($this->app->t('user', 'Don\'t have an account? Sign up!'), ['/user/registration/register']) ?>
         <?= Html::endTag('p') ?>
     <?php endif ?>
-
-	<?php $auth = Connect::begin([
-		'baseAuthUrl' => ['/user/security/auth'],
-        'popupMode' => false,
-    ]) ?>
-
-        <?php if ($auth->getClients()) : ?>
-
-            <?= Html::beginTag(
-                'div',
-                [
-                    'class' => 'align-items-center d-flex flex-row justify-content-around mb-3'
-                ]
-            ) ?>
-
-                <?php foreach ($auth->getClients() as $client) : ?>
-                    <?= Html::beginTag('div', ['class' => 'p-2']) ?>
-                        <?= Html::a('', $auth->createClientUrl($client), [
-                            'class' => 'auth-icon ' . $client->getName() . ' btn btn-block',
-                        ]) ?>
-                    <?= Html::endTag('div') ?>
-                <?php endforeach; ?>
-
-            <?= Html::endTag('div') ?>
-
-        <?php endif ?>
-
-    <?php Connect::end() ?>
 
 <?php echo Html::endTag('div');

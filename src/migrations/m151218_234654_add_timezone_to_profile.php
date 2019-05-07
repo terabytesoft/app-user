@@ -1,8 +1,8 @@
 <?php
 
-use app\user\migrations\Migration;
+use TerabyteSoft\Module\User\Migration\Migration;
 
-class m151218_234654_add_timezone_to_profile extends Migration
+class M151218_234654_add_timezone_to_profile extends Migration
 {
     public function up()
     {

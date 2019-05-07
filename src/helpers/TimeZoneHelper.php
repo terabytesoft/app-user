@@ -1,6 +1,6 @@
 <?php
 
-namespace app\user\helpers;
+namespace TerabyteSoft\Module\User\Helpers;
 
 /**
  * Timezone helper

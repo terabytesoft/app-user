@@ -1,15 +1,15 @@
 <?php
 
-namespace app\user\clients;
+namespace TerabyteSoft\Module\User\Clients;
 
-use app\user\traits\ModuleTrait;
-use yii\authclient\clients\VKontakte as BaseVKontakte;
+use TerabyteSoft\Module\User\Traits\ModuleTrait;
+use Yiisoft\Yii\AuthClient\Clients\VKontakte as BaseVKontakte;
 
 /**
  * VKontakte
  *
  * Dependencies:
- * @property \app\user\Module module
+ * @property \TerabyteSoft\Module\User\Module module
  * @property \yii\web\Application app
  */
 class VKontakte extends BaseVKontakte implements ClientInterface

@@ -1,6 +1,6 @@
 <?php
 
-namespace app\user\tests\controllers;
+namespace TerabyteSoft\Module\User\Tests\Controllers;
 
 use yii\web\Controller;
 use yii\web\ErrorAction;

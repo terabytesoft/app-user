@@ -3,26 +3,26 @@
 /**
  * RegistrationConnectAsset
  *
- * assets form
+ * Assets Forms
  **/
 
-namespace app\user\assets;
+namespace TerabyteSoft\Module\User\Assets;
 
 use yii\web\AssetBundle;
 
 class RegistrationConnectAsset extends AssetBundle
 {
-    public $sourcePath = '@app/user/assets/';
+    public $sourcePath = '@TerabyteSoft/Module/User/Assets/';
 
 	public $css = [
-		'css/registration_connect.css',
+		'Css/Registration_Connect.css',
     ];
 
 	public $js = [
     ];
 
 	public $depends = [
-		\yii\jquery\YiiAsset::class,
-		\yii\bootstrap4\BootstrapAsset::class,
+		\Yiisoft\Yii\JQuery\YiiAsset::class,
+		\Yiisoft\Yii\Bootstrap4\BootstrapAsset::class,
 	];
 }

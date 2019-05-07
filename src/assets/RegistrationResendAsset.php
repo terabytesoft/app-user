@@ -3,26 +3,26 @@
 /**
  * RegistrationResendAsset
  *
- * assets form
+ * Assets Forms
  **/
 
-namespace app\user\assets;
+namespace TerabyteSoft\Module\User\Assets;
 
 use yii\web\AssetBundle;
 
 class RegistrationResendAsset extends AssetBundle
 {
-    public $sourcePath = '@app/user/assets/';
+    public $sourcePath = '@TerabyteSoft/Module/User/Assets/';
 
 	public $css = [
-		'css/registration_resend.css',
+		'Css/Registration_Resend.css',
     ];
 
 	public $js = [
     ];
 
 	public $depends = [
-		\yii\jquery\YiiAsset::class,
-		\yii\bootstrap4\BootstrapAsset::class,
+		\Yiisoft\Yii\JQuery\YiiAsset::class,
+		\Yiisoft\Yii\Bootstrap4\BootstrapAsset::class,
 	];
 }

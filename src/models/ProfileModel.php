@@ -1,9 +1,9 @@
 <?php
 
-namespace app\user\models;
+namespace TerabyteSoft\Module\User\Models;
 
-use app\user\traits\ModuleTrait;
-use yii\activerecord\ActiveRecord;
+use TerabyteSoft\Module\User\Traits\ModuleTrait;
+use Yiisoft\ActiveRecord\ActiveRecord;
 
 /**
  * Class ProfileModel.
@@ -22,7 +22,7 @@ use yii\activerecord\ActiveRecord;
  * @property string  $timezone
  *
  * Dependencies:
- * @property \app\user\Module module
+ * @property \TerabyteSoft\Module\User\Module module
  * @property \yii\web\Application app
  **/
 class ProfileModel extends ActiveRecord
@@ -54,7 +54,7 @@ class ProfileModel extends ActiveRecord
 	/**
 	 * getUser.
 	 *
-	 * @return \yii\activerecord\ActiveQueryInterface
+	 * @return \Yiisoft\ActiveRecord\ActiveQueryInterface
 	 **/
 	public function getUser()
 	{

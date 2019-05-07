@@ -1,8 +1,8 @@
 <?php
 
-namespace app\user\clients;
+namespace TerabyteSoft\Module\User\Clients;
 
-use yii\authclient\clients\Google as BaseGoogle;
+use Yiisoft\Yii\AuthClient\Clients\Google as BaseGoogle;
 
 /**
  * Google

@@ -1,8 +1,8 @@
 <?php
 
-use app\user\migrations\Migration;
+use TerabyteSoft\Module\User\Migration\Migration;
 
-class m140403_174025_create_account_table extends Migration
+class M140403_174025_create_account_table extends Migration
 {
     public function up()
     {

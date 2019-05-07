@@ -1,8 +1,8 @@
 <?php
 
-use app\user\migrations\Migration;
+use TerabyteSoft\Module\User\Migration\Migration;
 
-class m150623_212711_fix_username_notnull extends Migration
+class M150623_212711_fix_username_notnull extends Migration
 {
     public function up()
     {

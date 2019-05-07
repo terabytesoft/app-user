@@ -1,6 +1,6 @@
 <?php
 
-namespace app\user\events;
+namespace TerabyteSoft\Module\User\Events;
 
 use yii\base\Event;
 
@@ -12,32 +12,32 @@ class ConnectEvent extends Event
 {
 	/**
 	 * event is triggered raised after executing init action
-	 * triggered with app\user\events\ConnectEvent
+	 * triggered with TerabyteSoft\Module\User\Events\ConnectEvent
 	 **/
-	const INIT = 'app\user\events\ConnectEvent::INIT';
+	const INIT = 'TerabyteSoft\Module\User\Events\ConnectEvent::INIT';
 
     /**
      * event is triggered before connecting user to social account
-     * triggered with app\user\events\ConnectEvent
+     * triggered with TerabyteSoft\Module\User\Events\ConnectEvent
      **/
-    const BEFORE_CONNECT = 'app\user\events\ConnectEvent::BEFORE_CONNECT';
+    const BEFORE_CONNECT = 'TerabyteSoft\Module\User\Events\ConnectEvent::BEFORE_CONNECT';
     /**
      * event is triggered after connecting user to social account
-     * triggered with app\user\events\ConnectEvent
+     * triggered with TerabyteSoft\Module\User\Events\ConnectEvent
      */
-    const AFTER_CONNECT = 'app\user\events\ConnectEvent::AFTER_CONNECT';
+    const AFTER_CONNECT = 'TerabyteSoft\Module\User\Events\ConnectEvent::AFTER_CONNECT';
 
     /**
      * event is triggered before disconnecting social account from user
-     * triggered with app\user\events\ConnectEvent
+     * triggered with TerabyteSoft\Module\User\Events\ConnectEvent
      */
-    const BEFORE_DISCONNECT = 'app\user\events\ConnectEvent::BEFORE_DISCONNECT';
+    const BEFORE_DISCONNECT = 'TerabyteSoft\Module\User\Events\ConnectEvent::BEFORE_DISCONNECT';
 
     /**
      * event is triggered after disconnecting social account from user
-     * triggered with app\user\events\ConnectEvent
+     * triggered with TerabyteSoft\Module\User\Events\ConnectEvent
      */
-    const AFTER_DISCONNECT = 'app\user\events\ConnectEvent::AFTER_DISCONNECT';
+    const AFTER_DISCONNECT = 'TerabyteSoft\Module\User\Events\ConnectEvent::AFTER_DISCONNECT';
 
 	/**
 	 * init

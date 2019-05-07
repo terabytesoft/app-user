@@ -1,8 +1,8 @@
 <?php
 
-use app\user\migrations\Migration;
+use TerabyteSoft\Module\User\Migration\Migration;
 
-class m140830_172703_change_account_table_name extends Migration
+class M140830_172703_change_account_table_name extends Migration
 {
     public function up()
     {

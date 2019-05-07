@@ -1,11 +1,11 @@
 <?php
 
-namespace app\user\controllers;
+namespace TerabyteSoft\Module\User\Controllers;
 
-use app\user\events\FormEvent;
-use app\user\events\ResetPasswordEvent;
-use app\user\Module;
-use app\user\traits\AjaxValidationTrait;
+use TerabyteSoft\Module\User\Events\FormEvent;
+use TerabyteSoft\Module\User\Events\ResetPasswordEvent;
+use TerabyteSoft\Module\User\Module;
+use TerabyteSoft\Module\User\Traits\AjaxValidationTrait;
 use yii\web\Controller;
 use yii\web\filters\AccessControl;
 use yii\web\NotFoundHttpException;

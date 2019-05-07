@@ -5,9 +5,9 @@
  *
  **/
 
-namespace app\user\querys;
+namespace TerabyteSoft\Module\User\Querys;
 
-use yii\activerecord\ActiveQuery;
+use Yiisoft\ActiveRecord\ActiveQuery;
 
 class ProfileQuery extends ActiveQuery
 {
@@ -18,7 +18,7 @@ class ProfileQuery extends ActiveQuery
      *
      * @param int $id
      *
-     * @return null|array|\app\user\models\ProfileModel
+     * @return null|array|\TerabyteSoft\Module\User\Models\ProfileModel
      */
     public function findProfileById($id)
     {

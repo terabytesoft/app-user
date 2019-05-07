@@ -1,8 +1,8 @@
 <?php
 
-use app\user\migrations\Migration;
+use TerabyteSoft\Module\User\Migration\Migration;
 
-class m140504_130429_create_token_table extends Migration
+class M140504_130429_create_token_table extends Migration
 {
     public function up()
     {

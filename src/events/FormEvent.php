@@ -1,6 +1,6 @@
 <?php
 
-namespace app\user\events;
+namespace TerabyteSoft\Module\User\Events;
 
 use yii\base\Event;
 
@@ -12,81 +12,81 @@ class FormEvent extends Event
 {
 	/**
 	 * event is triggered raised after executing init action
-	 * triggered with app\user\events\FormEvent
+	 * triggered with TerabyteSoft\Module\User\Events\FormEvent
 	 **/
-	const INIT = 'app\user\events\FomEvent::INIT';
+	const INIT = 'TerabyteSoft\Module\User\Events\FomEvent::INIT';
 
 	/**
 	 * event is triggered after creating RegistrationForm class
-	 * triggered with app\user\events\FormEvent
+	 * triggered with TerabyteSoft\Module\User\Events\FormEvent
 	 **/
-	const BEFORE_REGISTER = 'app\user\events\FomEvent::BEFORE_REGISTER';
+	const BEFORE_REGISTER = 'TerabyteSoft\Module\User\Events\FomEvent::BEFORE_REGISTER';
 
 	/**
 	 * event is triggered after successful registration Form class
-	 * triggered with app\user\events\FormEvent
+	 * triggered with TerabyteSoft\Module\User\Events\FormEvent
 	 **/
-	const AFTER_REGISTER = 'app\user\events\FomEvent::AFTER_REGISTER';
+	const AFTER_REGISTER = 'TerabyteSoft\Module\User\Events\FomEvent::AFTER_REGISTER';
 
     /**
      * event is triggered after creating ResendForm class
-     * triggered with app\user\events\FormEvent
+     * triggered with TerabyteSoft\Module\User\Events\FormEvent
      **/
-    const BEFORE_RESEND = 'app\user\events\FomEvent::BEFORE_RESEND';
+    const BEFORE_RESEND = 'TerabyteSoft\Module\User\Events\FomEvent::BEFORE_RESEND';
 
     /**
      * event is triggered after successful resending of confirmation email
-     * triggered with app\user\events\FormEvent
+     * triggered with TerabyteSoft\Module\User\Events\FormEvent
      **/
-    const AFTER_RESEND = 'app\user\events\FomEvent::AFTER_RESEND';
+    const AFTER_RESEND = 'TerabyteSoft\Module\User\Events\FomEvent::AFTER_RESEND';
 
     /**
      * event is triggered before logging user in
-     * triggered with app\user\events\FormEvent
+     * triggered with TerabyteSoft\Module\User\Events\FormEvent
      **/
-    const BEFORE_LOGIN = 'app\user\events\FomEvent::BEFORE_LOGIN';
+    const BEFORE_LOGIN = 'TerabyteSoft\Module\User\Events\FomEvent::BEFORE_LOGIN';
 
     /**
      * event is triggered after logging user in
-     * triggered with app\user\events\FormEvent
+     * triggered with TerabyteSoft\Module\User\Events\FormEvent
      **/
-    const AFTER_LOGIN = 'app\user\events\FomEvent::AFTER_LOGIN';
+    const AFTER_LOGIN = 'TerabyteSoft\Module\User\Events\FomEvent::AFTER_LOGIN';
 
     /**
      * event is triggered before logging user out
-     * triggered with app\user\events\UserEvent
+     * triggered with TerabyteSoft\Module\User\Events\UserEvent
      **/
-    const BEFORE_LOGOUT = 'app\user\events\FomEvent::BEFORE_LOGOUT';
+    const BEFORE_LOGOUT = 'TerabyteSoft\Module\User\Events\FomEvent::BEFORE_LOGOUT';
 
     /**
      * event is triggered after logging user out
-     * triggered with app\user\events\UserEvent
+     * triggered with TerabyteSoft\Module\User\Events\UserEvent
      **/
-    const AFTER_LOGOUT = 'app\user\events\FomEvent::AFTER_LOGOUT';
+    const AFTER_LOGOUT = 'TerabyteSoft\Module\User\Events\FomEvent::AFTER_LOGOUT';
 
     /**
      * event is triggered before requesting password reset
-     * triggered with app\user\events\FormEvent
+     * triggered with TerabyteSoft\Module\User\Events\FormEvent
      **/
-    const BEFORE_REQUEST = 'app\user\events\FomEvent::BEFORE_REQUEST';
+    const BEFORE_REQUEST = 'TerabyteSoft\Module\User\Events\FomEvent::BEFORE_REQUEST';
 
     /**
      * event is triggered after requesting password reset
-     * triggered with app\user\events\FormEvent
+     * triggered with TerabyteSoft\Module\User\Events\FormEvent
      **/
-    const AFTER_REQUEST = 'app\user\events\FomEvent::AFTER_REQUEST';
+    const AFTER_REQUEST = 'TerabyteSoft\Module\User\Events\FomEvent::AFTER_REQUEST';
 
     /**
      * event is triggered before updating user's account settings
-     * triggered with app\user\events\FormEvent
+     * triggered with TerabyteSoft\Module\User\Events\FormEvent
      **/
-    const BEFORE_ACCOUNT_UPDATE = 'app\user\events\FomEvent::BEFORE_ACCOUNT_UPDATE';
+    const BEFORE_ACCOUNT_UPDATE = 'TerabyteSoft\Module\User\Events\FomEvent::BEFORE_ACCOUNT_UPDATE';
 
     /**
      * event is triggered after updating user's account settings
-     * triggered with app\user\events\FormEvent
+     * triggered with TerabyteSoft\Module\User\Events\FormEvent
      **/
-    const AFTER_ACCOUNT_UPDATE = 'app\user\events\FomEvent::AFTER_ACCOUNT_UPDATE';
+    const AFTER_ACCOUNT_UPDATE = 'TerabyteSoft\Module\User\Events\FomEvent::AFTER_ACCOUNT_UPDATE';
 
 
 	/**

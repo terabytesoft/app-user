@@ -6,26 +6,26 @@
  * assets form
  **/
 
-namespace app\user\tests\assets;
+namespace TerabyteSoft\Module\User\Tests\Assets;
 
 use yii\web\AssetBundle;
 
 class LayoutAdminAsset extends AssetBundle
 {
-    public $sourcePath = '@app/user/tests/assets/';
+    public $sourcePath = '@TerabyteSoft/Module/User/Tests/Assets/';
 
 	public $css = [
-		'css/main.css',
+		'Css/Main.css',
     ];
 
 	public $depends = [
-		\yii\jquery\YiiAsset::class,
-		\yii\bootstrap4\BootstrapAsset::class,
+        \Yiisoft\Yii\JQuery\YiiAsset::class,
+        \Yiisoft\Yii\Bootstrap4\BootstrapAsset::class,
     ];
 
     public $publishOptions = [
         'only' => [
-            'css/*',
+            'Css/*',
         ],
     ];
 }

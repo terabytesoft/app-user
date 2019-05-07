@@ -1,10 +1,10 @@
 <?php
 
-namespace app\user\searchs;
+namespace TerabyteSoft\Module\User\Searchs;
 
-use app\user\traits\ModuleTrait;
-use yii\activerecord\ActiveQuery;
-use yii\activerecord\data\ActiveDataProvider;
+use TerabyteSoft\Module\User\Traits\ModuleTrait;
+use Yiisoft\ActiveRecord\ActiveQuery;
+use Yiisoft\ActiveRecord\Data\ActiveDataProvider;
 use yii\base\Model;
 use yii\helpers\Yii;
 

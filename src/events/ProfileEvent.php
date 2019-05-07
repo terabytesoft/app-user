@@ -1,6 +1,6 @@
 <?php
 
-namespace app\user\events;
+namespace TerabyteSoft\Module\User\Events;
 
 use yii\base\Event;
 
@@ -12,21 +12,21 @@ class ProfileEvent extends Event
 {
 	/**
 	 * event is triggered raised after executing init action
-	 * triggered with app\user\events\ProfileEvent
+	 * triggered with TerabyteSoft\Module\User\Events\ProfileEvent
 	 **/
-	const INIT = 'app\user\events\ProfileEvent::INIT';
+	const INIT = 'TerabyteSoft\Module\User\Events\ProfileEvent::INIT';
 
     /**
      * event is triggered before updating existing user's profile
-     * triggered with app\user\events\ProfileEvent
+     * triggered with TerabyteSoft\Module\User\Events\ProfileEvent
      **/
-    const BEFORE_PROFILE_UPDATE = 'app\user\events\ProfileEvent::BEFORE_PROFILE_UPDATE';
+    const BEFORE_PROFILE_UPDATE = 'TerabyteSoft\Module\User\Events\ProfileEvent::BEFORE_PROFILE_UPDATE';
 
     /**
      * event is triggered after updating existing user's profile
-     * triggered with app\user\events\ProfileEvent
+     * triggered with TerabyteSoft\Module\User\Events\ProfileEvent
      **/
-    const AFTER_PROFILE_UPDATE = 'app\user\events\ProfileEvent::AFTER_PROFILE_UPDATE';
+    const AFTER_PROFILE_UPDATE = 'TerabyteSoft\Module\User\Events\ProfileEvent::AFTER_PROFILE_UPDATE';
 
 	/**
 	 * init

@@ -1,11 +1,11 @@
 <?php
 
-namespace app\user\traits;
+namespace TerabyteSoft\Module\User\Traits;
 
 use yii\base\Model;
 use yii\helpers\Yii;
 use yii\web\Response;
-use yii\widgets\ActiveForm;
+use Yiisoft\Yii\Bootstrap4\ActiveForm;
 
 trait AjaxValidationTrait
 {

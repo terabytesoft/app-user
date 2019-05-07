@@ -1,10 +1,10 @@
 <?php
 
-namespace app\user\commands;
+namespace TerabyteSoft\Module\User\Commands;
 
-use app\user\Module;
-use app\user\traits\ModuleTrait;
-use yii\console\Controller;
+use TerabyteSoft\Module\User\Module;
+use TerabyteSoft\Module\User\Traits\ModuleTrait;
+use Yiisoft\Yii\Console\Controller;
 use yii\helpers\Console;
 
 /**
@@ -12,7 +12,7 @@ use yii\helpers\Console;
  *
  * Confirms a user
  *
- * @property \app\user\Module $module
+ * @property \TerabyteSoft\Module\User\Module $module
  * @property \yii\web\Application $app
  **/
 class ConfirmController extends Controller
