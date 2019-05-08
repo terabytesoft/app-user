@@ -1,12 +1,12 @@
 <?php
 
 /**
- * admin/_menu
+ * admin/_Menu
  *
  * View web application user
  **/
 
-use yii\bootstrap4\Nav;
+use Yiisoft\Yii\Bootstrap4\Nav;
 
 ?>
 

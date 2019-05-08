@@ -4,7 +4,7 @@ use yii\helpers\Yii;
 
 /**
  * @var \yii\web\View $this
- * @var yii\mail\BaseMessage $content
+ * @var \yii\mail\BaseMessage $content
  */
 
 ?>

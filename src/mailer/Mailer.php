@@ -19,7 +19,7 @@ class Mailer extends Component
 
 	public $mailerComponent;
 	public $sender;
-	public $viewPath = '@app/user/views/mail';
+	public $viewPath = '@TerabyteSoft/Module/User/Views/Mail';
 
 	protected $confirmationSubject;
 	protected $newPasswordSubject;

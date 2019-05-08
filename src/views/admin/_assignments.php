@@ -1,16 +1,24 @@
 <?php
 
-use app\rbac\widgets\Assignments;
+/**
+ * Admin/_Assignments
+ *
+ * _Assignments Form
+ *
+ * View web application user
+ **/
+
+use TerabyteSoft\Module\User\Rbac\Widgets\Assignments;
 
 /**
- * @var yii\web\View $this
- * @var app\user\models\User $user
+ * @var \yii\web\View $this
+ * @var \TerabyteSoft\Module\User\Models\User $user
  */
 ?>
 
-<?php $this->beginContent('@app/user/views/admin/update.php', ['user' => $user]) ?>
+<?php $this->beginContent('@TerabyteSoft/Module/User/Views/Admin/Update.php', ['user' => $user]) ?>
 
-<?= yii\bootstrap4\Alert::widget([
+<?= Yiisoft\Yii\Bootstrap4\Alert::widget([
     'options' => [
         'class' => 'alert-info alert-dismissible',
     ],

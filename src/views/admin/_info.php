@@ -8,7 +8,7 @@
  * View web application user
  **/
 
-use yii\bootstrap4\Html;
+use Yiisoft\Yii\Bootstrap4\Html;
 
 /**
  * @var \app\user\models\UserModel $user

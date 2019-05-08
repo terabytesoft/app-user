@@ -29,7 +29,7 @@ class TimeZoneHelper
             ];
         }
 
-        \yii\helpers\ArrayHelper::multisort($timeZones, 'offset', SORT_DESC, SORT_NUMERIC);
+        \Yiisoft\Arrays\ArrayHelper::multisort($timeZones, 'offset', SORT_DESC, SORT_NUMERIC);
 
         return $timeZones;
     }

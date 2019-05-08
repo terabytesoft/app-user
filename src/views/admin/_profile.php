@@ -8,14 +8,14 @@
  * View web application user
  **/
 
-use app\user\helpers\TimeZoneHelper;
-use yii\bootstrap4\ActiveForm;
-use yii\bootstrap4\Html;
-use yii\helpers\ArrayHelper;
+use TerabyteSoft\Module\User\Helpers\TimeZoneHelper;
+use Yiisoft\Yii\Bootstrap4\ActiveForm;
+use Yiisoft\Yii\Bootstrap4\Html;
+use Yiisoft\Arrays\ArrayHelper;
 
 /**
- * @var \app\user\models\ProfileModel $profile
- * @var \app\user\models\UserModel $user
+ * @var \TerabyteSoft\Module\User\Models\ProfileModel $profile
+ * @var \TerabyteSoft\Module\User\Models\UserModel $user
  * @var yii\web\View $this
  **/
 
@@ -25,7 +25,7 @@ $this->title = $this->app->t('user', 'Profile Form');
 
 ?>
 
-<?php $this->beginContent('@app/user/views/admin/update.php', ['user' => $user]) ?>
+<?php $this->beginContent('@TerabyteSoft/Module/User/Views/Admin/Update.php', ['user' => $user]) ?>
 
 	<?= Html::tag('h2', '<b>' . Html::encode($this->title) . '</b>', ['class' => 'text-center']) ?>
 

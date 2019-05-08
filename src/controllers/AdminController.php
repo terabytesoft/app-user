@@ -86,7 +86,7 @@ class AdminController extends Controller
 
 		$dataProvider = $searchModel->search($this->app->request->get(), $this->module->userQuery);
 
-		return $this->render('index', [
+		return $this->render('Index', [
 			'dataProvider' => $dataProvider,
 			'searchModel' => $searchModel,
 		]);
@@ -118,7 +118,7 @@ class AdminController extends Controller
 			return $this->redirect(['update', 'id' => $user->id]);
 		}
 
-		return $this->render('create', [
+		return $this->render('Create', [
 			'user' => $user,
 		]);
 	}
@@ -153,7 +153,7 @@ class AdminController extends Controller
 			return $this->refresh();
 		}
 
-		return $this->render('_account', [
+		return $this->render('_Account', [
 			'user' => $user,
 		]);
 	}
@@ -193,7 +193,7 @@ class AdminController extends Controller
 			return $this->refresh();
 		}
 
-		return $this->render('_profile', [
+		return $this->render('_Profile', [
 			'user' => $user,
 			'profile' => $profile,
 		]);
@@ -214,7 +214,7 @@ class AdminController extends Controller
 
 		$user = $this->findModel($id);
 
-		return $this->render('_info', [
+		return $this->render('_Info', [
 			'user' => $user,
 		]);
 	}
@@ -286,7 +286,7 @@ class AdminController extends Controller
 
 		$user = $this->findModel($id);
 
-		return $this->render('_assignments', [
+		return $this->render('_Assignments', [
 			'user' => $user,
 		]);
 	}
@@ -439,7 +439,7 @@ class AdminController extends Controller
 	 *
 	 * @param int $id
 	 *
-	 * @return \app\user\models\UserModel the loaded model
+	 * @return \TerabyteSoft\Module\User\Models\UserModel the loaded model
 	 * @throws NotFoundHttpException if the model cannot be found
 	 **/
 	protected function findModel(int $id)

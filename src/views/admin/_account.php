@@ -1,19 +1,18 @@
 <?php
 
 /**
- * admin/_account
+ * Admin/_Account
  *
- * Account Form
+ * _Account Form
  *
  * View web application user
  **/
 
-
-use yii\bootstrap4\ActiveForm;
-use yii\bootstrap4\Html;
+use Yiisoft\Yii\Bootstrap4\ActiveForm;
+use Yiisoft\Yii\Bootstrap4\Html;
 
 /**
- * @var \app\user\models\UserModel $user
+ * @var \TerabyteSoft\Module\User\Models\UserModel $user
  * @var \yii\web\View $this
  **/
 
@@ -21,7 +20,7 @@ $this->title = $this->app->t('user', 'Account Form');
 
 ?>
 
-<?php $this->beginContent('@app/user/views/admin/update.php', ['user' => $user]) ?>
+<?php $this->beginContent('@TerabyteSoft/Module/User/Views/Admin/Update.php', ['user' => $user]) ?>
 
 	<?= Html::tag('h2', '<b>' . Html::encode($this->title) . '</b>', ['class' => 'text-center']) ?>
 

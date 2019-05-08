@@ -8,12 +8,12 @@
  * View web application user
  **/
 
-use yii\bootstrap4\Html;
-use yii\bootstrap4\Nav;
+use Yiisoft\Yii\Bootstrap4\Html;
+use Yiisoft\Yii\Bootstrap4\Nav;
 
 /**
  * @var string $content
- * @var \app\user\models\UserModel $user
+ * @var \TerabyteSoft\Module\User\Models\UserModel $user
  * @var \yii\web\View $this
  **/
 

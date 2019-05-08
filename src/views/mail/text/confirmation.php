@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @var app\user\models\User   $user
- * @var app\user\models\Token  $token
+ * @var \TerabyteSoft\Module\User\models\User   $user
+ * @var \TerabyteSoft\Module\User\models\Token  $token
  */
 
 ?>
@@ -15,5 +15,4 @@
 <?= $token->url ?>
 
 <?= $module->getApp()->t('user', 'If you cannot click the link, please try pasting the text into your browser') ?>.
-
 <?= $module->getApp()->t('user', 'If you did not make this request you can ignore this email') ?>.

@@ -8,12 +8,12 @@
  * View web application user
  **/
 
-use app\user\assets\RegistrationResendAsset;
-use yii\bootstrap4\ActiveForm;
-use yii\bootstrap4\Html;
+use TerabyteSoft\Module\User\Assets\RegistrationResendAsset;
+use Yiisoft\Yii\Bootstrap4\ActiveForm;
+use Yiisoft\Yii\Bootstrap4\Html;
 
 /**
- * @var \app\user\forms\ResendForm $model
+ * @var \TerabyteSoft\Module\User\forms\ResendForm $model
  * @var \yii\web\View $this
  */
 
@@ -21,7 +21,7 @@ $this->title = $this->app->t('user', 'Request new confirmation message');
 $this->params['breadcrumbs'][] = $this->title;
 
 if ($module->floatLabels) {
-    \app\user\assets\FloatingLabelAsset::register($this);
+    \TerabyteSoft\Module\User\Assets\FloatingLabelAsset::register($this);
 }
 
 RegistrationResendAsset::register($this);

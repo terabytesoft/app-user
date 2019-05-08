@@ -4,9 +4,9 @@ use yii\helpers\Html;
 use yii\helpers\Yii;
 
 /**
- * @var app\user\Module $module
- * @var app\user\models\User $user
- * @var app\user\models\Password $password
+ * @var TerabyteSoft\Module\User\Module $module
+ * @var TerabyteSoft\Module\User\Models\User $user
+ * @var TerabyteSoft\Module\User\Models\Password $password
  */
 
 ?>

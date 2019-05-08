@@ -6,12 +6,13 @@ return [
     'app' => [
         'basePath' => dirname(__DIR__) . '/tests/src',
         'controllerNamespace' => '\TerabyteSoft\Module\User\Tests\Controllers',
+        'layout' => 'Main.php',
     ],
 	'authClientCollection' => [
 		'__class' => Yiisoft\Yii\AuthClient\Collection::class,
 		'setClients()' => [
-			'facebook' => [
-				'__class'      => Yiisoft\Yii\AuthClient\Clients\Facebook::class,
+			'github' => [
+				'__class'      => Yiisoft\Yii\AuthClient\Clients\Github::class,
 				'clientId'     => 'CLIENT_ID',
 				'clientSecret' => 'CLIENT_SECRET',
 			],
@@ -29,5 +30,11 @@ return [
         '__class'   => yii\web\AssetManager::class,
         'basePath'  => '@public/assets',
         'baseUrl'   => '@web/assets',
+    ],
+    'theme' => [
+        'pathMap' => [
+            '@app/views/layouts' => '@TerabyteSoft/Module/User/Tests/Views/Layouts',
+            '@app/views/site' => '@TerabyteSoft/Module/User/Tests/Views/Site',
+        ],
     ],
 ];

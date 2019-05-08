@@ -8,19 +8,19 @@
  * View web application user
  **/
 
-use app\user\assets\AdminIndexAsset;
-use assets\fontawesome\dev\css\NpmSolidAsset;
-use yii\bootstrap4\Html;
-use yii\dataview\GridView;
-use yii\dataview\columns\ActionColumn;
-use yii\dataview\columns\CheckboxColumn;
-use yii\jquery\GridViewAsset;
+use TerabyteSoft\Module\User\Assets\AdminIndexAsset;
+use TerabyteSoft\Assets\Fontawesome\Dev\Css\NpmSolidAsset;
+use Yiisoft\Yii\Bootstrap4\Html;
+use Yiisoft\Yii\DataView\GridView;
+use Yiisoft\Yii\DataView\columns\ActionColumn;
+use Yiisoft\Yii\DataView\columns\CheckboxColumn;
+use Yiisoft\Yii\JQuery\GridViewAsset;
 use yii\helpers\Url;
 use yii\web\View;
 
 /**
- * @var \app\user\models\UserSearch $searchModel
- * @var \yii\activerecord\data\ActiveDataProvider $dataProvider
+ * @var \TerabyteSoft\Module\User\models\UserSearch $searchModel
+ * @var \Yiisoft\ActiveRecord\data\ActiveDataProvider $dataProvider
  * @var \yii\web\View $this
  **/
 
@@ -257,12 +257,12 @@ $columns = 	[
 
     <?= Html::tag('hr', '', ['class' => 'mb-4']) ?>
 
-    <?= $this->render('/admin/_menu') ?>
+    <?= $this->render('/admin/_Menu') ?>
 
     <?php echo GridView::widget([
 	    'id' => 'form-admin-index',
 	    'as clientScript' => [
-		    '__class' => \yii\jquery\GridViewClientScript::class,
+		    '__class' => \Yiisoft\Yii\JQuery\GridViewClientScript::class,
 	    ],
 	    'columns' => $columns,
 	    'dataProvider' => $dataProvider,

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @var app\user\models\Token $token
+ * @var \TerabyteSoft\Module\User\Models\Token $token
  */
 
 ?>
@@ -13,6 +13,7 @@
     'We have received a request to change the email address for your account on {0}',
     [$module->getApp()->name]
 ) ?>.
+
 <?= $module->getApp()->t('user', 'In order to complete your request, please click the link below') ?>.
 
 <?= $token->url ?>

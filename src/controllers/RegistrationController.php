@@ -62,7 +62,7 @@ class RegistrationController extends Controller
 
 		$this->trigger(FormEvent::init());
 
-		/** @var \app\user\forms\RegistrationForm $model */
+		/** @var \TerabyteSoft\Module\User\Forms\RegistrationForm $model */
 		$model = $this->module->registrationForm;
 
 		$this->trigger(FormEvent::beforeRegister());
@@ -92,7 +92,7 @@ class RegistrationController extends Controller
 			return $this->goHome();
 		}
 
-		return $this->render('register', [
+		return $this->render('Register', [
 			'model' => $model,
 			'module' => $this->module,
 		]);

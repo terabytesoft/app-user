@@ -7,11 +7,11 @@
  **/
 
 use TerabyteSoft\Module\User\Tests\Assets\LayoutAdminAsset;
-use TerabyteSoft\Widgets\Alert;
-use \Yiisoft\Yii\JQuery\YiiAsset;
 use Yiisoft\Yii\Bootstrap4\Html;
 use Yiisoft\Yii\Bootstrap4\Nav;
 use Yiisoft\Yii\Bootstrap4\NavBar;
+use TerabyteSoft\Widgets\Alert;
+use Yiisoft\Yii\JQuery\YiiAsset;
 
 LayoutAdminAsset::register($this);
 
@@ -71,7 +71,8 @@ if ($this->app->user->isGuest) {
 
                     <?= Html::beginTag('div', ['class' => 'container flex-fill']) ?>
 
-                        <?= Alert::widget() ?>
+                        <?= Alert::widget([])?>
+
 						<?= $content ?>
 
 					<?= Html::endTag('div') ?>

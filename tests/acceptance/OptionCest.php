@@ -9,22 +9,13 @@ use yii\helpers\Yii;
  **/
 class OptionCest
 {
-	/**
-	 * _before.
-	 *
-	 **/
-	public function _before(AcceptanceTester $I)
-	{
-		$I->amOnPage('/user/security/login');
-	}
-
 	public function logInFloatLabels(AcceptanceTester $I)
 	{
-		$I->amOnPage('/user/security/login');
-		$I->paramUpdate("'user.setting.floatLabels' => false", "'user.setting.floatLabels' => true");
+        $I->paramUpdate("'user.setting.floatLabels' => false", "'user.setting.floatLabels' => true");
+        $I->amOnPage('/user/security/login');
 		$sourceFloatLabels =
 <<<'HTML'
-floating_labels.css
+Floating_Labels.css
 HTML;
 		\PHPUnit_Framework_Assert::assertContains($sourceFloatLabels, $I->grabPageSource());
 	}

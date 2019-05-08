@@ -8,14 +8,14 @@
  * View web application user
  **/
 
-use app\user\assets\RegistrationRegisterAsset;
-use app\user\widgets\Connect;
-use yii\bootstrap4\ActiveForm;
-use yii\bootstrap4\Html;
+use TerabyteSoft\Module\User\Assets\RegistrationRegisterAsset;
+use TerabyteSoft\Module\User\widgets\Connect;
+use Yiisoft\Yii\Bootstrap4\ActiveForm;
+use Yiisoft\Yii\Bootstrap4\Html;
 
 /**
- * @var \app\user\Module $module
- * @var \app\user\models\UserModel $model
+ * @var \TerabyteSoft\Module\User\Module $module
+ * @var \TerabyteSoft\Module\User\Models\UserModel $model
  * @var \yii\web\View $this
  **/
 
@@ -23,7 +23,7 @@ $this->title = $this->getApp()->t('user', 'Sign up');
 $this->params['breadcrumbs'][] = $this->title;
 
 if ($module->floatLabels) {
-    \app\user\assets\FloatingLabelAsset::register($this);
+    \TerabyteSoft\Module\User\Assets\FloatingLabelAsset::register($this);
 }
 
 RegistrationRegisterAsset::register($this);

@@ -5,11 +5,11 @@ return [
 	'app.id' => 'my-project-user',
     'app.name' => 'My Project Basic',
     // db:
-    'db.dns' => 'mysql:host=107.175.70.117;dbname=app-user;charset=utf8',
-    'db.username' => 'root',
-    'db.password' => 'zCbHrQiQn1W1j4',
+    'db.dns' => 'mysql:host=127.0.0.1;dbname=app-user;charset=utf8',
+    'db.username' => '',
+    'db.password' => '',
     // debug:
-    'debug.enable' => true,
+    'debug.enabled' => false,
     'debug.allowedIPs' => ['127.0.0.1', '::1', '*', '192.168.1.108'],
     // mailer:
     'mailer.useFileTransport' => true,

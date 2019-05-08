@@ -8,12 +8,12 @@
  * View web application user
  **/
 
-use app\user\assets\RecoveryRequestAsset;
-use yii\bootstrap4\ActiveForm;
-use yii\bootstrap4\Html;
+use TerabyteSoft\Module\User\Assets\RecoveryRequestAsset;
+use Yiisoft\Yii\Bootstrap4\ActiveForm;
+use Yiisoft\Yii\Bootstrap4\Html;
 
 /**
- * @var \app\user\forms\RecoveryForm $model
+ * @var \TerabyteSoft\Module\User\Forms\RecoveryForm $model
  * @var \yii\bootstrap4\ActiveForm $form
  * @var \yii\web\View $this
  **/
@@ -22,7 +22,7 @@ $this->title = $this->app->t('user', 'Recover your password');
 $this->params['breadcrumbs'][] = $this->title;
 
 if ($module->floatLabels) {
-    \app\user\assets\FloatingLabelAsset::register($this);
+    \TerabyteSoft\Module\User\Assets\FloatingLabelAsset::register($this);
 }
 
 RecoveryRequestAsset::register($this);
