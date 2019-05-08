@@ -79,5 +79,16 @@ return [
                 'basePath' => $params['translator.basePath'],
             ],
         ],
-	],
+    ],
+    'theme' => [
+    	'pathMap' => [
+            '@TerabyteSoft/Module/User/views/admin' => '@TerabyteSoft/Module/User/Views/Admin',
+            '@TerabyteSoft/Module/User/views/mail' => '@TerabyteSoft/Module/User/Views/Mail',
+            '@TerabyteSoft/Module/User/views/profile' => '@TerabyteSoft/Module/User/Views/Profile',
+            '@TerabyteSoft/Module/User/views/recovery' => '@TerabyteSoft/Module/User/Views/Recovery',
+        	'@TerabyteSoft/Module/User/views/registration' => '@TerabyteSoft/Module/User/Views/Registration',
+            '@TerabyteSoft/Module/User/views/security' => '@TerabyteSoft/Module/User/Views/Security',
+            '@TerabyteSoft/Module/User/views/settings' => '@TerabyteSoft/Module/User/Views/Settings',
+        ],
+    ],
 ];
