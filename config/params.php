@@ -5,7 +5,7 @@ return [
 	'app.id' => 'my-project-user',
     'app.name' => 'My Project Basic',
     // db:
-    'db.dns' => 'mysql:host=127.0.0.1;dbname=app-user;charset=utf8',
+    'db.dns' => 'mysql:host=localhost;dbname=app_user;charset=utf8',
     'db.username' => 'root',
     'db.password' => '',
     // debug:
