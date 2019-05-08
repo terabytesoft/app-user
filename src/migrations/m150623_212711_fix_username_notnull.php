@@ -1,6 +1,6 @@
 <?php
 
-use TerabyteSoft\Module\User\Migration\Migration;
+use TerabyteSoft\Module\User\Migrations\Migration;
 
 class M150623_212711_fix_username_notnull extends Migration
 {

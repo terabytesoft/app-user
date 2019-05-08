@@ -1,6 +1,6 @@
 <?php
 
-use TerabyteSoft\Module\User\Migration\Migration;
+use TerabyteSoft\Module\User\Migrations\Migration;
 
 class M140209_132017_init extends Migration
 {

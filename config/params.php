@@ -5,9 +5,9 @@ return [
 	'app.id' => 'my-project-user',
     'app.name' => 'My Project Basic',
     // db:
-    'db.dns' => 'mysql:host=107.175.70.117;dbname=app_user;charset=utf8',
+    'db.dns' => 'mysql:host=107.175.70.117;dbname=app-user;charset=utf8',
     'db.username' => 'root',
-    'db.password' => 'uFaRo1Cp8gPb1g',
+    'db.password' => 'zCbHrQiQn1W1j4',
     // debug:
     'debug.enable' => true,
     'debug.allowedIPs' => ['127.0.0.1', '::1', '*', '192.168.1.108'],

@@ -1,6 +1,6 @@
 <?php
 
-namespace TerabyteSoft\Module\User\Migration;
+namespace TerabyteSoft\Module\User\Migrations;
 
 use yii\helpers\Yii;
 

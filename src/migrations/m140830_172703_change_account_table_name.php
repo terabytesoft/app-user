@@ -1,6 +1,6 @@
 <?php
 
-use TerabyteSoft\Module\User\Migration\Migration;
+use TerabyteSoft\Module\User\Migrations\Migration;
 
 class M140830_172703_change_account_table_name extends Migration
 {

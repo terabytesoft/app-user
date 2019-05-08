@@ -1,6 +1,6 @@
 <?php
 
-use TerabyteSoft\Module\User\Migration\Migration;
+use TerabyteSoft\Module\User\Migrations\Migration;
 use Yiisoft\Db\Query;
 
 class m150614_103145_update_social_account_table extends Migration

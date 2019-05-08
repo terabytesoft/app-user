@@ -1,6 +1,6 @@
 <?php
 
-use TerabyteSoft\Module\User\Migration\Migration;
+use TerabyteSoft\Module\User\Migrations\Migration;
 use Yiisoft\Db\Query;
 
 class M141222_110026_update_ip_field extends Migration
