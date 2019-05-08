@@ -31,7 +31,7 @@ install:
     fi
 
 before_script:
-  - vendor/bin/yii migrate --migrationPath=@app/user/migrations --interactive=0
+  - vendor/bin/yii migrate --migrationPath=@TerabyteSoft/Module/User/Migrations --interactive=0
 
 script:
   - |
