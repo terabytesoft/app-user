@@ -6,7 +6,7 @@ return [
     'app.name' => 'My Project Basic',
     // db:
     'db.dns' => 'mysql:host=127.0.0.1;dbname=app-user;charset=utf8',
-    'db.username' => '',
+    'db.username' => 'root',
     'db.password' => '',
     // debug:
     'debug.enabled' => false,
