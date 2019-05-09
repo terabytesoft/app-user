@@ -4,9 +4,9 @@ return [
     'app' => [
         'modules' => [
             'user' => [
-                '__class' => \app\user\Module::class,
+                '__class' => \TerabyteSoft\Module\User\Module::class,
                 'basePath' => dirname(__DIR__) . '/src',
-                'controllerNamespace' => 'app\user\controllers',
+                'controllerNamespace' => '\TerabyteSoft\Module\User\Controllers',
                 'accountAdmins' => $params['user.setting.accountAdmins'],
                 'accountDelete' => $params['user.setting.accountDelete'],
                 'accountConfirmation' => $params['user.setting.accountConfirmation'],
@@ -50,30 +50,25 @@ return [
         ],
     ],
     'db' => [
-        '__class'   => \yii\db\Connection::class,
+        '__class'   => \Yiisoft\Db\Connection::class,
         'dsn'       => $params['db.dns'],
         'username'  => $params['db.username'],
         'password'  =>  $params['db.password'],
     ],
     'cache' => [
-        '__class' => \yii\cache\Cache::class,
+        '__class' => \Yiisoft\Cache\Cache::class,
         'handler' => [
-            '__class' => \yii\cache\FileCache::class,
+            '__class' => \Yiisoft\Cache\FileCache::class,
             'keyPrefix' => 'app-user',
         ],
     ],
-    'logger' => [
-        '__construct()' => [
-            'targets' => [
-                [
-                    '__class' => \yii\log\FileTarget::class,
-                    'levels' => ['error', 'warning'],
-                ],
-            ],
-        ],
-    ],
+    'logger' => function () {
+        return new \Yiisoft\Log\Logger([
+            new \Yiisoft\Log\FileTarget('/tmp/log.txt')
+        ]);
+    },
     'mailer' => [
-        '__class' => \yii\swiftmailer\Mailer::class,
+        '__class' => \Yiisoft\Yii\SwiftMailer\Mailer::class,
         'useFileTransport' => $params['mailer.useFileTransport'],
 	],
     'translator' => [
@@ -84,5 +79,18 @@ return [
                 'basePath' => $params['translator.basePath'],
             ],
         ],
-	],
+    ],
+    'theme' => [
+    	'pathMap' => [
+            '@TerabyteSoft/Module/User/views/admin' => '@TerabyteSoft/Module/User/Views/Admin',
+            '@TerabyteSoft/Module/User/views/mail' => '@TerabyteSoft/Module/User/Views/Mail',
+        	'@TerabyteSoft/Module/User/views/mail/layouts' => '@TerabyteSoft/Module/User/Views/Mail/Layouts',
+        	'@TerabyteSoft/Module/User/views/mail/text' => '@TerabyteSoft/Module/User/Views/Mail/Text',
+            '@TerabyteSoft/Module/User/views/profile' => '@TerabyteSoft/Module/User/Views/Profile',
+            '@TerabyteSoft/Module/User/views/recovery' => '@TerabyteSoft/Module/User/Views/Recovery',
+        	'@TerabyteSoft/Module/User/views/registration' => '@TerabyteSoft/Module/User/Views/Registration',
+            '@TerabyteSoft/Module/User/views/security' => '@TerabyteSoft/Module/User/Views/Security',
+            '@TerabyteSoft/Module/User/views/settings' => '@TerabyteSoft/Module/User/Views/Settings',
+        ],
+    ],
 ];

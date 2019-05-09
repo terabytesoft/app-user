@@ -1,21 +1,21 @@
 <?php
 
-namespace app\user;
+namespace TerabyteSoft\Module\User;
 
-use app\user\forms\LoginForm;
-use app\user\forms\RecoveryForm;
-use app\user\forms\RegistrationForm;
-use app\user\forms\ResendForm;
-use app\user\forms\SettingsForm;
-use app\user\models\AccountModel;
-use app\user\models\ProfileModel;
-use app\user\models\TokenModel;
-use app\user\models\UserModel;
-use app\user\querys\AccountQuery;
-use app\user\querys\ProfileQuery;
-use app\user\querys\TokenQuery;
-use app\user\querys\UserQuery;
-use app\user\searchs\UserSearch;
+use TerabyteSoft\Module\User\Forms\LoginForm;
+use TerabyteSoft\Module\User\Forms\RecoveryForm;
+use TerabyteSoft\Module\User\Forms\RegistrationForm;
+use TerabyteSoft\Module\User\Forms\ResendForm;
+use TerabyteSoft\Module\User\Forms\SettingsForm;
+use TerabyteSoft\Module\User\Models\AccountModel;
+use TerabyteSoft\Module\User\Models\ProfileModel;
+use TerabyteSoft\Module\User\Models\TokenModel;
+use TerabyteSoft\Module\User\Models\UserModel;
+use TerabyteSoft\Module\User\Querys\AccountQuery;
+use TerabyteSoft\Module\User\Querys\ProfileQuery;
+use TerabyteSoft\Module\User\Querys\TokenQuery;
+use TerabyteSoft\Module\User\Querys\UserQuery;
+use TerabyteSoft\Module\User\Searchs\UserSearch;
 use yii\base\Module as BaseModule;
 
 /**
@@ -218,105 +218,105 @@ class Module extends BaseModule
 	/**
 	 * The value of accountModel.
 	 *
-	 * @var \app\user\models\AccountModel
+	 * @var \TerabyteSoft\Module\User\Models\AccountModel
 	 **/
 	protected $accountModel;
 
 	/**
 	 * The value of accountQuery.
 	 *
-	 * @var \app\user\querys\AccountQuery
+	 * @var \TerabyteSoft\Module\User\Querys\AccountQuery
 	 **/
 	protected $accountQuery;
 
 	/**
 	 * The value of loginForm.
 	 *
-	 * @var \app\user\forms\LoginForm
+	 * @var \TerabyteSoft\Module\User\Forms\LoginForm
 	 **/
 	protected $loginForm;
 
 	/**
 	 * The value of profileModel.
 	 *
-	 * @var \app\user\models\ProfileModel
+	 * @var \TerabyteSoft\Module\User\Models\ProfileModel
 	 **/
 	protected $profileModel;
 
 	/**
 	 * The value of profileQuery.
 	 *
-	 * @var \app\user\querys\ProfileQuery
+	 * @var \TerabyteSoft\Module\User\Querys\ProfileQuery
 	 **/
 	protected $profileQuery;
 
 	/**
 	 * The value of recoveryForm.
 	 *
-	 * @var \app\user\forms\RecoveryForm
+	 * @var \TerabyteSoft\Module\User\Forms\RecoveryForm
 	 **/
 	protected $recoveryForm;
 
 	/**
 	 * The value of registrationForm.
 	 *
-	 * @var \app\user\forms\RegistrationForm
+	 * @var \TerabyteSoft\Module\User\Forms\RegistrationForm
 	 **/
 	protected $registrationForm;
 
 	/**
 	 * The value of resendForm.
 	 *
-	 * @var \app\user\forms\ResendForm
+	 * @var \TerabyteSoft\Module\User\Forms\ResendForm
 	 **/
 	protected $resendForm;
 
 	/**
 	 * The value of settingsForm.
 	 *
-	 * @var \app\user\forms\SettingsForm
+	 * @var \TerabyteSoft\Module\User\Forms\SettingsForm
 	 **/
 	protected $settingsForm;
 
 	/**
 	 * The value of tokenModel.
 	 *
-	 * @var \app\user\models\TokenModel
+	 * @var \TerabyteSoft\Module\User\Models\TokenModel
 	 **/
 	protected $tokenModel;
 
 	/**
 	 * The value of tokenQuery.
 	 *
-	 * @var \app\user\querys\TokenQuery
+	 * @var \TerabyteSoft\Module\User\Querys\TokenQuery
 	 **/
 	protected $tokenQuery;
 
 	/**
 	 * The value of userModel.
 	 *
-	 * @var \app\user\models\UserModel
+	 * @var \TerabyteSoft\Module\User\Models\UserModel
 	 **/
 	protected $userModel;
 
 	/**
 	 * The value of userQuery.
 	 *
-	 * @var \app\user\querys\UserQuery
+	 * @var \TerabyteSoft\Module\User\Querys\UserQuery
 	 **/
 	protected $userQuery;
 
 	/**
 	 * The value of userSearch.
 	 *
-	 * @var \app\user\searchs\UserSearch
+	 * @var \TerabyteSoft\Module\User\Searchs\UserSearch
 	 **/
 	protected $userSearch;
 
 	/**
 	 * Get the value of accountModel.
 	 *
-	 * @return \app\user\models\AccountModel
+	 * @return \TerabyteSoft\Module\User\Models\AccountModel
 	 **/
 	public function getAccountModel(): AccountModel
 	{
@@ -326,7 +326,7 @@ class Module extends BaseModule
 	/**
 	 * Get the value of accountQuery.
 	 *
-	 * @return \app\user\querys\AccountQuery
+	 * @return \TerabyteSoft\Module\User\Querys\AccountQuery
 	 **/
 	public function getAccountQuery(): AccountQuery
 	{
@@ -336,7 +336,7 @@ class Module extends BaseModule
 	/**
 	 * Get the value of loginForm.
 	 *
-	 * @return \app\user\forms\LoginForm
+	 * @return \TerabyteSoft\Module\User\Forms\LoginForm
 	 **/
 	public function getLoginForm(): LoginForm
 	{
@@ -346,7 +346,7 @@ class Module extends BaseModule
 	/**
 	 * Get the value of profileModel.
 	 *
-	 * @return \app\user\models\ProfileModel
+	 * @return \TerabyteSoft\Module\User\Models\ProfileModel
 	 **/
 	public function getProfileModel(): ProfileModel
 	{
@@ -356,7 +356,7 @@ class Module extends BaseModule
 	/**
 	 * Get the value of profileQuery.
 	 *
-	 * @return \app\user\querys\ProfileQuery
+	 * @return \TerabyteSoft\Module\User\Querys\ProfileQuery
 	 **/
 	public function getProfileQuery(): ProfileQuery
 	{
@@ -366,7 +366,7 @@ class Module extends BaseModule
 	/**
 	 * Get the value of recoveryForm.
 	 *
-	 * @return \app\user\forms\RecoveryForm
+	 * @return \TerabyteSoft\Module\User\Forms\RecoveryForm
 	 **/
 	public function getRecoveryForm(): RecoveryForm
 	{
@@ -376,7 +376,7 @@ class Module extends BaseModule
 	/**
 	 * Get the value of registrationForm.
 	 *
-	 * @return \app\user\forms\RegistrationForm
+	 * @return \TerabyteSoft\Module\User\Forms\RegistrationForm
 	 **/
 	public function getRegistrationForm(): RegistrationForm
 	{
@@ -386,7 +386,7 @@ class Module extends BaseModule
 	/**
 	 * Get the value of resendForm.
 	 *
-	 * @return \app\user\forms\ResendForm
+	 * @return \TerabyteSoft\Module\User\Forms\ResendForm
 	 **/
 	public function getResendForm(): ResendForm
 	{
@@ -396,7 +396,7 @@ class Module extends BaseModule
 	/**
 	 * Get the value of settingsForm.
 	 *
-	 * @return \app\user\forms\SettingsForm
+	 * @return \TerabyteSoft\Module\User\Forms\SettingsForm
 	 **/
 	public function getSettingsForm(): SettingsForm
 	{
@@ -406,7 +406,7 @@ class Module extends BaseModule
 	/**
 	 * Get the value of tokenModel.
 	 *
-	 * @return \app\user\models\TokenModel
+	 * @return \TerabyteSoft\Module\User\Models\TokenModel
 	 **/
 	public function getTokenModel(): TokenModel
 	{
@@ -416,7 +416,7 @@ class Module extends BaseModule
 	/**
 	 * Get the value of tokenQuery.
 	 *
-	 * @return \app\user\querys\TokenQuery
+	 * @return \TerabyteSoft\Module\User\Querys\TokenQuery
 	 **/
 	public function getTokenQuery(): TokenQuery
 	{
@@ -426,7 +426,7 @@ class Module extends BaseModule
 	/**
 	 * Get the value of userModel.
 	 *
-	 * @return \app\user\models\UserModel
+	 * @return \TerabyteSoft\Module\User\Models\UserModel
 	 **/
 	public function getUserModel(): UserModel
 	{
@@ -436,7 +436,7 @@ class Module extends BaseModule
 	/**
 	 * Get the value of userQuery.
 	 *
-	 * @return \app\user\querys\UserQuery
+	 * @return \TerabyteSoft\Module\User\Querys\UserQuery
 	 **/
 	public function getUserQuery(): UserQuery
 	{
@@ -446,7 +446,7 @@ class Module extends BaseModule
 	/**
 	 * Get the value of userSearch.
 	 *
-	 * @return \app\user\searchs\UserSearch
+	 * @return \TerabyteSoft\Module\User\Searchs\UserSearch
 	 **/
 	public function getUserSearch(): UserSearch
 	{

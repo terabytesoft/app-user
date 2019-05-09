@@ -9,7 +9,8 @@ return [
     'db.username' => 'root',
     'db.password' => '',
     // debug:
-    'debug.allowedIPs' => ['127.0.0.1', '::1', '*'],
+    'debug.enabled' => false,
+    'debug.allowedIPs' => ['127.0.0.1', '::1', '*', '192.168.1.108'],
     // mailer:
     'mailer.useFileTransport' => true,
     // module user - settings:
@@ -23,7 +24,7 @@ return [
     'user.setting.accountUnconfirmedLogin' => true,
     'user.setting.cost' => 10,
     'user.setting.debug' => false,
-    'user.setting.emailChangeStrategy' => \app\user\Module::STRATEGY_DEFAULT,
+    'user.setting.emailChangeStrategy' => \TerabyteSoft\Module\User\Module::STRATEGY_DEFAULT,
     'user.setting.floatLabels' => false,
     'user.setting.rememberFor' => 1209600,
     'user.setting.tokenConfirmWithin' => 86400,
@@ -39,23 +40,23 @@ return [
         'settings/<action:\w+>'                  => 'settings/<action>',
     ],
     // module user - form map models:
-    'user.formMap.LoginForm' => \app\user\forms\LoginForm::class,
-    'user.formMap.RecoveryForm' => \app\user\forms\RecoveryForm::class,
-    'user.formMap.RegistrationForm' => \app\user\forms\RegistrationForm::class,
-    'user.formMap.ResendForm' => \app\user\forms\ResendForm::class,
-    'user.formMap.SettingsForm' => \app\user\forms\SettingsForm::class,
+    'user.formMap.LoginForm' => \TerabyteSoft\Module\User\Forms\LoginForm::class,
+    'user.formMap.RecoveryForm' => \TerabyteSoft\Module\User\Forms\RecoveryForm::class,
+    'user.formMap.RegistrationForm' => \TerabyteSoft\Module\User\Forms\RegistrationForm::class,
+    'user.formMap.ResendForm' => \TerabyteSoft\Module\User\Forms\ResendForm::class,
+    'user.formMap.SettingsForm' => \TerabyteSoft\Module\User\Forms\SettingsForm::class,
     // module user - query map models:
-    'user.queryMap.AccountQuery' => \app\user\querys\AccountQuery::class,
-    'user.queryMap.ProfileQuery' => \app\user\querys\ProfileQuery::class,
-    'user.queryMap.TokenQuery' => \app\user\querys\TokenQuery::class,
-    'user.queryMap.UserQuery' => \app\user\querys\UserQuery::class,
+    'user.queryMap.AccountQuery' => \TerabyteSoft\Module\User\Querys\AccountQuery::class,
+    'user.queryMap.ProfileQuery' => \TerabyteSoft\Module\User\Querys\ProfileQuery::class,
+    'user.queryMap.TokenQuery' => \TerabyteSoft\Module\User\Querys\TokenQuery::class,
+    'user.queryMap.UserQuery' => \TerabyteSoft\Module\User\Querys\UserQuery::class,
     // module user - map models:
-    'user.modelMap.AccountModel' => \app\user\models\AccountModel::class,
-    'user.modelMap.ProfileModel' => \app\user\models\ProfileModel::class,
-    'user.modelMap.TokenModel' => \app\user\models\TokenModel::class,
-    'user.modelMap.UserModel' => \app\user\models\UserModel::class,
+    'user.modelMap.AccountModel' => \TerabyteSoft\Module\User\Models\AccountModel::class,
+    'user.modelMap.ProfileModel' => \TerabyteSoft\Module\User\Models\ProfileModel::class,
+    'user.modelMap.TokenModel' => \TerabyteSoft\Module\User\Models\TokenModel::class,
+    'user.modelMap.UserModel' => \TerabyteSoft\Module\User\Models\UserModel::class,
     // module user - search map models:
-    'user.searchMap.UserSearch' => \app\user\searchs\UserSearch::class,
+    'user.searchMap.UserSearch' => \TerabyteSoft\Module\User\Searchs\UserSearch::class,
     // translator:
     'i18n.locale' => 'en',
     'i18n.encoding' => 'UTF-8',

@@ -7,6 +7,9 @@ package.json
 # composer vendor dir
 /vendor
 
+# c3 coverage
+c3.php
+
 # local phpunit config
 /phpunit.xml
 
@@ -18,6 +21,9 @@ nbproject
 
 #node_modules
 /node_modules
+
+# phpdocumentor
+/api
 
 # phpstorm project files
 .idea
