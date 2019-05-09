@@ -25,7 +25,7 @@ return [
     'user.setting.cost' => 10,
     'user.setting.debug' => false,
     'user.setting.emailChangeStrategy' => \TerabyteSoft\Module\User\Module::STRATEGY_DEFAULT,
-    'user.setting.floatLabels' => false,
+    'user.setting.floatLabels' => true,
     'user.setting.rememberFor' => 1209600,
     'user.setting.tokenConfirmWithin' => 86400,
     'user.setting.tokenRecoverWithin' => 21600,
@@ -41,7 +41,7 @@ return [
     ],
     // module user - form map models:
     'user.formMap.LoginForm' => \TerabyteSoft\Module\User\Forms\LoginForm::class,
-    'user.formMap.RecoveryForm' => \TerabyteSoft\Module\User\forms\RecoveryForm::class,
+    'user.formMap.RecoveryForm' => \TerabyteSoft\Module\User\Forms\RecoveryForm::class,
     'user.formMap.RegistrationForm' => \TerabyteSoft\Module\User\Forms\RegistrationForm::class,
     'user.formMap.ResendForm' => \TerabyteSoft\Module\User\Forms\ResendForm::class,
     'user.formMap.SettingsForm' => \TerabyteSoft\Module\User\Forms\SettingsForm::class,

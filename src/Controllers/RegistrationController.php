@@ -239,7 +239,7 @@ class RegistrationController extends Controller
 			return $this->goHome();
 		}
 
-		return $this->render('resend', [
+		return $this->render('Resend', [
 			'model' => $model,
 			'module' => $this->module,
 		]);
