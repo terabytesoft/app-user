@@ -1,6 +1,6 @@
 <?php
 
-namespace TerabyteSoft\Module\User\models;
+namespace TerabyteSoft\Module\User\Models;
 
 use TerabyteSoft\Module\User\Clients\ClientInterface;
 use TerabyteSoft\Module\User\Models\UserModel;

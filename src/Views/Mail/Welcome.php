@@ -4,8 +4,8 @@ use yii\helpers\Html;
 
 /**
  * @var \TerabyteSoft\Module\User\Module $module
- * @var \TerabyteSoft\Module\User\models\User $user
- * @var \TerabyteSoft\Module\User\models\Token $token
+ * @var \TerabyteSoft\Module\User\Models\User $user
+ * @var \TerabyteSoft\Module\User\Models\Token $token
  * @var bool $showPassword
  */
 

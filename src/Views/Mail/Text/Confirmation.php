@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @var \TerabyteSoft\Module\User\models\User   $user
- * @var \TerabyteSoft\Module\User\models\Token  $token
+ * @var \TerabyteSoft\Module\User\Models\User   $user
+ * @var \TerabyteSoft\Module\User\Models\Token  $token
  */
 
 ?>

@@ -19,7 +19,7 @@ use yii\helpers\Url;
 use yii\web\View;
 
 /**
- * @var \TerabyteSoft\Module\User\models\UserSearch $searchModel
+ * @var \TerabyteSoft\Module\User\Models\UserSearch $searchModel
  * @var \Yiisoft\ActiveRecord\data\ActiveDataProvider $dataProvider
  * @var \yii\web\View $this
  **/
