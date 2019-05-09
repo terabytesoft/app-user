@@ -84,7 +84,7 @@ class RecoveryController extends Controller
 			return $this->goHome();
 		}
 
-		return $this->render('request', [
+		return $this->render('Request', [
 			'model' => $model,
 			'module' => $this->module,
 		]);
@@ -162,7 +162,7 @@ class RecoveryController extends Controller
 			return $this->goHome();
 		}
 
-		return $this->render('reset', [
+		return $this->render('Reset', [
 			'model' => $model,
 			'module' => $this->module,
 		]);
