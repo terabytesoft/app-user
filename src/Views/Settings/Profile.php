@@ -8,15 +8,15 @@
  * View web application user
  **/
 
-use app\user\helpers\TimeZoneHelper;
-use yii\bootstrap4\ActiveForm;
-use yii\bootstrap4\Html;
-use yii\helpers\ArrayHelper;
+use TerabyteSoft\Module\User\Helpers\TimeZoneHelper;
+use Yiisoft\Yii\Bootstrap4\ActiveForm;
+use Yiisoft\Yii\Bootstrap4\Html;
+use Yiisoft\Arrays\ArrayHelper;
 
 /**
  * @var TimeZoneHelper $timezoneHelper
- * @var \app\user\models\ProfileModel $model
- * @var \yii\bootstrap4\ActiveForm $form
+ * @var \TerabyteSoft\Module\User\Models\ProfileModel $model
+ * @var \Yiisoft\Yii\Bootstrap4\ActiveForm $form
  * @var \yii\web\View $this
  **/
 

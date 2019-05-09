@@ -1,18 +1,14 @@
 <?php
 
 /**
- * settings/networks
- *
- * Networks form
- *
- * View web application user
+ * Networks
  **/
 
-use app\user\widgets\Connect;
-use yii\bootstrap4\Html;
+use TerabyteSoft\Module\User\Widgets\Connect;
+use Yiisoft\Yii\Bootstrap4\Html;
 
 /**
- * @var $form \yii\bootstrap4\ActiveForm
+ * @var $form \Yiisoft\Yii\Bootstrap4\ActiveForm
  * @var $this \yii\web\View
  **/
 

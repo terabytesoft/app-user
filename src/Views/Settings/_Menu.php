@@ -1,18 +1,14 @@
 <?php
 
 /**
- * settings/_menu
- *
- * Login form
- *
- * View web application user
+ * _Menu
  **/
 
-use yii\bootstrap4\Html;
-use yii\bootstrap4\Nav;
+use Yiisoft\Yii\Bootstrap4\Html;
+use Yiisoft\Yii\Bootstrap4\Nav;
 
 /**
- * @var app\user\models\UserModel $user
+ * @var \TerabyteSoft\Module\User\Models\UserModel $user
  **/
 
 $user = $this->app->user->identity;

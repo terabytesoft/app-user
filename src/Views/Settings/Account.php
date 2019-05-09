@@ -1,19 +1,15 @@
 <?php
 
 /**
- * settings/account
- *
- * Account form
- *
- * View web application user
+ * Account
  **/
 
-use yii\bootstrap4\ActiveForm;
-use yii\bootstrap4\Html;
+use Yiisoft\Yii\Bootstrap4\ActiveForm;
+use Yiisoft\Yii\Bootstrap4\Html;
 
 /**
- * @var \app\user\form\SettingsForm $model
- * @var \yii\bootstrap4\ActiveForm $form
+ * @var \TerabyteSoft\Module\User\Form\SettingsForm $model
+ * @var \Yiisoft\Yii\Bootstrap4\ActiveForm $form
  * @var \yii\web\View $this
  **/
 
