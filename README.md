@@ -3,6 +3,7 @@
         <img src="https://farm1.staticflickr.com/887/27875183957_69a3645a56_q.jpg" height="100px;">
     </a>
     <h1 align="center">Flexible user registration and authentication module.<br/>Yii version 3.0 with Boostratp 4.0.</h1>
+    <h4 align="center">Fork Based https://github.com/dektrium/yii2-user of demerof.</br>Module in development.</h4>
 </p>
 
 </br>
