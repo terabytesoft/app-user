@@ -84,6 +84,8 @@ return [
     	'pathMap' => [
             '@TerabyteSoft/Module/User/views/admin' => '@TerabyteSoft/Module/User/Views/Admin',
             '@TerabyteSoft/Module/User/views/mail' => '@TerabyteSoft/Module/User/Views/Mail',
+        	'@TerabyteSoft/Module/User/views/mail/layouts' => '@TerabyteSoft/Module/User/Views/Mail/Layouts',
+        	'@TerabyteSoft/Module/User/views/mail/text' => '@TerabyteSoft/Module/User/Views/Mail/Text',
             '@TerabyteSoft/Module/User/views/profile' => '@TerabyteSoft/Module/User/Views/Profile',
             '@TerabyteSoft/Module/User/views/recovery' => '@TerabyteSoft/Module/User/Views/Recovery',
         	'@TerabyteSoft/Module/User/views/registration' => '@TerabyteSoft/Module/User/Views/Registration',

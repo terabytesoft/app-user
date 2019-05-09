@@ -194,7 +194,7 @@ class Mailer extends Component
 		return $this->sendMessage(
 			$user->email,
 			$this->getWelcomeSubject(),
-			'welcome',
+			'Welcome',
 			['user' => $user, 'token' => $token, 'module' => $this->module, 'showPassword' => $showPassword]
 		);
 	}
@@ -214,7 +214,7 @@ class Mailer extends Component
 		return $this->sendMessage(
 			$user->email,
 			$this->getNewPasswordSubject(),
-			'new_password',
+			'New_Password',
 			['user' => $user, 'password' => $password, 'module' => $this->module]
 		);
 	}
@@ -234,7 +234,7 @@ class Mailer extends Component
 		return $this->sendMessage(
 			$user->email,
 			$this->getConfirmationSubject(),
-			'confirmation',
+			'Confirmation',
 			['user' => $user, 'token' => $token, 'module' => $this->module]
 		);
 	}
@@ -260,7 +260,7 @@ class Mailer extends Component
 		return $this->sendMessage(
 			$email,
 			$this->getReconfirmationSubject(),
-			'reconfirmation',
+			'Reconfirmation',
 			['user' => $user, 'token' => $token, 'module' => $this->module]
 		);
 	}
@@ -281,7 +281,7 @@ class Mailer extends Component
 		return $this->sendMessage(
 			$user->email,
 			$this->getRecoverySubject(),
-			'recovery',
+			'Recovery',
 			['user' => $user, 'token' => $token, 'module' => $this->module]
 		);
 	}
@@ -308,7 +308,7 @@ class Mailer extends Component
 				: 'no-reply@example.com';
 		}
 
-		return $mailer->compose(['html' => $view, 'text' => 'text/' . $view], $params)
+		return $mailer->compose(['Layouts/Html' => $view, 'Layouts/Text' => 'Text/' . $view], $params)
 			->setTo($to)
 			->setFrom($this->sender)
 			->setSubject($subject)
