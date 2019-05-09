@@ -25,7 +25,7 @@ return [
     'user.setting.cost' => 10,
     'user.setting.debug' => false,
     'user.setting.emailChangeStrategy' => \TerabyteSoft\Module\User\Module::STRATEGY_DEFAULT,
-    'user.setting.floatLabels' => true,
+    'user.setting.floatLabels' => false,
     'user.setting.rememberFor' => 1209600,
     'user.setting.tokenConfirmWithin' => 86400,
     'user.setting.tokenRecoverWithin' => 21600,
