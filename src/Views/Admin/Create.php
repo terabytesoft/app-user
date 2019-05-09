@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
-<?= $this->render('_menu') ?>
+<?= $this->render('_Menu') ?>
 
 <?= Html::beginTag('div', ['class' => 'row']) ?>
 
@@ -83,7 +83,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			'validateOnType' => false,
 		]) ?>
 
-        	<?= $this->render('_user', ['form' => $form, 'user' => $user]) ?>
+        	<?= $this->render('_User', ['form' => $form, 'user' => $user]) ?>
 
 			<?= Html::submitButton($this->app->t('user', 'Save'), [
 				'class' => 'btn btn-block btn-lg btn-primary', 'tabindex' => '4',

@@ -12,8 +12,8 @@ use TerabyteSoft\Module\User\Assets\AdminIndexAsset;
 use TerabyteSoft\Assets\Fontawesome\Dev\Css\NpmSolidAsset;
 use Yiisoft\Yii\Bootstrap4\Html;
 use Yiisoft\Yii\DataView\GridView;
-use Yiisoft\Yii\DataView\columns\ActionColumn;
-use Yiisoft\Yii\DataView\columns\CheckboxColumn;
+use Yiisoft\Yii\DataView\Columns\ActionColumn;
+use Yiisoft\Yii\DataView\Columns\CheckboxColumn;
 use Yiisoft\Yii\JQuery\GridViewAsset;
 use yii\helpers\Url;
 use yii\web\View;
@@ -257,7 +257,7 @@ $columns = 	[
 
     <?= Html::tag('hr', '', ['class' => 'mb-4']) ?>
 
-    <?= $this->render('/admin/_Menu') ?>
+    <?= $this->render('_Menu') ?>
 
     <?php echo GridView::widget([
 	    'id' => 'form-admin-index',

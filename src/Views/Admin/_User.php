@@ -9,8 +9,8 @@
  **/
 
 /**
- * @var \app\user\models\UserModel $user
- * @var \yii\widgets\ActiveForm $form
+ * @var \TerabyteSoft\Module\User\Models\UserModel $user
+ * @var \Yiisoft\Yii\Bootstrap4\ActiveForm $form
  **/
 
 ?>

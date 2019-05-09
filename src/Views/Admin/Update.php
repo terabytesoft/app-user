@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
-<?= $this->render('_menu') ?>
+<?= $this->render('_Menu') ?>
 
 <?= Html::beginTag('div', ['class' => 'row']) ?>
 

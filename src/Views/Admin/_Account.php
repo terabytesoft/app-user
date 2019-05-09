@@ -35,7 +35,7 @@ $this->title = $this->app->t('user', 'Account Form');
 		'validateOnType' => false,
 	]) ?>
 
-		<?= $this->render('_user', ['form' => $form, 'user' => $user]) ?>
+		<?= $this->render('_User', ['form' => $form, 'user' => $user]) ?>
 
 		<?= Html::submitButton($this->app->t('user', 'Update'), [
 			'class' => 'btn btn-block btn-lg btn-primary', 'tabindex' => '4',

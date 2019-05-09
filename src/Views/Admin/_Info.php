@@ -19,7 +19,7 @@ $this->title = $this->app->t('user', 'Information Details');
 
 ?>
 
-<?php $this->beginContent('@app/user/views/admin/update.php', ['user' => $user]) ?>
+<?php $this->beginContent('@TerabyteSoft/Module/User/Views/Admin/Update.php', ['user' => $user]) ?>
 
 	<?= Html::beginTag(
 		'div',

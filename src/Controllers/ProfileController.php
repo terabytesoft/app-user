@@ -64,7 +64,7 @@ class ProfileController extends Controller
 			throw new NotFoundHttpException();
 		}
 
-		return $this->render('show', [
+		return $this->render('Show', [
 			'profile' => $profile,
 		]);
 	}
