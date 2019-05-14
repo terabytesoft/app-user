@@ -37,7 +37,7 @@ class Mailer extends Component
 	{
 		if ($this->welcomeSubject == null) {
 			$this->setWelcomeSubject($this->module->getApp()->t(
-				'user',
+				'ModuleUser',
 				'Welcome to {0}',
 				[$this->module->getApp()->name]
 			));
@@ -67,7 +67,7 @@ class Mailer extends Component
 	{
 		if ($this->newPasswordSubject == null) {
 			$this->setNewPasswordSubject($this->module->getApp()->t(
-				'user',
+				'ModuleUser',
 				'Your password on {0} has been changed',
 				[$this->module->getApp()->name]
 			));
@@ -97,7 +97,7 @@ class Mailer extends Component
 	{
 		if ($this->confirmationSubject == null) {
 			$this->setConfirmationSubject($this->module->getApp()->t(
-				'user',
+				'ModuleUser',
 				'Confirm account on {0}',
 				[$this->module->getApp()->name]
 			));
@@ -127,7 +127,7 @@ class Mailer extends Component
 	{
 		if ($this->reconfirmationSubject == null) {
 			$this->setReconfirmationSubject($this->module->getApp()->t(
-				'user',
+				'ModuleUser',
 				'Confirm email change on {0}',
 				[$this->module->getApp()->name]
 			));
@@ -157,7 +157,7 @@ class Mailer extends Component
 	{
 		if ($this->recoverySubject == null) {
 			$this->setRecoverySubject($this->module->getApp()->t(
-				'user',
+				'ModuleUser',
 				'Complete password reset on {0}',
 				[$this->module->getApp()->name]
 			));
