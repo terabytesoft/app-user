@@ -55,7 +55,7 @@ class SignUpCest
         $I->click(Yii::t('ModuleUser', 'Sign up'), '.btn');
         $I->expectTo('see messages register confirm');
         $I->see(Yii::t('ModuleUser', 'Your account has been created and a message with further instructions has been sent to your email'), '.alert');
-        $I->See(Yii::t('ModuleUser', 'Sign up'), '.btn');
+        $I->dontSeeLink(Yii::t('ModuleUser', 'Sign up'), '.btn');
     }
 
     /**
