@@ -59,7 +59,7 @@ class RecoveryForm extends Model
             'emailPattern' => ['email', 'email'],
 			['email', 'exist',
 				'targetClass' => $this->userModel,
-				'message' => $this->app->t('user', 'There is no user with this email address.'),
+				'message' => $this->app->t('ModuleUser', 'There is no user with this email address.'),
             ],
             'passwordRequired' => ['password', 'required'],
             'passwordLength' => ['password', 'string', 'max' => 72, 'min' => 6],

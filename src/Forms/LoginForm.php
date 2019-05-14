@@ -48,11 +48,11 @@ class LoginForm extends Model
 							&& !$this->module->accountUnconfirmedLogin;
 
                         if ($confirmationRequired && !$this->user->getIsConfirmed()) {
-                            $this->addError($attribute, $this->app->t('user', 'You need to confirm your email address'));
+                            $this->addError($attribute, $this->app->t('ModuleUser', 'You need to confirm your email address'));
 						}
 
                         if ($this->user->getIsBlocked()) {
-                            $this->addError($attribute, $this->app->t('user', 'Your account has been blocked'));
+                            $this->addError($attribute, $this->app->t('ModuleUser', 'Your account has been blocked'));
                         }
                     }
                 }
@@ -147,7 +147,7 @@ class LoginForm extends Model
     {
 		$this->passwordHelper = new PasswordHelper();
         if ($this->user === null || !$this->passwordHelper->validate($this->password, $this->user->password_hash)) {
-            $this->addError($attribute, $this->app->t('user', 'Invalid login or password.'));
+            $this->addError($attribute, $this->app->t('ModuleUser', 'Invalid login or password.'));
         }
     }
 }

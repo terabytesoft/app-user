@@ -41,6 +41,6 @@ class VKontakte extends BaseVKontakte implements ClientInterface
  	 **/
     protected function defaultTitle()
     {
-        return $this->app->t('user', 'VKontakte');
+        return $this->app->t('ModuleUser', 'VKontakte');
     }
 }

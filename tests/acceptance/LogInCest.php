@@ -26,7 +26,7 @@ class LogInCest
     {
         $I->wantTo('ensure that login page works.');
         $I->expectTo('see page login.');
-        $I->see(Yii::t('user', 'Login'), 'h2');
+        $I->see(Yii::t('ModuleUser', 'Login'), 'h2');
     }
 
     /**
@@ -36,10 +36,10 @@ class LogInCest
     public function logInResetPasswordLink(AcceptanceTester $I)
     {
         $I->wantTo('ensure that link reset password link works.');
-        $I->SeeLink(Yii::t('user', 'reset it here'));
-        $I->click(Yii::t('user', 'reset it here'));
+        $I->SeeLink(Yii::t('ModuleUser', 'reset it here'));
+        $I->click(Yii::t('ModuleUser', 'reset it here'));
         $I->expectTo('see page recover password.');
-        $I->see(Yii::t('user', 'Recover your password'), 'h2');
+        $I->see(Yii::t('ModuleUser', 'Recover your password'), 'h2');
     }
 
     /**
@@ -49,10 +49,10 @@ class LogInCest
     public function logInResendReceiveConfirmationMessageLink(AcceptanceTester $I)
     {
         $I->wantTo('ensure that link resend receive confirmation message link works.');
-        $I->SeeLink(Yii::t('user', 'Didn\'t receive confirmation message?'));
-        $I->click(Yii::t('user', 'Didn\'t receive confirmation message?'));
+        $I->SeeLink(Yii::t('ModuleUser', 'Didn\'t receive confirmation message?'));
+        $I->click(Yii::t('ModuleUser', 'Didn\'t receive confirmation message?'));
         $I->expectTo('see page request new confirmation message.');
-        $I->see(Yii::t('user', 'Request new confirmation message'), 'h2');
+        $I->see(Yii::t('ModuleUser', 'Request new confirmation message'), 'h2');
     }
 
     /**
@@ -62,10 +62,10 @@ class LogInCest
     public function logInDontIHaveAccountLink(AcceptanceTester $I)
     {
         $I->wantTo('ensure that link receive confirmation message works.');
-        $I->SeeLink(Yii::t('user', 'Don\'t have an account? Sign up!'));
-        $I->click(Yii::t('user', 'Don\'t have an account? Sign up!'));
+        $I->SeeLink(Yii::t('ModuleUser', 'Don\'t have an account? Sign up!'));
+        $I->click(Yii::t('ModuleUser', 'Don\'t have an account? Sign up!'));
         $I->expectTo('see page sign up.');
-        $I->see(Yii::t('user', 'Sign up'), 'h2');
+        $I->see(Yii::t('ModuleUser', 'Sign up'), 'h2');
     }
 
     /**
@@ -75,12 +75,11 @@ class LogInCest
     public function logInEmptyDataTest(AcceptanceTester $I)
     {
         $I->amGoingTo('login submit form with empty data.');
-        $I->click(Yii::t('user', 'Login'), '.btn');
+        $I->click(Yii::t('ModuleUser', 'Login'), '.btn');
         $I->expectTo('see validations errors.');
-        $I->see(Yii::t('user', 'Login cannot be blank.'), '.invalid-feedback');
-        $I->see(Yii::t('user', 'Password cannot be blank.'), '.invalid-feedback');
-        $I->SeeLink(Yii::t('user', 'Sign up'));
-        $I->SeeLink(Yii::t('user', 'Login'));
+        $I->see(Yii::t('ModuleUser', 'Login cannot be blank.'), '.invalid-feedback');
+        $I->see(Yii::t('ModuleUser', 'Password cannot be blank.'), '.invalid-feedback');
+        $I->See(Yii::t('ModuleUser', 'Login'), '.btn');
     }
 
     /**
@@ -92,11 +91,10 @@ class LogInCest
         $I->amGoingTo('login submit form with data wrong.');
         $I->fillField('#login-form-login', 'admin');
         $I->fillField('#login-form-password', '1234567');
-        $I->click(Yii::t('user', 'Login'), '.btn');
+        $I->click(Yii::t('ModuleUser', 'Login'), '.btn');
         $I->expectTo('invalid login or password.');
-        $I->see(Yii::t('user', 'Invalid login or password.'), '.invalid-feedback');
-        $I->SeeLink(Yii::t('user', 'Sign up'));
-        $I->SeeLink(Yii::t('user', 'Login'));
+        $I->see(Yii::t('ModuleUser', 'Invalid login or password.'), '.invalid-feedback');
+        $I->See(Yii::t('ModuleUser', 'Login'), '.btn');
     }
 
     /**
@@ -109,11 +107,11 @@ class LogInCest
         $I->amGoingTo('login submit form with data success.');
         $I->fillField('#login-form-login', 'admin');
         $I->fillField('#login-form-password', '123456');
-        $I->click(Yii::t('user', 'Login'), '.btn');
+        $I->click(Yii::t('ModuleUser', 'Login'), '.btn');
         $I->expectTo('link logout');
-        $I->dontSeeLink(Yii::t('user', 'Login'));
-        $I->dontSeeLink(Yii::t('user', 'Sign up'));
-        $I->dontSeeLink(Yii::t('user', 'Login'));
-        $I->seeLink(Yii::t('user', 'Logout'));
+        $I->dontSeeLink(Yii::t('ModuleUser', 'Login'));
+        $I->dontSeeLink(Yii::t('ModuleUser', 'Sign up'));
+        $I->dontSeeLink(Yii::t('ModuleUser', 'Login'));
+        $I->dontseeLink(Yii::t('ModuleUser', 'Login'), '.btn');
     }
 }

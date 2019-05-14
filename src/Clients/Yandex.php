@@ -53,6 +53,6 @@ class Yandex extends BaseYandex implements ClientInterface
  	 **/
     protected function defaultTitle(): string
     {
-        return $this->app->t('user', 'Yandex');
+        return $this->app->t('ModuleUser', 'Yandex');
     }
 }

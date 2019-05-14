@@ -1,12 +1,12 @@
 /**
- * Recovery_Reset
+ * Resend.css
  *
  **/
 
 /**********************************************************************************************************************
  * FORMS                                                                                                              *
  **********************************************************************************************************************/
-.form-recovery-reset {
+.form-registration-resend {
     background: #EAEDED;
     border-top: 3px solid #494f54;
     margin: auto;
@@ -15,11 +15,11 @@
     width: 100%;
 }
 
-.form-recovery-reset-title {
+.form-registration-resend-title {
     text-align: center;
 }
 
-.form-recovery-reset-subtitle {
+.form-registration-resend-subtitle {
     text-align: center;
     margin-bottom: 1.5rem;
 }

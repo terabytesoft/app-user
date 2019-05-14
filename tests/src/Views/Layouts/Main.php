@@ -17,16 +17,16 @@ LayoutAdminAsset::register($this);
 
 if ($this->app->user->isGuest) {
     $menuItems[] = [
-	    'label' => $this->app->t('user', 'Sign up'),
+	    'label' => $this->app->t('ModuleUser', 'Sign up'),
 	    'url' => ['/user/registration/register'],
     ];
     $menuItems[] = [
-	    'label' => $this->app->t('user', 'Login'),
+	    'label' => $this->app->t('ModuleUser', 'Login'),
 	    'url' => ['/user/security/login']
     ];
 } else {
     $menuItems[] = [
-        'label' =>  $this->app->t('user', 'Logout'),
+        'label' =>  $this->app->t('ModuleUser', 'Logout'),
         'url' => ['/user/security/logout'],
         'linkOptions' => ['data-method' => 'POST'],
     ];
@@ -55,7 +55,7 @@ if ($this->app->user->isGuest) {
 				<?= Html::beginTag('wrapper', ['class' => 'd-flex flex-column']) ?>
 
                     <?php NavBar::begin([
-						'brandLabel' => $this->app->t('user', $this->app->name),
+						'brandLabel' => $this->app->t('ModuleUser', $this->app->name),
 						'brandUrl' => $this->app->homeUrl,
 						'options' => [
 						    'class' => 'navbar  navbar-dark bg-dark navbar-expand-lg',
@@ -82,11 +82,11 @@ if ($this->app->user->isGuest) {
 						<?= Html::beginTag('div', ['class' => 'container flex-fill']) ?>
 
 							<?= Html::beginTag('p', ['class' => 'float-left text-white']) ?>
-								<?= '&copy; ' . $this->app->t('user', 'My Company') . ' ' . date('Y') ?>
+								<?= '&copy; ' . $this->app->t('ModuleUser', 'My Company') . ' ' . date('Y') ?>
 							<?= Html::endTag('p') ?>
 
 							<?= Html::beginTag('p', ['class' => 'float-right text-white']) ?>
-								<?= $this->app->t('user', 'Powered by') ?>
+								<?= $this->app->t('ModuleUser', 'Powered by') ?>
 								<?= Html::a(
 									$this->app->t(
 										'user',

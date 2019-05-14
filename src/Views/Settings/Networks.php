@@ -12,7 +12,7 @@ use Yiisoft\Yii\Bootstrap4\Html;
  * @var $this \yii\web\View
  **/
 
-$this->title = $this->app->t('user', 'Social Accounts Form');
+$this->title = $this->app->t('ModuleUser', 'Social Accounts Form');
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		<?= Html::tag('h2', '<b>' . Html::encode($this->title) . '</b>', ['class' => 'text-center']) ?>
 
 		<?= Html::beginTag('div', ['class' => 'alert alert-info align-middle', 'role' => 'alert']) ?>
-            <?= $this->app->t('user', 'You can connect multiple accounts to be able to log in using them') ?>
+            <?= $this->app->t('ModuleUser', 'You can connect multiple accounts to be able to log in using them') ?>
 		<?= Html::endTag('div') ?>
 
         <?php $auth = Connect::begin([
@@ -56,11 +56,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
 					<?= Html::beginTag('div', ['class' => 'p-3 w-25']) ?>
                         <?= $auth->isConnected($client) ?
-                           	Html::a($this->app->t('user', 'Disconnect'), $auth->createClientUrl($client), [
+                           	Html::a($this->app->t('ModuleUser', 'Disconnect'), $auth->createClientUrl($client), [
                                		'class' => 'btn btn-block btn-danger',
                                 	'data-method' => 'POST',
                                 ]) :
-                                Html::a($this->app->t('user', 'Connect'), $auth->createClientUrl($client), [
+                                Html::a($this->app->t('ModuleUser', 'Connect'), $auth->createClientUrl($client), [
                                 	'class' => 'btn btn-block btn-success',
 								])
 						?>

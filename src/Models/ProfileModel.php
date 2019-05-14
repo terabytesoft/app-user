@@ -94,7 +94,7 @@ class ProfileModel extends ActiveRecord
 	public function validateTimeZone($attribute, $params)
 	{
 		if (!in_array($this->$attribute, timezone_identifiers_list())) {
-			$this->addError($attribute, $this->app->t('user', 'Time zone is not valid'));
+			$this->addError($attribute, $this->app->t('ModuleUser', 'Time zone is not valid'));
 		}
 	}
 

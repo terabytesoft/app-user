@@ -1,12 +1,17 @@
 /**
- * Registration_Resend
+ * Registration_Register
  *
  **/
 
 /**********************************************************************************************************************
  * FORMS                                                                                                              *
  **********************************************************************************************************************/
-.form-registration-resend {
+.form-label-group {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.form-registration-register {
     background: #EAEDED;
     border-top: 3px solid #494f54;
     margin: auto;
@@ -15,11 +20,11 @@
     width: 100%;
 }
 
-.form-registration-resend-title {
+.form-registration-register-title {
     text-align: center;
 }
 
-.form-registration-resend-subtitle {
+.form-registration-register-subtitle {
     text-align: center;
     margin-bottom: 1.5rem;
 }

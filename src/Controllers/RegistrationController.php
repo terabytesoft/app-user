@@ -56,7 +56,7 @@ class RegistrationController extends Controller
 	{
 		if (!$this->module->accountRegistration) {
 			throw new ForbiddenHttpException(
-				$this->app->t('user', 'Account register is disabled')
+				$this->app->t('ModuleUser', 'Account register is disabled')
 			);
 		}
 
@@ -75,7 +75,7 @@ class RegistrationController extends Controller
 				$this->app->session->setFlash(
 					'info',
 					$this->app->t(
-						'user',
+						'ModuleUser',
 						'Your account has been created and a message with further instructions has been sent to your email.'
 					)
 				);
@@ -83,7 +83,7 @@ class RegistrationController extends Controller
 				$this->app->session->setFlash(
 					'warning',
 					$this->app->t(
-						'user',
+						'ModuleUser',
 						'The account could not be created. Contact the administrator.'
 					)
 				);
@@ -156,7 +156,7 @@ class RegistrationController extends Controller
 
 		if ($user === null || $this->module->accountConfirmation === false) {
 			throw new ForbiddenHttpException(
-				$this->app->t('user', 'Account confirm is disabled')
+				$this->app->t('ModuleUser', 'Account confirm is disabled')
 			);
 		}
 
@@ -176,12 +176,12 @@ class RegistrationController extends Controller
 			$token->delete();
 			if ($result = $user->confirm()) {
 				$this->app->user->login($user, $this->module->rememberFor);
-				$message = $this->app->t('user', 'Thank you, registration is now complete.');
+				$message = $this->app->t('ModuleUser', 'Thank you, registration is now complete.');
 			} else {
-				$message = $this->app->t('user', 'Something went wrong and your account has not been confirmed.');
+				$message = $this->app->t('ModuleUser', 'Something went wrong and your account has not been confirmed.');
 			}
 		} else {
-			$message = $this->app->t('user', 'The confirmation link is invalid or expired. Please try requesting a new one.');
+			$message = $this->app->t('ModuleUser', 'The confirmation link is invalid or expired. Please try requesting a new one.');
 		}
 
 		$this->app->session->setFlash($result ? 'success' : 'danger', $message);
@@ -204,7 +204,7 @@ class RegistrationController extends Controller
 	{
 		if ($this->module->accountConfirmation === false) {
 			throw new ForbiddenHttpException(
-				$this->app->t('user', 'Account confirm is disabled')
+				$this->app->t('ModuleUser', 'Account confirm is disabled')
 			);
 		}
 
@@ -222,7 +222,7 @@ class RegistrationController extends Controller
 				$this->app->session->setFlash(
 					'info',
 					$this->app->t(
-						'user',
+						'ModuleUser',
 						'A message has been sent to your email address. It contains a confirmation link that you must click to complete registration.'
 					)
 				);
@@ -230,7 +230,7 @@ class RegistrationController extends Controller
 				$this->app->session->setFlash(
 					'warning',
 					$this->app->t(
-						'user',
+						'ModuleUser',
 						'A message has not been sent to your email address. The user has already been confirmed.'
 					)
 				);

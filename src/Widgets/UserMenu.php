@@ -27,10 +27,10 @@ class UserMenu extends Widget
 		$networksVisible = count($this->app->authClientCollection->clients) > 0;
 
 		$this->items = [
-				['label' => $this->app->t('user', 'Profile'), 'url' => ['/user/settings/profile']],
-				['label' => $this->app->t('user', 'Account'), 'url' => ['/user/settings/account']],
+				['label' => $this->app->t('ModuleUser', 'Profile'), 'url' => ['/user/settings/profile']],
+				['label' => $this->app->t('ModuleUser', 'Account'), 'url' => ['/user/settings/account']],
 				[
-					'label' => $this->app->t('user', 'Networks'),
+					'label' => $this->app->t('ModuleUser', 'Networks'),
 					'url' => ['/user/settings/networks'],
 					'visible' => $networksVisible,
 				],

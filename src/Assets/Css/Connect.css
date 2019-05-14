@@ -1,12 +1,12 @@
 /**
- * Security_Login
+ * Connect.css
  *
  **/
 
 /**********************************************************************************************************************
  * FORMS                                                                                                              *
  **********************************************************************************************************************/
- .form-security-login {
+.form-registration-connect {
     background: #EAEDED;
     border-top: 3px solid #494f54;
     margin: auto;
@@ -15,11 +15,11 @@
     width: 100%;
 }
 
-.form-security-login-title {
+.form-registration-connect-title {
     text-align: center;
 }
 
-.form-security-login-subtitle {
+.form-registration-connect-subtitle {
     text-align: center;
     margin-bottom: 1.5rem;
 }

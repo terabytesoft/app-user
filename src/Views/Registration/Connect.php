@@ -19,7 +19,7 @@ use yii\bootstrap4\Html;
  * @var \yii\web\View $this
  */
 
-$this->title = $this->getApp()->t('user', 'Sign in');
+$this->title = $this->app->t('ModuleUser', 'Sign in');
 $this->params['breadcrumbs'][] = $this->title;
 
 if ($module->floatLabels) {
@@ -35,8 +35,8 @@ RegistrationConnectAsset::register($this);
     <?= Html::tag('h2', '<b>' . Html::encode($this->title) . '</b>', ['class' => 'form-registration-connect-title']) ?>
 
     <?= Html::beginTag('p', ['class' => 'form-registration-connect-subtitle']) ?>
-		<?= $this->getApp()->t(
-            'user',
+		<?= $this->app->t(
+            'ModuleUser',
             'In order to finish your registration, we need you to enter following fields'
         ) ?>
     <?= Html::endTag('p') ?>
@@ -70,25 +70,25 @@ RegistrationConnectAsset::register($this);
 		<?= $form->field($model, 'email')
 			->textInput([
 				'oninput' => 'this.setCustomValidity("")',
-				'oninvalid' => 'this.setCustomValidity("' . $this->app->t('user', 'Enter Email Here') . '")',
-				'placeholder' => $this->app->t('user', 'Email'),
+				'oninvalid' => 'this.setCustomValidity("' . $this->app->t('ModuleUser', 'Enter Email Here') . '")',
+				'placeholder' => $this->app->t('ModuleUser', 'Email'),
 				'required' => (YII_ENV === 'test') ? false : true,
 				'tabindex' => '1',
-			])->label($this->app->t('user', 'Email'))
+			])->label($this->app->t('ModuleUser', 'Email'))
 		?>
 
 		<?= $form->field($model, 'username')
 			->textInput([
 				'autofocus' => true,
 				'oninput' => 'this.setCustomValidity("")',
-				'oninvalid' => 'this.setCustomValidity("' . $this->app->t('user', 'Enter Username Here') . '")',
-				'placeholder' => $this->app->t('user', 'Username'),
+				'oninvalid' => 'this.setCustomValidity("' . $this->app->t('ModuleUser', 'Enter Username Here') . '")',
+				'placeholder' => $this->app->t('ModuleUser', 'Username'),
 				'required' => (YII_ENV === 'test') ? false : true,
 				'tabindex' => '2',
-			])->label($this->app->t('user', 'Username'))
+			])->label($this->app->t('ModuleUser', 'Username'))
 		?>
 
-		<?= Html::submitButton($this->getApp()->t('user', 'Continue'), [
+		<?= Html::submitButton($this->app->t('ModuleUser', 'Continue'), [
             'class' => 'btn btn-block btn-lg btn-primary mt-3', 'name' => 'connect-button', 'tabindex' => '3'
         ]) ?>
 
@@ -99,8 +99,8 @@ RegistrationConnectAsset::register($this);
 
 	<?= Html::beginTag('p', ['class' => 'text-center']) ?>
         <?= Html::a(
-            $this->getApp()->t(
-                'user',
+            $this->app->t(
+                'ModuleUser',
                 'If you already registered, sign in and connect this account on settings page'
             ),
             ['/user/settings/networks']

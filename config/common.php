@@ -42,6 +42,9 @@ return [
                     'UserSearch'   => $params['user.searchMap.UserSearch'],
                 ],
                 'rememberFor' => $params['user.setting.rememberFor'],
+                'theme' => $params['user.setting.theme'],
+                'themeViewsLogin' => $params['user.setting.theme.view.security.login'],
+                'themeViewsRegister' => $params['user.setting.theme.view.registration.register'],
                 'tokenConfirmWithin' => $params['user.setting.tokenConfirmWithin'],
                 'tokenRecoverWithin' => $params['user.setting.tokenRecoverWithin'],
                 'urlPrefix' => $params['user.setting.urlPrefix'],
@@ -62,18 +65,13 @@ return [
             'keyPrefix' => 'app-user',
         ],
     ],
-    'logger' => function () {
-        return new \Yiisoft\Log\Logger([
-            new \Yiisoft\Log\FileTarget('/tmp/log.txt')
-        ]);
-    },
     'mailer' => [
         '__class' => \Yiisoft\Yii\SwiftMailer\Mailer::class,
         'useFileTransport' => $params['mailer.useFileTransport'],
 	],
     'translator' => [
         'translations' => [
-            'user' => [
+            'ModuleUser' => [
                 '__class' => \yii\i18n\PhpMessageSource::class,
                 'sourceLanguage' => $params['translator.sourceLanguage'],
                 'basePath' => $params['translator.basePath'],

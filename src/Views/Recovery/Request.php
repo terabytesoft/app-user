@@ -18,7 +18,7 @@ use Yiisoft\Yii\Bootstrap4\Html;
  * @var \yii\web\View $this
  **/
 
-$this->title = $this->app->t('user', 'Recover your password');
+$this->title = $this->app->t('ModuleUser', 'Recover your password');
 $this->params['breadcrumbs'][] = $this->title;
 
 if ($module->floatLabels) {
@@ -35,7 +35,7 @@ RecoveryRequestAsset::register($this);
 
     <?= Html::beginTag('p', ['class' => 'form-recovery-request-subtitle']) ?>
         <?= $this->app->t(
-			'user',
+			'ModuleUser',
 			'Please fill out the following fields to' . '<br/>' . 'Recover your password.'
 		) ?>
     <?= Html::endTag('p') ?>
@@ -68,13 +68,13 @@ RecoveryRequestAsset::register($this);
 
         <?= $form->field($model, 'email')->textInput([
 			'oninput' => 'this.setCustomValidity("")',
-			'oninvalid' => 'this.setCustomValidity("' . $this->app->t('user', 'Enter Email Here') . '")',
-			'placeholder' => $this->app->t('user', 'Email'),
+			'oninvalid' => 'this.setCustomValidity("' . $this->app->t('ModuleUser', 'Enter Email Here') . '")',
+			'placeholder' => $this->app->t('ModuleUser', 'Email'),
 			'required' => (YII_ENV === 'test') ? false : true,
 			'tabindex' => '1',
-		])->label($this->app->t('user', 'Email')) ?>
+		])->label($this->app->t('ModuleUser', 'Email')) ?>
 
-        <?= Html::submitButton($this->app->t('user', 'Request Password'), [
+        <?= Html::submitButton($this->app->t('ModuleUser', 'Request Password'), [
             'class' => 'btn btn-block btn-lg btn-primary mt-3', 'name' => 'request-button', 'tabindex' => '2'
         ]) ?>
 

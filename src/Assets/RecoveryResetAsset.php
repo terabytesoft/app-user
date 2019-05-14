@@ -12,10 +12,10 @@ use yii\web\AssetBundle;
 
 class RecoveryResetAsset extends AssetBundle
 {
-    public $sourcePath = '@Terabytesoft/Module/User/Assets/';
+    public $sourcePath = __DIR__ . '/Css';
 
 	public $css = [
-		'Css/Recovery_Reset.css',
+		'Reset.css',
 	];
 
 	public $js = [

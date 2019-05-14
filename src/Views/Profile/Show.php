@@ -17,7 +17,7 @@ use yii\bootstrap4\Html;
  * @var \yii\web\View $this
  **/
 
-$this->title = $this->app->t('user', 'Profile Details');
+$this->title = $this->app->t('ModuleUser', 'Profile Details');
 $this->params['breadcrumbs'][] = empty($profile->name) ? $profile->user->username : $profile->name;
 
 ProfileShowAsset::register($this);
@@ -30,7 +30,7 @@ ProfileShowAsset::register($this);
 
         <?= Html::beginTag('p', ['class' => 'form-profile-show-subtitle']) ?>
             <?= $this->app->t(
-			    'user',
+			    'ModuleUser',
 			    'Show the details of the User.'
 		    ) ?>
         <?= Html::endTag('p') ?>
@@ -44,7 +44,7 @@ ProfileShowAsset::register($this);
                 'title' => $profile->name,
                 ]) ?>
 
-            <?= Html::tag('p', $this->app->t('user', 'Gravatar image'), ['class' => 'text-muted text-center mt-2']); ?>
+            <?= Html::tag('p', $this->app->t('ModuleUser', 'Gravatar image'), ['class' => 'text-muted text-center mt-2']); ?>
 
         <?= Html::endTag('div') ?>
 
@@ -53,8 +53,8 @@ ProfileShowAsset::register($this);
             <?= Html::beginTag('div', ['class' => 'form-profile-show-fields-title']) ?>
     	        <?= Html::encode(
 			        empty($profile->name) ?
-			        $this->app->t('user', 'Username:') :
-                    $this->app->t('user', 'Name:')
+			        $this->app->t('ModuleUser', 'Username:') :
+                    $this->app->t('ModuleUser', 'Name:')
                 )?>
             <?= Html::endTag('div') ?>
 
@@ -63,7 +63,7 @@ ProfileShowAsset::register($this);
             <?= Html::endTag('div') ?>
 
             <?= Html::beginTag('div', ['class' => 'form-profile-show-fields-title']) ?>
-                <?= Html::encode($this->app->t('user', 'Email - (Public):')) ?>
+                <?= Html::encode($this->app->t('ModuleUser', 'Email - (Public):')) ?>
             <?= Html::endTag('div') ?>
 
 		    <?= Html::beginTag('div', ['class' => 'alert alert-info flex-fill p-2', 'role' => 'alert']) ?>
@@ -75,7 +75,7 @@ ProfileShowAsset::register($this);
 		    <?= Html::endTag('div') ?>
 
             <?= Html::beginTag('div', ['class' => 'form-profile-show-fields-title']) ?>
-                <?= Html::encode($this->app->t('user', 'Website:')) ?>
+                <?= Html::encode($this->app->t('ModuleUser', 'Website:')) ?>
             <?= Html::endTag('div') ?>
 
 		    <?= Html::beginTag('div', ['class' => 'alert alert-info flex-fill p-2', 'role' => 'alert']) ?>
@@ -87,7 +87,7 @@ ProfileShowAsset::register($this);
 		    <?= Html::endTag('div') ?>
 
             <?= Html::beginTag('div', ['class' => 'form-profile-show-fields-title']) ?>
-                <?= Html::encode($this->app->t('user', 'Location:')) ?>
+                <?= Html::encode($this->app->t('ModuleUser', 'Location:')) ?>
             <?= Html::endTag('div') ?>
 
 		    <?= Html::beginTag('div', ['class' => 'alert alert-info flex-fill p-2', 'role' => 'alert']) ?>
@@ -96,7 +96,7 @@ ProfileShowAsset::register($this);
 		    <?= Html::endTag('div') ?>
 
             <?= Html::beginTag('div', ['class' => 'form-profile-show-fields-title']) ?>
-                <?= Html::encode($this->app->t('user', 'Time Zone:')) ?>
+                <?= Html::encode($this->app->t('ModuleUser', 'Time Zone:')) ?>
             <?= Html::endTag('div') ?>
 
 		    <?= Html::beginTag('div', ['class' => 'alert alert-info flex-fill p-2', 'role' => 'alert']) ?>
@@ -105,7 +105,7 @@ ProfileShowAsset::register($this);
             <?= Html::endTag('div') ?>
 
             <?= Html::beginTag('div', ['class' => 'form-profile-show-fields-title']) ?>
-                <?= Html::encode($this->app->t('user', 'Gravatar Email:')) ?>
+                <?= Html::encode($this->app->t('ModuleUser', 'Gravatar Email:')) ?>
             <?= Html::endTag('div') ?>
 
 		    <?= Html::beginTag('div', ['class' => 'alert alert-info flex-fill p-2', 'role' => 'alert']) ?>
@@ -114,7 +114,7 @@ ProfileShowAsset::register($this);
 		    <?= Html::endTag('div') ?>
 
             <?= Html::beginTag('div', ['class' => 'form-profile-show-fields-title']) ?>
-                <?= Html::encode($this->app->t('user', 'Bio:')) ?>
+                <?= Html::encode($this->app->t('ModuleUser', 'Bio:')) ?>
             <?= Html::endTag('div') ?>
 
             <?= Html::beginTag('div', ['class' => 'alert alert-info flex-fill p-2', 'role' => 'alert']) ?>
@@ -123,14 +123,14 @@ ProfileShowAsset::register($this);
 		    <?= Html::endTag('div') ?>
 
             <?= Html::beginTag('div', ['class' => 'form-profile-show-fields-title']) ?>
-                <?= Html::encode($this->app->t('user', 'Register:')) ?>
+                <?= Html::encode($this->app->t('ModuleUser', 'Register:')) ?>
             <?= Html::endTag('div') ?>
 
 		    <?= Html::beginTag('div', ['class' => 'alert alert-info flex-fill p-2', 'role' => 'alert']) ?>
 			    <?= Html::tag('i', '', ['class' => 'fas fa-registered']) ?>
 			    <?= Html::encode(empty($profile->user->created_at) ?
 				    '(not set)' :
-				    $this->app->t('user', 'Joined on {0, date}', [$profile->user->created_at]))
+				    $this->app->t('ModuleUser', 'Joined on {0, date}', [$profile->user->created_at]))
 			    ?>
             <?= Html::endTag('div') ?>
 

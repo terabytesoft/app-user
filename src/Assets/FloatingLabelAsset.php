@@ -12,10 +12,10 @@ use yii\web\AssetBundle;
 
 class FloatingLabelAsset extends AssetBundle
 {
-    public $sourcePath = '@TerabyteSoft/Module/User/Assets/';
+    public $sourcePath = __DIR__ . '/Css';
 
 	public $css = [
-		'Css/Floating_Labels.css',
+		'FloatingLabels.css',
     ];
 
 	public $js = [

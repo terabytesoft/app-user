@@ -8,7 +8,7 @@
 
 use Yiisoft\Yii\Bootstrap4\Html;
 
-$this->title = $this->app->t('user', 'Index');
+$this->title = $this->app->t('ModuleUser', 'Index');
 
 ?>
 
@@ -18,13 +18,13 @@ $this->title = $this->app->t('user', 'Index');
             <?= Html::tag('h1', 'app-user', ['class' => 'display-4']) ?>
             <?= Html::tag(
                 'p',
-                $this->app->t('user', '<b>' . 'Flexible user registration and authentication module.' . '</b>'),
+                $this->app->t('ModuleUser', '<b>' . 'Flexible user registration and authentication module.' . '</b>'),
                 ['class' => 'lead']
             ) ?>
             <?= Html::beginTag('p', ['class' => 'lead']) ?>
                 <?= Html::a(
 					$this->app->t(
-						'user',
+						'ModuleUser',
 						'Learn more'
 					),
 					'https://github.com/terabytesoft/app-user',

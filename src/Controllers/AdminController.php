@@ -87,8 +87,8 @@ class AdminController extends Controller
 		$dataProvider = $searchModel->search($this->app->request->get(), $this->module->userQuery);
 
 		return $this->render('Index', [
-			'dataProvider' => $dataProvider,
-			'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel,
 		]);
 	}
 
@@ -112,7 +112,7 @@ class AdminController extends Controller
 		if ($user->load($this->app->request->post()) && $user->create()) {
 			$this->app->session->setFlash(
 				'success',
-				$this->app->t('user', 'User has been created')
+				$this->app->t('ModuleUser', 'User has been created')
 			);
 			$this->trigger(UserEvent::afterCreate());
 			return $this->redirect(['update', 'id' => $user->id]);
@@ -146,7 +146,7 @@ class AdminController extends Controller
 		if ($user->load($this->app->request->post()) && $user->save()) {
 			$this->app->session->setFlash(
 				'success',
-				$this->app->t('user', 'Account details have been updated')
+				$this->app->t('ModuleUser', 'Account details have been updated')
 			);
 			$this->trigger(UserEvent::afterUpdate());
 
@@ -186,7 +186,7 @@ class AdminController extends Controller
 		if ($profile->load($this->app->request->post()) && $profile->save()) {
 			$this->app->session->setFlash(
 				'success',
-				$this->app->t('user', 'Profile details have been updated')
+				$this->app->t('ModuleUser', 'Profile details have been updated')
 			);
 			$this->trigger(ProfileEvent::afterProfileUpdate());
 
@@ -235,7 +235,7 @@ class AdminController extends Controller
 		if (!$this->module->accountImpersonateUser) {
 			throw new ForbiddenHttpException(
 				$this->app->t(
-					'user',
+					'ModuleUser',
 					'Impersonate user is disabled in the application configuration'
 				)
 			);
@@ -248,7 +248,7 @@ class AdminController extends Controller
 			if (!$this->app->user->identity->isAdmin) {
 				throw new ForbiddenHttpException(
 					$this->app->t(
-						'user',
+						'ModuleUser',
 						'The user does not have administrator permissions'
 					)
 				);
@@ -312,7 +312,7 @@ class AdminController extends Controller
 		$this->trigger(UserEvent::afterConfirm());
 		$this->app->session->setFlash(
 			'success',
-			$this->app->t('user', 'User has been confirmed')
+			$this->app->t('ModuleUser', 'User has been confirmed')
 		);
 
 		return $this->redirect(Url::previous('actions-redirect'));
@@ -333,7 +333,7 @@ class AdminController extends Controller
 		if ($id == $this->app->user->getId()) {
 			$this->app->session->setFlash(
 				'danger',
-				$this->app->t('user', 'You can not remove your own account')
+				$this->app->t('ModuleUser', 'You can not remove your own account')
 			);
 		} else {
 			$model = $this->findModel($id);
@@ -346,7 +346,7 @@ class AdminController extends Controller
 			$this->trigger(UserEvent::afterDelete());
 			$this->app->session->setFlash(
 				'success',
-				$this->app->t('user', 'User has been deleted')
+				$this->app->t('ModuleUser', 'User has been deleted')
 			);
 		}
 
@@ -367,7 +367,7 @@ class AdminController extends Controller
 		if ($id == $this->app->user->getId()) {
 			$this->app->session->setFlash(
 				'danger',
-				$this->app->t('user', 'You can not block your own account')
+				$this->app->t('ModuleUser', 'You can not block your own account')
 			);
 		} else {
 			$user = $this->findModel($id);
@@ -381,7 +381,7 @@ class AdminController extends Controller
 				$this->trigger(UserEvent::afterUnblock());
 				$this->app->session->setFlash(
 					'success',
-					$this->app->t('user', 'User has been unblocked')
+					$this->app->t('ModuleUser', 'User has been unblocked')
 				);
 			} else {
 				$this->trigger(UserEvent::beforeBlock());
@@ -391,7 +391,7 @@ class AdminController extends Controller
 				$this->trigger(UserEvent::afterBlock());
 				$this->app->session->setFlash(
 					'danger',
-					$this->app->t('user', 'User has been blocked')
+					$this->app->t('ModuleUser', 'User has been blocked')
 				);
 			}
 		}
@@ -412,19 +412,19 @@ class AdminController extends Controller
 		$user = $this->findModel($id);
 		if ($user->isAdmin) {
 			throw new ForbiddenHttpException(
-				$this->app->t('user', 'Password generation is not possible for admin users')
+				$this->app->t('ModuleUser', 'Password generation is not possible for admin users')
 			);
 		}
 
 		if ($user->resendPassword()) {
 			$this->app->session->setFlash(
 				'success',
-				$this->app->t('user', 'New Password has been generated and sent to user')
+				$this->app->t('ModuleUser', 'New Password has been generated and sent to user')
 			);
 		} else {
 			$this->app->session->setFlash(
 				'danger',
-				$this->app->t('user', 'Error while trying to generate new password')
+				$this->app->t('ModuleUser', 'Error while trying to generate new password')
 			);
 		}
 

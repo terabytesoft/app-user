@@ -67,7 +67,7 @@ class RecoveryController extends Controller
 				$this->app->session->setFlash(
 					'info',
 					$this->app->t(
-						'user',
+						'ModuleUser',
 						'An email has been sent with instructions for resetting your password'
 					)
 				);
@@ -75,7 +75,7 @@ class RecoveryController extends Controller
 				$this->app->session->setFlash(
 					'warning',
 					$this->app->t(
-						'user',
+						'ModuleUser',
 						'A message has not been sent to your email address. Contact the administrator.'
 					)
 				);
@@ -126,7 +126,7 @@ class RecoveryController extends Controller
 			$this->app->session->setFlash(
 				'danger',
 				$this->app->t(
-					'user',
+					'ModuleUser',
 					'Recovery link is invalid or expired. Please try requesting a new one.'
 				)
 			);
@@ -144,7 +144,7 @@ class RecoveryController extends Controller
 				$this->app->session->setFlash(
 					'success',
 					$this->app->t(
-						'user',
+						'ModuleUser',
 						'Your password has been changed successfully.'
 					)
 				);
@@ -153,7 +153,7 @@ class RecoveryController extends Controller
 				$this->app->session->setFlash(
 					'danger',
 					$this->app->t(
-						'user',
+						'ModuleUser',
 						'An error occurred and your password has not been changed. Please try again later.'
 					)
 				);

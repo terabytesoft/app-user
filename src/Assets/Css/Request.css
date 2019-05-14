@@ -1,12 +1,12 @@
 /**
- * Registration_Connect
+ * Request.css
  *
  **/
 
 /**********************************************************************************************************************
  * FORMS                                                                                                              *
  **********************************************************************************************************************/
-.form-registration-connect {
+.form-recovery-request {
     background: #EAEDED;
     border-top: 3px solid #494f54;
     margin: auto;
@@ -15,11 +15,11 @@
     width: 100%;
 }
 
-.form-registration-connect-title {
+.form-recovery-request-title {
     text-align: center;
 }
 
-.form-registration-connect-subtitle {
+.form-recovery-request-subtitle {
     text-align: center;
     margin-bottom: 1.5rem;
 }

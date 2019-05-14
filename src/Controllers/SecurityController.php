@@ -133,7 +133,7 @@ class SecurityController extends Controller
 			$this->app->session->setFlash(
 				'danger',
 				$this->app->t(
-					'user',
+					'ModuleUser',
 					'Registration on this website is disabled'
 				)
 			);
@@ -155,7 +155,7 @@ class SecurityController extends Controller
 				$this->app->session->setFlash(
 					'danger',
 					$this->app->t(
-						'user',
+						'ModuleUser',
 						'Your account has been blocked.'
 					)
 				);

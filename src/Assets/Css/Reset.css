@@ -1,12 +1,12 @@
 /**
- * Recovery_Request
+ * Reset.css
  *
  **/
 
 /**********************************************************************************************************************
  * FORMS                                                                                                              *
  **********************************************************************************************************************/
-.form-recovery-request {
+.form-recovery-reset {
     background: #EAEDED;
     border-top: 3px solid #494f54;
     margin: auto;
@@ -15,11 +15,11 @@
     width: 100%;
 }
 
-.form-recovery-request-title {
+.form-recovery-reset-title {
     text-align: center;
 }
 
-.form-recovery-request-subtitle {
+.form-recovery-reset-subtitle {
     text-align: center;
     margin-bottom: 1.5rem;
 }

@@ -17,8 +17,8 @@ use Yiisoft\Yii\Bootstrap4\Nav;
  * @var \yii\web\View $this
  **/
 
-$this->title = $this->app->t('user', 'Create a user account');
-$this->params['breadcrumbs'][] = ['label' => $this->app->t('user', 'Users'), 'url' => ['index']];
+$this->title = $this->app->t('ModuleUser', 'Create a user account');
+$this->params['breadcrumbs'][] = ['label' => $this->app->t('ModuleUser', 'Users'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 		<?= Html::beginTag('h5', ['class' => 'text-center']) ?>
 
-			<?= $this->app->t('user', 'Menu Settings') ?>
+			<?= $this->app->t('ModuleUser', 'Menu Settings') ?>
 
 		<?= Html::endTag('h5') ?>
 
@@ -44,17 +44,17 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 'items' => [
                     [
-						'label' => $this->app->t('user', 'Account'),
+						'label' => $this->app->t('ModuleUser', 'Account'),
 						'url' => ['/user/admin/create']
 					],
                     [
-						'label' => $this->app->t('user', 'Profile'),
+						'label' => $this->app->t('ModuleUser', 'Profile'),
 						'options' => [
                            	'class' => 'disabled',
                            	'onclick' => 'return false;',
 						]
 					],
-					['label' => $this->app->t('user', 'Information'),
+					['label' => $this->app->t('ModuleUser', 'Information'),
 						'options' => [
                            	'class' => 'disabled',
                            	'onclick' => 'return false;',
@@ -68,8 +68,8 @@ $this->params['breadcrumbs'][] = $this->title;
 	<?= Html::beginTag('div', ['class' => 'col-md-9']) ?>
 
 		<?= Html::beginTag('div', ['class' => 'alert alert-info', 'role' => 'alert']) ?>
-            <?= $this->app->t('user', 'Credentials will be sent to the user by email') ?>.
-            <?= $this->app->t('user', 'A password will be generated automatically if not provided') ?>.
+            <?= $this->app->t('ModuleUser', 'Credentials will be sent to the user by email') ?>.
+            <?= $this->app->t('ModuleUser', 'A password will be generated automatically if not provided') ?>.
 		<?= Html::endTag('div') ?>
 
         <?php $form = ActiveForm::begin([
@@ -85,7 +85,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
         	<?= $this->render('_User', ['form' => $form, 'user' => $user]) ?>
 
-			<?= Html::submitButton($this->app->t('user', 'Save'), [
+			<?= Html::submitButton($this->app->t('ModuleUser', 'Save'), [
 				'class' => 'btn btn-block btn-lg btn-primary', 'tabindex' => '4',
 			]) ?>
 

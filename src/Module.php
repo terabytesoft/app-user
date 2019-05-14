@@ -279,6 +279,27 @@ class Module extends BaseModule
 	protected $settingsForm;
 
 	/**
+	 * The value of theme.
+	 *
+	 * @var bool
+	 **/
+    public $theme;
+
+	/**
+	 * The value of theme view login.
+	 *
+	 * @var string
+	 **/
+	public $themeViewsLogin;
+
+	/**
+	 * The value of theme view register.
+	 *
+	 * @var string
+	 **/
+	public $themeViewsRegister;
+
+	/**
 	 * The value of tokenModel.
 	 *
 	 * @var \TerabyteSoft\Module\User\Models\TokenModel

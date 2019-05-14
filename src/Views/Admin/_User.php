@@ -19,18 +19,18 @@
 	->textInput([
 		'tabindex' => '1',
 	])
-	->label($this->app->t('user', 'Email'))
+	->label($this->app->t('ModuleUser', 'Email'))
 ?>
 
 <?= $form->field($user, 'username')
 	->textInput([
 		'tabindex' => '2',
 	])
-	->label($this->app->t('user', 'Username'))
+	->label($this->app->t('ModuleUser', 'Username'))
 ?>
 
 <?php echo $form->field($user, 'password')
 	->passwordInput([
 		'tabindex' => '3',
 	])
-	->label($this->app->t('user', 'New Password'));
+	->label($this->app->t('ModuleUser', 'New Password'));

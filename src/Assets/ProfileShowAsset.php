@@ -12,10 +12,10 @@ use yii\web\AssetBundle;
 
 class ProfileShowAsset extends AssetBundle
 {
-    public $sourcePath = '@TerabyteSoft/Module/User/Assets/';
+    public $sourcePath = __DIR__ . '/Css';
 
 	public $css = [
-		'Css/Profile_Show.css',
+		'Profile.css',
     ];
 
 	public $js = [
@@ -24,11 +24,5 @@ class ProfileShowAsset extends AssetBundle
 	public $depends = [
         \TerabyteSoft\Assets\Fontawesome\Dev\Css\NpmSolidAsset::class,
 		\Yiisoft\Yii\Bootstrap4\BootstrapAsset::class,
-    ];
-
-    public $publishOptions = [
-        'only' => [
-            'css/*',
-        ],
     ];
 }

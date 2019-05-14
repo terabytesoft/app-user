@@ -71,7 +71,7 @@ class SettingsForm extends Model
             'currentPasswordRequired' => ['current_password', 'required'],
             'currentPasswordValidate' => ['current_password', function ($attr) {
                 if (!$this->passwordhelper->validate($this->$attr, $this->userModel->password_hash)) {
-                    $this->addError($attr, $this->app->t('user', 'Current password is not valid'));
+                    $this->addError($attr, $this->app->t('ModuleUser', 'Current password is not valid'));
                 }
             }],
         ];
@@ -96,7 +96,7 @@ class SettingsForm extends Model
 
 		$this->app->session->setFlash(
             'info',
-            $this->app->t('user', 'A confirmation message has been sent to your new email address')
+            $this->app->t('ModuleUser', 'A confirmation message has been sent to your new email address')
         );
     }
 
@@ -136,7 +136,7 @@ class SettingsForm extends Model
     protected function insecureEmailChange(): void
     {
         $this->userModel->email = $this->email;
-        $this->app->session->setFlash('success', $this->app->t('user', 'Your email address has been changed'));
+        $this->app->session->setFlash('success', $this->app->t('ModuleUser', 'Your email address has been changed'));
     }
 
     /**
@@ -204,7 +204,7 @@ class SettingsForm extends Model
         $this->app->session->setFlash(
             'info',
             $this->app->t(
-                'user',
+                'ModuleUser',
                 'We have sent confirmation links to both old and new email addresses. You must click both links to complete your request'
             )
         );

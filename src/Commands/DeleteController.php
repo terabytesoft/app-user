@@ -28,15 +28,15 @@ class DeleteController extends Controller
 	 **/
 	public function actionIndex($search): void
 	{
-		if ($this->confirm($this->app->t('user', 'Are you sure? Deleted user can not be restored'))) {
+		if ($this->confirm($this->app->t('ModuleUser', 'Are you sure? Deleted user can not be restored'))) {
 			$user = $this->module->userQuery->findUserByUsernameOrEmail($search);
 			if ($user === null) {
-				$this->stdout($this->app->t('user', 'User is not found') . "\n", Console::FG_RED);
+				$this->stdout($this->app->t('ModuleUser', 'User is not found') . "\n", Console::FG_RED);
 			} else {
 				if ($user->delete() !== false) {
-					$this->stdout($this->app->t('user', 'User has been deleted') . "\n", Console::FG_GREEN);
+					$this->stdout($this->app->t('ModuleUser', 'User has been deleted') . "\n", Console::FG_GREEN);
 				} else {
-					$this->stdout($this->app->t('user', 'Error occurred while deleting user') . "\n", Console::FG_RED);
+					$this->stdout($this->app->t('ModuleUser', 'Error occurred while deleting user') . "\n", Console::FG_RED);
 				}
 			}
 		}

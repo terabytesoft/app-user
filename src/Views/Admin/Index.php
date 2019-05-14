@@ -24,7 +24,7 @@ use yii\web\View;
  * @var \yii\web\View $this
  **/
 
-$this->title = $this->app->t('user', 'Manage users');
+$this->title = $this->app->t('ModuleUser', 'Manage users');
 $this->params['breadcrumbs'][] = $this->title;
 
 AdminIndexAsset::register($this);
@@ -36,28 +36,28 @@ $columns = 	[
 		'attribute' => 'id',
 		'contentOptions' => ['class' => 'form-admin-index-field-id'],
 		'filterInputOptions' => ['class' => 'form-control'],
-		'label' => $this->app->t('user', 'id'),
+		'label' => $this->app->t('ModuleUser', 'id'),
 	],
 	[
 		'attribute' => 'username',
 		'contentOptions' => ['class' => 'form-admin-index-field-username'],
 		'filterInputOptions' => ['class' => 'form-control'],
-		'label' => $this->app->t('user', 'Username'),
+		'label' => $this->app->t('ModuleUser', 'Username'),
 	],
 	[
 		'attribute' => 'email',
 		'contentOptions' => ['class' => 'form-admin-index-field-email'],
 		'filterInputOptions' => ['class' => 'form-control'],
-		'label' => $this->app->t('user', 'Email'),
+		'label' => $this->app->t('ModuleUser', 'Email'),
 	],
 	[
 		'attribute' => 'registration_ip',
 		'contentOptions' => ['class' => 'form-admin-index-field-registration_ip'],
 		'filterInputOptions' => ['class' => 'form-control'],
-		'label' => $this->app->t('user', 'Ip'),
+		'label' => $this->app->t('ModuleUser', 'Ip'),
 		'value' => function ($model) {
 			return $model->registration_ip === null
-				? $this->app->t('user', '(not set)')
+				? $this->app->t('ModuleUser', '(not set)')
 				: $model->registration_ip;
 		},
 	],
@@ -65,10 +65,10 @@ $columns = 	[
 		'attribute' => 'created_at',
 		'contentOptions' => ['class' => 'form-admin-index-field-created_at'],
 		'filterInputOptions' => ['class' => 'form-control'],
-		'label' => $this->app->t('user', 'Register Time'),
+		'label' => $this->app->t('ModuleUser', 'Register Time'),
 		'value' => function ($model) {
 			if (extension_loaded('intl')) {
-				return $this->app->t('user', '{0, date, yyyy-MM-dd HH:mm}', [$model->created_at]);
+				return $this->app->t('ModuleUser', '{0, date, yyyy-MM-dd HH:mm}', [$model->created_at]);
 			} else {
 				return date('Y-m-d G:i:s', $model->created_at);
 			}
@@ -78,12 +78,12 @@ $columns = 	[
 		'attribute' => 'last_login_at',
 		'contentOptions' => ['class' => 'form-admin-index-field-last_login_at'],
 		'filterInputOptions' => ['class' => 'form-control'],
-		'label' => $this->app->t('user', 'Last Login'),
+		'label' => $this->app->t('ModuleUser', 'Last Login'),
 		'value' => function ($model) {
 			if (!$model->last_login_at || $model->last_login_at == 0) {
-				return $this->app->t('user', 'Never');
+				return $this->app->t('ModuleUser', 'Never');
 		  	} elseif (extension_loaded('intl')) {
-				return $this->app->t('user', '{0, date, yyyy-MM-dd HH:mm}', [$model->last_login_at]);
+				return $this->app->t('ModuleUser', '{0, date, yyyy-MM-dd HH:mm}', [$model->last_login_at]);
 			} else {
 				return date('Y-m-d G:i:s', $model->last_login_at);
 			}
@@ -92,7 +92,7 @@ $columns = 	[
 	[
 		'contentOptions' => ['class' => 'form-admin-index-field-confirm'],
 		'format' => 'raw',
-		'header' => $this->app->t('user', 'Confirm'),
+		'header' => $this->app->t('ModuleUser', 'Confirm'),
 		'value' => function ($model) {
 			if ($model->isConfirmed) {
 				return Html::tag(
@@ -102,7 +102,7 @@ $columns = 	[
 					]),
 					[
 						'class' => 'text-success',
-						'title' => $this->app->t('user', 'Confirmed')
+						'title' => $this->app->t('ModuleUser', 'Confirmed')
 					]
 				);
 			} else {
@@ -113,9 +113,9 @@ $columns = 	[
 					['confirm', 'id' => $model->id],
 					[
 						'class' => 'text-danger',
-						'data-confirm' => $this->app->t('user', 'Are you sure you want to confirm this user?'),
+						'data-confirm' => $this->app->t('ModuleUser', 'Are you sure you want to confirm this user?'),
 						'data-method' => 'POST',
-						'title' => $this->app->t('user', 'Not confirmed'),
+						'title' => $this->app->t('ModuleUser', 'Not confirmed'),
 					]
 				);
 			}
@@ -125,7 +125,7 @@ $columns = 	[
 	[
 		'contentOptions' => ['class' => 'form-admin-index-field-block'],
 		'format' => 'raw',
-		'header' => $this->app->t('user', 'Block'),
+		'header' => $this->app->t('ModuleUser', 'Block'),
 		'value' => function ($model) {
 			if ($model->isBlocked) {
 				return Html::a(
@@ -135,9 +135,9 @@ $columns = 	[
 					['block', 'id' => $model->id],
 					[
 						'class' => 'text-success',
-						'data-confirm' => $this->app->t('user', 'Are you sure you want to unblock this user?'),
+						'data-confirm' => $this->app->t('ModuleUser', 'Are you sure you want to unblock this user?'),
 						'data-method' => 'POST',
-						'title' => $this->app->t('user', 'Unblock'),
+						'title' => $this->app->t('ModuleUser', 'Unblock'),
 					]
 				);
 			} else {
@@ -148,9 +148,9 @@ $columns = 	[
 					['block', 'id' => $model->id],
 					[
 						'class' => 'text-danger',
-						'data-confirm' => $this->app->t('user', 'Are you sure you want to block this user?'),
+						'data-confirm' => $this->app->t('ModuleUser', 'Are you sure you want to block this user?'),
 						'data-method' => 'post',
-						'title' => $this->app->t('user', 'Block'),
+						'title' => $this->app->t('ModuleUser', 'Block'),
 					]
 				);
 			}
@@ -171,8 +171,8 @@ $columns = 	[
 					[
 						'class' => 'border-0 fa-stack text-danger',
 						'data-method' => 'POST',
-						'data-confirm' => $this->app->t('user', 'Are you sure to delete this user?'),
-						'title' => $this->app->t('user', 'Delete'),
+						'data-confirm' => $this->app->t('ModuleUser', 'Are you sure to delete this user?'),
+						'title' => $this->app->t('ModuleUser', 'Delete'),
 					]
 				);
 			},
@@ -187,7 +187,7 @@ $columns = 	[
 					$url,
 					[
 						'class' => 'border-0 fa-stack text-info',
-						'title' => $this->app->t('user', 'Info'),
+						'title' => $this->app->t('ModuleUser', 'Info'),
 					]
 				);
 			},
@@ -203,9 +203,9 @@ $columns = 	[
 						$url,
 						[
 							'class' => 'border-0 fa-stack text-dark',
-							'data-confirm' => $this->app->t('user', 'Are you sure, send new password ?'),
+							'data-confirm' => $this->app->t('ModuleUser', 'Are you sure, send new password ?'),
 							'data-method' => 'POST',
-							'title' => $this->app->t('user', 'Generate and send new password to user'),
+							'title' => $this->app->t('ModuleUser', 'Generate and send new password to user'),
 						]
 					);
 				}
@@ -219,8 +219,8 @@ $columns = 	[
 						$url,
 						[
 							'class' => 'border-0 fa-stack text-warning',
-							'title' => $this->app->t('user', 'Become this user'),
-							'data-confirm' => $this->app->t('user', 'Are you sure you want to switch to this user for the rest of this Session?'),
+							'title' => $this->app->t('ModuleUser', 'Become this user'),
+							'data-confirm' => $this->app->t('ModuleUser', 'Are you sure you want to switch to this user for the rest of this Session?'),
 							'data-method' => 'POST',
 						]
 					);
@@ -237,13 +237,13 @@ $columns = 	[
 					$url,
 					[
 						'class' => 'border-0 fa-stack text-success',
-						'title' => $this->app->t('user', 'Update'),
+						'title' => $this->app->t('ModuleUser', 'Update'),
 					]
 				);
 			},
 		],
 		'contentOptions' => ['class' => 'd-flex'],
-		'header' => $this->app->t('user', 'User Actions'),
+		'header' => $this->app->t('ModuleUser', 'User Actions'),
 		'headerOptions' => ['class' => 'text-center'],
 		'template' => '{delete} {info} {resend-password} {switch} {update}',
 	]
