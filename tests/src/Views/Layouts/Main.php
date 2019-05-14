@@ -89,7 +89,7 @@ if ($this->app->user->isGuest) {
 								<?= $this->app->t('ModuleUser', 'Powered by') ?>
 								<?= Html::a(
 									$this->app->t(
-										'user',
+										'ModuleUser',
 										'Yii Framework'
 									),
 									'http://www.yiiframework.com/',
