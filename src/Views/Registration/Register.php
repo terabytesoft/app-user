@@ -20,6 +20,7 @@ use Yiisoft\Yii\Bootstrap4\Html;
  **/
 
 $this->title = $this->app->t('ModuleUser', 'Sign up');
+
 if (!$module->theme) {
     $this->params['breadcrumbs'][] = $this->title;
 }
@@ -122,7 +123,22 @@ if ($module->theme) {
 
     <?php if ($module->theme) : ?>
         <?= Html::beginTag('p', ['class' => 'text-center']) ?>
-            <?= Html::a($this->app->t('ModuleUser', 'Go to Home'), ['/']) ?>
+            <?= Html::a(
+                Html::tag(
+                    'span',
+                    Html::tag(
+                        'i',
+                        ' ',
+                        ['class' => 'c-blue-500 ti-home']
+                    ),
+                    ['class' => 'icon-holder']
+                ) .
+                $this->app->t(
+                    'ModuleUser',
+                    'Go to Home'
+                ),
+                ['/']
+            ) ?>
         <?= Html::endTag('p') ?>
     <?php endif ?>
 

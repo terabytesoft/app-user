@@ -45,6 +45,8 @@ return [
                 'theme' => $params['user.setting.theme'],
                 'themeViewsLogin' => $params['user.setting.theme.view.security.login'],
                 'themeViewsRegister' => $params['user.setting.theme.view.registration.register'],
+                'themeViewsRequest' => $params['user.setting.theme.view.registration.request'],
+                'themeViewsResend' => $params['user.setting.theme.view.registration.resend'],
                 'tokenConfirmWithin' => $params['user.setting.tokenConfirmWithin'],
                 'tokenRecoverWithin' => $params['user.setting.tokenRecoverWithin'],
                 'urlPrefix' => $params['user.setting.urlPrefix'],

@@ -19,7 +19,10 @@ use Yiisoft\Yii\Bootstrap4\Html;
  **/
 
 $this->title = $this->app->t('ModuleUser', 'Recover your password');
-$this->params['breadcrumbs'][] = $this->title;
+
+if (!$module->theme) {
+    $this->params['breadcrumbs'][] = $this->title;
+}
 
 if ($module->floatLabels) {
     \TerabyteSoft\Module\User\Assets\FloatingLabelAsset::register($this);
@@ -27,9 +30,15 @@ if ($module->floatLabels) {
 
 RecoveryRequestAsset::register($this);
 
+if ($module->theme) {
+    $this->beginContent($module->themeViewsRequest);
+}
+
 ?>
 
-<?= Html::beginTag('div', ['class' => 'form-recovery-request']) ?>
+<?= Html::beginTag('div', [
+   'class' => (!$module->theme) ? 'form-recovery-request' : 'form-recovery-request-adminator'
+]) ?>
 
     <?= Html::tag('h2', '<b>' . Html::encode($this->title) . '</b>', ['class' => 'form-recovery-request-title']) ?>
 
@@ -40,7 +49,7 @@ RecoveryRequestAsset::register($this);
 		) ?>
     <?= Html::endTag('p') ?>
 
-    <?= Html::tag('hr', '', ['class' => 'mb-4']) ?>
+    <?= Html::tag('hr', '', ['class' => 'mb-2']) ?>
 
     <?php $form = ActiveForm::begin([
         'id' => 'form-recovery-request',
@@ -80,4 +89,35 @@ RecoveryRequestAsset::register($this);
 
     <?php ActiveForm::end() ?>
 
+    <?= Html::tag('hr', '', ['class' => 'mb-2']) ?>
+
+    <?= Html::beginTag('p', ['class' => 'mt-3 text-center']) ?>
+        <?= Html::a($this->app->t('ModuleUser', 'Already registered? Sign in!'), ['/user/security/login']) ?>
+    <?= Html::endTag('p') ?>
+
+    <?php if ($module->theme) : ?>
+        <?= Html::beginTag('p', ['class' => 'text-center']) ?>
+            <?= Html::a(
+                Html::tag(
+                    'span',
+                    Html::tag(
+                        'i',
+                        ' ',
+                        ['class' => 'c-blue-500 ti-home']
+                    ),
+                    ['class' => 'icon-holder']
+                ) .
+                $this->app->t(
+                    'ModuleUser',
+                    'Go to Home'
+                ),
+                ['/']
+            ) ?>
+        <?= Html::endTag('p') ?>
+    <?php endif ?>
+
 <?php echo Html::endTag('div');
+
+if ($module->theme) {
+    $this->endContent();
+}

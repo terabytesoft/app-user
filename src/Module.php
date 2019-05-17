@@ -297,7 +297,21 @@ class Module extends BaseModule
 	 *
 	 * @var string
 	 **/
-	public $themeViewsRegister;
+    public $themeViewsRegister;
+
+    /**
+	 * The value of theme view request.
+	 *
+	 * @var string
+	 **/
+    public $themeViewsRequest;
+
+    /**
+	 * The value of theme view resend.
+	 *
+	 * @var string
+	 **/
+	public $themeViewsResend;
 
 	/**
 	 * The value of tokenModel.

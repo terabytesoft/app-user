@@ -27,6 +27,22 @@ return [
         '@runtime'  => '@public/runtime',
         '@web'      => '/',
     ]),
+    'logger' => static function (\yii\di\Container $container) {
+        /** @var \yii\base\Aliases $aliases */
+        $aliases = $container->get('aliases');
+        $fileTarget = new Yiisoft\Log\FileTarget(
+            $aliases->get('@runtime/logs/app.log'),
+            $container->get('file-rotator')
+        );
+        return new \Yiisoft\Log\Logger([
+            'file' => $fileTarget->setCategories(
+                [
+                    'application',
+                    'error',
+                ]
+            ),
+        ]);
+    },
     'assetManager' => [
         '__class'   => yii\web\AssetManager::class,
         'basePath'  => '@public/assets',

@@ -18,7 +18,10 @@ use Yiisoft\Yii\Bootstrap4\Html;
  */
 
 $this->title = $this->app->t('ModuleUser', 'Request new confirmation message');
-$this->params['breadcrumbs'][] = $this->title;
+
+if (!$module->theme) {
+    $this->params['breadcrumbs'][] = $this->title;
+}
 
 if ($module->floatLabels) {
     \TerabyteSoft\Module\User\Assets\FloatingLabelAsset::register($this);
@@ -26,9 +29,15 @@ if ($module->floatLabels) {
 
 RegistrationResendAsset::register($this);
 
+if ($module->theme) {
+    $this->beginContent($module->themeViewsResend);
+}
+
 ?>
 
-<?= Html::beginTag('div', ['class' => 'form-registration-resend']) ?>
+<?= Html::beginTag('div', [
+    'class' => (!$module->theme) ? 'form-registration-resend' : 'form-registration-resend-adminator'
+]) ?>
 
     <?= Html::tag('h2', '<b>' . Html::encode($this->title) . '</b>', ['class' => 'form-registration-resend-title']) ?>
 
@@ -39,7 +48,7 @@ RegistrationResendAsset::register($this);
 		) ?>
     <?= Html::endTag('p') ?>
 
-    <?= Html::tag('hr', '', ['class' => 'mb-4']) ?>
+    <?= Html::tag('hr', '', ['class' => 'mb-2']) ?>
 
     <?php $form = ActiveForm::begin([
         'id' => 'form-registration-resend',
@@ -80,4 +89,41 @@ RegistrationResendAsset::register($this);
 
 	<?php ActiveForm::end(); ?>
 
+    <?= Html::tag('hr', '', ['class' => 'mb-2']) ?>
+
+    <?php if ($module->accountRegistration) : ?>
+        <?= Html::beginTag('p', ['class' => 'text-center']) ?>
+            <?= Html::a($this->app->t('ModuleUser', 'Don\'t have an account? Sign up!'), ['/user/registration/register']) ?>
+        <?= Html::endTag('p') ?>
+    <?php endif ?>
+
+    <?= Html::beginTag('p', ['class' => 'mt-3 text-center']) ?>
+        <?= Html::a($this->app->t('ModuleUser', 'Already registered? Sign in!'), ['/user/security/login']) ?>
+    <?= Html::endTag('p') ?>
+
+    <?php if ($module->theme) : ?>
+        <?= Html::beginTag('p', ['class' => 'text-center']) ?>
+            <?= Html::a(
+                Html::tag(
+                    'span',
+                    Html::tag(
+                        'i',
+                        ' ',
+                        ['class' => 'c-blue-500 ti-home']
+                    ),
+                    ['class' => 'icon-holder']
+                ) .
+                $this->app->t(
+                    'ModuleUser',
+                    'Go to Home'
+                ),
+                ['/']
+            ) ?>
+        <?= Html::endTag('p') ?>
+    <?php endif ?>
+
 <?php echo Html::endTag('div');
+
+if ($module->theme) {
+    $this->endContent();
+}
