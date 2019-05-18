@@ -24,11 +24,11 @@ $menuSettings = [
 		'url' => ['/user/settings/account'],
 		'linkOptions' => ['class' => 'nav-link'],
 	],
-	[
+	/*[
 		'label' => $this->app->t('ModuleUser', 'Social Accounts'),
 		'url' => ['/user/settings/networks'],
 		'linkOptions' => ['class' => 'nav-link'],
-	],
+	],*/
 ];
 
 if ($this->app->controller->action->id === 'account') {

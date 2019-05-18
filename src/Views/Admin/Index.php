@@ -9,7 +9,7 @@
  **/
 
 use TerabyteSoft\Module\User\Assets\AdminIndexAsset;
-use TerabyteSoft\Assets\Fontawesome\Dev\Css\NpmSolidAsset;
+use TerabyteSoft\Assets\Fontawesome\Dev\Css\NpmAllAsset;
 use Yiisoft\Yii\Bootstrap4\Html;
 use Yiisoft\Yii\DataView\GridView;
 use Yiisoft\Yii\DataView\Columns\ActionColumn;
@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 AdminIndexAsset::register($this);
 GridViewAsset::register($this);
-NpmSolidAsset::register($this);
+NpmAllAsset::register($this);
 
 $columns = 	[
 	[
