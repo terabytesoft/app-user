@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <?= Html::beginTag('div', ['class' => 'row']) ?>
 
 	<?= Html::beginTag('div', ['class' => 'col-md-3']) ?>
-        <?= $this->render('_menu') ?>
+        <?= $this->render('_Menu') ?>
 	<?= Html::endTag('div') ?>
 
 	<?= Html::beginTag('div', ['class' => 'col-md-9']) ?>
