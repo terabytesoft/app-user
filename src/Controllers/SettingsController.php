@@ -93,7 +93,7 @@ class SettingsController extends Controller
 			return $this->refresh();
 		}
 
-		return $this->render('profile', [
+		return $this->render('Profile', [
 			'model' => $model,
 		]);
 	}
@@ -126,7 +126,7 @@ class SettingsController extends Controller
 			return $this->refresh();
 		}
 
-		return $this->render('account', [
+		return $this->render('Account', [
 			'model' => $model,
 		]);
 	}
@@ -171,7 +171,7 @@ class SettingsController extends Controller
 	 **/
 	public function actionNetworks(): string
 	{
-		return $this->render('networks', [
+		return $this->render('Networks', [
 			'user' => $this->app->user->identity,
 		]);
 	}

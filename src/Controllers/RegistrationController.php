@@ -132,7 +132,7 @@ class RegistrationController extends Controller
 			return $this->goBack();
 		}
 
-		return $this->render('connect', [
+		return $this->render('Connect', [
 			'model' => $user,
 			'account' => $account,
 		]);
