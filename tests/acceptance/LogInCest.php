@@ -1,5 +1,8 @@
 <?php
 
+namespace ModuleUser;
+
+use ModuleUser\AcceptanceTester;
 use yii\helpers\Yii;
 
 /**

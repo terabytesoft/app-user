@@ -26,6 +26,18 @@ if ($this->app->user->isGuest) {
     ];
 } else {
     $menuItems[] = [
+        'label' =>  $this->app->t('ModuleUser', 'Manage Users'),
+        'url' => ['/user/admin/index'],
+    ];
+    $menuItems[] = [
+        'label' =>  $this->app->t('ModuleUser', 'Settings Account'),
+        'url' => ['/user/settings/account'],
+    ];
+    $menuItems[] = [
+        'label' =>  $this->app->t('ModuleUser', 'Settings Profile'),
+        'url' => ['/user/settings/profile'],
+    ];
+    $menuItems[] = [
         'label' =>  $this->app->t('ModuleUser', 'Logout'),
         'url' => ['/user/security/logout'],
         'linkOptions' => ['data-method' => 'POST'],

@@ -1,5 +1,8 @@
 <?php
 
+namespace ModuleUser;
+
+use ModuleUser\AcceptanceTester;
 use yii\helpers\Yii;
 
 /**
@@ -13,7 +16,7 @@ class SignUpCest
      * _before
      *
      **/
-    public function _before(FunctionalTester $I)
+    public function _before(AcceptanceTester $I)
     {
         $I->amOnPage('/user/registration/register');
     }

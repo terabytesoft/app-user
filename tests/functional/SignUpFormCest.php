@@ -1,5 +1,8 @@
 <?php
 
+namespace ModuleUser;
+
+use ModuleUser\FunctionalTester;
 use yii\helpers\Yii;
 
 /**
