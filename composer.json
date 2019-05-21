@@ -52,7 +52,7 @@
             "defines": "config/defines.php",
             "params": [
                 "config/params.php",
-                "config/user.php"
+                "config/moduleuser.php"
             ],
             "common": "config/common.php",
             "web": "config/web.php",

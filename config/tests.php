@@ -6,7 +6,7 @@ return [
     'app' => [
         'basePath' => dirname(__DIR__) . '/tests/src',
         'controllerNamespace' => '\TerabyteSoft\Module\User\Tests\Controllers',
-        'layout' => $params['user.setting.theme.layout'],
+        'layout' => $params['module.user.setting.theme.layout'],
     ],
 	'authClientCollection' => [
 		'__class' => Yiisoft\Yii\AuthClient\Collection::class,
