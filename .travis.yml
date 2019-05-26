@@ -21,6 +21,7 @@ service:
   - mysql
 
 before_install:
+  - google-chrome-stable --headless --no-sandbox
   - mysql -e 'CREATE DATABASE ModuleUser;'
 
 install:
