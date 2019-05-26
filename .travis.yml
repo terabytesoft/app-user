@@ -4,6 +4,9 @@ php:
   - 7.2
   - 7.3
 
+addons:
+  chrome: stable
+
 # faster builds on new travis setup not using sudo
 sudo: false
 
@@ -31,6 +34,9 @@ install:
     fi
 
 before_script:
+  - wget https://chromedriver.storage.googleapis.com/74.0.3729.6/chromedriver_linux64.zip
+  - unzip chromedriver_linux64.zip -d vendor/bin
+  - vendor/bin/chromedriver --url-base=wd/hub > /dev/null 2>&1&
   - vendor/bin/yii migrate --migrationPath=@TerabyteSoft/Module/User/Migrations --interactive=0
 
 script:

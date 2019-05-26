@@ -22,10 +22,10 @@ class LogInFormCest
     }
 
     /**
-     * LogInFormPageTest
+     * logInFormPageTest
      *
      **/
-    public function LogInFormPageTest(FunctionalTester $I)
+    public function logInFormPageTest(FunctionalTester $I)
     {
         $I->wantTo('ensure that login page works.');
         $I->expectTo('see page login.');
@@ -33,10 +33,10 @@ class LogInFormCest
     }
 
     /**
-     * LogInFormResetPasswordLink
+     * logInFormResetPasswordLink
      *
      **/
-    public function LogInFormResetPasswordLink(FunctionalTester $I)
+    public function logInFormResetPasswordLink(FunctionalTester $I)
     {
         $I->wantTo('ensure that link reset password link works.');
         $I->SeeLink(Yii::t('ModuleUser', 'reset it here'), '/user/recovery/request');
@@ -46,10 +46,10 @@ class LogInFormCest
     }
 
     /**
-     * LogInResendReceiveConfirmationMessageLink
+     * logInFormResendReceiveConfirmationMessageLink
      *
      **/
-    public function LogInResendReceiveConfirmationMessageLink(FunctionalTester $I)
+    public function logInFormResendReceiveConfirmationMessageLink(FunctionalTester $I)
     {
         $I->wantTo('ensure that link resend receive confirmation message link works.');
         $I->SeeLink(Yii::t('ModuleUser', 'Didn\'t receive confirmation message?'), '/user/registration/resend');
@@ -59,10 +59,10 @@ class LogInFormCest
     }
 
     /**
-     * LogInDontIHaveAccountLink
+     * logInFormDontIHaveAccountLink
      *
      **/
-    public function LogInDontIHaveAccountLink(FunctionalTester $I)
+    public function logInFormDontIHaveAccountLink(FunctionalTester $I)
     {
         $I->wantTo('ensure that link receive confirmation message works.');
         $I->SeeLink(Yii::t('ModuleUser', 'Don\'t have an account? Sign up!'), '/user/registration/register');
@@ -72,10 +72,10 @@ class LogInFormCest
     }
 
     /**
-     * LogInFormEmptyDataTest
+     * logInFormEmptyDataTest
      *
      **/
-    public function LogInFormEmptyDataTest(FunctionalTester $I)
+    public function logInFormEmptyDataTest(FunctionalTester $I)
     {
         $I->amGoingTo('login submit form with empty data.');
         $I->submitForm('#form-security-login', []);
@@ -86,10 +86,10 @@ class LogInFormCest
     }
 
     /**
-     * LogInFormSubmitFormWrongDataTest
+     * logInFormSubmitFormWrongDataTest
      *
      **/
-    public function LogInFormSubmitFormWrongDataTest(FunctionalTester $I)
+    public function logInFormSubmitFormWrongDataTest(FunctionalTester $I)
     {
         $I->amGoingTo('login submit form with data wrong.');
         $I->submitForm('#form-security-login', [
@@ -102,11 +102,12 @@ class LogInFormCest
     }
 
     /**
-     * LogInFormSubmitFormSuccessDataTest
+     * @depends ModuleUser\SignUpFormCest:SignUpFormRegisterSuccessDataTest
      *
-     * @depends SignUpFormCest:SignUpFormRegisterSuccessDataTest
-     **/
-    public function LogInFormSubmitFormSuccessDataTest(FunctionalTester $I)
+     * logInFormSubmitFormSuccessDataTest
+     *
+     */
+    public function logInFormSubmitFormSuccessDataTest(FunctionalTester $I)
     {
         $I->amGoingTo('login submit form with data success.');
         $I->submitForm('#form-security-login', [

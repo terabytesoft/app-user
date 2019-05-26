@@ -8,7 +8,8 @@
  * View web application user
  **/
 
-use app\user\assets\ProfileShowAsset;
+use TerabyteSoft\Assets\Fontawesome\Dev\Css\NpmAllAsset;
+use TerabyteSoft\Module\User\Assets\ProfileShowAsset;
 use yii\bootstrap4\Html;
 
 /**
@@ -20,6 +21,7 @@ use yii\bootstrap4\Html;
 $this->title = $this->app->t('ModuleUser', 'Profile Details');
 $this->params['breadcrumbs'][] = empty($profile->name) ? $profile->user->username : $profile->name;
 
+NpmAllAsset::register($this);
 ProfileShowAsset::register($this);
 
 ?>

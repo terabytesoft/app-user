@@ -24,7 +24,7 @@ use yii\web\View;
  * @var \yii\web\View $this
  **/
 
-$this->title = $this->app->t('ModuleUser', 'Manage users');
+$this->title = $this->app->t('ModuleUser', 'Manage Users');
 $this->params['breadcrumbs'][] = $this->title;
 
 AdminIndexAsset::register($this);

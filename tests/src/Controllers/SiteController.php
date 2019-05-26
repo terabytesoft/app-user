@@ -19,6 +19,7 @@ class SiteController extends Controller
         return [
             'error' => [
                 '__class' => ErrorAction::class,
+                'view' => 'Error.php',
             ],
         ];
     }

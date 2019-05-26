@@ -5,8 +5,8 @@ namespace TerabyteSoft\Module\User\Forms;
 use TerabyteSoft\Module\User\Helpers\PasswordHelper;
 use TerabyteSoft\Module\User\Traits\ModuleTrait;
 use yii\base\Model;
-use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
+use Yiisoft\Arrays\ArrayHelper;
 
 /**
  * LoginForm
