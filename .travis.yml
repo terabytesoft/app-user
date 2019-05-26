@@ -5,9 +5,7 @@ php:
   - 7.3
 
 addons:
-  apt:
-    packages:
-      - google-chrome-stable
+  chrome: stable
 
 # faster builds on new travis setup not using sudo
 sudo: false
@@ -21,7 +19,7 @@ service:
   - mysql
 
 before_install:
-  - google-chrome-stable --headless --no-sandbox
+  - which google-chrome
   - mysql -e 'CREATE DATABASE ModuleUser;'
 
 install:
