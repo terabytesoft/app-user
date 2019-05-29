@@ -10,7 +10,7 @@
 
 use TerabyteSoft\Assets\Fontawesome\Dev\Css\NpmAllAsset;
 use TerabyteSoft\Module\User\Assets\ProfileShowAsset;
-use yii\bootstrap4\Html;
+use Yiisoft\Yii\Bootstrap4\Html;
 
 /**
  * @property \app\user\models\UserModel $user
