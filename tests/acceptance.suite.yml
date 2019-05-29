@@ -7,14 +7,14 @@
 actor: AcceptanceTester
 modules:
     enabled:
-        - WebDriver:
+        - WebDriver
+        - \ModuleUser\Helper\Acceptance
+    config:
+        WebDriver:
             url: 'http://127.0.0.1:8080'
             window_size: false # disabled in ChromeDriver
-            port: 9515
             browser: chrome
             capabilities:
-                chromeOptions:
-                args: ["--headless", "--disable-gpu"]
-                binary: "/usr/bin/google-chrome"
-        - \ModuleUser\Helper\Acceptance
+                "goog:chromeOptions":
+                    args: ["--headless", "--disable-gpu"]
     step_decorators: ~
