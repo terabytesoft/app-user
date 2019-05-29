@@ -18,7 +18,7 @@ use yii\bootstrap4\Html;
  * @var \yii\widgets\ActiveForm $form
  **/
 
-$this->title = $this->getApp()->t('user', 'Reset your password');
+$this->title = $this->app->t('ModuleUser', 'Reset your password');
 $this->params['breadcrumbs'][] = $this->title;
 
 if ($module->floatLabels) {
@@ -35,7 +35,7 @@ RecoveryResetAsset::register($this);
 
 	<?= Html::beginTag('p', ['class' => 'form-recovery-reset-subtitle']) ?>
         <?= $this->app->t(
-			'user',
+			'ModuleUser',
 			'Please fill out the following fields to' . '<br/>' . 'Reset your password.'
 		) ?>
     <?= Html::endTag('p') ?>
@@ -68,13 +68,13 @@ RecoveryResetAsset::register($this);
 
     	<?= $form->field($model, 'password')->passwordInput([
 				'oninput' => 'this.setCustomValidity("")',
-				'oninvalid' => 'this.setCustomValidity("' . $this->app->t('user', 'Enter Password Here') . '")',
-				'placeholder' => $this->app->t('user', 'Password'),
+				'oninvalid' => 'this.setCustomValidity("' . $this->app->t('ModuleUser', 'Enter Password Here') . '")',
+				'placeholder' => $this->app->t('ModuleUser', 'Password'),
 				'required' => (YII_ENV === 'test') ? false : true,
 				'tabindex' => '1',
-		])->label($this->app->t('user', 'Password')) ?>
+		])->label($this->app->t('ModuleUser', 'Password')) ?>
 
-    	<?= Html::submitButton($this->getApp()->t('user', 'Reset Password'), [
+    	<?= Html::submitButton($this->app->t('ModuleUser', 'Reset Password'), [
 			'class' => 'btn btn-block btn-lg btn-primary mt-3', 'name' => 'reset-button', 'tabindex' => '2'
 		]) ?>
 

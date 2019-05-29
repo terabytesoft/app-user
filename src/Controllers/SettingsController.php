@@ -84,7 +84,7 @@ class SettingsController extends Controller
 			$this->app->getSession()->setFlash(
 				'success',
 				$this->app->t(
-					'user',
+					'ModuleUser',
 					'Your profile has been updated'
 				)
 			);
@@ -93,7 +93,7 @@ class SettingsController extends Controller
 			return $this->refresh();
 		}
 
-		return $this->render('profile', [
+		return $this->render('Profile', [
 			'model' => $model,
 		]);
 	}
@@ -117,7 +117,7 @@ class SettingsController extends Controller
 			$this->app->session->setFlash(
 				'success',
 				$this->app->t(
-					'user',
+					'ModuleUser',
 					'Your account details have been updated'
 				)
 			);
@@ -126,7 +126,7 @@ class SettingsController extends Controller
 			return $this->refresh();
 		}
 
-		return $this->render('account', [
+		return $this->render('Account', [
 			'model' => $model,
 		]);
 	}
@@ -148,7 +148,7 @@ class SettingsController extends Controller
 
 		if ($user === null || $this->module->emailChangeStrategy === Module::STRATEGY_INSECURE) {
 			throw new ForbiddenHttpException(
-				$this->app->t('user', 'The email can not be changed without confirmation')
+				$this->app->t('ModuleUser', 'The email can not be changed without confirmation')
 			);
 		}
 
@@ -171,7 +171,7 @@ class SettingsController extends Controller
 	 **/
 	public function actionNetworks(): string
 	{
-		return $this->render('networks', [
+		return $this->render('Networks', [
 			'user' => $this->app->user->identity,
 		]);
 	}
@@ -220,7 +220,7 @@ class SettingsController extends Controller
 	public function actionDelete()
 	{
 		if (!$this->module->accountDelete) {
-			throw new NotFoundHttpException($this->app->t('user', 'Not found'));
+			throw new NotFoundHttpException($this->app->t('ModuleUser', 'Not found'));
 		}
 
 		$user = $this->app->user->identity;
@@ -235,7 +235,7 @@ class SettingsController extends Controller
 		$this->app->session->setFlash(
 			'info',
 			$this->app->t(
-				'user',
+				'ModuleUser',
 				'Your account has been completely deleted'
 			)
 		);

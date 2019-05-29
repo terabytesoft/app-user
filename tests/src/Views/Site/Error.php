@@ -21,11 +21,11 @@ $this->title = $name;
 	<?= Html::endTag('div') ?>
 
 	<?= Html::beginTag('p') ?>
-		<?= $this->app->t('user', 'The above error occurred while the Web server was processing your request') ?>
+		<?= $this->app->t('ModuleUser', 'The above error occurred while the Web server was processing your request') ?>
 	<?= Html::endTag('p') ?>
 
 	<?= Html::beginTag('p') ?>
-		<?= $this->app->t('user', 'Please contact us if you think this is a server error. Thank you') ?>
+		<?= $this->app->t('ModuleUser', 'Please contact us if you think this is a server error. Thank you') ?>
 	<?= Html::endTag('p') ?>
 
 <?php echo Html::endTag('div');

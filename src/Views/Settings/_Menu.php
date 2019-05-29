@@ -15,30 +15,30 @@ $user = $this->app->user->identity;
 
 $menuSettings = [
 	[
-		'label' => $this->app->t('user', 'Profile'),
+		'label' => $this->app->t('ModuleUser', 'Profile'),
 		'url' => ['/user/settings/profile'],
 		'linkOptions' => ['class' => 'nav-link'],
 	],
 	[
-		'label' => $this->app->t('user', 'Account'),
+		'label' => $this->app->t('ModuleUser', 'Account'),
 		'url' => ['/user/settings/account'],
 		'linkOptions' => ['class' => 'nav-link'],
 	],
-	[
-		'label' => $this->app->t('user', 'Social Accounts'),
+	/*[
+		'label' => $this->app->t('ModuleUser', 'Social Accounts'),
 		'url' => ['/user/settings/networks'],
 		'linkOptions' => ['class' => 'nav-link'],
-	],
+	],*/
 ];
 
 if ($this->app->controller->action->id === 'account') {
 	$menuSettings[] = [
-		'label' => $this->app->t('user', 'Delete account'),
+		'label' => $this->app->t('ModuleUser', 'Delete account'),
 		'url' => ['delete'],
 		'linkOptions' => [
 			'class' => 'btn-outline-danger nav-link',
 			'data-method' => 'post',
-			'data-confirm' => $this->app->t('user', 'Are you sure? There is no going back'),
+			'data-confirm' => $this->app->t('ModuleUser', 'Are you sure? There is no going back'),
 		],
 		'visible' => ($this->app->modules['user']->accountDelete),
 	];
@@ -47,7 +47,7 @@ if ($this->app->controller->action->id === 'account') {
 ?>
 
 <?= Html::beginTag('h5', ['class' => 'text-center']) ?>
-	<?= $this->app->t('user', 'Menu Settings') ?>
+	<?= $this->app->t('ModuleUser', 'Menu Settings') ?>
 <?= Html::endTag('h5') ?>
 
 <?php echo Nav::widget([

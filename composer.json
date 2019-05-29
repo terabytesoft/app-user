@@ -8,11 +8,11 @@
     "type": "library",
     "license": "MIT",
     "minimum-stability": "dev",
+    "prefer-stable": true,
     "require": {
 		"php": "^7.2",
         "ezyang/htmlpurifier": "^4.6",
         "nyholm/psr7": "*",
-        "terabytesoft/alert": "^0.0.1@dev",
         "terabytesoft/font-awesome": "^0.0.1@dev",
         "yiisoft/active-record": "^3.0@dev",
         "yiisoft/db-mysql": "^3.0@dev",
@@ -29,7 +29,9 @@
         "codeception/codeception": "^3.0",
         "foxy/foxy": "^1.0",
         "hiqdev/composer-config-plugin": "^1.0@dev",
+        "monolog/monolog": "*",
         "phpunit/phpunit": "8.1.3",
+        "terabytesoft/adminator": "^0.0.1@dev",
         "yiisoft/cache": "^3.0@dev",
         "yiisoft/di": "^3.0@dev",
         "yiisoft/log": "^3.0@dev",
@@ -49,7 +51,10 @@
         },
         "config-plugin": {
             "defines": "config/defines.php",
-            "params": "config/params.php",
+            "params": [
+                "config/params.php",
+                "config/moduleuser.php"
+            ],
             "common": "config/common.php",
             "web": "config/web.php",
             "codecept": [

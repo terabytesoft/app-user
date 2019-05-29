@@ -17,8 +17,8 @@ use Yiisoft\Yii\Bootstrap4\Nav;
  * @var \yii\web\View $this
  **/
 
-$this->title = $this->app->t('user', 'Update user account');
-$this->params['breadcrumbs'][] = ['label' => $this->app->t('user', 'Users'), 'url' => ['index']];
+$this->title = $this->app->t('ModuleUser', 'Update user account');
+$this->params['breadcrumbs'][] = ['label' => $this->app->t('ModuleUser', 'Users'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	<?= Html::beginTag('div', ['class' => 'col-md-3']) ?>
 
 		<?= Html::beginTag('h5', ['class' => 'text-center']) ?>
-			<?= $this->app->t('user', 'Menu Settings') ?>
+			<?= $this->app->t('ModuleUser', 'Menu Settings') ?>
 		<?= Html::endTag('h5') ?>
 
         <?= Nav::widget([
@@ -42,58 +42,58 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'items' => [
                 [
-                    'label' => $this->app->t('user', 'Account'),
+                    'label' => $this->app->t('ModuleUser', 'Account'),
                      'url' => ['/user/admin/update', 'id' => $user->id]
                     ],
                     [
-                        'label' => $this->app->t('user', 'Profile'),
+                        'label' => $this->app->t('ModuleUser', 'Profile'),
                         'url' => ['/user/admin/update-profile', 'id' => $user->id]
                     ],
                     [
-						'label' => $this->app->t('user', 'Information'),
+						'label' => $this->app->t('ModuleUser', 'Information'),
 						'url' => ['/user/admin/info', 'id' => $user->id]],
                     [
-                     	'label' => $this->app->t('user', 'Assignments'),
+                     	'label' => $this->app->t('ModuleUser', 'Assignments'),
                         'url' => ['/user/admin/assignments', 'id' => $user->id],
                         'visible' => false,
                     ],
                     [
-                        'label' => $this->app->t('user', 'Confirm'),
+                        'label' => $this->app->t('ModuleUser', 'Confirm'),
                         'url' => ['/user/admin/confirm', 'id' => $user->id],
                         'visible' => !$user->isConfirmed,
                         'linkOptions' => [
                             'class' => 'btn-outline-success nav-link',
                             'data-method' => 'post',
-                            'data-confirm' => $this->app->t('user', 'Are you sure you want to confirm this user?'),
+                            'data-confirm' => $this->app->t('ModuleUser', 'Are you sure you want to confirm this user?'),
                         ],
                     ],
                     [
-                        'label' => $this->app->t('user', 'Block'),
+                        'label' => $this->app->t('ModuleUser', 'Block'),
                         'url' => ['/user/admin/block', 'id' => $user->id],
                         'visible' => !$user->isBlocked,
                         'linkOptions' => [
                             'class' => 'btn-outline-danger nav-link',
                             'data-method' => 'post',
-                            'data-confirm' => $this->app->t('user', 'Are you sure you want to block this user?'),
+                            'data-confirm' => $this->app->t('ModuleUser', 'Are you sure you want to block this user?'),
                         ],
                     ],
                     [
-                        'label' => $this->app->t('user', 'Unblock'),
+                        'label' => $this->app->t('ModuleUser', 'Unblock'),
                         'url' => ['/user/admin/block', 'id' => $user->id],
                         'visible' => $user->isBlocked,
                         'linkOptions' => [
                             'class' => 'btn-outline-success snav-link',
                             'data-method' => 'post',
-                            'data-confirm' => $this->app->t('user', 'Are you sure you want to unblock this user?'),
+                            'data-confirm' => $this->app->t('ModuleUser', 'Are you sure you want to unblock this user?'),
                         ],
                     ],
                     [
-                        'label' => $this->app->t('user', 'Delete'),
+                        'label' => $this->app->t('ModuleUser', 'Delete'),
                         'url' => ['/user/admin/delete', 'id' => $user->id],
                         'linkOptions' => [
                             'class' => 'btn-outline-danger nav-link',
                             'data-method' => 'post',
-                            'data-confirm' => $this->app->t('user', 'Are you sure you want to delete this user?'),
+                            'data-confirm' => $this->app->t('ModuleUser', 'Are you sure you want to delete this user?'),
                         ],
                     ],
                 ],

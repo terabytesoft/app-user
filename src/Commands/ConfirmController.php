@@ -30,12 +30,12 @@ class ConfirmController extends Controller
 	{
 		$user = $this->module->userQuery->findUserByUsernameOrEmail($search);
 		if ($user === null) {
-			$this->stdout($this->app->t('user', 'User is not found') . "\n", Console::FG_RED);
+			$this->stdout($this->app->t('ModuleUser', 'User is not found') . "\n", Console::FG_RED);
 		} else {
 			if ($user->confirm()) {
-				$this->stdout($this->app->t('user', 'User has been confirmed') . "\n", Console::FG_GREEN);
+				$this->stdout($this->app->t('ModuleUser', 'User has been confirmed') . "\n", Console::FG_GREEN);
 			} else {
-				$this->stdout($this->app->t('user', 'Error occurred while confirming user') . "\n", Console::FG_RED);
+				$this->stdout($this->app->t('ModuleUser', 'Error occurred while confirming user') . "\n", Console::FG_RED);
 			}
 		}
 	}

@@ -12,10 +12,10 @@ use yii\web\AssetBundle;
 
 class RegistrationRegisterAsset extends AssetBundle
 {
-    public $sourcePath = '@TerabyteSoft/Module/User/Assets/';
+    public $sourcePath = __DIR__ . '/Css';
 
 	public $css = [
-		'Css/Registration_Register.css',
+		'Register.css',
     ];
 
 	public $js = [

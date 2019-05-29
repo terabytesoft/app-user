@@ -22,7 +22,7 @@ use Yiisoft\Arrays\ArrayHelper;
 
 $timezoneHelper = new TimeZoneHelper();
 
-$this->title = $this->app->t('user', 'Profile Form');
+$this->title = $this->app->t('ModuleUser', 'Profile Form');
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <?= Html::beginTag('div', ['class' => 'row']) ?>
 
 	<?= Html::beginTag('div', ['class' => 'col-md-3']) ?>
-        <?= $this->render('_menu') ?>
+        <?= $this->render('_Menu') ?>
 	<?= Html::endTag('div') ?>
 
 	<?= Html::beginTag('div', ['class' => 'col-md-9']) ?>
@@ -52,28 +52,28 @@ $this->params['breadcrumbs'][] = $this->title;
 				->textInput([
 			    	'tabindex' => '1',
 				])
-				->label($this->app->t('user', 'Name'))
+				->label($this->app->t('ModuleUser', 'Name'))
 			?>
 
 			<?= $form->field($model, 'public_email')
 				->textInput([
 			    	'tabindex' => '2',
 				])
-				->label($this->app->t('user', 'Email - (Public)'))
+				->label($this->app->t('ModuleUser', 'Email - (Public)'))
 			?>
 
 			<?= $form->field($model, 'website')
 				->textInput([
 			    	'tabindex' => '3',
 				])
-				->label($this->app->t('user', 'Website'))
+				->label($this->app->t('ModuleUser', 'Website'))
 			?>
 
 			<?= $form->field($model, 'location')
 				->textInput([
 			    	'tabindex' => '4',
 				])
-				->label($this->app->t('user', 'Location'))
+				->label($this->app->t('ModuleUser', 'Location'))
 			?>
 
 			<?= $form->field($model, 'timezone')
@@ -87,24 +87,24 @@ $this->params['breadcrumbs'][] = $this->title;
 						'tabindex' => '5',
 					]
 				)
-				->label($this->app->t('user', 'Time Zone'))
+				->label($this->app->t('ModuleUser', 'Time Zone'))
 			?>
 
 			<?= $form->field($model, 'gravatar_email')
 				->textInput([
 			    	'tabindex' => '6',
 				])
-				->label($this->app->t('user', 'Gravatar Email'))
-				->hint(Html::a($this->app->t('user', 'Change your avatar at Gravatar.com'), 'http://gravatar.com'))
+				->label($this->app->t('ModuleUser', 'Gravatar Email'))
+				->hint(Html::a($this->app->t('ModuleUser', 'Change your avatar at Gravatar.com'), 'http://gravatar.com'))
 			?>
 
             <?= $form->field($model, 'bio')->textarea([
 			    	'tabindex' => '7',
 				])
-				->label($this->app->t('user', 'Bio'))
+				->label($this->app->t('ModuleUser', 'Bio'))
 			?>
 
-			<?= Html::submitButton($this->app->t('user', 'Save'), [
+			<?= Html::submitButton($this->app->t('ModuleUser', 'Save'), [
 				'class' => 'btn btn-block btn-lg btn-primary', 'name' => 'profile-button', 'tabindex' => '8',
 	        ]); ?>
 

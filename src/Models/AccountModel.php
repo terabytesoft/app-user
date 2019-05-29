@@ -180,7 +180,7 @@ class AccountModel extends ActiveRecord
     public function connectWithUser(BaseClientInterface $client)
     {
         if ($this->app->user->isGuest) {
-            $this->app->session->setFlash('danger', $this->app->t('user', 'Something went wrong'));
+            $this->app->session->setFlash('danger', $this->app->t('ModuleUser', 'Something went wrong'));
 
             return;
         }
@@ -189,11 +189,11 @@ class AccountModel extends ActiveRecord
 
         if ($account->user === null) {
             $account->link('user', $this->app->user->identity);
-            $this->app->session->setFlash('success', $this->app->t('user', 'Your account has been connected'));
+            $this->app->session->setFlash('success', $this->app->t('ModuleUser', 'Your account has been connected'));
         } else {
             $this->app->session->setFlash(
                 'danger',
-                $this->app->t('user', 'This account has already been connected to another user')
+                $this->app->t('ModuleUser', 'This account has already been connected to another user')
             );
         }
     }

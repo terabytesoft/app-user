@@ -1,44 +1,30 @@
 /**
- * Profile_Show
+ * Registration_Register
  *
  **/
 
 /**********************************************************************************************************************
  * FORMS                                                                                                              *
  **********************************************************************************************************************/
- .form-profile-show {
+.form-label-group {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.form-registration-register {
     background: #EAEDED;
-    border-radius: 3px;
     border-top: 3px solid #494f54;
-    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
     margin: auto;
     max-width: 420px;
     padding: 15px;
-    position: relative;
     width: 100%;
 }
 
-.form-profile-show-title {
+.form-registration-register-title {
     text-align: center;
 }
 
-.form-profile-show-subtitle {
+.form-registration-register-subtitle {
     text-align: center;
     margin-bottom: 1.5rem;
-}
-
-.form-profile-show-img {
-    border: 3px solid #d2d6de;
-    display: block;
-    margin: 0 auto;
-    padding: 3px;
-    width: 30vh;
-}
-
-.form-profile-show-fields-title {
-    font-weight: bold;
-}
-
-.img-circle {
-    border-radius: 70%;
 }

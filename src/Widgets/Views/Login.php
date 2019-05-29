@@ -13,7 +13,7 @@ use yii\helpers\Url;
 
 ?>
 
-<?php if ($this->getApp()->user->isGuest) : ?>
+<?php if ($this->app->user->isGuest) : ?>
     <?php $form = ActiveForm::begin([
         'id'                     => 'login-widget-form',
         'action'                 => Url::to(['/user/security/login']),
@@ -30,11 +30,11 @@ use yii\helpers\Url;
 
     <?= $form->field($model, 'rememberMe')->checkbox() ?>
 
-    <?= Html::submitButton($this->getApp()->t('user', 'Sign in'), ['class' => 'btn btn-primary btn-block']) ?>
+    <?= Html::submitButton($this->app->t('ModuleUser', 'Sign in'), ['class' => 'btn btn-primary btn-block']) ?>
 
     <?php ActiveForm::end(); ?>
 <?php else : ?>
-    <?= Html::a($this->getApp()->t('user', 'Logout'), ['/user/security/logout'], [
+    <?= Html::a($this->app->t('ModuleUser', 'Logout'), ['/user/security/logout'], [
         'class'       => 'btn btn-danger btn-block',
         'data-method' => 'post'
     ]) ?>

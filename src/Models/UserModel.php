@@ -233,14 +233,14 @@ class UserModel extends ActiveRecord implements IdentityInterface
 	public function attributeLabels()
 	{
 		return [
-			'username' => Yii::t('user', 'Username'),
-			'email' => Yii::t('user', 'Email'),
-			'registration_ip' => Yii::t('user', 'Registration ip'),
-			'unconfirmed_email' => Yii::t('user', 'New email'),
-			'password' => Yii::t('user', 'Password'),
-			'created_at' => Yii::t('user', 'Registration time'),
-			'last_login_at' => Yii::t('user', 'Last login'),
-			'confirmed_at' => Yii::t('user', 'Confirmation time'),
+			'username' => Yii::t('ModuleUser', 'Username'),
+			'email' => Yii::t('ModuleUser', 'Email'),
+			'registration_ip' => Yii::t('ModuleUser', 'Registration ip'),
+			'unconfirmed_email' => Yii::t('ModuleUser', 'New email'),
+			'password' => Yii::t('ModuleUser', 'Password'),
+			'created_at' => Yii::t('ModuleUser', 'Registration time'),
+			'last_login_at' => Yii::t('ModuleUser', 'Last login'),
+			'confirmed_at' => Yii::t('ModuleUser', 'Confirmation time'),
 		];
 	}
 
@@ -289,7 +289,7 @@ class UserModel extends ActiveRecord implements IdentityInterface
 			'usernameUnique' => [
 				'username',
 				'unique',
-				'message' => Yii::t('user', 'This username has already been taken.'),
+				'message' => Yii::t('ModuleUser', 'This username has already been taken.'),
 			],
 
 			// email rules
@@ -300,7 +300,7 @@ class UserModel extends ActiveRecord implements IdentityInterface
 			'emailUnique' => [
 				'email',
 				'unique',
-				'message' => Yii::t('user', 'This email address has already been taken.'),
+				'message' => Yii::t('ModuleUser', 'This email address has already been taken.'),
 			],
 
 			// password rules
@@ -451,11 +451,11 @@ class UserModel extends ActiveRecord implements IdentityInterface
 		])->andWhere(['in', 'type', [TokenModel::TYPE_CONFIRM_NEW_EMAIL, TokenModel::TYPE_CONFIRM_OLD_EMAIL]])->one();
 
 		if (empty($this->unconfirmed_email) || $token === null || $token->isExpired) {
-			$this->app->session->setFlash('danger', Yii::t('user', 'Your confirmation token is invalid or expired'));
+			$this->app->session->setFlash('danger', Yii::t('ModuleUser', 'Your confirmation token is invalid or expired'));
 		} else {
 			$token->delete();
 			if (empty($this->unconfirmed_email)) {
-				$this->app->session->setFlash('danger', Yii::t('user', 'An error occurred processing your request'));
+				$this->app->session->setFlash('danger', Yii::t('ModuleUser', 'An error occurred processing your request'));
 			} elseif ($this->userQuery->findUser(['email' => $this->unconfirmed_email])->exists() === false) {
 				if ($this->module->emailChangeStrategy === $this->module::STRATEGY_SECURE) {
 					switch ($token->type) {
@@ -464,7 +464,7 @@ class UserModel extends ActiveRecord implements IdentityInterface
 							$this->app->session->setFlash(
 								'success',
 								$this->app->t(
-									'user',
+									'ModuleUser',
 									'Awesome, almost there. Now you need to click the confirmation link sent to your old email address'
 								)
 							);
@@ -474,7 +474,7 @@ class UserModel extends ActiveRecord implements IdentityInterface
 							$this->app->session->setFlash(
 								'success',
 								$this->app->t(
-									'user',
+									'ModuleUser',
 									'Awesome, almost there. Now you need to click the confirmation link sent to your new email address'
 								)
 							);
@@ -486,7 +486,7 @@ class UserModel extends ActiveRecord implements IdentityInterface
 					|| ($this->flags & self::NEW_EMAIL_CONFIRMED && $this->flags & self::OLD_EMAIL_CONFIRMED)) {
 					$this->email = $this->unconfirmed_email;
 					$this->unconfirmed_email = null;
-					$this->app->session->setFlash('success', $this->app->t('user', 'Your email address has been changed'));
+					$this->app->session->setFlash('success', $this->app->t('ModuleUser', 'Your email address has been changed'));
 				}
 				$this->save(false);
 			}

@@ -39,9 +39,9 @@ class CreateController extends Controller
 		$user->password = $password;
 
 		if ($user->create()) {
-			$this->stdout($this->app->t('user', 'User has been created') . "!\n", Console::FG_GREEN);
+			$this->stdout($this->app->t('ModuleUser', 'User has been created') . "!\n", Console::FG_GREEN);
 		} else {
-			$this->stdout($this->app->t('user', 'Please fix following errors:') . "\n", Console::FG_RED);
+			$this->stdout($this->app->t('ModuleUser', 'Please fix following errors:') . "\n", Console::FG_RED);
 			foreach ($user->errors as $errors) {
 				foreach ($errors as $error) {
 					$this->stdout(' - ' . $error . "\n", Console::FG_RED);

@@ -12,10 +12,10 @@ use yii\web\AssetBundle;
 
 class AdminIndexAsset extends AssetBundle
 {
-    public $sourcePath = '@TerabyteSoft/Module/User/Assets/';
+    public $sourcePath = __DIR__ . '/Css';
 
 	public $css = [
-		'Css/Admin_Index.css',
+		'Admin.css',
     ];
 
 	public $js = [

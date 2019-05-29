@@ -12,10 +12,10 @@ use yii\web\AssetBundle;
 
 class RecoveryRequestAsset extends AssetBundle
 {
-    public $sourcePath = '@TerabyteSoft/Module/User/Assets/';
+    public $sourcePath = __DIR__ . '/Css';
 
 	public $css = [
-		'Css/Recovery_Request.css',
+		'Request.css',
     ];
 
 	public $js = [

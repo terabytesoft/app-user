@@ -17,8 +17,11 @@ use Yiisoft\Yii\Bootstrap4\Html;
  * @var \yii\web\View $this
  */
 
-$this->title = $this->app->t('user', 'Request new confirmation message');
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = $this->app->t('ModuleUser', 'Request new confirmation message');
+
+if (!$module->theme) {
+    $this->params['breadcrumbs'][] = $this->title;
+}
 
 if ($module->floatLabels) {
     \TerabyteSoft\Module\User\Assets\FloatingLabelAsset::register($this);
@@ -26,20 +29,26 @@ if ($module->floatLabels) {
 
 RegistrationResendAsset::register($this);
 
+if ($module->theme) {
+    $this->beginContent($module->themeViewsResend);
+}
+
 ?>
 
-<?= Html::beginTag('div', ['class' => 'form-registration-resend']) ?>
+<?= Html::beginTag('div', [
+    'class' => (!$module->theme) ? 'form-registration-resend' : 'form-registration-resend-adminator'
+]) ?>
 
     <?= Html::tag('h2', '<b>' . Html::encode($this->title) . '</b>', ['class' => 'form-registration-resend-title']) ?>
 
     <?= Html::beginTag('p', ['class' => 'form-registration-resend-subtitle']) ?>
         <?= $this->app->t(
-			'user',
+			'ModuleUser',
 			'Please fill out the following fields to Resend.'
 		) ?>
     <?= Html::endTag('p') ?>
 
-    <?= Html::tag('hr', '', ['class' => 'mb-4']) ?>
+    <?= Html::tag('hr', '', ['class' => 'mb-2']) ?>
 
     <?php $form = ActiveForm::begin([
         'id' => 'form-registration-resend',
@@ -67,17 +76,54 @@ RegistrationResendAsset::register($this);
 
         <?= $form->field($model, 'email')->textInput([
 	        'oninput' => 'this.setCustomValidity("")',
-	        'oninvalid' => 'this.setCustomValidity("' . $this->app->t('user', 'Enter Email Here') . '")',
-            'placeholder' => $this->app->t('user', 'Email'),
+	        'oninvalid' => 'this.setCustomValidity("' . $this->app->t('ModuleUser', 'Enter Email Here') . '")',
+            'placeholder' => $this->app->t('ModuleUser', 'Email'),
 		    'required' => (YII_ENV === 'test') ? false : true,
 		    'tabindex' => '1',
-            ])->label($this->app->t('user', 'Email'));
+            ])->label($this->app->t('ModuleUser', 'Email'));
         ?>
 
-        <?= Html::submitButton($this->app->t('user', 'Continue'), [
+        <?= Html::submitButton($this->app->t('ModuleUser', 'Continue'), [
             'class' => 'btn btn-block btn-lg btn-primary mt-3', 'name' => 'resend-button', 'tabindex' => '2'
         ]) ?>
 
 	<?php ActiveForm::end(); ?>
 
+    <?= Html::tag('hr', '', ['class' => 'mb-2']) ?>
+
+    <?php if ($module->accountRegistration) : ?>
+        <?= Html::beginTag('p', ['class' => 'text-center']) ?>
+            <?= Html::a($this->app->t('ModuleUser', 'Don\'t have an account? Sign up!'), ['/user/registration/register']) ?>
+        <?= Html::endTag('p') ?>
+    <?php endif ?>
+
+    <?= Html::beginTag('p', ['class' => 'mt-3 text-center']) ?>
+        <?= Html::a($this->app->t('ModuleUser', 'Already registered? Sign in!'), ['/user/security/login']) ?>
+    <?= Html::endTag('p') ?>
+
+    <?php if ($module->theme) : ?>
+        <?= Html::beginTag('p', ['class' => 'text-center']) ?>
+            <?= Html::a(
+                Html::tag(
+                    'span',
+                    Html::tag(
+                        'i',
+                        ' ',
+                        ['class' => 'c-blue-500 ti-home']
+                    ),
+                    ['class' => 'icon-holder']
+                ) .
+                $this->app->t(
+                    'ModuleUser',
+                    'Go to Home'
+                ),
+                ['/']
+            ) ?>
+        <?= Html::endTag('p') ?>
+    <?php endif ?>
+
 <?php echo Html::endTag('div');
+
+if ($module->theme) {
+    $this->endContent();
+}

@@ -12,10 +12,10 @@ use yii\web\AssetBundle;
 
 class SecurityLoginAsset extends AssetBundle
 {
-    public $sourcePath = '@TerabyteSoft/Module/User/Assets/';
+    public $sourcePath = __DIR__ . '/Css';
 
 	public $css = [
-		'Css/Security_Login.css',
+		'Login.css',
     ];
 
 	public $js = [

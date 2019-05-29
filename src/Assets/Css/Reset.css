@@ -1,12 +1,17 @@
 /**
- * Security_Login
+ * Reset.css
  *
  **/
 
 /**********************************************************************************************************************
  * FORMS                                                                                                              *
  **********************************************************************************************************************/
- .form-security-login {
+.form-label-group {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.form-recovery-reset {
     background: #EAEDED;
     border-top: 3px solid #494f54;
     margin: auto;
@@ -15,11 +20,11 @@
     width: 100%;
 }
 
-.form-security-login-title {
+.form-recovery-reset-title {
     text-align: center;
 }
 
-.form-security-login-subtitle {
+.form-recovery-reset-subtitle {
     text-align: center;
     margin-bottom: 1.5rem;
 }

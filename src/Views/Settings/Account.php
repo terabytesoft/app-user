@@ -13,7 +13,7 @@ use Yiisoft\Yii\Bootstrap4\Html;
  * @var \yii\web\View $this
  **/
 
-$this->title = $this->app->t('user', 'Account Form');
+$this->title = $this->app->t('ModuleUser', 'Account Form');
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <?= Html::beginTag('div', ['class' => 'row']) ?>
 
 	<?= Html::beginTag('div', ['class' => 'col-md-3']) ?>
-        <?= $this->render('_menu') ?>
+        <?= $this->render('_Menu') ?>
 	<?= Html::endTag('div') ?>
 
 	<?= Html::beginTag('div', ['class' => 'col-md-9']) ?>
@@ -44,31 +44,31 @@ $this->params['breadcrumbs'][] = $this->title;
 				->textInput([
 					'tabindex' => '1',
 				])
-				->label($this->app->t('user', 'Email'))
+				->label($this->app->t('ModuleUser', 'Email'))
 			?>
 
         	<?= $form->field($model, 'username')
 				->textInput([
 					'tabindex' => '2',
 				])
-				->label($this->app->t('user', 'Username'))
+				->label($this->app->t('ModuleUser', 'Username'))
 			?>
 
 			<?= $form->field($model, 'new_password')
 				->passwordInput([
 					'tabindex' => '3',
 				])
-				->label($this->app->t('user', 'New Password'))
+				->label($this->app->t('ModuleUser', 'New Password'))
 			?>
 
         	<?= $form->field($model, 'current_password')
 				->passwordInput([
 					'tabindex' => '4',
 				])
-				->label($this->app->t('user', 'Current Password'))
+				->label($this->app->t('ModuleUser', 'Current Password'))
 			?>
 
-			<?= Html::submitButton($this->app->t('user', 'Save'), [
+			<?= Html::submitButton($this->app->t('ModuleUser', 'Save'), [
 				'class' => 'btn btn-block btn-lg btn-primary', 'name' => 'account-button', 'tabindex' => '5',
 	    	]); ?>
 

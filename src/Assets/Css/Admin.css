@@ -1,25 +1,37 @@
 /**
- * Registration_Connect
+ * Admin.css
  *
  **/
 
 /**********************************************************************************************************************
  * FORMS                                                                                                              *
  **********************************************************************************************************************/
-.form-registration-connect {
+.grid-font-consolas {
     background: #EAEDED;
-    border-top: 3px solid #494f54;
-    margin: auto;
-    max-width: 420px;
-    padding: 15px;
-    width: 100%;
+	font-family: consolas;
+	font-size: 14px;
 }
 
-.form-registration-connect-title {
+.form-admin-index-title {
     text-align: center;
 }
 
-.form-registration-connect-subtitle {
+.form-admin-index-field-block {
     text-align: center;
-    margin-bottom: 1.5rem;
+}
+
+.form-admin-index-field-confirm {
+    text-align: center;
+}
+
+.form-admin-index-field-created_at {
+    white-space: nowrap !important;
+}
+
+.form-admin-index-field-last_login_at {
+    white-space: nowrap !important;
+}
+
+.form-admin-index-field-registration_ip {
+    white-space: nowrap !important;
 }

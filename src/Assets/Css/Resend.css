@@ -1,11 +1,16 @@
 /**
- * Registration_Resend
+ * Resend.css
  *
  **/
 
 /**********************************************************************************************************************
  * FORMS                                                                                                              *
  **********************************************************************************************************************/
+.form-label-group {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
 .form-registration-resend {
     background: #EAEDED;
     border-top: 3px solid #494f54;

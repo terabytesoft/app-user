@@ -16,7 +16,7 @@ use Yiisoft\Yii\Bootstrap4\Html;
  * @var \yii\web\View $this
  **/
 
-$this->title = $this->app->t('user', 'Account Form');
+$this->title = $this->app->t('ModuleUser', 'Account Form');
 
 ?>
 
@@ -37,7 +37,7 @@ $this->title = $this->app->t('user', 'Account Form');
 
 		<?= $this->render('_User', ['form' => $form, 'user' => $user]) ?>
 
-		<?= Html::submitButton($this->app->t('user', 'Update'), [
+		<?= Html::submitButton($this->app->t('ModuleUser', 'Update'), [
 			'class' => 'btn btn-block btn-lg btn-primary', 'tabindex' => '4',
 		]) ?>
 

@@ -22,10 +22,4 @@ class LayoutAdminAsset extends AssetBundle
         \Yiisoft\Yii\JQuery\YiiAsset::class,
         \Yiisoft\Yii\Bootstrap4\BootstrapAsset::class,
     ];
-
-    public $publishOptions = [
-        'only' => [
-            'Css/*',
-        ],
-    ];
 }

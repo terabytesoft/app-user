@@ -1,5 +1,8 @@
 <?php
 
+namespace ModuleUser;
+
+use ModuleUser\FunctionalTester;
 use yii\helpers\Yii;
 
 /**
@@ -26,7 +29,7 @@ class SignUpFormCest
     {
         $I->wantTo('ensure that Sing up page works.');
         $I->expectTo('see page sign up.');
-        $I->see(Yii::t('user', 'Sign up'), '.form-registration-register-title');
+        $I->see(Yii::t('ModuleUser', 'Sign up'), '.form-registration-register-title');
     }
 
     /**
@@ -36,10 +39,10 @@ class SignUpFormCest
     public function SignUpFormAlreadyRegisteredLink(FunctionalTester $I)
     {
         $I->wantTo('ensure that link already registered link works.');
-        $I->SeeLink(Yii::t('user', 'Already registered? Sign in!'), '/user/security/login');
-        $I->click(['link' => Yii::t('user', 'Already registered? Sign in!')]);
+        $I->SeeLink(Yii::t('ModuleUser', 'Already registered? Sign in!'), '/user/security/login');
+        $I->click(['link' => Yii::t('ModuleUser', 'Already registered? Sign in!')]);
         $I->expectTo('see page login.');
-        $I->see(Yii::t('user', 'Login'), '.form-security-login-title');
+        $I->see(Yii::t('ModuleUser', 'Login'), '.form-security-login-title');
     }
 
    /**
@@ -55,9 +58,8 @@ class SignUpFormCest
             'register-form[password]' => '123456',
         ]);
         $I->expectTo('see messages register confirm');
-        $I->see(Yii::t('user', 'Your account has been created and a message with further instructions has been sent to your email'), '.alert');
-        $I->SeeLink(Yii::t('user', 'Sign up'), '/user/registration/register');
-        $I->SeeLink(Yii::t('user', 'Login'), '/user/security/login');
+        $I->see(Yii::t('ModuleUser', 'Your account has been created and a message with further instructions has been sent to your email'), '.alert');
+        $I->dontSeeLink(Yii::t('ModuleUser', 'Sign up'), '.btn');
     }
 
     /**
@@ -73,11 +75,10 @@ class SignUpFormCest
             'register-form[password]' => '',
         ]);
         $I->expectTo('see validations errors.');
-        $I->see(Yii::t('user', 'Email cannot be blank.'), '.invalid-feedback');
-        $I->see(Yii::t('user', 'Username cannot be blank.'), '.invalid-feedback');
-        $I->see(Yii::t('user', 'Password cannot be blank.'), '.invalid-feedback');
-        $I->SeeLink(Yii::t('user', 'Sign up'), '/user/registration/register');
-        $I->SeeLink(Yii::t('user', 'Login'), '/user/security/login');
+        $I->see(Yii::t('ModuleUser', 'Email cannot be blank.'), '.invalid-feedback');
+        $I->see(Yii::t('ModuleUser', 'Username cannot be blank.'), '.invalid-feedback');
+        $I->see(Yii::t('ModuleUser', 'Password cannot be blank.'), '.invalid-feedback');
+        $I->See(Yii::t('ModuleUser', 'Sign up'), '.btn');
     }
 
    /**
@@ -93,9 +94,8 @@ class SignUpFormCest
             'register-form[password]' => '123456',
         ]);
         $I->expectTo('see validation email errors');
-        $I->see(Yii::t('user', 'Email is not a valid email address.'), '.invalid-feedback');
-        $I->SeeLink(Yii::t('user', 'Sign up'), '/user/registration/register');
-        $I->SeeLink(Yii::t('user', 'Login'), '/user/security/login');
+        $I->see(Yii::t('ModuleUser', 'Email is not a valid email address.'), '.invalid-feedback');
+        $I->See(Yii::t('ModuleUser', 'Sign up'), '.btn');
     }
 
    /**
@@ -111,9 +111,8 @@ class SignUpFormCest
             'register-form[password]' => '123456',
         ]);
         $I->expectTo('see validation email errors');
-        $I->see(Yii::t('user', 'This email address has already been taken.'), '.invalid-feedback');
-        $I->SeeLink(Yii::t('user', 'Sign up'), '/user/registration/register');
-        $I->SeeLink(Yii::t('user', 'Login'), '/user/security/login');
+        $I->see(Yii::t('ModuleUser', 'This email address has already been taken.'), '.invalid-feedback');
+        $I->See(Yii::t('ModuleUser', 'Sign up'), '.btn');
     }
 
    /**
@@ -129,9 +128,8 @@ class SignUpFormCest
 			'register-form[password]' => '123456',
 		]);
 		$I->expectTo('see validation username errors');
-		$I->see(Yii::t('user', 'Username is invalid.'), '.invalid-feedback');
-		$I->SeeLink(Yii::t('user', 'Sign up'), '/user/registration/register');
-		$I->SeeLink(Yii::t('user', 'Login'), '/user/security/login');
+		$I->see(Yii::t('ModuleUser', 'Username is invalid.'), '.invalid-feedback');
+        $I->See(Yii::t('ModuleUser', 'Sign up'), '.btn');
 		$I->amGoingTo('sign up submit form register with invalid username data.');
 		$I->submitForm('#form-registration-register', [
 			'register-form[email]' => 'demo@example.com',
@@ -139,9 +137,8 @@ class SignUpFormCest
 			'register-form[password]' => '123456',
 		]);
         $I->expectTo('see validation username errors');
-        $I->see(Yii::t('user', 'Username should contain at least 3 characters.'), '.invalid-feedback');
-        $I->SeeLink(Yii::t('user', 'Sign up'), '/user/registration/register');
-        $I->SeeLink(Yii::t('user', 'Login'), '/user/security/login');
+        $I->see(Yii::t('ModuleUser', 'Username should contain at least 3 characters.'), '.invalid-feedback');
+        $I->See(Yii::t('ModuleUser', 'Sign up'), '.btn');
     }
 
    /**
@@ -157,9 +154,8 @@ class SignUpFormCest
 			'register-form[password]' => '123456',
 		]);
         $I->expectTo('see validation username errors');
-        $I->see(Yii::t('user', 'This username has already been taken.'), '.invalid-feedback');
-        $I->SeeLink(Yii::t('user', 'Sign up'), '/user/registration/register');
-        $I->SeeLink(Yii::t('user', 'Login'), '/user/security/login');
+        $I->see(Yii::t('ModuleUser', 'This username has already been taken.'), '.invalid-feedback');
+        $I->See(Yii::t('ModuleUser', 'Sign up'), '.btn');
     }
 
    /**
@@ -175,8 +171,7 @@ class SignUpFormCest
 			'register-form[password]' => '123',
 		]);
         $I->expectTo('see validation password errors');
-        $I->see(Yii::t('user', 'Password should contain at least 6 characters.'), '.invalid-feedback');
-        $I->SeeLink(Yii::t('user', 'Sign up'), '/user/registration/register');
-        $I->SeeLink(Yii::t('user', 'Login'), '/user/security/login');
+        $I->see(Yii::t('ModuleUser', 'Password should contain at least 6 characters.'), '.invalid-feedback');
+        $I->See(Yii::t('ModuleUser', 'Sign up'), '.btn');
     }
 }
