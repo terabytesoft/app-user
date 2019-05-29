@@ -12,7 +12,7 @@ modules:
     config:
         WebDriver:
             url: 'http://127.0.0.1:8080'
-            window_size: false # disabled in ChromeDriver
+            window_size: 1024x768 # disabled in ChromeDriver
             browser: chrome
             capabilities:
                 "goog:chromeOptions":
