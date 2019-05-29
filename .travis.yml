@@ -47,7 +47,7 @@ script:
     php -S 127.0.0.1:8080 -t public > /dev/null 2>&1&
     cd ..
     vendor/bin/codecept build
-    google-chrome-stable --headless --disable-gpu --remote-debugging-port=9515 http://127.0.0.1:8080 &
+    google-chrome-stable --headless --no-sandbox --disable-gpu --remote-debugging-port=9515 http://127.0.0.1:8080 &
     vendor/bin/codecept run
 
 after_script:
